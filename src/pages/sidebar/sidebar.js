@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Box } from '@material-ui/core'
-import { FaGem, FaHeart } from "react-icons/fa";
+import { FaGem, FaHeart, FaTractor } from "react-icons/fa";
+import { MdHome, MdOutlineMonetizationOn, MdOutlineImage, MdOutlineBarChart} from "react-icons/md";
 import {
     Menu,
     MenuItem,
@@ -34,9 +35,9 @@ const Sidebar = ( {flag_sidebar}) => {
             color: "#757B75",
         }
     };
-    const onClickMenuIcon = () => {
-        setCollapsed(!collapsed);
-    };
+    // const onClickMenuIcon = () => {
+    //     setCollapsed(!collapsed);
+    // };
     return (
         <ProSidebar style={styles.sideBarHeight} collapsed={flag_sidebar}>
             {/* <SidebarHeader style={styles.color_back}>
@@ -44,14 +45,14 @@ const Sidebar = ( {flag_sidebar}) => {
                     <AiOutlineMenu />
                 </div>
             </SidebarHeader> */}
-            <Menu iconShape="square" style={styles.color_back}>
-                <MenuItem icon={<FaGem />}>Home</MenuItem>
-                <MenuItem icon={<FaGem />}>Trade</MenuItem>
-                <MenuItem icon={<FaGem />}>NFT Marketplace</MenuItem>
-                <MenuItem icon={<FaGem />}>Farms</MenuItem>
-                <MenuItem icon={<FaGem />}>New Farms</MenuItem>
-                <MenuItem icon={<FaGem />}>New Farms V3</MenuItem>
-                <SubMenu title="Info" icon={<FaHeart />}>
+            <Menu  style={styles.color_back}>
+                <MenuItem icon={<MdHome fontSize="30px"/>}>Home</MenuItem>
+                <MenuItem icon={<MdOutlineMonetizationOn fontSize="30px"/>}>Trade</MenuItem>
+                <MenuItem icon={<MdOutlineImage fontSize="30px"/>}>NFT Marketplace</MenuItem>
+                <MenuItem icon={<FaTractor fontSize="30px"/>}>Farms</MenuItem>
+                <MenuItem icon={<FaTractor fontSize="30px"/>}>New Farms</MenuItem>
+                <MenuItem icon={<FaTractor fontSize="30px"/>}>New Farms V3</MenuItem>
+                <SubMenu title="Info" icon={<MdOutlineBarChart fontSize="30px"/>}>
                     <MenuItem>Notification</MenuItem>
                 </SubMenu>
             </Menu>
