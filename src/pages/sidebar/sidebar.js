@@ -13,17 +13,14 @@ import "react-pro-sidebar/dist/css/styles.css";
 import './sidebar.scss';
 import 'react-pro-sidebar/dist/css/styles.css';
 
-import { useDarkMode } from '../../contexts/ui-context';
-
-
-
 const Sidebar = ({ flag_sidebar }) => {
     const styles = {
         sideBarHeight: {
-            height: "100vh",
-            backgroundColor: '#FCFCFC',
+            height: "unset",
+            backgroundColor: 'white',
             boxShadow: '4px 4px 3px -4px rgba(0, 0, 0, 0.08)',
             color: "#757B75",
+            minHeight: "100VH"
 
         },
         menuIcon: {
@@ -32,14 +29,14 @@ const Sidebar = ({ flag_sidebar }) => {
 
         },
         color_back: {
-            backgroundColor: '#FCFCFC',
+            backgroundColor: 'white',
             boxShadow: '4px 4px 3px -4px rgba(0, 0, 0, 0.08)',
             color: "#757B75",
         }
     };
 
     return (
-        <ProSidebar style={styles.sideBarHeight} collapsed={flag_sidebar} >
+        <ProSidebar style={styles.sideBarHeight} collapsed={flag_sidebar}  >
             <SidebarContent>
                 <Menu style={styles.color_back}>
                     <MenuItem icon={<MdHome fontSize="30px" />}>Home</MenuItem>
@@ -51,13 +48,14 @@ const Sidebar = ({ flag_sidebar }) => {
                     <SubMenu title="Info" icon={<MdOutlineBarChart fontSize="30px" />}>
                         <MenuItem icon={<MdNotificationsActive fontSize="30px" />}>Notification</MenuItem>
                     </SubMenu>
+                    <MenuItem icon={<VscColorMode fontSize="30px" />} >Theme Light/Dark</MenuItem>
                 </Menu>
             </SidebarContent>
-            <SidebarFooter>
+            {/* <SidebarFooter>
                 <Menu>
                     <MenuItem icon={<VscColorMode fontSize="30px" />} >Light/Dark</MenuItem>
                 </Menu>
-            </SidebarFooter>
+            </SidebarFooter> */}
         </ProSidebar>
 
     );

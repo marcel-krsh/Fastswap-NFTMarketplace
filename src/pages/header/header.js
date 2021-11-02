@@ -169,7 +169,8 @@ const StyledContainer = styled(Box)`
     display: flex;
     width: 100%;
     height: 64px;
-    background: #FCFCFC;
+    background: white;
+    border:
     box-shadow: 0px 4px 3px -4px rgba(0, 0, 0, 0.08);
 `
 

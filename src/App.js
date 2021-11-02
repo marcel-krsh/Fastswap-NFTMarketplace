@@ -12,7 +12,6 @@ import { Global } from "../src/theme/global";
 import { lightTheme, darkTheme } from "../src/theme/theme"
 
 
-
 function getLibrary(provider) {
   return new Web3(provider)
 }
@@ -24,7 +23,7 @@ function App() {
     },
     contentMargin: {
       width: "100%",
-      background: "#F8F8F8",
+      background: `${({ theme }) => theme.body}`,
     },
   };
 
@@ -46,10 +45,11 @@ function App() {
         </Row>
         <div style={styles.contentDiv}>
           <Sidebar flag_sidebar={flag_sidebar}></Sidebar>
-          <div style={styles.contentMargin}>
+          <Mainpage></Mainpage>
+          {/* <div style={styles.contentMargin}>
             <h1 style={{ padding: "20%" }}>This is Content Area</h1>
           </div>
-          <button onClick={themeToggler}>Select Theme</button>
+          <button onClick={themeToggler}>Select Theme</button> */}
         </div>
       </Web3ReactProvider>
     </>
