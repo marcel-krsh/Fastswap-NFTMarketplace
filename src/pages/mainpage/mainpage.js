@@ -123,6 +123,7 @@ const StyledContainer = styled(Box)`
     width: 100%;
     flex-direction: column;
     align-items: center;
+    background: #FCFCFC;
 `
 
 const Part_Header = styled(Box)`
@@ -150,6 +151,7 @@ const Part_Foot = styled(Box)`
     width: 80%;
     margin-top:100px;
     flex-direction: column;
+
 `
 
 export default Mainpage;

@@ -7,9 +7,10 @@ import Mainpage from "./pages/mainpage/mainpage"
 import { Col, Row } from "reactstrap";
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
-import {ThemeProvider} from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { Global } from "../src/theme/global";
 import { lightTheme, darkTheme } from "../src/theme/theme"
+import { useDarkMode } from "./theme/userDarkMode"
 
 
 function getLibrary(provider) {
@@ -23,37 +24,35 @@ function App() {
     },
     contentMargin: {
       width: "100%",
-      background: `${({ theme }) => theme.body}`,
+      // background: `${({ theme }) => theme.body}`,
+      background: "#FCFCFC",
     },
   };
 
-  const [theme, setTheme] = useState('light');
+  // const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  // const [theme, themeToggler] = useDarkMode();
   const [flag_sidebar, set_sidebar] = useState(false);
-  const themeToggler = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light')
-}
+
 
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-    <>
-    <Global/>
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <Row>
-          <Col>
-            <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar}></Header>
-          </Col>
-        </Row>
-        <div style={styles.contentDiv}>
-          <Sidebar flag_sidebar={flag_sidebar}></Sidebar>
-          <Mainpage></Mainpage>
-          {/* <div style={styles.contentMargin}>
+
+      <>
+        <Web3ReactProvider getLibrary={getLibrary}>
+          <Row>
+            <Col>
+              <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar}></Header>
+            </Col>
+          </Row>
+          <div style={styles.contentDiv}>
+            <Sidebar flag_sidebar={flag_sidebar}></Sidebar>
+            <Mainpage></Mainpage>
+            {/* <div style={styles.contentMargin}>
             <h1 style={{ padding: "20%" }}>This is Content Area</h1>
           </div>
           <button onClick={themeToggler}>Select Theme</button> */}
-        </div>
-      </Web3ReactProvider>
-    </>
-    </ThemeProvider>
+          </div>
+        </Web3ReactProvider>
+      </>
   );
 }
 

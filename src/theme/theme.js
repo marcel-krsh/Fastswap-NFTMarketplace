@@ -1,10 +1,11 @@
 export const lightTheme = {
-    body: '#FCFCFC',
-    text: 'blue',
-    background_bar: '#FCFCFC',
+    bgcolor_bar: 'white',
+    bgcolor_main: '#FCFCFC',
+    font_color1:"black",
+
 }
 export const darkTheme = {
-    body: 'rgb(157 209 178)',
-    text: 'red',
-    background_bar: 'rgb(72 63 90)',
+    bgcolor_bar: 'rgb(39 38 44)',
+    bgcolor_main: 'rgb(51 58 54)',
+    font_color1:"white",
 }

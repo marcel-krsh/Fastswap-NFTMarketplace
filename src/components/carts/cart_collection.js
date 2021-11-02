@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Box, Button, Modal } from '@material-ui/core'
 import styled from 'styled-components';
 
-const Hot_Collection = ({img, simg, title, price}) => {
+const Hot_Collection = ({ img, simg, title, price }) => {
     return (
         <HCollection>
             <Box display="flex" flex="120">

@@ -20,7 +20,8 @@ const Sidebar = ({ flag_sidebar }) => {
             backgroundColor: 'white',
             boxShadow: '4px 4px 3px -4px rgba(0, 0, 0, 0.08)',
             color: "#757B75",
-            minHeight: "100VH"
+            minHeight: "100VH",
+
 
         },
         menuIcon: {
@@ -31,7 +32,7 @@ const Sidebar = ({ flag_sidebar }) => {
         color_back: {
             backgroundColor: 'white',
             boxShadow: '4px 4px 3px -4px rgba(0, 0, 0, 0.08)',
-            color: "#757B75",
+            color: "#2BA55D",
         }
     };
 
