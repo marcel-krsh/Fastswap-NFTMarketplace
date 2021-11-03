@@ -1,17 +1,18 @@
 import React from "react";
 import { useState } from 'react'
-import { Box, Button, Modal } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import styled from 'styled-components';
+import { lightTheme, darkTheme } from "../../theme/theme";
 
-const Hot_Collection = ({ img, simg, title, price }) => {
+const Hot_Collection = ({ img, simg, title, price, ctheme }) => {
     return (
-        <HCollection>
+        <HCollection ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme}>
             <Box display="flex" flex="120">
                 <img src={img} width="100%" height="100%"></img>
             </Box>
             <Box display="flex" flex="92" flexDirection="column">
-                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-end" fontFamily="Work Sans" fontSize="18px" color="#363936" >{title}</Box>
-                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-start" fontFamily="Work Sans" fontSize="12px" color="#757B75">{price}</Box>
+                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-end" fontFamily="Work Sans" fontSize="18px" color={ctheme?"#363936":darkTheme.font_color1 } >{title}</Box>
+                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-start" fontFamily="Work Sans" fontSize="12px" color={ctheme?"#757B75": darkTheme.font_color_grey}>{price}</Box>
             </Box>
             <Box position="absolute" left="40%" top="45%">
                 <img src={simg} width="100%" height="100%"></img>
@@ -26,7 +27,7 @@ const HCollection = styled(Box)`
     width:231px;
     height: 220px;
     flex-direction: column;
-    background: #FCFCFC;
+    background: ${({ctheme, ltheme, dtheme})=>ctheme?ltheme.bgcolor_bar:dtheme.bgcolor_bar};
     border: 1px solid #CECECE;
     box-sizing: border-box;
     border-radius: 8px;

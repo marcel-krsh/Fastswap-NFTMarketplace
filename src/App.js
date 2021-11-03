@@ -32,7 +32,7 @@ function App() {
   // const themeMode = theme === 'light' ? lightTheme : darkTheme;
   // const [theme, themeToggler] = useDarkMode();
   const [flag_sidebar, set_sidebar] = useState(false);
-
+  const [ctheme, setTheme] = useState(true);
 
   return (
 
@@ -40,12 +40,12 @@ function App() {
         <Web3ReactProvider getLibrary={getLibrary}>
           <Row>
             <Col>
-              <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar}></Header>
+              <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar} ctheme={ctheme} ></Header>
             </Col>
           </Row>
           <div style={styles.contentDiv}>
-            <Sidebar flag_sidebar={flag_sidebar}></Sidebar>
-            <Mainpage></Mainpage>
+            <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+            <Mainpage ctheme={ctheme}></Mainpage>
             {/* <div style={styles.contentMargin}>
             <h1 style={{ padding: "20%" }}>This is Content Area</h1>
           </div>

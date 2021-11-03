@@ -2,10 +2,11 @@ import React from "react";
 import { useState } from 'react'
 import { Box, Button, Modal } from '@material-ui/core'
 import styled from 'styled-components';
+import { lightTheme, darkTheme } from "../../theme/theme"
 
-const Img_Letter = ({ letter }) => {
+const Img_Letter = ({ letter, ctheme }) => {
     return (
-        <ILtter>
+        <ILtter ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme}>
             {letter}
         </ILtter>
     );
@@ -17,7 +18,7 @@ font-style: normal;
 font-weight: 600;
 font-size: 24px;
 line-height: 28px;
-color: #131413;
+color: ${({ ctheme, ltheme, dtheme}) => ctheme ? ltheme.font_color1 : dtheme.font_color1};
 `
 
 

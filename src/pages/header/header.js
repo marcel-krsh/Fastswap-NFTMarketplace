@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from 'react'
 import { Box, Button, Modal } from '@material-ui/core'
 import styled from 'styled-components';
-import { MdMenuOpen} from "react-icons/md";
+import { MdMenuOpen } from "react-icons/md";
 import {
     injected,
     walletConnect,
@@ -15,10 +15,11 @@ import metamask from '../../images/MetaMask.png'
 import walletconnect from '../../images/WalletConnect.png'
 import binance from '../../images/BinanceWallet.png'
 import trust from '../../images/TrustWallet.png'
-import img_logo from '../../images/logo_mark.png';
+import img_logo from '../../images/logo_mark1.png';
 import vector from "../../images/Vector.png";
+import { lightTheme, darkTheme } from "../../theme/theme";
 
-const Header = ({ flag_sidebar, set_sidebar }) => {
+const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -65,11 +66,12 @@ const Header = ({ flag_sidebar, set_sidebar }) => {
     }
 
     return (
-        <StyledContainer>
-            
-            <Box display="flex" flex="1" alignItems="center" justifyContent="center">
+        <StyledContainer ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme}>
+            {/* {theme? <div>123</div>:<div>KKK</div>} */}
+            <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px" color={ctheme?lightTheme.font_color1: darkTheme.font_color1}>
                 <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D"/>
-                <img src={img_logo} width="120px" height="40px" style={{ marginLeft: "30px" }}></img>
+                <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }}></img>
+                FASTSWAP
             </Box>
             <Box display="flex" flex="4"></Box>
             <Box display="flex" flex="1" alignItems="center" justifyContent="center">
@@ -171,9 +173,10 @@ const StyledContainer = styled(Box)`
     display: flex;
     width: 100%;
     height: 64px;
-    background: white;
-    border-bottom: 2px solid #F0F0F0;
-    box-shadow: 0px 4px 3px -4px rgba(0, 0, 0, 0.08);
+    background: ${({ ctheme, ltheme, dtheme}) => ctheme ? ltheme.bgcolor_bar : dtheme.bgcolor_bar};
+    border-bottom: ${({ ctheme}) => ctheme ? '2px solid #F0F0F0' : '2px solid #2ba55d'};
+    //#564a4a
+    // box-shadow: 0px 4px 3px -4px rgba(0, 0, 0, 0.08);
 `
 
 const Btn_connect = styled(Box)`
