@@ -66,11 +66,13 @@ const Header = ({ flag_sidebar, set_sidebar }) => {
 
     return (
         <StyledContainer>
-            <Box display="flex" flex="1" alignItems="center" justifyContent="flex-start" paddingLeft="50px">
+            
+            <Box display="flex" flex="1" alignItems="center" justifyContent="center">
                 <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D"/>
                 <img src={img_logo} width="120px" height="40px" style={{ marginLeft: "30px" }}></img>
             </Box>
-            <Box display="flex" flex="1" alignItems="center" justifyContent="flex-end" paddingRight="50px">
+            <Box display="flex" flex="4"></Box>
+            <Box display="flex" flex="1" alignItems="center" justifyContent="center">
                 <Btn_connect onClick={handleOpen}>Connect</Btn_connect>
             </Box>
             <Modal
@@ -188,7 +190,11 @@ const Btn_connect = styled(Box)`
     font-weight: 600;
     font-size: 16px;
     &:hover{
-        background: black;
+        cursor: pointer;
+        box-shadow:
+        inset 0 -3em 3em rgba(0,0,0,0.1),
+              0 0  0 0px rgb(255,255,255),
+              0.3em 0.3em 1em rgba(0,0,0,0.3);
     }
 `
 

@@ -7,14 +7,14 @@ const Hot_Collection = ({ img, simg, title, price }) => {
     return (
         <HCollection>
             <Box display="flex" flex="120">
-                <img src={img} width="250px" height="120px"></img>
+                <img src={img} width="100%" height="100%"></img>
             </Box>
-            <Box display="flex" flex="100" flexDirection="column">
-                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-end" fontFamily="Work Sans, sans-serif" fontSize="18px" color="#363936">{title}</Box>
-                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-start" fontFamily="Work Sans, sans-serif" fontSize="12px" color="#757B75">{price}</Box>
+            <Box display="flex" flex="92" flexDirection="column">
+                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-end" fontFamily="Work Sans" fontSize="18px" color="#363936" >{title}</Box>
+                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-start" fontFamily="Work Sans" fontSize="12px" color="#757B75">{price}</Box>
             </Box>
-            <Box position="absolute" left="100px" top="90px">
-                <img src={simg} width="48px" height="48px"></img>
+            <Box position="absolute" left="40%" top="45%">
+                <img src={simg} width="100%" height="100%"></img>
             </Box>
         </HCollection>
     );
@@ -23,7 +23,7 @@ const Hot_Collection = ({ img, simg, title, price }) => {
 const HCollection = styled(Box)`
     display:flex;
     position: relative;
-    width:250px;
+    width:231px;
     height: 220px;
     flex-direction: column;
     background: #FCFCFC;

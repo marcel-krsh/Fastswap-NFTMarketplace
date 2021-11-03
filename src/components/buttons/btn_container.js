@@ -19,10 +19,13 @@ const Btn_Customize = ({ color, back, width, height, border, str, borderRadius, 
 };
 
 const Btn_Cus = styled(Box)`
-    &:hover{
-        background: black;
-        border: none;
-    }
+&:hover{
+    cursor: pointer;
+    box-shadow:
+    inset 0 -3em 3em rgba(0,0,0,0.1),
+          0 0  0 0px rgb(255,255,255),
+          0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
 `
 
 

@@ -32,83 +32,100 @@ const Mainpage = () => {
 
     return (
         <StyledContainer>
+            <Header1>
+                <Box display="flex" flex="1"></Box>
+                <Box display="flex" flex="3" justifyContent="space-between">
+                    <HLetter>Overview</HLetter>
+                    <HLetter>Explore</HLetter>
+                    <HLetter>Rankings</HLetter>
+                    <HLetter>Activities</HLetter>
+                    <HLetter>Manage</HLetter>
+                </Box>
+                <Box display="flex" flex="1"></Box>
+            </Header1>
             <Part_Header>
-                <Box display="flex" flex="1" flexDirection="column" marginTop="150px">
-                    <Box display="flex" flex="1" flexDirection="column">
-                        <Box display="flex" flex="9" justifyContent="flex-start" alignItems="flex-end" fontSize="82px" fontWeight="bold" lineHeight="80px" fontFamily="Work Sans, sans-serif" color="black">Collect </Box>
-                        <Box display="flex" flex="4" justifyContent="flex-start" alignItems="center" fontSize="82px" fontWeight="bold" lineHeight="80px" fontFamily="Work Sans, sans-serif" color="black">digital art</Box>
-                        <Box display="flex" flex="2" justifyContent="flex-start" alignItems="flex-end" fontSize="20px" fontFamily="Work Sans, sans-serif" color="#363936">Buy and Sell NFTs on Binance Smart Chain</Box>
+                <Box display="flex" flex="1" flexDirection="column" marginTop="120px" marginLeft="100px">
+                    <Box display="flex" flex="4" flexDirection="column" width="100%">
+                        <Box display="flex" flex="1"></Box>
+                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" fontSize="72px" fontWeight="bold" lineHeight="80px" fontFamily="Work Sans" color="black">Collect </Box>
+                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" fontSize="72px" fontWeight="bold" lineHeight="80px" fontFamily="Work Sans" color="black">digital art</Box>
                     </Box>
-                    <Box display="flex" flex="1" justifyContent="flex-start" alignItems="flex-start" paddingTop="50px">
+                    <Box display="flex" flex="1" width="100%">
+                        <Box display="flex" justifyContent="flex-start" alignItems="center" fontSize="20px" fontFamily="Work Sans" color="#363936">Buy and Sell NFTs on Binance Smart Chain</Box>
+                    </Box>
+                    <Box display="flex" flex="4" justifyContent="flex-start" alignItems="flex-start" paddingTop="50px" width="100%">
                         <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'164px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore'} borderRadius={'8px'} />
-                        <Btn_Customize display="flex" color={'#2BA55D'} back={'color'} width={'164px'} height={'56px'} border={'1px solid #2BA55D'} str={'Create'} borderRadius={'8px'} marginL={'30px'} />
+                        <Btn_Customize display="flex" color={'#2BA55D'} back={'white'} width={'164px'} height={'56px'} border={'1px solid #2BA55D'} str={'Create'} borderRadius={'8px'} marginL={'24px'} />
                     </Box>
                 </Box>
-                <Box display="flex" flex="1" flexDirection="column" marginLeft="100px" marginTop="150px">
-                    <Box display="flex" flex="3" alignItems="flex-end" marginBottom="20px">
+                <Box display="flex" flex="1" flexDirection="column" marginTop="120px" marginLeft="50px" width="100%">
+                    <Box display="flex" flex="3" alignItems="flex-end" marginBottom="20px" width="100%">
                         <Box width="16px" height="16px" borderRadius="100%" bgcolor="#2BA55D"></Box>
-                        <Box marginLeft="10px" color="black" font="Work Sans, sans-serif" fontSize="18px" fontWeight="bold">Auction in progress</Box>
+                        <Box marginLeft="10px" color="black" font="Work Sans" fontSize="18px" fontWeight="bold">Auction in progress</Box>
                     </Box>
-                    <Box display="flex" flex="6" alignItems="center">
-                        <img src={cover_big1} width="400px" height="400px" />
-
+                    <Box display="flex" flex="9" alignItems="center" width="100%">
+                        <img src={cover_big1} width="80%" height="100%" />
                     </Box>
-                    <Box display="flex" flex="2" alignItems="flex-start" marginTop="20px">
-                        <Box display="flex" flex="3" flexDirection="column">
-                            <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans, sans-serif" fontSize="12px">Artist</Box>
-                            <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans, sans-serif" fontSize="18px" marginTop="10px">
-                                <img src={small_ellipse} width="24px" height="24px" ></img>Creator Name
+                    <Box display="flex" flex="3" flexDirection="column" marginTop="15px" width="80%">
+                        <Box display="flex" flex="1" flexDirection="column">
+                            <Box display="flex" flex="1">
+                                <Box display="flex" flex="5" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans" fontSize="12px">Artist</Box>
+                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans" fontSize="12px">Current</Box>
+                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans" fontSize="12px">Action Ends in</Box>
+                            </Box>
+                            <Box display="flex" flex="2" marginTop="10px">
+                                <Box display="flex" flex="5" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans" fontSize="18px">
+                                    <img src={small_ellipse} width="24px" height="24px" ></img>{`\u00a0`}{`\u00a0`}creator name
+                                </Box>
+                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans" fontSize="18px">$22.2K</Box>
+                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans" fontSize="18px">hh:mm:ss</Box>
                             </Box>
                         </Box>
-                        <Box display="flex" flex="2" flexDirection="column">
-                            <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans, sans-serif" fontSize="12px">Current Bid</Box>
-                            <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans, sans-serif" fontSize="18px" marginTop="10px">$22.2K</Box>
-                        </Box>
-                        <Box display="flex" flex="5" flexDirection="column">
-                            <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans, sans-serif" fontSize="12px">Action Ends in</Box>
-                            <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" color="black" fontFamily="Work Sans, sans-serif" fontSize="18px" marginTop="10px">hh:mm:ss</Box>
-                        </Box>
+                        <Box display="flex" flex="1"></Box>
+
                     </Box>
 
                 </Box>
             </Part_Header>
             <Part_Collection>
-                <Img_Letter letter={'Hot collections 🔥'} />
-                <Box display="flex" justifyContent="space-between" marginTop="30px">
-                    <Hot_Collection img={cover} simg={small_ellipse} title={'Kingkoog'} price={'$13.369'}></Hot_Collection>
-                    <Hot_Collection img={cover1} simg={small_ellipse} title={'Sunny Showers'} price={'$13.369'}></Hot_Collection>
-                    <Hot_Collection img={cover2} simg={small_ellipse} title={'The future'} price={'$13.369'}></Hot_Collection>
-                    <Hot_Collection img={cover3} simg={small_ellipse} title={'Joe Home'} price={'$13.369'}></Hot_Collection>
+                <Box display="flex" flexDirection="column" marginLeft="100px" marginRight="100px">
+                    <Img_Letter letter={'Hot collections 🔥'} />
+                    <Box display="flex" marginTop="30px" justifyContent="space-between">
+                        <Hot_Collection img={cover} simg={small_ellipse} title={'Kingkoog'} price={'$13.369'} display="flex" flex="1"></Hot_Collection>
+                        <Hot_Collection img={cover1} simg={small_ellipse} title={'Sunny Showers'} price={'$13.369'} display="flex" flex="1"></Hot_Collection>
+                        <Hot_Collection img={cover2} simg={small_ellipse} title={'The future'} price={'$13.369'} display="flex" flex="1"></Hot_Collection>
+                        <Hot_Collection img={cover3} simg={small_ellipse} title={'Joe Home'} price={'$13.369'} display="flex" flex="1"></Hot_Collection>
+                    </Box>
                 </Box>
-
             </Part_Collection>
             <Part_Drop>
-                <Img_Letter letter={'Latest drops 🚀'} />
-                <Box display="flex" flexDirection="column" marginTop="30px">
-                    <Box display="flex" flex="1" justifyContent="space-between" marginBottom="30px">
-                        <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                <Box display="flex" flexDirection="column" marginLeft="100px" marginRight="100px">
+                    <Img_Letter letter={'Latest drops 🚀'} />
+                    <Box display="flex" flexDirection="column" marginTop="30px">
+                        <Box display="flex" flex="1" justifyContent="space-between" marginBottom="30px">
+                            <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                        </Box>
+                        <Box display="flex" flex="1" justifyContent="space-between" marginBottom="30px">
+                            <Last_Drop img={cover8} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover9} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover10} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover11} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                        </Box>
+                        <Box display="flex" flex="1" justifyContent="space-between" marginBottom="13px">
+                            <Last_Drop img={cover12} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover13} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover14} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                            <Last_Drop img={cover15} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                        </Box>
                     </Box>
-                    <Box display="flex" flex="1" justifyContent="space-between" marginBottom="30px">
-                        <Last_Drop img={cover8} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover9} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover10} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover11} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                    </Box>
-                    <Box display="flex" flex="1" justifyContent="space-between" marginBottom="13px">
-                        <Last_Drop img={cover12} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover13} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover14} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
-                        <Last_Drop img={cover15} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'}></Last_Drop>
+                    <Box marginTop="150px" display="flex" justifyContent="center">
+                        <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
+
                     </Box>
                 </Box>
-                <Box marginTop="150px" display="flex" justifyContent="center">
-                    <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
-
-                </Box>
-
             </Part_Drop>
             <Part_Foot>
 
@@ -116,6 +133,29 @@ const Mainpage = () => {
         </StyledContainer>
     );
 };
+
+const HLetter = styled(Box)`
+    display: flex;
+    height:34px;
+    justify-content: center;
+    align-items: center;
+    font-family: Work Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #2BA55D;
+    border-top: 4px solid #FCFCFC;
+    &:hover{
+        border-top: 4px solid  #2BA55D;
+        cursor: pointer;
+    }
+`
+
+const Header1 = styled(Box)`
+    display: flex;
+    width:100%;
+`
 
 const StyledContainer = styled(Box)`
     position: relative;
@@ -128,19 +168,19 @@ const StyledContainer = styled(Box)`
 
 const Part_Header = styled(Box)`
     display: flex;
-    width: 80%;
+    width: 100%;
 `
 
 const Part_Collection = styled(Box)`
     display: flex;
-    width: 80%;
+    width: 100%;
     margin-top:100px;
     flex-direction: column;
 `
 
 const Part_Drop = styled(Box)`
     display: flex;
-    width: 80%;
+    width: 100%;
     margin-top:100px;
     flex-direction: column;
 
@@ -148,7 +188,7 @@ const Part_Drop = styled(Box)`
 
 const Part_Foot = styled(Box)`
     display: flex;
-    width: 80%;
+    width: 100%;
     margin-top:100px;
     flex-direction: column;
 
