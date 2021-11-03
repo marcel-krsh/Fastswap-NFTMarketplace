@@ -101,7 +101,7 @@ const Mainpage = ({ctheme}) => {
             </Part_Collection>
             <Part_Drop>
                 <Box display="flex" flexDirection="column" marginLeft="100px" marginRight="100px">
-                    <Img_Letter letter={'Latest drops 🚀'} />
+                    <Img_Letter letter={'Latest drops 🚀'} ctheme={ctheme}/>
                     <Box display="flex" flexDirection="column" marginTop="30px">
                         <Box display="flex" flex="1" justifyContent="space-between" marginBottom="30px">
                             <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
