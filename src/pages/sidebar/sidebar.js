@@ -16,6 +16,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import 'react-pro-sidebar/dist/css/styles.css';
 import { lightTheme, darkTheme } from '../../theme/theme';
 import "./style.css"
+import history from '../../history';
 
 const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
 

@@ -29,6 +29,7 @@ import Last_Drop from "../../components/carts/cart_drop"
 import Img_Letter from "../../components/letters/img_letter"
 import { lightTheme, darkTheme } from "../../theme/theme"
 
+
 const Mainpage = ({ctheme}) => {
 
     return (

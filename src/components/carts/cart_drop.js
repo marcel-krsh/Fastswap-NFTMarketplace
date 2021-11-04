@@ -3,10 +3,14 @@ import { useState } from 'react'
 import { Box, Button, Modal } from '@material-ui/core'
 import styled from 'styled-components';
 import { lightTheme, darkTheme } from "../../theme/theme";
+import { useHistory } from "react-router";
 
 const Last_Drop = ({ img, simg, simg1, name, price, ctheme}) => {
+    const history = useHistory()
     return (
-        <HCollection ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme}>
+        <HCollection ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme} onClick={()=>{
+            history.push('/Detail_page');
+        }}>
             <Box display="flex" flex="250">
                 <img src={img} width="100%" height="100%"></img>
             </Box>
@@ -40,6 +44,13 @@ const HCollection = styled(Box)`
     border: 1px solid #CECECE;
     box-sizing: border-box;
     border-radius: 8px;
+    &:hover{
+        cursor: pointer;
+        box-shadow:
+        inset 0 -3em 3em rgba(0,0,0,0.1),
+              0 0  0 0px rgb(255,255,255),
+              0.3em 0.3em 1em rgba(0,0,0,0.3);
+    }
 `
 
 

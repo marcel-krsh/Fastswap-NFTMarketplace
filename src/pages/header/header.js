@@ -18,8 +18,10 @@ import trust from '../../images/TrustWallet.png'
 import img_logo from '../../images/logo_mark1.png';
 import vector from "../../images/Vector.png";
 import { lightTheme, darkTheme } from "../../theme/theme";
+import { useHistory } from "react-router";
 
 const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
+    const history = useHistory()
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -64,6 +66,8 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
             "....",
         );
     }
+
+
 
     return (
         <StyledContainer ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme}>
