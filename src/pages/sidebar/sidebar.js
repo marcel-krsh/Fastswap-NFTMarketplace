@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { VscColorMode } from "react-icons/vsc";
 import { FaTractor } from "react-icons/fa";
 import { Box } from '@material-ui/core'
@@ -7,20 +6,17 @@ import {
     Menu,
     MenuItem,
     ProSidebar,
-    SidebarFooter,
     SidebarContent,
     SubMenu,
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-// import './sidebar.scss';
+
 import 'react-pro-sidebar/dist/css/styles.css';
 import { lightTheme, darkTheme } from '../../theme/theme';
 import "./style.css"
-import { useHistory } from "react-router";
 
 const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
 
-    const history = useHistory()
     const styles = {
         sideBarHeight: {
             height: "unset",
@@ -47,14 +43,12 @@ const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
         },
         color_back: {
             backgroundColor: `${lightTheme.bgcolor_bar}`,
-            // backgroundColor: 'white',
             boxShadow: '4px 4px 3px -4px rgba(0, 0, 0, 0.08)',
             color: "#2BA55D",
             fontStyle: "Work sans",
         },
         color_back1: {
             backgroundColor: `${darkTheme.bgcolor_bar}`,
-            // backgroundColor: 'white',
             boxShadow: '4px 4px 3px -4px rgba(0, 0, 0, 0.08)',
             color: "#2BA55D",
             fontStyle: "Work sans",
@@ -84,11 +78,6 @@ const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
 
                     </Menu>
                 </SidebarContent>
-                {/* <SidebarFooter>
-                <Menu>
-                    <MenuItem icon={<VscColorMode fontSize="30px" />} >Light/Dark</MenuItem>
-                </Menu>
-            </SidebarFooter> */}
             </ProSidebar>
         </div>
     );

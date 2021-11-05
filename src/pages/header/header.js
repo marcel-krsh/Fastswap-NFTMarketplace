@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { useState } from 'react'
-import { Box, Button, Modal } from '@material-ui/core'
+import { Box, Modal} from '@material-ui/core'
 import styled from 'styled-components';
 import { MdMenuOpen } from "react-icons/md";
 import {
@@ -16,7 +18,6 @@ import walletconnect from '../../images/WalletConnect.png'
 import binance from '../../images/BinanceWallet.png'
 import trust from '../../images/TrustWallet.png'
 import img_logo from '../../images/logo_mark1.png';
-import vector from "../../images/Vector.png";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
@@ -66,8 +67,6 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
             "....",
         );
     }
-
-
 
     return (
         <StyledContainer ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme}>

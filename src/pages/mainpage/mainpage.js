@@ -1,7 +1,8 @@
-import { VscColorMode } from "react-icons/vsc";
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react/jsx-pascal-case */
+
 import React from "react";
-import { useState } from 'react'
-import { Box, Button, Modal } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import styled from 'styled-components';
 import cover_big1 from '../../images/cover/cover_big1.png';
 import small_ellipse from "../../images/small_ellipse2.png"
@@ -114,33 +115,45 @@ const Mainpage = ({ ctheme }) => {
                     <Img_Letter letter={'Latest drops 🚀'} ctheme={ctheme} />
                     <Box display="flex" flexDirection="column" marginTop="2%">
                         <Collection_Image display="flex" flex="1" marginBottom="2%">
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1">                            <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                        </Collection_Image>
-                        <Collection_Image display="flex" flex="1" marginBottom="2%">
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover8} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover9} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover10} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1">                            <Last_Drop img={cover11} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1">
+                                <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
                         </Collection_Image>
                         <Collection_Image display="flex" flex="1" marginBottom="2%">
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover12} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover8} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover13} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover9} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover14} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover10} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1" >                            <Last_Drop img={cover15} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1">
+                                <Last_Drop img={cover11} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            </Box>
+                        </Collection_Image>
+                        <Collection_Image display="flex" flex="1" marginBottom="2%">
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover12} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            </Box>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover13} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            </Box>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover14} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            </Box>
+                            <Box display="flex" flex="1" >
+                                <Last_Drop img={cover15} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
                         </Collection_Image>
                     </Box>
@@ -150,10 +163,6 @@ const Mainpage = ({ ctheme }) => {
                     </Box>
                 </Box>
             </Part_Drop>
-            {/* 
-            <Part_Foot> 
-
-            </Part_Foot>*/}
         </StyledContainer>
     );
 };
@@ -289,14 +298,6 @@ const Part_Collection = styled(Box)`
 `
 
 const Part_Drop = styled(Box)`
-    display: flex;
-    width: 100%;
-    margin-top:5%;
-    flex-direction: column;
-
-`
-
-const Part_Foot = styled(Box)`
     display: flex;
     width: 100%;
     margin-top:5%;

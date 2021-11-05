@@ -1,11 +1,11 @@
-import { VscColorMode } from "react-icons/vsc";
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react/jsx-pascal-case */
+
 import React from "react";
 import { FaShareAlt, FaHeart } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
-import { useState } from 'react'
-import { Box, Button, Modal } from '@material-ui/core'
+import { Box,   } from '@material-ui/core'
 import styled from 'styled-components';
-import cover_big1 from '../../images/cover/collection_header.png';
 import small_ellipse from "../../images/small_ellipse2.png"
 import small_duke from "../../images/small_duke1.png";
 import cover from "../../images/cover/cover.png";
@@ -26,11 +26,8 @@ import cover14 from "../../images/cover/cover-14.png";
 import cover15 from "../../images/cover/cover-15.png";
 import icon_logo from "../../images/icon_logo.png";
 import detail_chart1 from "../../images/detail_chart1.png";
-
 import Btn_Customize from "../../components/buttons/btn_container"
-import Hot_Collection from "../../components/carts/cart_collection"
 import Last_Drop from "../../components/carts/cart_drop"
-import Img_Letter from "../../components/letters/img_letter"
 import List_ULetter from "../../components/letters/list_uletter"
 import { lightTheme, darkTheme } from "../../theme/theme"
 
@@ -147,13 +144,17 @@ const Detail_Page = ({ ctheme }) => {
                 <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
                     <Box display="flex" flexDirection="column" marginTop="2%">
                     <Collection_Image display="flex" flex="1" marginBottom="2%">
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1" marginRight="2%">
+                                <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
-                            <Box display="flex" flex="1">                            <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            <Box display="flex" flex="1">
+                                <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
                             </Box>
                         </Collection_Image>
 

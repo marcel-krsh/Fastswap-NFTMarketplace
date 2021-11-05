@@ -1,16 +1,14 @@
 import React from "react";
-import { useState } from 'react'
-import { Box, Button, Modal } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import styled from 'styled-components';
 import { lightTheme, darkTheme } from "../../theme/theme"
 import { MdArrowDropUp } from "react-icons/md";
 
-const List_ULetter = ({ ctheme, str, width1, height1}) => {
+const List_ULetter = ({ ctheme, str, width1, height1 }) => {
     return (
-        <ILtter ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme} width={width1} height={height1}>
-
+        <ILtter ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} width={width1} height={height1}>
             <Box display="flex" flex="5" alignItems="center" justifyContent="flex-start">{str}</Box>
-            <Box display="flex" flex="1" alignItems="center" justifyContent="flex-end"><MdArrowDropUp/></Box>
+            <Box display="flex" flex="1" alignItems="center" justifyContent="flex-end"><MdArrowDropUp /></Box>
         </ILtter>
     );
 };
@@ -26,7 +24,7 @@ const ILtter = styled(Box)`
     border-bottom:1px solid #757B75;
     color:#757B75;
     margin-top: 32px;
-    // color: ${({ ctheme, ltheme, dtheme}) => ctheme ? ltheme.font_color_grey : dtheme.font_color_grey};
+    // color: ${({ ctheme, ltheme, dtheme }) => ctheme ? ltheme.font_color_grey : dtheme.font_color_grey};
     @media (max-width: 600px) {
         font-size: 14px !important;
     }

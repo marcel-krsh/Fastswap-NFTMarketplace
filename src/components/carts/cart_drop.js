@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-import { useState } from 'react'
-import { Box, Button, Modal } from '@material-ui/core'
+import { Box} from '@material-ui/core'
 import styled from 'styled-components';
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";

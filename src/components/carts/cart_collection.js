@@ -1,5 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-import { useState } from 'react'
 import { Box } from '@material-ui/core'
 import styled from 'styled-components';
 import { lightTheme, darkTheme } from "../../theme/theme";
