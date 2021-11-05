@@ -40,24 +40,22 @@ const Detail_Page = ({ ctheme }) => {
     return (
         <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
             <Header1>
-                <Box display="flex" flex="1"></Box>
-                <Box display="flex" flex="3" justifyContent="space-between">
+                <Header1_space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
                     <HLetter>Overview</HLetter>
                     <HLetter>Explore</HLetter>
                     <HLetter>Rankings</HLetter>
                     <HLetter>Activities</HLetter>
                     <HLetter>Manage</HLetter>
-                </Box>
-                <Box display="flex" flex="1"></Box>
+                </Header1_space>
             </Header1>
-            <Box display="flex" width="100%" marginTop="120px" >
-                <Box display="flex" marginLeft="100px" marginRight="100px" width="100%">
-                    <Box display="flex" flex="4" width="100%" borderRadius="8px">
-                        <img src={cover14} width="403px" height="403px" borderRadius="8px"></img>
+            <Box display="flex" width="100%" marginTop="5%" >
+                <Detail_Img display="flex" marginLeft="5%" marginRight="5%" width="100%">
+                    <Box display="flex" flex="4"  borderRadius="8px">
+                        <img src={cover14} width="100%" height="100%" borderRadius="8px"></img>
                     </Box>
-                    <Box display="flex" flex="5" width="100%" justifyContent="center">
+                    <Box display="flex" flex="5"justifyContent="center">
                         <Box display="flex" flexDirection="column" width="90%">
-                            <Box display="flex" flex="1" alignItems="center">
+                            <Box display="flex" flex="1" alignItems="center" >
                                 <Box display="flex" flex="1" justifyContent="flex-start" fontFamily="Work Sans" fontWeight="500" fontSize="18px" color="#2BA55D">
                                     Collection name
                                 </Box>
@@ -65,18 +63,18 @@ const Detail_Page = ({ ctheme }) => {
                                     <FaShareAlt fontSize="18px" color="#757B75"></FaShareAlt>
                                 </Box>
                             </Box>
-                            <Box display="flex" flex="2" flexDirection="column" >
-                                <Box display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize="34px" color="#363936" lineHeight="40px" alignItems="center">NFT artwork titleNFT</Box>
-                                <Box display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize="34px" color="#363936" lineHeight="40px" alignItems="center">artwork title</Box>
+                            <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
+                                <Img_Title1 display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize="34px" color="#363936" lineHeight="40px" alignItems="center">NFT artwork titleNFT</Img_Title1>
+                                <Img_Title1 display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize="34px" color="#363936" lineHeight="40px" alignItems="center">artwork title</Img_Title1>
                             </Box>
-                            <Box display="flex" flex="1" alignItems="center">
+                            <Box display="flex" flex="1" alignItems="center" marginTop="1%">
                                 <Box display="flex" flex="60" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">Owned by </Box>
                                 <Box display="flex" flex="75" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#2BA55D">User's name</Box>
                                 <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75"><MdRemoveRedEye fontSize="20px" />{'\u00a0'}2.4 K views</Box>
                                 <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75"><FaHeart fontSize="20px" />{'\u00a0'}201 favorited</Box>
-                                <Box display="flex" flex="100" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="500" color=""></Box>
+                                {/* <Box display="flex" flex="100" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="500" color=""></Box> */}
                             </Box>
-                            <Box display="flex" flex="2" flexDirection="column" >
+                            <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
                                 <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Work Sans" fontSize="10px" fontWeight="400" color="#757B75">
                                     Lowest price
                                 </Box>
@@ -90,16 +88,16 @@ const Detail_Page = ({ ctheme }) => {
                                     </Box>
                                 </Box>
                             </Box>
-                            <Box display="flex" flex="2" alignItems="flex-start">
-                                <Btn_Customize color={'white'} back={'#2BA55D'} width={'488px'} height={'56px'} border={'1px solid #2BA55D'} str={'Place a bid'} borderRadius={'8px'} />
+                            <Box display="flex" flex="2" alignItems="flex-start" marginTop="1%">
+                                <Btn_Customize color={'white'} back={'#2BA55D'} width={'100%'} height={'56px'} border={'1px solid #2BA55D'} str={'Place a bid'} borderRadius={'8px'} />
 
                             </Box>
                         </Box>
                     </Box>
-                </Box>
+                </Detail_Img>
             </Box>
             <Box display="flex" width="100%" >
-                <Box display="flex" marginLeft="100px" marginRight="100px" width="100%" marginTop="20px">
+                <Underline1 display="flex" marginLeft="5%" marginRight="5%" width="100%" marginTop="2%">
                     <Box display="flex" flex="4" width="100%" justifyContent="flex-start" >
                         <Box display="flex" width="95%" flexDirection="column">
                             <List_ULetter ctheme={ctheme} str={"Description"} width1={"100%"} height1={"40px"}></List_ULetter>
@@ -117,19 +115,20 @@ const Detail_Page = ({ ctheme }) => {
                         </Box>
 
                     </Box>
-                    <Box display="flex" flex="5" width="100%" justifyContent="center">
+                    <Underline3 display="flex" flex="5" width="100%" justifyContent="center">
 
-                        <Box display="flex" width="90%" flexDirection="column">
+                        <Underline2 display="flex" width="90%" flexDirection="column">
                             <List_ULetter ctheme={ctheme} str={"Price history"} width1={"100%"} height1={"40px"}></List_ULetter>
                             <Box display="flex">
-                                <img src={detail_chart1} width="100%" height="262px"></img>
+                                <img src={detail_chart1} width="100%" height="100%"></img>
                             </Box>
-                        </Box>
-                    </Box>
-                </Box>
+                        </Underline2>
+                    </Underline3>
+                </Underline1>
             </Box>
+
             <Box display="flex" width="100%" >
-                <Box display="flex" marginLeft="100px" marginRight="100px" width="90%" marginTop="50px" flexDirection="column">
+                <Box display="flex" marginLeft="5%" marginRight="5%" width="90%" marginTop="2%" flexDirection="column">
                     <List_ULetter ctheme={ctheme} str={"Items activity"} width1={"100%"} height1={"40px"}></List_ULetter>
                     <Drop_chart1>
                         Need to make table here
@@ -139,19 +138,24 @@ const Detail_Page = ({ ctheme }) => {
             </Box>
 
             <Box display="flex" width="100%" >
-                <Box display="flex" marginLeft="100px" marginRight="100px" width="90%" marginTop="50px" flexDirection="column">
+                <Box display="flex" marginLeft="5%" marginRight="5%" width="90%" marginTop="2%" flexDirection="column">
                     <List_ULetter ctheme={ctheme} str={"Other items in this collection"} width1={"100%"} height1={"40px"}></List_ULetter>
                 </Box>
             </Box>
+
             <Part_Drop>
-                <Box display="flex" flexDirection="column" marginLeft="100px" marginRight="100px">
-                    <Box display="flex" flexDirection="column" marginTop="30px">
-                        <Box display="flex" flex="1" justifyContent="space-between" marginBottom="30px">
-                            <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                        </Box>
+                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
+                    <Box display="flex" flexDirection="column" marginTop="2%">
+                    <Collection_Image display="flex" flex="1" marginBottom="2%">
+                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            </Box>
+                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            </Box>
+                            <Box display="flex" flex="1" marginRight="2%">                            <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            </Box>
+                            <Box display="flex" flex="1">                            <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
+                            </Box>
+                        </Collection_Image>
 
                     </Box>
                 </Box>
@@ -161,6 +165,48 @@ const Detail_Page = ({ ctheme }) => {
     );
 };
 
+
+const Collection_Image = styled(Box)`
+    flex-direction: row;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+
+
+`
+
+const Underline1 = styled(Box)`
+flex-direction: row;
+    @media (max-width: 800px) {
+        flex-direction: column;
+    }
+`
+
+const Underline2 = styled(Box)`
+    @media (max-width: 800px) {
+        width: 95% !important;
+    }
+`
+
+const Underline3 = styled(Box)`
+    @media (max-width: 800px) {
+        justify-content: flex-start !important;
+    }
+`
+
+const Detail_Img = styled(Box)`
+flex-direction: row;
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+`
+
+const Img_Title1 = styled(Box)`
+    @media (max-width: 1000px) {
+        font-size: 25px !important;
+    }
+`
 
 const Part_Drop = styled(Box)`
     display: flex;
@@ -194,10 +240,17 @@ const StyledContainer = styled(Box)`
     background: ${({ ctheme, ltheme, dtheme }) => ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main};
 `
 
-const Header1 = styled(Box)`
-    display: flex;
-    width:100%;
+const Header1_space = styled(Box)`
+@media (max-width: 1000px) {
+    margin-left: 8% !important;
+    margin-right: 8% !important;
+}
+    @media (max-width: 800px) {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
 `
+
 const HLetter = styled(Box)`
     display: flex;
     height:34px;
@@ -214,6 +267,21 @@ const HLetter = styled(Box)`
         border-top: 4px solid  #2BA55D;
         cursor: pointer;
     }
+    @media (max-width: 1000px) {
+        font-size: 12px;
+    }
+    @media (max-width: 800px) {
+        font-size: 12px;
+    }
+    @media (max-width: 600px) {
+        font-size: 8px;
+    }
+
 `
 
+const Header1 = styled(Box)`
+    display: flex;
+    width:100%;
+
+`
 export default Detail_Page;

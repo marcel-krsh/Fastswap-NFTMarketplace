@@ -14,6 +14,10 @@ import { Col, Row } from "reactstrap";
 
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
+import { lightTheme, darkTheme } from '../src/theme/theme';
+import { light } from '@material-ui/core/styles/createPalette';
+
+
 function getLibrary(provider) {
   return new Web3(provider)
 }
@@ -36,32 +40,39 @@ function App() {
 
     <>
       <Web3ReactProvider getLibrary={getLibrary}>
-        <Row>
-          <Col>
+
             <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar} ctheme={ctheme} ></Header>
-          </Col>
-        </Row>
-        <div style={styles.contentDiv}>
-          <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                <Mainpage ctheme={ctheme} />
-              </Route>
-              <Route exact path="/Collection_page">
-                <Collection_page ctheme={ctheme} />
-              </Route>
-              <Route exact path="/Detail_page">
-                <Detail_page ctheme={ctheme} />
-              </Route>
-              {/* <Route exact path="/Collection_page" component={<Collection_page ctheme={ctheme} />} /> */}
-            </Switch>
-          </Router>
-          {/* <Mainpage ctheme={ctheme}></Mainpage>
+
+        <div style={styles.contentDiv} >
+            <div className="sidebar1" style={{ display: "none"}} >
+            <Sidebar flag_sidebar={1} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+            </div>
+
+            <div className="sidebar2">
+            <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+          </div>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Mainpage ctheme={ctheme} />
+            </Route>
+            <Route exact path="/Collection_page">
+              <Collection_page ctheme={ctheme} />
+            </Route>
+            <Route exact path="/Detail_page">
+              <Detail_page ctheme={ctheme} />
+            </Route>
+            {/* <Route exact path="/Collection_page" component={<Collection_page ctheme={ctheme} />} /> */}
+
+
+          </Switch>
+
+        </Router>
+        {/* <Mainpage ctheme={ctheme}></Mainpage>
           <Collection_page ctheme={ctheme}></Collection_page> */}
 
-        </div>
-      </Web3ReactProvider>
+      </div>
+    </Web3ReactProvider>
     </>
   );
 }

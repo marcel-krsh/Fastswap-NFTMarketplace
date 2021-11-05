@@ -30,7 +30,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 600,
+        width: '60%',
         height: 468,
         boxShadow: 24,
         p: 4,
@@ -72,12 +72,15 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     return (
         <StyledContainer ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme}>
             {/* {theme? <div>123</div>:<div>KKK</div>} */}
-            <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px" color={ctheme?lightTheme.font_color1: darkTheme.font_color1}>
+            <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" marginLeft="5%" marginRight="5%" fontWeight="bold" fontSize="20px" color={ctheme?lightTheme.font_color1: darkTheme.font_color1}>
                 <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D"/>
+                <Logo_img>
                 <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }}></img>
+
                 FASTSWAP
+                </Logo_img>
             </Box>
-            <Box display="flex" flex="4"></Box>
+            <Box display="flex" flex="3"></Box>
             <Box display="flex" flex="1" alignItems="center" justifyContent="center">
                 <Btn_connect onClick={handleOpen}>Connect</Btn_connect>
             </Box>
@@ -111,7 +114,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                                 boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
                                 height: '50%',
                             }} onClick={() => { handleConnect(walletConnectors['MetaMask']) }}>
-                                <img src={metamask} width="40px" height="40px"></img><Box fontWeight='bold' margin='20px' color='#337ab7' fontSize='1.25rem'>MetaMask</Box>
+                                <img src={metamask} width="40px" height="40px"></img><Connect_btn_letter fontWeight='bold' margin='20px' color='#337ab7' fontSize='1.25rem'>MetaMask</Connect_btn_letter>
                             </Box>
                         </Box>
                         <Box display='flex' alignItems="center" height="100%" flex='1'>
@@ -128,7 +131,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                                 boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
                                 height: '50%',
                             }} onClick={() => { handleConnect(walletConnectors['WalletConnect']) }}>
-                                <img src={walletconnect} width="40px" height="40px"></img><Box fontWeight='bold' margin='20px' color='#337ab7' fontSize='1.25rem'>WalletConnect</Box>
+                                <img src={walletconnect} width="40px" height="40px"></img><Connect_btn_letter fontWeight='bold' margin='20px' color='#337ab7' fontSize='1.25rem'>WalletConnect</Connect_btn_letter>
                             </Box>
                         </Box>
                         <Box display='flex' alignItems="center" height="100%" flex='1'>
@@ -145,7 +148,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                                 boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
                                 height: '50%',
                             }} onClick={() => { handleConnect(walletConnectors['BinanceWallet']) }}>
-                                <img src={binance} width="40px" height="40px"></img><Box fontWeight='bold' margin='20px' color='#337ab7' fontSize='1.25rem'>BinanceWallet</Box>
+                                <img src={binance} width="40px" height="40px"></img><Connect_btn_letter fontWeight='bold' margin='20px' color='#337ab7' fontSize='1.25rem'>BinanceWallet</Connect_btn_letter>
                             </Box>
                         </Box>
                         <Box display='flex' alignItems="center" height="100%" flex='1'>
@@ -162,7 +165,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                                 boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
                                 height: '50%',
                             }} onClick={() => { handleConnect(walletConnectors['TrustWallet']) }}>
-                                <img src={trust} width="40px" height="40px"></img><Box fontWeight='bold' margin='20px' color='#337ab7' fontSize='1.25rem'>TrustWallet</Box>
+                                <img src={trust} width="40px" height="40px"></img><Connect_btn_letter fontWeight='bold' margin='20px' color='#337ab7' fontSize='1.25rem'>TrustWallet</Connect_btn_letter>
                             </Box>
                         </Box>
                     </Box>
@@ -172,6 +175,21 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     );
 };
 
+const Connect_btn_letter = styled(Box)`
+@media (max-width: 400px) {
+    font-size:0.75rem !important;
+    
+}
+`
+
+const Logo_img = styled(Box)`
+    display: flex;
+    @media (max-width: 600px) {
+        display: none;
+        
+    }
+
+`
 const StyledContainer = styled(Box)`
     position: relative;
     display: flex;
@@ -187,7 +205,7 @@ const Btn_connect = styled(Box)`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 130px;
+    width: 80%;
     height: 32px;
     background: #2BA55D;
     border-radius: 8px;
@@ -202,6 +220,14 @@ const Btn_connect = styled(Box)`
         inset 0 -3em 3em rgba(0,0,0,0.1),
               0 0  0 0px rgb(255,255,255),
               0.3em 0.3em 1em rgba(0,0,0,0.3);
+    }
+    @media (max-width: 800px) {
+        font-size: 12px;
+        
+    }
+    @media (max-width: 600px) {
+        font-size: 8px;
+        
     }
 `
 

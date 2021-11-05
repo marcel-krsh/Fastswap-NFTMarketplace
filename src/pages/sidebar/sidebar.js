@@ -16,10 +16,11 @@ import "react-pro-sidebar/dist/css/styles.css";
 import 'react-pro-sidebar/dist/css/styles.css';
 import { lightTheme, darkTheme } from '../../theme/theme';
 import "./style.css"
-import history from '../../history';
+import { useHistory } from "react-router";
 
 const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
 
+    const history = useHistory()
     const styles = {
         sideBarHeight: {
             height: "unset",
@@ -66,7 +67,7 @@ const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
             <ProSidebar style={ctheme ? styles.sideBarHeight : styles.sideBarHeight1} collapsed={flag_sidebar}  >
                 <SidebarContent>
                     <Menu style={ctheme ? styles.color_back : styles.color_back1} >
-                        <MenuItem icon={<MdHome fontSize="30px" />} fontStyle="Work sans" >Home</MenuItem>
+                        <MenuItem icon={<MdHome fontSize="30px" />} fontStyle="Work sans" onClick={()=>{window.history.pushState(null, null, '/')}}>Home</MenuItem>
                         <MenuItem icon={<MdOutlineMonetizationOn fontSize="30px" />} fontStyle="Work sans">Trade</MenuItem>
                         <MenuItem icon={<MdOutlineImage fontSize="30px" />} fontStyle="Work sans">NFT Marketplace</MenuItem>
                         <MenuItem icon={<FaTractor fontSize="30px" />} fontStyle="Work sans">Farms</MenuItem>
