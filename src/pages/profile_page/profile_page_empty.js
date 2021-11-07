@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-pascal-case */
 import React from "react";
-import { FaCamera} from "react-icons/fa";
+import { useState } from 'react'
+import { FaCamera, FaPencilAlt } from "react-icons/fa";
 import { FiMove } from "react-icons/fi";
-import { Box } from '@material-ui/core'
+import { Box, Slider } from '@material-ui/core'
 import styled from 'styled-components';
 import cover_big1 from '../../images/cover/collection_header.png';
 import small_ellipse from "../../images/small_ellipse2.png"
@@ -26,6 +27,7 @@ import cover13 from "../../images/cover/cover-13.png";
 import cover14 from "../../images/cover/cover-14.png";
 import cover15 from "../../images/cover/cover-15.png";
 import Btn_Customize from "../../components/buttons/btn_container"
+import Btn_Customize_Save from "../../components/buttons/btn_customize_save"
 import Last_Drop from "../../components/carts/cart_drop"
 import Img_Letter from "../../components/letters/img_letter"
 import { lightTheme, darkTheme } from "../../theme/theme"
@@ -33,6 +35,9 @@ import { lightTheme, darkTheme } from "../../theme/theme"
 
 
 const Profile_page_empty = ({ ctheme }) => {
+
+    const [flag_move, set_move] = useState(false);
+
 
     return (
         <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
@@ -49,19 +54,24 @@ const Profile_page_empty = ({ ctheme }) => {
                 <Box display="flex" flex="1" marginLeft="5%" marginTop="6%" flexDirection="column" marginRight="5%" position="relative">
                     <Camera_move1 display="flex" flex="210" width="100%" >
                         <img src={cover_big1} width="100%" height="210px"></img>
-                        <Box position="absolute"  display="none" width="9%" height="12%" justifyContent="center" alignItems="center" right="0px" bottom="10%">
-                            <Box  width="25%" height="100%" bgcolor="white" borderRadius="100%" justifyContent="center" alignItems="center" marginRight="5%">
+                        <Box position="absolute" display="none" width="9%" height="12%" justifyContent="center" alignItems="center" right="0px" bottom="10%">
+                            <Box width="25%" height="100%" bgcolor="white" borderRadius="100%" justifyContent="center" alignItems="center" marginRight="5%" >
                                 <FaCamera fontSize="18px" color="#323232"></FaCamera>
                             </Box>
-                            <Box width="25%" height="100%" bgcolor="white" borderRadius="100%" justifyContent="center" alignItems="center">
+                            <Box width="25%" height="100%" bgcolor="white" borderRadius="100%" justifyContent="center" alignItems="center" onClick={() => { set_move(!flag_move) }}>
                                 <FiMove fontSize="18px" color="#323232" fontWeight="bold"></FiMove>
                             </Box>
                         </Box>
+                        <Drag_reposition display="none" position="absolute" top="40%" left="40%" width="25%" height="40px" bgcolor="#FCFCFC" borderRadius="8px" fontSize="20px" fontWeight="300" fontFamily="Work Sans" alignItems="center" justifyContent="center">Drag to reposition{'\u00a0'}{'\u00a0'}<FiMove/></Drag_reposition>
                     </Camera_move1>
-                    <Box display="flex" flex="50" marginTop="10px">
-
+                    <Box display="flex" flex="50"  marginTop="1%" width="100%">
+                        {flag_move === true ? <Box position="absolute" display="flex" width="100%" justifyContent="flex-end" alignItems="center">
+                            <Box display="flex" width="30%" fontSize="20px" fontWeight="800" fontFamily="Work Sans" alignItems="center" bgcolor="#FFFFFF" border="1px solid #CECECE" borderRadius="8px" marginRight="2%">
+                            {'\u00a0'}{'\u00a0'}-{'\u00a0'}{'\u00a0'}<Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto"/>{'\u00a0'}{'\u00a0'}+{'\u00a0'}{'\u00a0'}</Box>
+                            <Btn_Customize_Save color={'white'} back={'#2BA55D'} width={'10%'} height={'40px'} border={'1px solid #2BA55D'} str={'Save'} borderRadius={'8px'} />
+                        </Box> : null}
                     </Box>
-                    <Tiger_img1 position="absolute" bottom="-5%" left="10%" width="7%">
+                    <Tiger_img1 position="absolute" bottom="-15%" left="10%" width="7%">
                         <img src={tiger_circle1} width="100%" height="80px"></img>
                         <Tiger_camera position="absolute" left="30%" top="30%" width="40%" height="40%" display="none" bgcolor="white" borderRadius="100%" justifyContent="center" alignItems="center">
                             <FaCamera fontSize="18px" color="#323232"></FaCamera>
@@ -69,17 +79,25 @@ const Profile_page_empty = ({ ctheme }) => {
                     </Tiger_img1>
 
 
+
                 </Box>
                 <Box display="flex" flex="1" marginLeft="5%" marginRight="5%" marginTop="5%" >
                     <Box display="flex" flex="1" flexDirection="column" justifyContent="center" marginLeft="5%">
-                        <Detail_Letter0 alignItems="flex-start" fontFamily="Work Sans" fontSize="24px" fontWeight="600"><span>Name</span></Detail_Letter0>
-                        <Detail_letter1 fontFamily="Work Sans" fontSize="18px" color="#363936" lineHeight="22px">
+                        <Detail_Letter0 display="flex" alignItems="flex-start" fontFamily="Work Sans" fontSize="24px" fontWeight="600">Name
+                            <Box marginLeft="3%" display="none">
+                                <FaPencilAlt fontSize="20px" color="#323232"></FaPencilAlt>
+                            </Box>
+                        </Detail_Letter0>
+                        <Detail_letter1 display="flex" fontFamily="Work Sans" fontSize="18px" color="#363936" lineHeight="22px">
                             <pre>Lorem ipsum dolor sit amet, <br />
                                 consectetur adipiscing elit. Placerat <br />
                                 praesent in dictum arcu consequat.<br />
                                 Porttitor nisl enim dictum ut non<br />
                                 consectetur euismod. Aliquam lorem <br />
                                 neque, lobortis neque arcu.</pre>
+                            <Box marginLeft="5%" marginTop='2%' display="none">
+                                <FaPencilAlt fontSize="20px" color="#323232"></FaPencilAlt>
+                            </Box>
                         </Detail_letter1>
                     </Box>
                     <Box_Price1 display="flex" flex="1" justifyContent="flex-end" alignItems="center" flexDirection='column'>
@@ -113,10 +131,9 @@ const Profile_page_empty = ({ ctheme }) => {
                         <Box width="80%" display="flex" flex="1">
 
                         </Box>
-                        <Box display="flex" flex="1" width="80%" justifyContent="flex-end">
+                        <Box_create_nft display="flex" flex="1" width="80%" justifyContent="flex-end">
                             <Btn_Customize color={'white'} back={'#2BA55D'} width={'60%'} height={'56px'} border={'1px solid #2BA55D'} str={'+ Create NFT'} borderRadius={'8px'} />
-
-                        </Box>
+                        </Box_create_nft>
                     </Box_Price1>
                 </Box>
             </Show_Detail>
@@ -206,6 +223,16 @@ const Profile_page_empty = ({ ctheme }) => {
     );
 };
 
+const Drag_reposition = styled(Box)`
+    opacity: 0.8;
+`
+
+const Box_create_nft = styled(Box)`
+    @media (max-width: 600px) {
+        display: none !important;
+    }
+`
+
 const Camera_move1 = styled(Box)`
     &:hover{
         div{
@@ -241,9 +268,9 @@ const Collection_Image = styled(Box)`
 
 const Box_Price1 = styled(Box)`
 
-// @media (max-width: 300px) {
-//     display: none !important;
-//     }
+@media (max-width: 600px) {
+    display: none !important;
+    }
 `
 
 const Tab_letter1 = styled(Box)`
@@ -253,11 +280,17 @@ const Tab_letter1 = styled(Box)`
 `
 
 const Detail_Letter0 = styled(Box)`
-@media (max-width: 1000px) {
-    font-size: 20px !important;
+    @media (max-width: 1000px) {
+        font-size: 20px !important;
     }
     @media (max-width: 600px) {
         font-size: 15px !important;
+        }
+        &:hover{
+            cursor: pointer;
+            div{
+                display: flex !important;
+            }
         }
 `
 
@@ -266,8 +299,11 @@ const Box_Letter1 = styled(Box)`
     flex-direction: row;
     @media (max-width: 600px) {
         flex-direction: column;
-        height: 120px !important;
+        height: 120px !important;   
     }
+
+    
+
 `
 const Box_Letter2 = styled(Box)`
 
@@ -279,17 +315,23 @@ const Box_Letter2 = styled(Box)`
 
 const Detail_letter1 = styled(Box)`
     @media (max-width: 1200px) {
-    font-size: 15px !important;
+        font-size: 15px !important;
     }
     @media (max-width: 1000px) {
         font-size: 12px !important;
-        }
+    }
     @media (max-width: 1000px) {
         font-size: 10px !important;
-        }
-        @media (max-width: 600px) {
-            font-size: 8px !important;
+    }
+    @media (max-width: 600px) {
+        font-size: 8px !important;
+        &:hover{
+            cursor: pointer;
+            div{
+                display: flex !important;
             }
+    }
+
 `
 
 const Detail_letter2 = styled(Box)`
