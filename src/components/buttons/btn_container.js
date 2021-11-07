@@ -19,6 +19,15 @@ const Btn_Customize = ({ color, back, width, height, border, str, borderRadius, 
 };
 
 const Btn_Cus = styled(Box)`
+
+@media (max-width: 800px) {
+    font-size: 15px !important;
+    }
+    @media (max-width: 600px) {
+        font-size: 12px !important;
+        }
+
+
 &:hover{
     cursor: pointer;
     box-shadow:

@@ -8,6 +8,9 @@ import Sidebar from "./pages/sidebar/sidebar"
 import Mainpage from "./pages/mainpage/mainpage"
 import Collection_page from './pages/collection_page/collection_page'
 import Detail_page from './pages/detail_page/detail_page'
+import Profile_page_prev from './pages/profile_page/profile_page_prev'
+import Profile_page_empty from './pages/profile_page/profile_page_empty'
+
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
 
@@ -51,6 +54,12 @@ function App() {
               </Route>
               <Route exact path="/Detail_page">
                 <Detail_page ctheme={ctheme} />
+              </Route>
+              <Route exact path="/Profile_prev">
+                <Profile_page_prev ctheme={ctheme} />
+              </Route>
+              <Route exact path="/Profile_empty">
+                <Profile_page_empty ctheme={ctheme} />
               </Route>
             </Switch>
           </Router>
