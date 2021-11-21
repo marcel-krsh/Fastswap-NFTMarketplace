@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-pascal-case */
-
-import './App.css';
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { Web3ReactProvider } from '@web3-react/core'
+import Web3 from 'web3'
+
 import Header from "./pages/header/header"
 import Sidebar from "./pages/sidebar/sidebar"
 import Mainpage from "./pages/mainpage/mainpage"
@@ -10,15 +12,18 @@ import Collection_page from './pages/collection_page/collection_page'
 import Detail_page from './pages/detail_page/detail_page'
 import Profile_page_prev from './pages/profile_page/profile_page_prev'
 import Profile_page_empty from './pages/profile_page/profile_page_empty'
+import getProducts from "./actions/product";
+import './App.css';
 
-import { Web3ReactProvider } from '@web3-react/core'
-import Web3 from 'web3'
 
 function getLibrary(provider) {
   return new Web3(provider)
 }
 
 function App() {
+
+  const dispatch = useDispatch();
+
   const styles = {
     contentDiv: {
       display: "flex",
@@ -31,6 +36,11 @@ function App() {
 
   const [flag_sidebar, set_sidebar] = useState(false);
   const [ctheme, setTheme] = useState(true);
+
+  useEffect(async() => {
+    dispatch(await getProducts());
+  }, [dispatch])
+
 
   return (
 

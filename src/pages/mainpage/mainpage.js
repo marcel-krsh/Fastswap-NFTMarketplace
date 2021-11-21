@@ -1,28 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-pascal-case */
 
-import React from "react";
-import { Box } from '@material-ui/core'
+import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 import cover_big1 from '../../images/cover/cover_big1.png';
 import small_ellipse from "../../images/small_ellipse2.png"
 import small_duke from "../../images/small_duke1.png";
-import cover from "../../images/cover/cover.png";
-import cover1 from "../../images/cover/cover-1.png";
-import cover2 from "../../images/cover/cover-2.png";
-import cover3 from "../../images/cover/cover-3.png";
-import cover4 from "../../images/cover/cover-4.png";
-import cover5 from "../../images/cover/cover-5.png";
-import cover6 from "../../images/cover/cover-6.png";
-import cover7 from "../../images/cover/cover-7.png";
-import cover8 from "../../images/cover/cover-8.png";
-import cover9 from "../../images/cover/cover-9.png";
-import cover10 from "../../images/cover/cover-10.png";
-import cover11 from "../../images/cover/cover-11.png";
-import cover12 from "../../images/cover/cover-12.png";
-import cover13 from "../../images/cover/cover-13.png";
-import cover14 from "../../images/cover/cover-14.png";
-import cover15 from "../../images/cover/cover-15.png";
 
 import Btn_Customize from "../../components/buttons/btn_container"
 import Hot_Collection from "../../components/carts/cart_collection"
@@ -30,8 +15,17 @@ import Last_Drop from "../../components/carts/cart_drop"
 import Img_Letter from "../../components/letters/img_letter"
 import { lightTheme, darkTheme } from "../../theme/theme"
 
-
 const Mainpage = ({ ctheme }) => {
+
+    // const dispatch = useDispatch();
+
+    const [rerender, setRerender] = useState('Hello');
+    const { nfts } = useSelector(state => state.product);
+    console.log('nfts: ', nfts);
+    useEffect(()=>{
+        setRerender('Hello World');
+        console.log('re-render')
+    },[nfts])
 
     return (
         <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
@@ -87,79 +81,24 @@ const Mainpage = ({ ctheme }) => {
 
                 </Box>
             </Part_Header>
-            <Part_Collection>
-                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
-                    <Img_Letter letter={'Hot collections 🔥'} ctheme={ctheme} />
-                    <Collection_Image display="flex" marginTop="2%">
-                        <Box display="flex" flex="1" marginRight="2%">
-                            <Hot_Collection img={cover} simg={small_ellipse} title={'Kingkoog'} price={'$13.369'} ctheme={ctheme} ></Hot_Collection>
-                        </Box>
-                        <Box display="flex" flex="1" marginRight="2%">
-                            <Hot_Collection img={cover1} simg={small_ellipse} title={'Sunny Showers'} price={'$13.369'} ctheme={ctheme} display="flex" flex="1" ></Hot_Collection>
-
-                        </Box>
-                        <Box display="flex" flex="1" marginRight="2%">
-                            <Hot_Collection img={cover2} simg={small_ellipse} title={'The future'} price={'$13.369'} ctheme={ctheme} display="flex" flex="1" ></Hot_Collection>
-
-                        </Box>
-                        <Box display="flex" flex="1">
-                            <Hot_Collection img={cover3} simg={small_ellipse} title={'Joe Home'} price={'$13.369'} ctheme={ctheme} display="flex" flex="1"></Hot_Collection>
-
-                        </Box>
-                    </Collection_Image>
-                </Box>
-            </Part_Collection>
 
             <Part_Drop>
                 <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
                     <Img_Letter letter={'Latest drops 🚀'} ctheme={ctheme} />
                     <Box display="flex" flexDirection="column" marginTop="2%">
-                        <Collection_Image display="flex" flex="1" marginBottom="2%">
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1">
-                                <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                        </Collection_Image>
-                        <Collection_Image display="flex" flex="1" marginBottom="2%">
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover8} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover9} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover10} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1">
-                                <Last_Drop img={cover11} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                        </Collection_Image>
-                        <Collection_Image display="flex" flex="1" marginBottom="2%">
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover12} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover13} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" marginRight="2%">
-                                <Last_Drop img={cover14} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                            <Box display="flex" flex="1" >
-                                <Last_Drop img={cover15} simg={small_ellipse} simg1={small_duke} name={'Creator Name'} price={'310.9 DUKE'} ctheme={ctheme}></Last_Drop>
-                            </Box>
-                        </Collection_Image>
+                        {
+                            nfts.length>0 && nfts.map((item, index) => {
+                                return (
+                                    <Box key={index} maxWidth="250px" display="flex" flex="1" marginRight="2%">
+                                        <Last_Drop key={index} img={item.img} simg={small_ellipse} title={item.title} simg1={small_duke} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme}></Last_Drop>
+                                    </Box>
+                                )
+                            })
+                        }
+                        
                     </Box>
                     <Box marginTop="150px" display="flex" justifyContent="center">
                         <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
-
                     </Box>
                 </Box>
             </Part_Drop>
@@ -174,8 +113,6 @@ const Collection_Image = styled(Box)`
     @media (max-width: 600px) {
         flex-direction: column;
     }
-
-
 `
 
 const Header1_space = styled(Box)`

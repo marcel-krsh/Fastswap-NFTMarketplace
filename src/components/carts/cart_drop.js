@@ -5,21 +5,21 @@ import styled from 'styled-components';
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
-const Last_Drop = ({ img, simg, simg1, name, price, ctheme}) => {
+const Last_Drop = ({ key, img, simg, simg1, title, name, price, ctheme}) => {
     const history = useHistory()
     return (
         <HCollection ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme} onClick={()=>{
             history.push('/Detail_page');
         }}>
-            <Box display="flex" flex="250">
-                <img src={img} width="100%" height="100%"></img>
+            <Box display="flex" flex="1">
+                <img src={img} width="250px" height="100%"></img>
             </Box>
             <Box display="flex" flex="75" borderBottom="1px solid #CECECE">
                 <Box display="flex" flex="2" alignItems="center" justifyContent="center">
                 {`\u00a0`}{`\u00a0`}<img src={simg} width="32px" height="32px"></img>
                 </Box>
                 <Box display="flex" flex="7" flexDirection="column">
-                    <Box display="flex" flex="1" justifyContent="flex-start" alignItems="flex-end" fontFamily="Work Sans" fontSize="18px" color={ctheme?lightTheme.font_color1:darkTheme.font_color1 } fontWeight="500">NFT Title</Box>
+                    <Box display="flex" flex="1" justifyContent="flex-start" alignItems="flex-end" fontFamily="Work Sans" fontSize="18px" color={ctheme?lightTheme.font_color1:darkTheme.font_color1 } fontWeight="500">{title}</Box>
                     <Box display="flex" flex="1" justifyContent="flex-start" alignItems="flex-start" fontFamily="Work Sans" fontSize="18px" color={ctheme?"#757B75":darkTheme.font_color_grey } lineHeight="22px" fontWeight="normal">{name}</Box>
                 </Box>
             </Box>

@@ -3,19 +3,24 @@ import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { ethers } from "ethers";
 
+const IS_MAINNET = process.env.REACT_APP_NETWORK === 'mainnet';
+const chainId = IS_MAINNET? 56 : 97;
+const rpcUrl = IS_MAINNET? "https://bsc-dataseed.binance.org/" : "https://data-seed-prebsc-1-s1.binance.org:8545/";
+const scanUrl = IS_MAINNET? "https://bscscan.com" : "https://testnet.bscscan.com/";
+
 const BINANCE_MAINNET_PARAMS = {
-  chainId: 56,
+  chainId: chainId,
   chainName: "Binance",
   nativeCurrency: {
     name: "Binance",
     symbol: "BNB",
     decimals: 18,
   },
-  rpcUrls: ["https://bsc-dataseed.binance.org/"],
-  blockExplorerUrls: ["https://bscscan.com"],
+  rpcUrls: [rpcUrl],
+  blockExplorerUrls: [scanUrl],
 };
 
-const injected = new InjectedConnector({ supportedChainIds: [56] });
+const injected = new InjectedConnector({ supportedChainIds: [chainId] });
 const binance_wallet = new InjectedConnector({
   supportedChainIds: [Number(BINANCE_MAINNET_PARAMS.chainId)],
 });
