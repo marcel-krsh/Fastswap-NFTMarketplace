@@ -12,7 +12,9 @@ const Last_Drop = ({ key, img, simg, simg1, title, name, price, ctheme}) => {
             history.push('/Detail_page');
         }}>
             <Box display="flex" flex="1">
-                <img src={img} width="250px" height="100%"></img>
+                <img src={img} width="100%" height="100%" style={{
+                    borderRadius:"8px 8px 0px 0px"
+                }}></img>
             </Box>
             <Box display="flex" flex="75" borderBottom="1px solid #CECECE">
                 <Box display="flex" flex="2" alignItems="center" justifyContent="center">

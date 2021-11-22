@@ -21,11 +21,11 @@ const Mainpage = ({ ctheme }) => {
 
     const [rerender, setRerender] = useState('Hello');
     const { nfts } = useSelector(state => state.product);
-    console.log('nfts: ', nfts);
+    console.log('nfts: '+nfts);
     useEffect(()=>{
         setRerender('Hello World');
         console.log('re-render')
-    },[nfts])
+    })
 
     return (
         <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
@@ -85,19 +85,19 @@ const Mainpage = ({ ctheme }) => {
             <Part_Drop>
                 <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
                     <Img_Letter letter={'Latest drops 🚀'} ctheme={ctheme} />
-                    <Box display="flex" flexDirection="column" marginTop="2%">
+                    <Box display="flex"  marginTop="2%">
                         {
                             nfts.length>0 && nfts.map((item, index) => {
                                 return (
-                                    <Box key={index} maxWidth="250px" display="flex" flex="1" marginRight="2%">
-                                        <Last_Drop key={index} img={item.img} simg={small_ellipse} title={item.title} simg1={small_duke} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme}></Last_Drop>
+                                    <Box key={index} maxWidth="250px" display="flex" flex="1" marginRight="2%" borderRadius="10px">
+                                        <Last_Drop img={item.img} simg={small_ellipse} title={item.title} simg1={small_duke} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme}></Last_Drop>
                                     </Box>
                                 )
                             })
                         }
                         
                     </Box>
-                    <Box marginTop="150px" display="flex" justifyContent="center">
+                    <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
                         <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
                     </Box>
                 </Box>
