@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
-const Last_Drop = ({ key, img, simg, simg1, title, name, price, ctheme}) => {
+const Last_Drop = ({ img, simg, simg1, title, name, price, ctheme}) => {
     const history = useHistory()
     return (
         <HCollection ctheme={ctheme?1:0} ltheme={lightTheme} dtheme={darkTheme} onClick={()=>{
