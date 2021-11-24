@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { MdImage } from "react-icons/md";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
-import { Box, TextField } from "@material-ui/core";
+import { Box, TextField, Modal } from "@material-ui/core";
 import styled from "styled-components";
 import small_duke from "../../images/small_duke1.png";
 import icon_logo from "../../images/icon_logo.png";
@@ -9,7 +9,8 @@ import bnb1 from "../../images/bnb1.png";
 import Btn_Customize from "../../components/buttons/btn_container";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { create } from 'ipfs-http-client'
-import { NFT_ABI } from '../../utils/abi';
+import { NFT_ABI, NFT_MARKETPLACE_ABI } from '../../utils/abi';
+import { CONTRACTS } from '../../utils/constants';
 import Web3 from 'web3'
 import { ethers } from 'ethers'
 
@@ -27,45 +28,100 @@ const Create_NFT = ({ ctheme }) => {
   const [name, set_name] = useState("");
   const [description, set_description] = useState("");
   const [image_url, set_url] = useState("");
-  
-  const Web3 = require("web3");
-  let dict = {
-    "name": "",
-    "description": "",
-    "image": "",
+  const [hash, set_hash] = useState("");
+  const [price_type, set_price_type] = useState({
+    duke: true,
+    fast: false,
+    bnb: false,
+  });
+  const [process, set_process] = useState("Processing...");
+  const [process1, set_process1] = useState("Processing...");
+
+  const [price, set_price] = useState({
+    duke: 0,
+    fast: 0,
+    bnb: 0
+  })
+  const style1 = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '40%',
+    height: 250,
+    boxShadow: 24,
+    p: 4,
+    borderRadius: '10px',
+    backgroundColor: '#2BA55D',
+    border: 'none',
+    display: "flex",
+    flexDirection: 'column',
   };
+  const Web3 = require("web3");
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const upload_image = async () => {
+
     let file = image_file;
     try {
       // activate(walletConnectors['MetaMask']);
       let added = await client.add(file)
       let url = `https://ipfs.io/ipfs/${added.path}`
       set_url(url);
+      set_hash(added.path);
     } catch (error) {
       console.log('Error uploading file: ', error)
     }
   }
 
   const upload_ipfs = async () => {
+    setOpen(true);
     let dict = {
       "name": name,
       "description": description,
       "image": image_url,
     };
-    try {
+    let tokenid;
 
-      let added = await client.add(JSON.stringify(dict))
-      window.web3 = new Web3(window.web3.currentProvider);
-      await window.ethereum.enable();
-      const accounts = await window.web3.eth.getAccounts();
-      //console.log(accounts);
-      let contract = new window.web3.eth.Contract(NFT_ABI, '0x0d27742fFfd004B1e6e6c05C99c6714Bc373416f')
-      //let account = await window.ethereum.request({ method: 'eth_requestAccounts' })
-      let abc = await contract.methods.mint(accounts[0], (added.path).toString()).send({from : accounts[0]});
-
-    } catch (error) {
-      console.log('Error uploading file: ', error)
+    let added = await client.add(JSON.stringify(dict))
+    window.web3 = new Web3(window.web3.currentProvider);
+    await window.ethereum.enable();
+    const accounts = await window.web3.eth.getAccounts();
+    let contract = new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT)
+    tokenid = await contract.methods.mint(accounts[0], (added.path).toString()).send({ from: accounts[0] }).then(async (res) => {
+      //setOpen(false);
+      set_process("Created!");
+    });
+    
+    let price1;
+    let pay_method;
+    if (toggle1 === true) {
+      // let t = Math.floor(value_faith).toString(16);
+      // let a = "0x" + t;
+      if (price_type.duke === true) {
+        pay_method = "DUKE"
+        price1 = Math.floor(price.duke * Math.pow(10, 9));
+      }
+      else if (price_type.fast === true) {
+        pay_method = "FAST"
+        price1 = Math.floor(price.fast * Math.pow(10, 18));
+      }
+      else if (price_type.bnb === true) {
+        pay_method = "BNB"
+        price1 = Math.floor(price.bnb * Math.pow(10, 18));
+      }
+      console.log(price1)
+      let contract1 = new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.NFT)
+      console.log(contract1)
+       await contract1.methods.registerForSale(9, price1, hash, pay_method).send({ from: accounts[0] }).then(async (res) => {
+        //setOpen(false);
+        set_process1("Created");
+			});
     }
+    //console.log(tokenid)
   };
 
   return (
@@ -411,6 +467,7 @@ const Create_NFT = ({ ctheme }) => {
                 onClick={() => {
                   set_trans(true);
                 }}
+                border="3px solid #237745 !important"
               >
                 Fixed Price
               </Transbut1>
@@ -453,9 +510,10 @@ const Create_NFT = ({ ctheme }) => {
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
+                      width="80%"
                     >
-                      <Box display="flex" bgcolor="#54DADE" borderRadius="100%">
-                        <img src={small_duke} width="90%" height="90%"></img>
+                      <Box display="flex" bgcolor="#54DADE" borderRadius="100%" flex="1" justifyContent="center">
+                        {price_type.duke ? <img src={small_duke} width="90%" height="90%" /> : price_type.fast ? <img src={icon_logo} width="90%" height="90%" /> : <img src={bnb1} width="90%" height="90%" />}
                       </Box>
                       <Box
                         color="black"
@@ -464,9 +522,11 @@ const Create_NFT = ({ ctheme }) => {
                         fontFamily="Poppins, sans-serif"
                         fontWeight="500"
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="flex-start"
+                        marginLeft="10px"
+                        flex="2.5"
                       >
-                        DUKE
+                        {price_type.duke ? 'DUKE' : price_type.fast ? 'FAST' : 'BNB'}
                       </Box>
                     </Box>
                   ) : (
@@ -483,11 +543,13 @@ const Create_NFT = ({ ctheme }) => {
                       top="9%"
                       left="3%"
                     >
-                      <Box display="flex" flex="1" marginTop="10px">
+                      <Box display="flex" flex="1" marginTop="10px" width="80%">
                         <Box
                           display="flex"
                           bgcolor="#54DADE"
                           borderRadius="100%"
+                          flex="1"
+                          justifyContent="center"
                         >
                           <img src={small_duke} width="90%" height="90%"></img>
                         </Box>
@@ -498,25 +560,45 @@ const Create_NFT = ({ ctheme }) => {
                           fontFamily="Poppins, sans-serif"
                           fontWeight="500"
                           alignItems="center"
-                          justifyContent="center"
+                          justifyContent="flex-start"
+                          marginLeft="10px"
+                          flex="2.5"
+                          onClick={() => {
+                            let temp = { ...price_type };
+                            temp.duke = true;
+                            temp.fast = false;
+                            temp.bnb = false;
+                            set_price_type(temp);
+                            set_down2(true);
+                          }}
                         >
                           DUKE
                         </Box>
                       </Box>
-                      <Box display="flex" flex="1" marginTop="10px">
-                        <Box display="flex">
+                      <Box display="flex" flex="1" marginTop="10px" width="80%">
+                        <Box display="flex" flex="1" justifyContent="center">
                           <img src={icon_logo} width="90%" height="90%"></img>
                         </Box>
                         <Box
                           color="black"
+                          flex="2.5"
                           display="flex"
                           fontSize="18px"
                           fontFamily="Poppins, sans-serif"
                           fontWeight="500"
                           alignItems="center"
-                          justifyContent="center"
+                          justifyContent="flex-start"
+                          marginLeft="10px"
+                          onClick={() => {
+                            let temp = { ...price_type };
+                            temp.duke = false;
+                            temp.fast = true;
+                            temp.bnb = false;
+                            set_price_type(temp);
+                            set_down2(true);
+                          }}
                         >
-                          DUKE
+                          FAST
                         </Box>
                       </Box>
                       <Box
@@ -524,20 +606,31 @@ const Create_NFT = ({ ctheme }) => {
                         flex="1"
                         marginTop="10px"
                         marginBottom="10px"
+                        width="80%"
                       >
-                        <Box display="flex">
+                        <Box display="flex" flex="1" justifyContent="center">
                           <img src={bnb1} width="90%" height="90%"></img>
                         </Box>
                         <Box
                           color="black"
                           display="flex"
                           fontSize="18px"
+                          flex="2.5"
                           fontFamily="Poppins, sans-serif"
                           fontWeight="500"
-                          alignItems="center"
-                          justifyContent="center"
+                          alignItems="center" width="80%"
+                          justifyContent="flex-start"
+                          marginLeft="10px"
+                          onClick={() => {
+                            let temp = { ...price_type };
+                            temp.duke = false;
+                            temp.fast = false;
+                            temp.bnb = true;
+                            set_price_type(temp);
+                            set_down2(true);
+                          }}
                         >
-                          DUKE
+                          BNB
                         </Box>
                       </Box>
                     </Box>
@@ -575,6 +668,29 @@ const Create_NFT = ({ ctheme }) => {
                   paddingLeft="3%"
                   style={{
                     border: "1px solid #CECECE",
+                  }}
+                  onChange={(e) => {
+                    if (price_type.duke === true) {
+                      let temp = { ...price };
+                      temp.duke = e.target.value;
+                      temp.fast = 0;
+                      temp.bnb = 0;
+                      set_price(temp);
+                    }
+                    else if (price_type.fast === true) {
+                      let temp = { ...price };
+                      temp.duke = 0;
+                      temp.fast = e.target.value;
+                      temp.bnb = 0;
+                      set_price(temp);
+                    }
+                    else if (price_type.bnb === true) {
+                      let temp = { ...price };
+                      temp.duke = 0;
+                      temp.fast = 0;
+                      temp.bnb = e.target.value;
+                      set_price(temp);
+                    }
                   }}
                 ></Box>
               </Box>
@@ -811,9 +927,49 @@ const Create_NFT = ({ ctheme }) => {
           />
         </Box>
       </Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box style={style1}>
+          <MHeader>Status</MHeader>
+          <MContent alignItems="flex-end">NFT:{'\u00a0'}{process}</MContent>
+          <MContent alignItems="flex-start" marginTop="3%">MARKETPLACE:{'\u00a0'}{process1}</MContent>
+          
+          {/* <MFooter></MFooter> */}
+        </Box>
+      </Modal>
     </StyledContainer>
   );
 };
+
+const MHeader = styled(Box)`
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+  font-size: 38px;
+  color: white;
+  margin-top: 3%;
+  align-items: center;
+
+`
+
+const MContent = styled(Box)`
+    display: flex;
+  flex: 2;
+  width: 100%;
+  justify-content: center;
+  font-size: 25px;
+  color: white;
+`
+
+const MFooter = styled(Box)`
+    display: flex;
+  flex: 1;
+`
 
 const Loadimg = styled(Box)`
   background-image: url(${({ image_file }) => image_file});
