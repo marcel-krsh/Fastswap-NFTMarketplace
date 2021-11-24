@@ -14,6 +14,7 @@ import Profile_page_prev from './pages/profile_page/profile_page_prev'
 import Profile_page_empty from './pages/profile_page/profile_page_empty'
 import Create_NFT from './pages/create_nft/create_nft'
 import getProducts from "./actions/product";
+import SettingPage from "./pages/settingpage";
 import './App.css';
 
 
@@ -76,6 +77,9 @@ function App() {
                 <Create_NFT ctheme={ctheme} />
               </Route>
 
+              <Route exact path="/Setting_page">
+                <SettingPage ctheme={ctheme} />
+              </Route>
             </Switch>
           </Router>
         </div>

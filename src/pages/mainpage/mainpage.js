@@ -90,7 +90,7 @@ const Mainpage = ({ ctheme }) => {
                             nfts.length>0 && nfts.map((item, index) => {
                                 return (
                                     <Box key={index} maxWidth="250px" display="flex" flex="1" marginRight="2%" borderRadius="10px">
-                                        <Last_Drop img={item.img} simg={small_ellipse} title={item.title} simg1={small_duke} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme}></Last_Drop>
+                                        <Last_Drop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={small_duke} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme}></Last_Drop>
                                     </Box>
                                 )
                             })

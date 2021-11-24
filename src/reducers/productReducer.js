@@ -1,5 +1,4 @@
-
-import * as TYPES from '../actions/types'
+import * as TYPES from "../actions/types";
 
 const initialState = {
   nfts: [],
@@ -11,22 +10,25 @@ export default function productReducer(state = initialState, action) {
     case TYPES.FETCH_PRODUCTS:
       return {
         ...state,
-        nfts: action.payload
+        nfts: action.payload,
       };
     case TYPES.SEARCH_PRODUCT:
-      const res = state.nfts.map(item => {
-        if(item.title.includes(action.payload) || item.description.includes(action.payload)){
+      const res = state.nfts.map((item) => {
+        if (
+          item.title.includes(action.payload) ||
+          item.description.includes(action.payload)
+        ) {
           return item;
         }
       });
       return {
         ...state,
-        nfts: res
+        nfts: res,
       };
     case TYPES.FETCH_PAGES:
       return {
         ...state,
-        pages: action.payload
+        pages: action.payload,
       };
     default:
       return state;
