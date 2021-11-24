@@ -13,6 +13,7 @@ import Detail_page from './pages/detail_page/detail_page'
 import Profile_page_prev from './pages/profile_page/profile_page_prev'
 import Profile_page_empty from './pages/profile_page/profile_page_empty'
 import getProducts from "./actions/product";
+import SettingPage from "./pages/settingpage";
 import './App.css';
 
 
@@ -70,6 +71,9 @@ function App() {
               </Route>
               <Route exact path="/Profile_empty">
                 <Profile_page_empty ctheme={ctheme} />
+              </Route>
+              <Route exact path="/Setting_page">
+                <SettingPage ctheme={ctheme} />
               </Route>
             </Switch>
           </Router>
