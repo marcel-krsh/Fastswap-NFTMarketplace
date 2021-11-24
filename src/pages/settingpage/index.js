@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@material-ui/core";
 import styled from "styled-components";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import ProfileContent from "./profile.jsx";
+import Notification from "./notification";
+import Offer from "./offer";
+import Support from "./support";
 
 const SettingPage = ({ ctheme }) => {
+  const [currentSubPage, setCurrentSubPage] = useState("Profile");
   return (
     <StyledContainer
       ctheme={ctheme ? 1 : 0}
@@ -28,13 +32,44 @@ const SettingPage = ({ ctheme }) => {
       </Header1>
       <PageTitle>Settings</PageTitle>
       <SettingTap>
-        <SettingTapBtn>Profile</SettingTapBtn>
-        <SettingTapBtn selected>Notifications</SettingTapBtn>
-        <SettingTapBtn>Offers</SettingTapBtn>
-        <SettingTapBtn>Support</SettingTapBtn>
+        <SettingTapBtn
+          selected={currentSubPage === "Profile"}
+          onClick={() => {
+            setCurrentSubPage("Profile");
+          }}
+        >
+          Profile
+        </SettingTapBtn>
+        <SettingTapBtn
+          selected={currentSubPage === "Notifications"}
+          onClick={() => {
+            setCurrentSubPage("Notifications");
+          }}
+        >
+          Notifications
+        </SettingTapBtn>
+        <SettingTapBtn
+          selected={currentSubPage === "Offers"}
+          onClick={() => {
+            setCurrentSubPage("Offers");
+          }}
+        >
+          Offers
+        </SettingTapBtn>
+        <SettingTapBtn
+          selected={currentSubPage === "Support"}
+          onClick={() => {
+            setCurrentSubPage("Support");
+          }}
+        >
+          Support
+        </SettingTapBtn>
       </SettingTap>
       <SettingTapContent>
-        <ProfileContent />
+        {currentSubPage === "Support" && <Support />}
+        {currentSubPage === "Offers" && <Offer />}
+        {currentSubPage === "Notifications" && <Notification />}
+        {currentSubPage === "Profile" && <ProfileContent />}
       </SettingTapContent>
     </StyledContainer>
   );
@@ -62,6 +97,7 @@ const Header1_space = styled(Box)`
     margin-left: 5% !important;
     margin-right: 5% !important;
   }import ProfileContent from './profile';
+import Notification from './notification';
 
 `;
 const HLetter = styled(Box)`
