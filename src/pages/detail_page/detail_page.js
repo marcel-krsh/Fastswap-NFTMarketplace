@@ -32,18 +32,27 @@ import List_ULetter from "../../components/letters/list_uletter";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
+import Web3 from "web3";
+import { NFT_MARKETPLACE_ABI } from "../../utils/abi";
+import { CONTRACTS } from "../../utils/constants";
 
 const Detail_Page = ({ ctheme }) => {
   const history = useHistory();
   const nftsIndex = parseInt(history.location.search.slice(1));
   const { nfts } = useSelector((store) => store.product);
   const mainData = nfts[nftsIndex];
-  useEffect(()=>{
-    console.log(mainData)
-  })
+  useEffect(() => {
+    console.log(mainData);
+  });
   if (mainData === undefined || mainData === null) {
     history.push("/");
     return <></>;
+  }
+  const handleBuyNow = async () => {
+    console.log(window.web3);
+    window.web3 = new Web3(window.web3.currentProvider);
+    const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
+    contract.methods.buy("BNB", 8686768, mainData.price)
   }
   return (
     <StyledContainer
@@ -250,6 +259,7 @@ const Detail_Page = ({ ctheme }) => {
                 marginTop="1%"
               >
                 <Btn_Customize
+                  flexGrow={1}
                   color={"white"}
                   back={"#2BA55D"}
                   width={"100%"}
@@ -257,7 +267,32 @@ const Detail_Page = ({ ctheme }) => {
                   border={"1px solid #2BA55D"}
                   str={"Buy now"}
                   borderRadius={"8px"}
+                  onClick={() => {
+                    handleBuyNow();
+                  }}
                 />
+                {/* <Btn_Customize
+                  flexGrow={1}
+                  marginL={1}
+                  color={"white"}
+                  back={"#2BA55D"}
+                  width={"100%"}
+                  height={"56px"}
+                  border={"1px solid #2BA55D"}
+                  str={"Make an offer"}
+                  borderRadius={"8px"}
+                />
+                <Btn_Customize
+                  marginL={1}
+                  color={"#2BA55D"}
+                  back={"white"}
+                  width={"100%"}
+                  height={"56px"}
+                  border={"1px solid #2BA55D"}
+                  str={"Buy now"}
+                  borderRadius={"8px"}
+                  style={{maxWidth: 63}}
+                /> */}
               </Box>
             </Box>
           </Box>
