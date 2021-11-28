@@ -55,11 +55,15 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     BinanceWallet: binance_wallet,
   };
   const walletConnectors = DESKTOP_CONNECTORS;
-  const { connector, account, activate } = useWeb3React();
+  const { connector, account, activate, deactivate } = useWeb3React();
+  const handleDisconnect = () => {
+    deactivate();
+    window.localStorage.removeItem("CurrentWalletConnect")
+  };
   const handleConnect = (currentConnector) => {
     setOpen(false);
-    activate(currentConnector);
-    alert(account);
+    activate(walletConnectors[currentConnector]);
+    window.localStorage.setItem("CurrentWalletConnect", currentConnector)
   };
   const getShortTxHash = (txHash, margin = 4) => {
     if (_.isEmpty(txHash)) {
@@ -71,9 +75,9 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     );
   };
   useEffect(() => {
-    console.log("-----------------------------------------");
-    console.log(account);
-  }, [account]);
+    const currentWalletState = window.localStorage.getItem("CurrentWalletConnect");
+    currentWalletState&&activate(walletConnectors[currentWalletState])
+  }, []);
   return (
     <StyledContainer
       ctheme={ctheme ? 1 : 0}
@@ -109,27 +113,34 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
       </Box>
       <Box display="flex" flex="3"></Box>
       <Box display="flex" flex="1" alignItems="center" justifyContent="center">
-        <DropDown text={"sdssdsdsd"}>
-          <DropDownItem>Items</DropDownItem>
-          <DropDownItem>Collections</DropDownItem>
-          <DropDownItem>WatchList</DropDownItem>
-          <DropDownItem>Offers</DropDownItem>
-          <Box width="100%" borderTop="1px solid #cecece" />
-          <DropDownItem>Profile</DropDownItem>
-          <DropDownItem
-            onClick={() => {
-              window.location.href = "/Setting_page";
-            }}
-          >
-            Settings
-          </DropDownItem>
-          <DropDownItem>Transactions</DropDownItem>
-          <Box width="100%" borderTop="1px solid #cecece" />
-          <DropDownItem>
-            <MdLogout fontSize="20px" /> Disconnect
-          </DropDownItem>
-        </DropDown>
-        <Btn_connect onClick={handleOpen}>Connect</Btn_connect>
+        {account ? (
+          <DropDown text={account.slice(0, 7) + "..." + account.slice(-4)}>
+            <DropDownItem>Items</DropDownItem>
+            <DropDownItem>Collections</DropDownItem>
+            <DropDownItem>WatchList</DropDownItem>
+            <DropDownItem>Offers</DropDownItem>
+            <Box width="100%" borderTop="1px solid #cecece" />
+            <DropDownItem>Profile</DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                window.location.href = "/Setting_page";
+              }}
+            >
+              Settings
+            </DropDownItem>
+            <DropDownItem>Transactions</DropDownItem>
+            <Box width="100%" borderTop="1px solid #cecece" />
+            <DropDownItem
+              onClick={() => {
+                handleDisconnect();
+              }}
+            >
+              <MdLogout fontSize="20px" /> Disconnect
+            </DropDownItem>
+          </DropDown>
+        ) : (
+          <Btn_connect onClick={handleOpen}>Connect</Btn_connect>
+        )}
       </Box>
       <Modal
         open={open}
@@ -168,7 +179,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   height: "50%",
                 }}
                 onClick={() => {
-                  handleConnect(walletConnectors["MetaMask"]);
+                  handleConnect("MetaMask");
                 }}
               >
                 <img src={metamask} width="40px" height="40px"></img>
@@ -199,7 +210,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   height: "50%",
                 }}
                 onClick={() => {
-                  handleConnect(walletConnectors["WalletConnect"]);
+                  handleConnect("WalletConnect");
                 }}
               >
                 <img src={walletconnect} width="40px" height="40px"></img>
@@ -230,7 +241,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   height: "50%",
                 }}
                 onClick={() => {
-                  handleConnect(walletConnectors["BinanceWallet"]);
+                  handleConnect("BinanceWallet");
                 }}
               >
                 <img src={binance} width="40px" height="40px"></img>
@@ -261,7 +272,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   height: "50%",
                 }}
                 onClick={() => {
-                  handleConnect(walletConnectors["TrustWallet"]);
+                  handleConnect("TrustWallet");
                 }}
               >
                 <img src={trust} width="40px" height="40px"></img>

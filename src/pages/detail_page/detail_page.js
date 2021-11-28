@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-pascal-case */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { FaShareAlt, FaHeart } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
 import { Box } from "@material-ui/core";
@@ -38,6 +38,9 @@ const Detail_Page = ({ ctheme }) => {
   const nftsIndex = parseInt(history.location.search.slice(1));
   const { nfts } = useSelector((store) => store.product);
   const mainData = nfts[nftsIndex];
+  useEffect(()=>{
+    console.log(mainData)
+  })
   if (mainData === undefined || mainData === null) {
     history.push("/");
     return <></>;
@@ -222,7 +225,8 @@ const Detail_Page = ({ ctheme }) => {
                       fontWeight="400"
                       color="#131413"
                     >
-                      200.1 FAST
+                      {mainData.price}
+                      {/* 200.1 FAST */}
                     </Box>
                     <Box
                       display="flex"
@@ -251,7 +255,7 @@ const Detail_Page = ({ ctheme }) => {
                   width={"100%"}
                   height={"56px"}
                   border={"1px solid #2BA55D"}
-                  str={"Place a bid"}
+                  str={"Buy now"}
                   borderRadius={"8px"}
                 />
               </Box>
@@ -303,43 +307,7 @@ const Detail_Page = ({ ctheme }) => {
                   fontWeight="400"
                   color="#363936"
                 >
-                  Lorem ipsum dolor sit amet, consectetur
-                </Box>
-                <Box
-                  display="flex"
-                  flex="1"
-                  alignItems="center"
-                  justifyContent="flex-start"
-                  fontFamily="Work Sans"
-                  fontSize="18px"
-                  fontWeight="400"
-                  color="#363936"
-                >
-                  adipiscing elit. Aliquet nibh faucibus feugiat
-                </Box>
-                <Box
-                  display="flex"
-                  flex="1"
-                  alignItems="center"
-                  justifyContent="flex-start"
-                  fontFamily="Work Sans"
-                  fontSize="18px"
-                  fontWeight="400"
-                  color="#363936"
-                >
-                  et mus habitasse. Sed nisi, vestibulum vitae
-                </Box>
-                <Box
-                  display="flex"
-                  flex="1"
-                  alignItems="center"
-                  justifyContent="flex-start"
-                  fontFamily="Work Sans"
-                  fontSize="18px"
-                  fontWeight="400"
-                  color="#363936"
-                >
-                  consequat.
+                  {mainData.description}
                 </Box>
               </Box>
               <List_ULetter
