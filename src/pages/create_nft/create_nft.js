@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useHistory } from "react-router";
 import { MdImage } from "react-icons/md";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { Box, TextField, Modal } from "@material-ui/core";
@@ -9,14 +10,16 @@ import bnb1 from "../../images/bnb1.png";
 import Btn_Customize from "../../components/buttons/btn_container";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { create } from 'ipfs-http-client'
-import { NFT_ABI, NFT_MARKETPLACE_ABI } from '../../utils/abi';
+import { NFT_ABI, NFT_MARKETPLACE_ABI, NFT_AUCTION_ABI } from '../../utils/abi';
 import { CONTRACTS } from '../../utils/constants';
 import Web3 from 'web3'
 import { ethers } from 'ethers'
+import { makeBatchCall } from "../../utils/transaction";
 
 const Create_NFT = ({ ctheme }) => {
+  const history = useHistory();
   const client = create('https://ipfs.infura.io:5001/api/v0')
-  const [toggle1, set_toggle1] = useState(true);
+  const [toggle1, set_toggle1] = useState(false);
   const [toggle2, set_toggle2] = useState(true);
   const [flag_down1, set_down1] = useState(false);
   const [flag_down2, set_down2] = useState(true);
@@ -36,6 +39,7 @@ const Create_NFT = ({ ctheme }) => {
   });
   const [process, set_process] = useState("Processing...");
   const [process1, set_process1] = useState("Processing...");
+
 
   const [price, set_price] = useState({
     duke: 0,
@@ -64,7 +68,6 @@ const Create_NFT = ({ ctheme }) => {
   const handleClose = () => setOpen(false);
 
   const upload_image = async () => {
-
     let file = image_file;
     try {
       // activate(walletConnectors['MetaMask']);
@@ -72,56 +75,103 @@ const Create_NFT = ({ ctheme }) => {
       let url = `https://ipfs.io/ipfs/${added.path}`
       set_url(url);
       set_hash(added.path);
+      console.log(added.path)
+      console.log(url)
     } catch (error) {
       console.log('Error uploading file: ', error)
     }
   }
 
   const upload_ipfs = async () => {
-    setOpen(true);
-    let dict = {
-      "name": name,
-      "description": description,
-      "image": image_url,
-    };
-    let tokenid;
 
-    let added = await client.add(JSON.stringify(dict))
+    // await window.ethereum.enable();
     window.web3 = new Web3(window.web3.currentProvider);
-    await window.ethereum.enable();
     const accounts = await window.web3.eth.getAccounts();
-    let contract = new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT)
-    tokenid = await contract.methods.mint(accounts[0], (added.path).toString()).send({ from: accounts[0] }).then(async (res) => {
-      //setOpen(false);
-      set_process("Created!");
-    });
-    
-    let price1;
-    let pay_method;
-    if (toggle1 === true) {
-      // let t = Math.floor(value_faith).toString(16);
-      // let a = "0x" + t;
-      if (price_type.duke === true) {
-        pay_method = "DUKE"
-        price1 = Math.floor(price.duke * Math.pow(10, 9));
-      }
-      else if (price_type.fast === true) {
-        pay_method = "FAST"
-        price1 = Math.floor(price.fast * Math.pow(10, 18));
-      }
-      else if (price_type.bnb === true) {
-        pay_method = "BNB"
-        price1 = Math.floor(price.bnb * Math.pow(10, 18));
-      }
-      console.log(price1)
-      let contract1 = new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.NFT)
-      console.log(contract1)
-       await contract1.methods.registerForSale(9, price1, hash, pay_method).send({ from: accounts[0] }).then(async (res) => {
-        //setOpen(false);
-        set_process1("Created");
-			});
+    if (accounts[0] === undefined) {
+      alert("Please connect wallet");
+      return;
     }
-    //console.log(tokenid)
+    else {
+      setOpen(true);
+      let dict = {
+        "name": name,
+        "description": description,
+        "image": image_url,
+      };
+      let added1 = await client.add(JSON.stringify(dict))
+      let tokenid;
+      let contract = new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT)
+      let start_price = 0, end_price = 100000, duration = 10;
+
+      console.log(added1.path)
+      tokenid = await contract.methods.mint(accounts[0], added1.path).send({ from: accounts[0] })
+        .then(async (res) => {
+          console.log(res);
+          //setOpen(false);
+          set_process("Created!");
+        });
+      console.log("here", tokenid)
+
+      let price1;
+      let pay_method;
+      if (toggle1 === true) {
+        if (type_trans === false) {
+          let contract_auction = new window.web3.eth.Contract(NFT_AUCTION_ABI, CONTRACTS.AUCTION_HALL)
+          await contract_auction.methods.createAuction(tokenid, start_price, end_price, pay_method, duration, accounts[0]).send({ from: accounts[0] }).then(async (res) => {
+            set_process1("Created successfully.");
+            setTimeout(() => {
+              handleClose();
+            }, 2000);
+            history.push({ pathname: "/" });
+          }).catch((error) => {
+            set_process1("Fault! Try again.");
+            setTimeout(() => {
+              handleClose();
+            }, 2000);
+          });
+        }
+        else {
+          // let t = Math.floor(value_faith).toString(16);
+          if (price_type.duke === true) {
+            pay_method = "DUKE"
+            price1 = (price.duke * Math.pow(10, 9)).toString(16);
+
+          }
+          if (price_type.fast === true) {
+            pay_method = "FAST"
+            price1 = (price.fast * Math.pow(10, 18)).toString(16);
+          }
+          if (price_type.bnb === true) {
+            pay_method = "BNB"
+            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+          }
+          let price_wei = "0x" + price1;
+          let contract1 = new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE)
+          const [ids] = await makeBatchCall(contract1, [
+            { methodName: "getNFTList", args: [] },
+          ]);
+          console.log(ids)
+          await contract1.methods.registerForSale(ids[ids.length - 1], price_wei, hash, pay_method).send({ from: accounts[0] }).then(async (res) => {
+
+            set_process1("Created successfully.");
+            setTimeout(() => {
+              handleClose();
+            }, 2000);
+            history.push({ pathname: "/" });
+
+
+          }).catch((error) => {
+            set_process1("Fault! Try again.");
+            setTimeout(() => {
+              handleClose();
+            }, 2000);
+
+          });
+        }
+
+      }
+    }
+
   };
 
   return (
@@ -467,7 +517,8 @@ const Create_NFT = ({ ctheme }) => {
                 onClick={() => {
                   set_trans(true);
                 }}
-                border="3px solid #237745 !important"
+
+              // border={!type_trans?"3px solid #237745 !important":''}
               >
                 Fixed Price
               </Transbut1>
@@ -937,7 +988,7 @@ const Create_NFT = ({ ctheme }) => {
           <MHeader>Status</MHeader>
           <MContent alignItems="flex-end">NFT:{'\u00a0'}{process}</MContent>
           <MContent alignItems="flex-start" marginTop="3%">MARKETPLACE:{'\u00a0'}{process1}</MContent>
-          
+
           {/* <MFooter></MFooter> */}
         </Box>
       </Modal>

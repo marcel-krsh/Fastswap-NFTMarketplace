@@ -7,6 +7,9 @@ import { useHistory } from "react-router";
 
 const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
   const history = useHistory();
+  const price_format = (value) =>{
+    return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  }
   return (
     <HCollection
       ctheme={ctheme ? 1 : 0}
@@ -92,7 +95,7 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
         >
           <img src={simg1} width="24px" height="24px"></img>
           {`\u00a0`}
-          {price}
+          {price_format(price)}
         </Box>
       </Box>
     </HCollection>

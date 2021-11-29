@@ -5,6 +5,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
+import { useHistory } from "react-router";
 import cover_big1 from '../../images/cover/cover_big1.png';
 import small_ellipse from "../../images/small_ellipse2.png"
 import small_duke from "../../images/small_duke1.png";
@@ -18,13 +19,13 @@ import { lightTheme, darkTheme } from "../../theme/theme"
 const Mainpage = ({ ctheme }) => {
 
     // const dispatch = useDispatch();
-
+    const history = useHistory();
     const [rerender, setRerender] = useState('Hello');
     const { nfts } = useSelector(state => state.product);
-    console.log('nfts: '+nfts);
-    useEffect(()=>{
+    useEffect(() => {
+        console.log(nfts);
         setRerender('Hello World');
-        console.log('re-render')
+        // console.log('re-render')
     })
 
     return (
@@ -48,8 +49,14 @@ const Mainpage = ({ ctheme }) => {
                         <Box display="flex" justifyContent="flex-start" alignItems="center" fontFamily="Work Sans" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey}>Buy and Sell NFTs on Binance Smart Chain</Box>
                     </Left_img_letter1>
                     <Box display="flex" flex="4" justifyContent="flex-start" alignItems="flex-start" marginTop="5%" width="100%">
-                        <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'40%'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore'} borderRadius={'8px'} />
-                        <Btn_Customize display="flex" color={'#2BA55D'} back={'white'} width={'40%'} height={'56px'} border={'1px solid #2BA55D'} str={'Create'} borderRadius={'8px'} marginL={'24px'} />
+                        <Box display="flex" width="40%">
+                            <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'100%'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore'} borderRadius={'8px'} />
+                        </Box>
+                        <Box display="flex" width="40%" onClick={() => {
+                            history.push({ pathname: "/Create_NFT" });
+                        }} >
+                            <Btn_Customize display="flex" color={'#2BA55D'} back={'white'} width={'100%'} height={'56px'} border={'1px solid #2BA55D'} str={'Create'} borderRadius={'8px'} marginL={'24px'} />
+                        </Box>
                     </Box>
                 </Box>
                 <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%">
@@ -85,9 +92,9 @@ const Mainpage = ({ ctheme }) => {
             <Part_Drop>
                 <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
                     <Img_Letter letter={'Latest drops 🚀'} ctheme={ctheme} />
-                    <Box display="flex"  marginTop="2%">
+                    <Box display="flex" marginTop="2%">
                         {
-                            nfts.length>0 && nfts.map((item, index) => {
+                            nfts.length > 0 && nfts.map((item, index) => {
                                 return (
                                     <Box key={index} maxWidth="250px" display="flex" flex="1" marginRight="2%" borderRadius="10px">
                                         <Last_Drop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={small_duke} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme}></Last_Drop>
@@ -95,7 +102,7 @@ const Mainpage = ({ ctheme }) => {
                                 )
                             })
                         }
-                        
+
                     </Box>
                     <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
                         <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
@@ -109,7 +116,6 @@ const Mainpage = ({ ctheme }) => {
 
 const Collection_Image = styled(Box)`
     flex-direction: row;
-
     @media (max-width: 600px) {
         flex-direction: column;
     }
