@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Web3Provider } from '@ethersproject/providers'
 import { Web3ReactProvider } from '@web3-react/core'
-import Web3 from 'web3'
 
 import Header from "./pages/header/header"
 import Sidebar from "./pages/sidebar/sidebar"
@@ -17,9 +17,10 @@ import getProducts from "./actions/product";
 import SettingPage from "./pages/settingpage";
 import './App.css';
 
-
 function getLibrary(provider) {
-  return new Web3(provider)
+  const library = new Web3Provider(provider)
+  library.pollingInterval = 8000
+  return library
 }
 
 function App() {

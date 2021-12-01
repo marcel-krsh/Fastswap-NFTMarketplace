@@ -24,7 +24,6 @@ const getProducts =
       );
       const nftInstance = new web3.eth.Contract(NFT_ABI, CONTRACTS.NFT);
 
-      console.log("contractInstance: ", contractInstance);
       const [ids] = await makeBatchCall(contractInstance, [
         { methodName: "getNFTList", args: [] },
       ]);

@@ -1,22 +1,23 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useHistory } from "react-router";
 import { MdImage } from "react-icons/md";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { Box, TextField, Modal } from "@material-ui/core";
 import styled from "styled-components";
+import { ethers } from 'ethers';
+import { useWeb3React } from '@web3-react/core';
+import { create } from 'ipfs-http-client';
+
 import small_duke from "../../images/small_duke1.png";
 import icon_logo from "../../images/icon_logo.png";
 import bnb1 from "../../images/bnb1.png";
 import Btn_Customize from "../../components/buttons/btn_container";
 import { lightTheme, darkTheme } from "../../theme/theme";
-import { create } from 'ipfs-http-client'
 import { NFT_ABI, NFT_MARKETPLACE_ABI, NFT_AUCTION_ABI } from '../../utils/abi';
 import { CONTRACTS } from '../../utils/constants';
-import Web3 from 'web3'
-import { ethers } from 'ethers'
-import { makeBatchCall } from "../../utils/transaction";
 
 const Create_NFT = ({ ctheme }) => {
+  const { account, library, chainId } = useWeb3React()
   const history = useHistory();
   const client = create('https://ipfs.infura.io:5001/api/v0')
   const [toggle1, set_toggle1] = useState(false);
@@ -40,6 +41,9 @@ const Create_NFT = ({ ctheme }) => {
   const [process, set_process] = useState("Processing...");
   const [process1, set_process1] = useState("Processing...");
 
+  const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
+  const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
+  const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
 
   const [price, set_price] = useState({
     duke: 0,
@@ -61,7 +65,7 @@ const Create_NFT = ({ ctheme }) => {
     display: "flex",
     flexDirection: 'column',
   };
-  const Web3 = require("web3");
+  // const Web3 = require("web3");
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -84,92 +88,91 @@ const Create_NFT = ({ ctheme }) => {
 
   const upload_ipfs = async () => {
 
-    // await window.ethereum.enable();
-    window.web3 = new Web3(window.web3.currentProvider);
-    const accounts = await window.web3.eth.getAccounts();
-    if (accounts[0] === undefined) {
+    if (account === undefined) {
       alert("Please connect wallet");
       return;
     }
     else {
       setOpen(true);
-      let dict = {
+      const dict = {
         "name": name,
         "description": description,
         "image": image_url,
       };
-      let added1 = await client.add(JSON.stringify(dict))
-      let tokenid;
-      let contract = new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT)
-      let start_price = 0, end_price = 100000, duration = 10;
+      const hash = await client.add(JSON.stringify(dict))
+      // let contract = new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT)
+      // let start_price = 0, end_price = 100000, duration = 10;
 
-      console.log(added1.path)
-      tokenid = await contract.methods.mint(accounts[0], added1.path).send({ from: accounts[0] })
-        .then(async (res) => {
-          console.log(res);
-          //setOpen(false);
-          set_process("Created!");
-        });
-      console.log("here", tokenid)
+      console.log(hash, account)
+      const createNFT = await marketplaceContract.createNewProduction(hash.path, 1)
+      await createNFT.wait()
+      const nftIDs = await marketplaceContract.getNFTIDsByHash(hash.path)
+      // tokenid = await contract.methods.mint(accounts[0], added1.path).send({ from: accounts[0] })
+      //   .then(async (res) => {
+      //     console.log(res);
+      //     //setOpen(false);
+      //     set_process("Created!");
+      //   });
+      console.log("here", nftIDs)
 
       let price1;
       let pay_method;
-      if (toggle1 === true) {
-        if (type_trans === false) {
-          let contract_auction = new window.web3.eth.Contract(NFT_AUCTION_ABI, CONTRACTS.AUCTION_HALL)
-          await contract_auction.methods.createAuction(tokenid, start_price, end_price, pay_method, duration, accounts[0]).send({ from: accounts[0] }).then(async (res) => {
-            set_process1("Created successfully.");
-            setTimeout(() => {
-              handleClose();
-            }, 2000);
-            history.push({ pathname: "/" });
-          }).catch((error) => {
-            set_process1("Fault! Try again.");
-            setTimeout(() => {
-              handleClose();
-            }, 2000);
-          });
-        }
-        else {
-          // let t = Math.floor(value_faith).toString(16);
-          if (price_type.duke === true) {
-            pay_method = "DUKE"
-            price1 = (price.duke * Math.pow(10, 9)).toString(16);
+      // if (toggle1 === true) {
+      //   if (type_trans === false) {
+      //     let contract_auction = new window.web3.eth.Contract(NFT_AUCTION_ABI, CONTRACTS.AUCTION_HALL)
+      //     await contract_auction.methods.createAuction(tokenid, start_price, end_price, pay_method, duration, accounts[0]).send({ from: accounts[0] }).then(async (res) => {
+      //       set_process1("Created successfully.");
+      //       setTimeout(() => {
+      //         handleClose();
+      //       }, 2000);
+      //       history.push({ pathname: "/" });
+      //     }).catch((error) => {
+      //       set_process1("Fault! Try again.");
+      //       setTimeout(() => {
+      //         handleClose();
+      //       }, 2000);
+      //     });
+      //   }
+      //   else {
+      //     // let t = Math.floor(value_faith).toString(16);
+      //     if (price_type.duke === true) {
+      //       pay_method = "DUKE"
+      //       price1 = (price.duke * Math.pow(10, 9)).toString(16);
 
-          }
-          if (price_type.fast === true) {
-            pay_method = "FAST"
-            price1 = (price.fast * Math.pow(10, 18)).toString(16);
-          }
-          if (price_type.bnb === true) {
-            pay_method = "BNB"
-            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
-          }
-          let price_wei = "0x" + price1;
-          let contract1 = new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE)
-          const [ids] = await makeBatchCall(contract1, [
-            { methodName: "getNFTList", args: [] },
-          ]);
-          console.log(ids)
-          await contract1.methods.registerForSale(ids[ids.length - 1], price_wei, hash, pay_method).send({ from: accounts[0] }).then(async (res) => {
+      //     }
+      //     if (price_type.fast === true) {
+      //       pay_method = "FAST"
+      //       price1 = (price.fast * Math.pow(10, 18)).toString(16);
+      //     }
+      //     if (price_type.bnb === true) {
+      //       pay_method = "BNB"
+      //       price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+      //     }
+      //     let price_wei = "0x" + price1;
+      //     let contract1 = new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE)
+      //     const [ids] = await makeBatchCall(contract1, [
+      //       { methodName: "getNFTList", args: [] },
+      //     ]);
+      //     console.log(ids)
+      //     await contract1.methods.registerForSale(ids[ids.length - 1], price_wei, hash, pay_method).send({ from: accounts[0] }).then(async (res) => {
 
-            set_process1("Created successfully.");
-            setTimeout(() => {
-              handleClose();
-            }, 2000);
-            history.push({ pathname: "/" });
+      //       set_process1("Created successfully.");
+      //       setTimeout(() => {
+      //         handleClose();
+      //       }, 2000);
+      //       history.push({ pathname: "/" });
 
 
-          }).catch((error) => {
-            set_process1("Fault! Try again.");
-            setTimeout(() => {
-              handleClose();
-            }, 2000);
+      //     }).catch((error) => {
+      //       set_process1("Fault! Try again.");
+      //       setTimeout(() => {
+      //         handleClose();
+      //       }, 2000);
 
-          });
-        }
+      //     });
+      //   }
 
-      }
+      // }
     }
 
   };
