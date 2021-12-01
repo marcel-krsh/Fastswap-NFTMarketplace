@@ -90,13 +90,13 @@ const Mainpage = ({ ctheme }) => {
             </Part_Header>
 
             <Part_Drop>
-                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
+                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" width="100%">
                     <Img_Letter letter={'Latest drops 🚀'} ctheme={ctheme} />
-                    <Box display="flex" marginTop="2%">
+                    <Box display="flex" marginTop="2%" width="100%" flexWrap="wrap">
                         {
                             nfts.length > 0 && nfts.map((item, index) => {
                                 return (
-                                    <Box key={index} maxWidth="250px" display="flex" flex="1" marginRight="2%" borderRadius="10px">
+                                    <Box key={index} maxWidth="260px" display="flex" flex="1" marginRight="2%" borderRadius="10px" marginBottom="2%">
                                         <Last_Drop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={small_duke} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme}></Last_Drop>
                                     </Box>
                                 )

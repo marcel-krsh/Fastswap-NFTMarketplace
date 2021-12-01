@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 
 const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
   const history = useHistory();
-  const price_format = (value) =>{
+  const price_format = (value) => {
     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
   }
   return (
@@ -22,8 +22,8 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
       <Box display="flex" flex="1">
         <img
           src={img}
-          width="100%"
-          height="100%"
+          width="260px"
+          height="260px"
           style={{
             borderRadius: "8px 8px 0px 0px",
           }}
@@ -47,7 +47,7 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
             justifyContent="flex-start"
             alignItems="flex-end"
             fontFamily="Work Sans"
-            fontSize="18px"
+            fontSize="16px"
             color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
             fontWeight="500"
           >
@@ -57,12 +57,13 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
             display="flex"
             flex="1"
             justifyContent="flex-start"
-            alignItems="flex-start"
+            alignItems="center"
             fontFamily="Work Sans"
-            fontSize="18px"
+            fontSize="16px"
             color={ctheme ? "#757B75" : darkTheme.font_color_grey}
             lineHeight="22px"
             fontWeight="normal"
+
           >
             {name}
           </Box>
@@ -88,10 +89,12 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
           justifyContent="flex-start"
           alignItems="center"
           fontFamily="Work Sans"
-          fontSize="16px"
+          fontSize="14px"
+          maxWidth="240px"
           color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
           lineHeight="22px"
           fontWeight="bold"
+          whiteSpace="nowrap"
         >
           <img src={simg1} width="24px" height="24px"></img>
           {`\u00a0`}
