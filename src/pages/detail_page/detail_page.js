@@ -52,7 +52,7 @@ const Detail_Page = ({ ctheme }) => {
     console.log(window.web3);
     window.web3 = new Web3(window.web3.currentProvider);
     const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
-    contract.methods.buy("BNB", 8686768, mainData.price)
+    contract.methods.buy("BNB", mainData.ids, mainData.price)
   }
   return (
     <StyledContainer
