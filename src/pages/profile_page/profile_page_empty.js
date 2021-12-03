@@ -212,7 +212,7 @@ const Profile_page_empty = ({ ctheme }) => {
                             </Box>
                         </Collection_Image>
                     </Box>
-                    <Box marginTop="150px" display="flex" justifyContent="center">
+                    <Box my="30px" display="flex" justifyContent="center">
                         <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
 
                     </Box>
