@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  Box,
-  Select,
-  MenuItem,
-} from "@material-ui/core";
+import { Box, Select, MenuItem } from "@material-ui/core";
 import { MdLockOutline } from "react-icons/md";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 
@@ -15,84 +11,48 @@ const Support = () => {
         <Box mb="unset" fontSize="18px" lineHeight="20px">
           Set a minimum offer for collections to ignore low offers.
         </Box>
-        <TextBox my="20px">
+        <TextBox>
           <div>General help</div>
           <div>
-            Visit our <CustomLink>help center</CustomLink> to learn how to get
-            started with buying, selling, and creating.
+            Visit our <CustomLink>help center</CustomLink> to learn how to get started with buying, selling, and creating.
           </div>
         </TextBox>
-        <TextBox my="20px">
+        <TextBox>
           <div>General help</div>
           <div>
-            Visit our <CustomLink>help center</CustomLink> to learn how to get
-            started with buying, selling, and creating.
+            Visit our <CustomLink>help center</CustomLink> to learn how to get started with buying, selling, and creating.
           </div>
         </TextBox>
-        <TextBox my="20px">
+        <TextBox>
           <div>General help</div>
           <div>
-            Visit our <CustomLink>help center</CustomLink> to learn how to get
-            started with buying, selling, and creating.
+            Visit our <CustomLink>help center</CustomLink> to learn how to get started with buying, selling, and creating.
           </div>
         </TextBox>
-        <TextBox my="20px">
+        <TextBox>
           <div>General help</div>
           <div>
-            Visit our <CustomLink>help center</CustomLink> to learn how to get
-            started with buying, selling, and creating.
+            Visit our <CustomLink>help center</CustomLink> to learn how to get started with buying, selling, and creating.
           </div>
         </TextBox>
-        <TextBox my="20px">
+        <TextBox>
           <div>General help</div>
           <div>
-            Visit our <CustomLink>help center</CustomLink> to learn how to get
-            started with buying, selling, and creating.
+            Visit our <CustomLink>help center</CustomLink> to learn how to get started with buying, selling, and creating.
           </div>
         </TextBox>
-        <CustomSelect
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={"1"}
-          label="Age"
-          onChange={() => {}}
-        >
+        <CustomSelect labelId="demo-simple-select-label" id="demo-simple-select" value={"1"} label="Age" onChange={() => {}}>
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
         </CustomSelect>
-        <Box
-          mt="30px"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          gridColumnGap="18px"
-        >
-          <IoMdCheckmarkCircle
-            fontSize="40px"
-            lineHeight="40px"
-            color="#2BA55D"
-          />
+        <Box mt="30px" display="flex" justifyContent="center" alignItems="center" gridColumnGap="18px">
+          <IoMdCheckmarkCircle fontSize="40px" lineHeight="40px" color="#2BA55D" />
           <Box fontSize="18px" lineHeight="20px" flexGrow="1">
-            I understand I must provide a sworn statement certified by a notary
-            public to unlock my account.
+            I understand I must provide a sworn statement certified by a notary public to unlock my account.
           </Box>
         </Box>
-        <Box
-          marginTop="42px"
-          bgcolor="#F16868"
-          borderRadius="8px"
-          fontSize="18px"
-          lineHeight="18px"
-          textAlign="center"
-          paddingY="19px"
-          color="white"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          gridColumnGap="11px"
-          css={{ cursor: "pointer" }}
-        >
+        <Box marginTop={["20px", "25px", "30px", "40px"]} bgcolor="#F16868" borderRadius="8px" fontSize="18px" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
           <MdLockOutline fontSize="20px" />
           Lock Account
         </Box>
@@ -116,6 +76,20 @@ const CustomSelect = styled(Select)`
   }
 `;
 const TextBox = styled(Box)`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  @media (max-width: 1000px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 800px) {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 600px) {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
   > div:first-child {
     font-weight: 600;
     font-size: 20px;
@@ -123,6 +97,21 @@ const TextBox = styled(Box)`
     letter-spacing: 0.5px;
     color: #131413;
     margin: 16px 0px;
+    @media (max-width: 1000px) {
+      font-size: 20px;
+      line-height: 20px;
+      margin: 16px 0px;
+    }
+    @media (max-width: 800px) {
+      font-size: 16px;
+      line-height: 16px;
+      margin: 12px 0px;
+    }
+    @media (max-width: 600px) {
+      font-size: 12px;
+      line-height: 12px;
+      margin: 8px 0px;
+    }
   }
   > div:last-child {
     font-size: 18px;

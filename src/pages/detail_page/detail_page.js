@@ -49,25 +49,14 @@ const Detail_Page = ({ ctheme }) => {
     return <></>;
   }
   const handleBuyNow = async () => {
-    console.log(window.web3);
     window.web3 = new Web3(window.web3.currentProvider);
     const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
-    contract.methods.buy("BNB", mainData.ids, mainData.price)
-  }
+    contract.methods.buy("BNB", mainData.ids, mainData.price);
+  };
   return (
-    <StyledContainer
-      ctheme={ctheme ? 1 : 0}
-      ltheme={lightTheme}
-      dtheme={darkTheme}
-    >
+    <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
       <Header1>
-        <Header1_space
-          display="flex"
-          flex="1"
-          justifyContent="space-between"
-          marginLeft="20%"
-          marginRight="20%"
-        >
+        <Header1_space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
           <HLetter>Overview</HLetter>
           <HLetter>Explore</HLetter>
           <HLetter>Rankings</HLetter>
@@ -76,190 +65,69 @@ const Detail_Page = ({ ctheme }) => {
         </Header1_space>
       </Header1>
       <Box display="flex" width="100%" marginTop="5%">
-        <Detail_Img
-          display="flex"
-          marginLeft="5%"
-          marginRight="5%"
-          width="100%"
-        >
+        <Detail_Img display="flex" marginLeft="5%" marginRight="5%" width="100%">
           <Box display="flex" flex="4" borderRadius="8px">
-            <img
-              src={mainData.img}
-              width="100%"
-              height="100%"
-              borderRadius="8px"
-            ></img>
+            <img src={mainData.img} width="100%" height="100%" borderRadius="8px"></img>
           </Box>
           <Box display="flex" flex="5" justifyContent="center">
             <Box display="flex" flexDirection="column" width="90%">
               <Box display="flex" flex="1" alignItems="center">
-                <Box
-                  display="flex"
-                  flex="1"
-                  justifyContent="flex-start"
-                  fontFamily="Work Sans"
-                  fontWeight="500"
-                  fontSize="18px"
-                  color="#2BA55D"
-                >
+                <Box display="flex" mt={["10px", "20px"]} flex="1" justifyContent="flex-start" fontFamily="Work Sans" fontWeight="500" fontSize={["14px", "18px"]} color="#2BA55D">
                   Collection name
                 </Box>
                 <Box display="flex" flex="1" justifyContent="flex-end">
                   <FaShareAlt fontSize="18px" color="#757B75"></FaShareAlt>
                 </Box>
               </Box>
-              <Box
-                display="flex"
-                flex="2"
-                flexDirection="column"
-                marginTop="1%"
-              >
-                <Img_Title1
-                  display="flex"
-                  flex="1"
-                  fontFamily="Work Sans"
-                  fontWeight="800"
-                  fontSize="34px"
-                  color="#363936"
-                  lineHeight="40px"
-                  alignItems="center"
-                >
+              <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
+                <Img_Title1 display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize={["20px", "30px", "34px"]} color="#363936" lineHeight={["20px", "30px", "40px"]} alignItems="center">
                   {/* NFT artwork titleNFT */}
                   {mainData.title}
                 </Img_Title1>
-                <Img_Title1
-                  display="flex"
-                  flex="1"
-                  fontFamily="Work Sans"
-                  fontWeight="800"
-                  fontSize="34px"
-                  color="#363936"
-                  lineHeight="40px"
-                  alignItems="center"
-                >
+                <Img_Title1 display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize={["20px", "30px", "34px"]} color="#363936" lineHeight={["20px", "30px", "40px"]} alignItems="center">
                   artwork title
                 </Img_Title1>
               </Box>
               <Box display="flex" flex="1" alignItems="center" marginTop="1%">
-                <Box
-                  display="flex"
-                  flex="60"
-                  alignItems="center"
-                  justifyContent="center"
-                  fontFamily="Work Sans"
-                  fontSize="12px"
-                  fontWeight="400"
-                  color="#757B75"
-                >
+                <Box display="flex" flex="60" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
                   Owned by{" "}
                 </Box>
-                <Box
-                  display="flex"
-                  flex="75"
-                  alignItems="center"
-                  justifyContent="center"
-                  fontFamily="Work Sans"
-                  fontSize="12px"
-                  fontWeight="400"
-                  color="#2BA55D"
-                >
+                <Box display="flex" flex="75" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#2BA55D">
                   User's name
                 </Box>
-                <Box
-                  display="flex"
-                  flex="95"
-                  alignItems="center"
-                  justifyContent="center"
-                  fontFamily="Work Sans"
-                  fontSize="12px"
-                  fontWeight="400"
-                  color="#757B75"
-                >
+                <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
                   <MdRemoveRedEye fontSize="20px" />
                   {"\u00a0"}2.4 K views
                 </Box>
-                <Box
-                  display="flex"
-                  flex="95"
-                  alignItems="center"
-                  justifyContent="center"
-                  fontFamily="Work Sans"
-                  fontSize="12px"
-                  fontWeight="400"
-                  color="#757B75"
-                >
+                <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
                   <FaHeart fontSize="20px" />
                   {"\u00a0"}201 favorited
                 </Box>
                 {/* <Box display="flex" flex="100" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="500" color=""></Box> */}
               </Box>
-              <Box
-                display="flex"
-                flex="2"
-                flexDirection="column"
-                marginTop="1%"
-              >
-                <Box
-                  display="flex"
-                  flex="1"
-                  alignItems="flex-end"
-                  fontFamily="Work Sans"
-                  fontSize="10px"
-                  fontWeight="400"
-                  color="#757B75"
-                >
+              <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
+                <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Work Sans" fontSize="10px" fontWeight="400" color="#757B75">
                   Lowest price
                 </Box>
-                <Box
-                  display="flex"
-                  flex="1"
-                  alignItems="flex-start"
-                  marginTop="10px"
-                >
+                <Box display="flex" flex="1" alignItems="flex-start" marginTop="10px">
                   <Box display="flex" alignItems="center">
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
+                    <Box display="flex" justifyContent="center" alignItems="center">
                       <img src={icon_logo} width="24px" height="24px"></img>
                     </Box>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      marginLeft="10px"
-                      fontFamily="Work Sans"
-                      fontSize="18px"
-                      fontWeight="400"
-                      color="#131413"
-                    >
+                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize={["14px", "18px"]} fontWeight="400" color="#131413">
                       {mainData.price}
                       {/* 200.1 FAST */}
                     </Box>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      marginLeft="10px"
-                      fontFamily="Work Sans"
-                      fontSize="12px"
-                      fontWeight="400"
-                      color="#757B75"
-                    >
+                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
                       $4.05
                     </Box>
                   </Box>
                 </Box>
               </Box>
-              <Box
-                display="flex"
-                flex="2"
-                alignItems="flex-start"
-                marginTop="1%"
-              >
+              <Box display="flex" flex="2" alignItems="flex-start" marginTop="1%">
                 <Btn_Customize
                   flexGrow={1}
+                  marginTop={"20px"}
                   color={"white"}
                   back={"#2BA55D"}
                   width={"100%"}
@@ -299,85 +167,26 @@ const Detail_Page = ({ ctheme }) => {
         </Detail_Img>
       </Box>
       <Box display="flex" width="100%">
-        <Underline1
-          display="flex"
-          marginLeft="5%"
-          marginRight="5%"
-          width="100%"
-          marginTop="2%"
-        >
+        <Underline1 display="flex" marginLeft="5%" marginRight="5%" width="100%" marginTop="2%">
           <Box display="flex" flex="4" width="100%" justifyContent="flex-start">
             <Box display="flex" width="95%" flexDirection="column">
-              <List_ULetter
-                ctheme={ctheme}
-                str={"Description"}
-                width1={"100%"}
-                height1={"40px"}
-              ></List_ULetter>
-              <Box
-                display="flex"
-                flexDirection="column"
-                marginTop="30px"
-                width="100%"
-              >
-                <Box
-                  display="flex"
-                  flex="1"
-                  alignItems="center"
-                  justifyContent="flex-start"
-                  fontFamily="Work Sans"
-                  fontSize="18px"
-                  fontWeight="400"
-                  color="#363936"
-                >
+              <List_ULetter ctheme={ctheme} str={"Description"} width1={"100%"} height1={"40px"}></List_ULetter>
+              <Box display="flex" flexDirection="column" marginTop="30px" width="100%">
+                <Box display="flex" flex="1" alignItems="center" justifyContent="flex-start" fontFamily="Work Sans" fontSize="18px" fontWeight="400" color="#363936">
                   Create by <Box color="#2BA55D">{"\u00a0"}username</Box>
                 </Box>
-                <Box
-                  display="flex"
-                  flex="1"
-                  alignItems="center"
-                  justifyContent="flex-start"
-                  fontFamily="Work Sans"
-                  fontSize="18px"
-                  fontWeight="400"
-                  color="#363936"
-                >
+                <Box display="flex" flex="1" alignItems="center" justifyContent="flex-start" fontFamily="Work Sans" fontSize="18px" fontWeight="400" color="#363936">
                   {mainData.description}
                 </Box>
               </Box>
-              <List_ULetter
-                ctheme={ctheme}
-                str={"Property"}
-                width1={"100%"}
-                height1={"40px"}
-              ></List_ULetter>
-              <List_ULetter
-                ctheme={ctheme}
-                str={"About this collection"}
-                width1={"100%"}
-                height1={"40px"}
-              ></List_ULetter>
-              <List_ULetter
-                ctheme={ctheme}
-                str={"Details"}
-                width1={"100%"}
-                height1={"40px"}
-              ></List_ULetter>
+              <List_ULetter ctheme={ctheme} str={"Property"} width1={"100%"} height1={"40px"}></List_ULetter>
+              <List_ULetter ctheme={ctheme} str={"About this collection"} width1={"100%"} height1={"40px"}></List_ULetter>
+              <List_ULetter ctheme={ctheme} str={"Details"} width1={"100%"} height1={"40px"}></List_ULetter>
             </Box>
           </Box>
-          <Underline3
-            display="flex"
-            flex="5"
-            width="100%"
-            justifyContent="center"
-          >
+          <Underline3 display="flex" flex="5" width="100%" justifyContent="center">
             <Underline2 display="flex" width="90%" flexDirection="column">
-              <List_ULetter
-                ctheme={ctheme}
-                str={"Price history"}
-                width1={"100%"}
-                height1={"40px"}
-              ></List_ULetter>
+              <List_ULetter ctheme={ctheme} str={"Price history"} width1={"100%"} height1={"40px"}></List_ULetter>
               <Box display="flex">
                 <img src={detail_chart1} width="100%" height="100%"></img>
               </Box>
@@ -387,94 +196,33 @@ const Detail_Page = ({ ctheme }) => {
       </Box>
 
       <Box display="flex" width="100%">
-        <Box
-          display="flex"
-          marginLeft="5%"
-          marginRight="5%"
-          width="90%"
-          marginTop="2%"
-          flexDirection="column"
-        >
-          <List_ULetter
-            ctheme={ctheme}
-            str={"Items activity"}
-            width1={"100%"}
-            height1={"40px"}
-          ></List_ULetter>
+        <Box display="flex" marginLeft="5%" marginRight="5%" width="90%" marginTop="2%" flexDirection="column">
+          <List_ULetter ctheme={ctheme} str={"Items activity"} width1={"100%"} height1={"40px"}></List_ULetter>
           <Drop_chart1>Need to make table here</Drop_chart1>
         </Box>
       </Box>
 
       <Box display="flex" width="100%">
-        <Box
-          display="flex"
-          marginLeft="5%"
-          marginRight="5%"
-          width="90%"
-          marginTop="2%"
-          flexDirection="column"
-        >
-          <List_ULetter
-            ctheme={ctheme}
-            str={"Other items in this collection"}
-            width1={"100%"}
-            height1={"40px"}
-          ></List_ULetter>
+        <Box display="flex" marginLeft="5%" marginRight="5%" width="90%" marginTop="2%" flexDirection="column">
+          <List_ULetter ctheme={ctheme} str={"Other items in this collection"} width1={"100%"} height1={"40px"}></List_ULetter>
         </Box>
       </Box>
 
       <Part_Drop>
-        <Box
-          display="flex"
-          flexDirection="column"
-          marginLeft="5%"
-          marginRight="5%"
-        >
+        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
           <Box display="flex" flexDirection="column" marginTop="2%">
             <Collection_Image display="flex" flex="1" marginBottom="2%">
               <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop
-                  index={1}
-                  img={cover4}
-                  simg={small_ellipse}
-                  simg1={small_duke}
-                  name={"Creator Name"}
-                  price={"310.9 DUKE"}
-                  ctheme={ctheme}
-                ></Last_Drop>
+                <Last_Drop index={1} img={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
               <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop
-                  index={1}
-                  img={cover5}
-                  simg={small_ellipse}
-                  simg1={small_duke}
-                  name={"Creator Name"}
-                  price={"310.9 DUKE"}
-                  ctheme={ctheme}
-                ></Last_Drop>
+                <Last_Drop index={1} img={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
               <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop
-                  index={1}
-                  img={cover6}
-                  simg={small_ellipse}
-                  simg1={small_duke}
-                  name={"Creator Name"}
-                  price={"310.9 DUKE"}
-                  ctheme={ctheme}
-                ></Last_Drop>
+                <Last_Drop index={1} img={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
               <Box display="flex" flex="1">
-                <Last_Drop
-                  index={1}
-                  img={cover7}
-                  simg={small_ellipse}
-                  simg1={small_duke}
-                  name={"Creator Name"}
-                  price={"310.9 DUKE"}
-                  ctheme={ctheme}
-                ></Last_Drop>
+                <Last_Drop index={1} img={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
             </Collection_Image>
           </Box>
@@ -520,7 +268,6 @@ const Detail_Img = styled(Box)`
 
 const Img_Title1 = styled(Box)`
   @media (max-width: 1000px) {
-    font-size: 25px !important;
   }
 `;
 
@@ -537,11 +284,7 @@ const Drop_chart1 = styled(Box)`
   justify-content: center;
   width: 100%;
   height: 160px;
-  background: linear-gradient(
-    273.64deg,
-    rgba(187, 230, 204, 0.33) 3.14%,
-    rgba(198, 231, 255, 0.31) 97.12%
-  );
+  background: linear-gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14%, rgba(198, 231, 255, 0.31) 97.12%);
   font-family: Work Sans;
   font-style: normal;
   font-weight: 600;
@@ -556,8 +299,7 @@ const StyledContainer = styled(Box)`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  background: ${({ ctheme, ltheme, dtheme }) =>
-    ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main};
+  background: ${({ ctheme, ltheme, dtheme }) => (ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main)};
 `;
 
 const Header1_space = styled(Box)`

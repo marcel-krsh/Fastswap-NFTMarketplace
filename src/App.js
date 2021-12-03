@@ -1,27 +1,26 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { Web3ReactProvider } from '@web3-react/core'
-import Web3 from 'web3'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Web3ReactProvider } from "@web3-react/core";
+import Web3 from "web3";
 
-import Header from "./pages/header/header"
-import Sidebar from "./pages/sidebar/sidebar"
-import Mainpage from "./pages/mainpage/mainpage"
-import Collection_page from './pages/collection_page/collection_page'
-import Detail_page from './pages/detail_page/detail_page'
-import Profile_page_prev from './pages/profile_page/profile_page_prev'
-import Profile_page_empty from './pages/profile_page/profile_page_empty'
+import Header from "./pages/header/header";
+import Sidebar from "./pages/sidebar/sidebar";
+import Mainpage from "./pages/mainpage/mainpage";
+import Collection_page from "./pages/collection_page/collection_page";
+import Detail_page from "./pages/detail_page/detail_page";
+import Profile_page_prev from "./pages/profile_page/profile_page_prev";
+import Profile_page_empty from "./pages/profile_page/profile_page_empty";
 import getProducts from "./actions/product";
 import SettingPage from "./pages/settingpage";
-import './App.css';
+import "./App.css";
 
 function getLibrary(provider) {
-  return new Web3(provider)
+  return new Web3(provider);
 }
 
 function App() {
-
   const dispatch = useDispatch();
 
   const styles = {
@@ -37,17 +36,17 @@ function App() {
   const [flag_sidebar, set_sidebar] = useState(false);
   const [ctheme, setTheme] = useState(true);
 
-  useEffect(async() => {
+  useEffect(async () => {
     dispatch(await getProducts());
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <>
       <Web3ReactProvider getLibrary={getLibrary}>
-        <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar} ctheme={ctheme} ></Header>
-        <div style={styles.contentDiv} >
-          <div className="sidebar1" style={{ display: "none" }} >
-            <Sidebar flag_sidebar={1} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+        <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar} ctheme={ctheme}></Header>
+        <div style={styles.contentDiv}>
+          <div className={"sidebar1" + (flag_sidebar ? " collapse" : " expand")} style={{ display: "none" }}>
+            <Sidebar flag_sidebar={false} ctheme={ctheme} setTheme={setTheme}></Sidebar>
           </div>
           <div className="sidebar2">
             <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>

@@ -42,9 +42,19 @@ const View = styled(Box)`
 `;
 const Expanded = styled(Box)`
   position: relative;
+  background: gray;
   height: 211px;
   overflow: hidden;
   border-radius: 8px;
+  @media (max-width: 1000px) {
+    height: 211px;
+  }
+  @media (max-width: 800px) {
+    height: 170px;
+  }
+  @media (max-width: 600px) {
+    height: 130px;
+  }
   > img {
     width: 100%;
   }

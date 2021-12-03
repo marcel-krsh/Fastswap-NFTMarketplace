@@ -5,12 +5,7 @@ import { useState } from "react";
 import { Box, Modal } from "@material-ui/core";
 import styled from "styled-components";
 import { MdMenuOpen } from "react-icons/md";
-import {
-  injected,
-  walletConnect,
-  trustWallet,
-  binance_wallet,
-} from "../../utils/connectors";
+import { injected, walletConnect, trustWallet, binance_wallet } from "../../utils/connectors";
 import _ from "lodash";
 import { useWeb3React } from "@web3-react/core";
 import metamask from "../../images/MetaMask.png";
@@ -58,56 +53,30 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
   const { connector, account, activate, deactivate } = useWeb3React();
   const handleDisconnect = () => {
     deactivate();
-    window.localStorage.removeItem("CurrentWalletConnect")
+    window.localStorage.removeItem("CurrentWalletConnect");
   };
   const handleConnect = (currentConnector) => {
     setOpen(false);
     activate(walletConnectors[currentConnector]);
-    window.localStorage.setItem("CurrentWalletConnect", currentConnector)
+    window.localStorage.setItem("CurrentWalletConnect", currentConnector);
   };
   const getShortTxHash = (txHash, margin = 4) => {
     if (_.isEmpty(txHash)) {
       return "";
     }
-    return txHash.replace(
-      txHash.substring(margin + 2, txHash.length - margin),
-      "...."
-    );
+    return txHash.replace(txHash.substring(margin + 2, txHash.length - margin), "....");
   };
   useEffect(() => {
     const currentWalletState = window.localStorage.getItem("CurrentWalletConnect");
-    currentWalletState&&activate(walletConnectors[currentWalletState])
+    currentWalletState && activate(walletConnectors[currentWalletState]);
   }, []);
   return (
-    <StyledContainer
-      ctheme={ctheme ? 1 : 0}
-      ltheme={lightTheme}
-      dtheme={darkTheme}
-    >
+    <StyledContainer px="20px" boxSizing="border-box" ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} zIndex={2}>
       {/* {theme? <div>123</div>:<div>KKK</div>} */}
-      <Box
-        display="flex"
-        flex="1.3"
-        alignItems="center"
-        justifyContent="center"
-        marginLeft="5%"
-        marginRight="5%"
-        fontWeight="bold"
-        fontSize="20px"
-        color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
-      >
-        <MdMenuOpen
-          onClick={() => set_sidebar(!flag_sidebar)}
-          fontSize="30px"
-          color="#2BA55D"
-        />
+      <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
+        <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D" />
         <Logo_img>
-          <img
-            src={img_logo}
-            width="55px"
-            height="35px"
-            style={{ marginLeft: "30px" }}
-          ></img>
+          <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }}></img>
           FASTSWAP
         </Logo_img>
       </Box>
@@ -142,12 +111,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
           <Btn_connect onClick={handleOpen}>Connect</Btn_connect>
         )}
       </Box>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style1}>
           <Box
             sx={{
@@ -174,8 +138,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   borderRadius: "12px",
                   flexDirection: "row",
                   backgroundColor: "#FCFCFC",
-                  boxShadow:
-                    "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+                  boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
                   height: "50%",
                 }}
                 onClick={() => {
@@ -183,12 +146,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                 }}
               >
                 <img src={metamask} width="40px" height="40px"></img>
-                <Connect_btn_letter
-                  fontWeight="bold"
-                  margin="20px"
-                  color="#337ab7"
-                  fontSize="1.25rem"
-                >
+                <Connect_btn_letter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
                   MetaMask
                 </Connect_btn_letter>
               </Box>
@@ -205,8 +163,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   borderRadius: "12px",
                   flexDirection: "row",
                   backgroundColor: "#FCFCFC",
-                  boxShadow:
-                    "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+                  boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
                   height: "50%",
                 }}
                 onClick={() => {
@@ -214,12 +171,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                 }}
               >
                 <img src={walletconnect} width="40px" height="40px"></img>
-                <Connect_btn_letter
-                  fontWeight="bold"
-                  margin="20px"
-                  color="#337ab7"
-                  fontSize="1.25rem"
-                >
+                <Connect_btn_letter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
                   WalletConnect
                 </Connect_btn_letter>
               </Box>
@@ -236,8 +188,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   borderRadius: "12px",
                   flexDirection: "row",
                   backgroundColor: "#FCFCFC",
-                  boxShadow:
-                    "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+                  boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
                   height: "50%",
                 }}
                 onClick={() => {
@@ -245,12 +196,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                 }}
               >
                 <img src={binance} width="40px" height="40px"></img>
-                <Connect_btn_letter
-                  fontWeight="bold"
-                  margin="20px"
-                  color="#337ab7"
-                  fontSize="1.25rem"
-                >
+                <Connect_btn_letter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
                   BinanceWallet
                 </Connect_btn_letter>
               </Box>
@@ -267,8 +213,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   borderRadius: "12px",
                   flexDirection: "row",
                   backgroundColor: "#FCFCFC",
-                  boxShadow:
-                    "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+                  boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
                   height: "50%",
                 }}
                 onClick={() => {
@@ -276,12 +221,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                 }}
               >
                 <img src={trust} width="40px" height="40px"></img>
-                <Connect_btn_letter
-                  fontWeight="bold"
-                  margin="20px"
-                  color="#337ab7"
-                  fontSize="1.25rem"
-                >
+                <Connect_btn_letter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
                   TrustWallet
                 </Connect_btn_letter>
               </Box>
@@ -310,10 +250,8 @@ const StyledContainer = styled(Box)`
   display: flex;
   width: 100%;
   height: 64px;
-  background: ${({ ctheme, ltheme, dtheme }) =>
-    ctheme ? ltheme.bgcolor_bar : dtheme.bgcolor_bar};
-  border-bottom: ${({ ctheme }) =>
-    ctheme ? "2px solid #F0F0F0" : "2px solid #2ba55d"};
+  background: ${({ ctheme, ltheme, dtheme }) => (ctheme ? ltheme.bgcolor_bar : dtheme.bgcolor_bar)};
+  border-bottom: ${({ ctheme }) => (ctheme ? "2px solid #F0F0F0" : "2px solid #2ba55d")};
   //#564a4a
   // box-shadow: 0px 4px 3px -4px rgba(0, 0, 0, 0.08);
 `;
@@ -333,8 +271,7 @@ const Btn_connect = styled(Box)`
   font-size: 16px;
   &:hover {
     cursor: pointer;
-    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
-      0 0 0 0px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 0px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   }
   @media (max-width: 800px) {
     font-size: 12px;

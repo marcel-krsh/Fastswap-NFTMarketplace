@@ -23,12 +23,7 @@ const ProfileContent = () => {
         <InputGroupType>
           <h1 className="name">Dscription</h1>
           <div className="inputTags">
-            <textarea
-              name=""
-              id=""
-              rows="7"
-              placeholder="Tell us a little bit about you"
-            />
+            <textarea name="" id="" rows="7" placeholder="Tell us a little bit about you" />
           </div>
           <h4 className="help">0 Character of 1000 maximum</h4>
         </InputGroupType>
@@ -52,28 +47,10 @@ const ProfileContent = () => {
         <InputGroupType readOnly fontMd>
           <h1 className="name">Wallet Address</h1>
           <div className="inputTags">
-            <input
-              type="text"
-              placeholder="Wallet disconnected"
-              readOnly={true}
-            />
+            <input type="text" placeholder="Wallet disconnected" readOnly={true} />
           </div>
         </InputGroupType>
-        <Box
-          marginTop="42px"
-          bgcolor="#2BA55D"
-          borderRadius="8px"
-          fontSize="18px"
-          lineHeight="18px"
-          textAlign="center"
-          paddingY="19px"
-          color="white"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          gridColumnGap="11px"
-          css={{ cursor: "pointer" }}
-        >
+        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
           <MdSave fontSize="20px" />
           Save
         </Box>
@@ -91,6 +68,15 @@ const ProfileMain = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 39px;
+  @media (max-width: 1000px) {
+    gap: 34px;
+  }
+  @media (max-width: 800px) {
+    gap: 29px;
+  }
+  @media (max-width: 600px) {
+    gap: 25px;
+  }
 `;
 const InputGroupType = styled(Box)`
   display: flex;
@@ -106,6 +92,15 @@ const InputGroupType = styled(Box)`
     line-height: 20px;
     letter-spacing: 0.5px;
     color: #131413;
+    @media (max-width: 1000px) {
+      font-size: 18px;
+    }
+    @media (max-width: 800px) {
+      font-size: 12px;
+    }
+    @media (max-width: 600px) {
+      font-size: 8px;
+    }
   }
   > .inputTags {
     background: ${(p) => (p.readOnly ? "#CECECE" : "white")};
