@@ -63,6 +63,7 @@ const getProducts =
           price: item.price,
           quantity: item.quantity,
           isAuction: false,
+          ids: ids[i],
         });
         if (i === tokenProducts.length - 1) {
           await dispatch({

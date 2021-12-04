@@ -5,56 +5,79 @@ import DragImage from "./components/DragImage";
 import TwitterIcon from "../../images/icons/twitter.svg";
 import DiscordIcon from "../../images/icons/discord.svg";
 import TelegramHandle from "../../images/icons/telegram.svg";
+import { MdSave } from "react-icons/md";
 
 const ProfileContent = () => {
   return (
     <>
       <Header>
         <DragImage />
-        <ProfileMain>
-          <InputGroupType>
-            <h1 className="name">Name</h1>
-            <div className="inputTags">
+      </Header>
+      <ProfileMain pb="80px">
+        <InputGroupType>
+          <h1 className="name">Name</h1>
+          <div className="inputTags">
+            <input type="text" placeholder="Your username" />
+          </div>
+        </InputGroupType>
+        <InputGroupType>
+          <h1 className="name">Dscription</h1>
+          <div className="inputTags">
+            <textarea
+              name=""
+              id=""
+              rows="7"
+              placeholder="Tell us a little bit about you"
+            />
+          </div>
+          <h4 className="help">0 Character of 1000 maximum</h4>
+        </InputGroupType>
+        <InputGroupType>
+          <h1 className="name">Name</h1>
+          <div className="inputTags">
+            <div>
+              <img src={TwitterIcon} alt="" />
               <input type="text" placeholder="Your username" />
             </div>
-          </InputGroupType>
-          <InputGroupType>
-            <h1 className="name">Dscription</h1>
-            <div className="inputTags">
-              <textarea
-                name=""
-                id=""
-                rows="7"
-                placeholder="Tell us a little bit about you"
-              />
+            <div>
+              <img src={DiscordIcon} alt="" />
+              <input type="text" placeholder="Your username" />
             </div>
-            <h4 className="help">0 Character of 1000 maximum</h4>
-          </InputGroupType>
-          <InputGroupType>
-            <h1 className="name">Name</h1>
-            <div className="inputTags">
-              <div>
-                <img src={TwitterIcon} alt="" />
-                <input type="text" placeholder="Your username" />
-              </div>
-              <div>
-                <img src={DiscordIcon} alt="" />
-                <input type="text" placeholder="Your username" />
-              </div>
-              <div>
-                <img src={TelegramHandle} alt="" />
-                <input type="text" placeholder="Your username" />
-              </div>
+            <div>
+              <img src={TelegramHandle} alt="" />
+              <input type="text" placeholder="Your username" />
             </div>
-          </InputGroupType>
-          <InputGroupType>
-            <h1 className="name">Wallet Address</h1>
-            <div className="inputTags">
-              <input type="text" placeholder="Wallet disconnected" />
-            </div>
-          </InputGroupType>
-        </ProfileMain>
-      </Header>
+          </div>
+        </InputGroupType>
+        <InputGroupType readOnly fontMd>
+          <h1 className="name">Wallet Address</h1>
+          <div className="inputTags">
+            <input
+              type="text"
+              placeholder="Wallet disconnected"
+              readOnly={true}
+            />
+          </div>
+        </InputGroupType>
+        <Box
+          marginTop="42px"
+          bgcolor="#2BA55D"
+          borderRadius="8px"
+          fontSize="18px"
+          lineHeight="18px"
+          textAlign="center"
+          paddingY="19px"
+          color="white"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          gridColumnGap="11px"
+          css={{ cursor: "pointer" }}
+        >
+          <MdSave fontSize="20px" />
+          Save
+        </Box>
+      </ProfileMain>
     </>
   );
 };
@@ -85,6 +108,7 @@ const InputGroupType = styled(Box)`
     color: #131413;
   }
   > .inputTags {
+    background: ${(p) => (p.readOnly ? "#CECECE" : "white")};
     margin-top: 17px;
     margin-bottom: 0px;
     display: flex;
@@ -97,16 +121,17 @@ const InputGroupType = styled(Box)`
     overflow: hidden;
     input,
     textarea {
+      background: ${(p) => (p.readOnly ? "#CECECE" : "white")};
       flex-grow: 1;
       border: none;
-      padding: 14px 24px;
+      padding: ${(p) => (p.fontMd ? "10px 24px" : "14px 24px")};
       font-style: normal;
       font-weight: normal;
-      font-size: 12px;
-      line-height: 12px;
+      font-size: ${(p) => (p.fontMd ? "18px" : "12px")};
+      line-height: ${(p) => (p.fontMd ? "20px" : "12px")};
       color: #757b75;
       resize: none;
-      /* outline: none; */
+      outline: none;
     }
     > div {
       display: flex;

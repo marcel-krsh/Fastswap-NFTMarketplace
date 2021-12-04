@@ -43,10 +43,7 @@ function App() {
     dispatch(await getProducts());
   }, [dispatch])
 
-
-
   return (
-
     <>
       <Web3ReactProvider getLibrary={getLibrary}>
         <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar} ctheme={ctheme} ></Header>
