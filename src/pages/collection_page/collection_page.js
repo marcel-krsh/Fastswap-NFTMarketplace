@@ -3,15 +3,11 @@
 import React from "react";
 import { FaTwitter, FaTelegram, FaShareAlt } from "react-icons/fa";
 import { RiMessage3Fill } from "react-icons/ri";
-import { Box} from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import styled from 'styled-components';
 import cover_big1 from '../../images/cover/collection_header.png';
 import small_ellipse from "../../images/small_ellipse2.png"
 import small_duke from "../../images/small_duke1.png";
-import cover from "../../images/cover/cover.png";
-import cover1 from "../../images/cover/cover-1.png";
-import cover2 from "../../images/cover/cover-2.png";
-import cover3 from "../../images/cover/cover-3.png";
 import cover4 from "../../images/cover/cover-4.png";
 import cover5 from "../../images/cover/cover-5.png";
 import cover6 from "../../images/cover/cover-6.png";
@@ -20,10 +16,6 @@ import cover8 from "../../images/cover/cover-8.png";
 import cover9 from "../../images/cover/cover-9.png";
 import cover10 from "../../images/cover/cover-10.png";
 import cover11 from "../../images/cover/cover-11.png";
-import cover12 from "../../images/cover/cover-12.png";
-import cover13 from "../../images/cover/cover-13.png";
-import cover14 from "../../images/cover/cover-14.png";
-import cover15 from "../../images/cover/cover-15.png";
 import bnb1 from "../../images/bnb1.png";
 import Btn_Customize from "../../components/buttons/btn_container"
 import Last_Drop from "../../components/carts/cart_drop"
@@ -112,7 +104,7 @@ const Collection_page = ({ ctheme }) => {
             </Show_Items>
 
             <Box display="flex" width="100%">
-                <Box display="flex" marginLeft="5%" marginRight="5%" marginTop="3%"  width="100%">
+                <Box display="flex" marginLeft="5%" marginRight="5%" marginTop="3%" width="100%">
                     <Box display="flex" flex="1" alignItems="center" marginRight="2%">
                         <Btn_Customize color={'white'} back={'#2BA55D'} width={'100%'} height={'32px'} border={'1px solid #2BA55D'} str={'All 7'} borderRadius={'8px'} />
                     </Box>

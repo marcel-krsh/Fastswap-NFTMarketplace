@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Box } from "@material-ui/core";
-import { Slider } from "@material-ui/core";
 
 const CustomSlider = () => {
   return (

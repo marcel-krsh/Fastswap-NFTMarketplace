@@ -1,31 +1,24 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/jsx-pascal-case */
-
-import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 import { useHistory } from "react-router";
 import cover_big1 from '../../images/cover/cover_big1.png';
 import small_ellipse from "../../images/small_ellipse2.png"
 import small_duke from "../../images/small_duke1.png";
-
 import Btn_Customize from "../../components/buttons/btn_container"
-import Hot_Collection from "../../components/carts/cart_collection"
 import Last_Drop from "../../components/carts/cart_drop"
 import Img_Letter from "../../components/letters/img_letter"
 import { lightTheme, darkTheme } from "../../theme/theme"
 
 const Mainpage = ({ ctheme }) => {
-
     // const dispatch = useDispatch();
     const history = useHistory();
     const [rerender, setRerender] = useState('Hello');
     const { nfts } = useSelector(state => state.product);
     useEffect(() => {
-        console.log(nfts);
+        console.log("123:",nfts);
         setRerender('Hello World');
-        // console.log('re-render')
     })
 
     return (
@@ -102,7 +95,6 @@ const Mainpage = ({ ctheme }) => {
                                 )
                             })
                         }
-
                     </Box>
                     <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
                         <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
@@ -112,14 +104,6 @@ const Mainpage = ({ ctheme }) => {
         </StyledContainer>
     );
 };
-
-
-const Collection_Image = styled(Box)`
-    flex-direction: row;
-    @media (max-width: 600px) {
-        flex-direction: column;
-    }
-`
 
 const Header1_space = styled(Box)`
 @media (max-width: 1000px) {
@@ -232,14 +216,6 @@ const Part_Header = styled(Box)`
         flex-direction: column;
     }
 `
-
-const Part_Collection = styled(Box)`
-    display: flex;
-    width: 100%;
-    margin-top:5%;
-    flex-direction: column;
-`
-
 const Part_Drop = styled(Box)`
     display: flex;
     width: 100%;

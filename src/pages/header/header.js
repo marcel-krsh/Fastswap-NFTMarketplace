@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-pascal-case */
-/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { useState } from 'react'
 import { Box, Modal} from '@material-ui/core'
@@ -19,10 +17,10 @@ import binance from '../../images/BinanceWallet.png'
 import trust from '../../images/TrustWallet.png'
 import img_logo from '../../images/logo_mark1.png';
 import { lightTheme, darkTheme } from "../../theme/theme";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 
 const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
-    const history = useHistory()
+    // const history = useHistory()
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -47,25 +45,16 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
         TrustWallet: trustWallet,
     };
 
-    const MOBILE_CONNECTORS = {
-        MetaMask: injected,
-        TrustWallet: trustWallet,
-        BinanceWallet: binance_wallet,
-    };
+    // const MOBILE_CONNECTORS = {
+    //     MetaMask: injected,
+    //     TrustWallet: trustWallet,
+    //     BinanceWallet: binance_wallet,
+    // };
     const walletConnectors = DESKTOP_CONNECTORS;
-    const { connector, activate } = useWeb3React();
+    const { activate } = useWeb3React();
     const handleConnect = (currentConnector) => {
         setOpen(false);
         activate(currentConnector);
-    }
-    const getShortTxHash = (txHash, margin = 4) => {
-        if (_.isEmpty(txHash)) {
-            return "";
-        }
-        return txHash.replace(
-            txHash.substring(margin + 2, txHash.length - margin),
-            "....",
-        );
     }
 
     return (

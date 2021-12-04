@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Web3Provider } from '@ethersproject/providers'
 import { Web3ReactProvider } from '@web3-react/core'
-
 import Header from "./pages/header/header"
 import Sidebar from "./pages/sidebar/sidebar"
 import Mainpage from "./pages/mainpage/mainpage"
@@ -43,6 +42,7 @@ function App() {
   useEffect(async() => {
     dispatch(await getProducts());
   }, [dispatch])
+
 
 
   return (

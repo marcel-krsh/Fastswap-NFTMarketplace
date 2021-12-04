@@ -10,10 +10,6 @@ import cover_big1 from '../../images/cover/collection_header.png';
 import small_ellipse from "../../images/small_ellipse2.png"
 import tiger_circle1 from "../../images/tiger_circle1.png"
 import small_duke from "../../images/small_duke1.png";
-import cover from "../../images/cover/cover.png";
-import cover1 from "../../images/cover/cover-1.png";
-import cover2 from "../../images/cover/cover-2.png";
-import cover3 from "../../images/cover/cover-3.png";
 import cover4 from "../../images/cover/cover-4.png";
 import cover5 from "../../images/cover/cover-5.png";
 import cover6 from "../../images/cover/cover-6.png";
@@ -22,14 +18,9 @@ import cover8 from "../../images/cover/cover-8.png";
 import cover9 from "../../images/cover/cover-9.png";
 import cover10 from "../../images/cover/cover-10.png";
 import cover11 from "../../images/cover/cover-11.png";
-import cover12 from "../../images/cover/cover-12.png";
-import cover13 from "../../images/cover/cover-13.png";
-import cover14 from "../../images/cover/cover-14.png";
-import cover15 from "../../images/cover/cover-15.png";
 import Btn_Customize from "../../components/buttons/btn_container"
 import Btn_Customize_Save from "../../components/buttons/btn_customize_save"
 import Last_Drop from "../../components/carts/cart_drop"
-import Img_Letter from "../../components/letters/img_letter"
 import { lightTheme, darkTheme } from "../../theme/theme"
 
 
@@ -62,12 +53,12 @@ const Profile_page_empty = ({ ctheme }) => {
                                 <FiMove fontSize="18px" color="#323232" fontWeight="bold"></FiMove>
                             </Box>
                         </Box>
-                        <Drag_reposition display="none" position="absolute" top="40%" left="40%" width="25%" height="40px" bgcolor="#FCFCFC" borderRadius="8px" fontSize="20px" fontWeight="300" fontFamily="Work Sans" alignItems="center" justifyContent="center">Drag to reposition{'\u00a0'}{'\u00a0'}<FiMove/></Drag_reposition>
+                        <Drag_reposition display="none" position="absolute" top="40%" left="40%" width="25%" height="40px" bgcolor="#FCFCFC" borderRadius="8px" fontSize="20px" fontWeight="300" fontFamily="Work Sans" alignItems="center" justifyContent="center">Drag to reposition{'\u00a0'}{'\u00a0'}<FiMove /></Drag_reposition>
                     </Camera_move1>
-                    <Box display="flex" flex="50"  marginTop="1%" width="100%">
+                    <Box display="flex" flex="50" marginTop="1%" width="100%">
                         {flag_move === true ? <Box position="absolute" display="flex" width="100%" justifyContent="flex-end" alignItems="center">
                             <Box display="flex" width="30%" fontSize="20px" fontWeight="800" fontFamily="Work Sans" alignItems="center" bgcolor="#FFFFFF" border="1px solid #CECECE" borderRadius="8px" marginRight="2%">
-                            {'\u00a0'}{'\u00a0'}-{'\u00a0'}{'\u00a0'}<Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto"/>{'\u00a0'}{'\u00a0'}+{'\u00a0'}{'\u00a0'}</Box>
+                                {'\u00a0'}{'\u00a0'}-{'\u00a0'}{'\u00a0'}<Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />{'\u00a0'}{'\u00a0'}+{'\u00a0'}{'\u00a0'}</Box>
                             <Btn_Customize_Save color={'white'} back={'#2BA55D'} width={'10%'} height={'40px'} border={'1px solid #2BA55D'} str={'Save'} borderRadius={'8px'} />
                         </Box> : null}
                     </Box>
@@ -330,8 +321,8 @@ const Detail_letter1 = styled(Box)`
             div{
                 display: flex !important;
             }
+        }
     }
-
 `
 
 const Detail_letter2 = styled(Box)`
@@ -391,20 +382,6 @@ const LItem_upletter1 = styled(Box)`
     font-size: 12px;
     @media (max-width: 1000px) {
         font-szie: 9px !important;
-    }
-`
-
-const LItem1 = styled(Box)`
-    font-family: 'Work Sans';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #757B75;
-    border-bottom: 4px solid rgba(0,0,0,0);
-    &:hover{
-        color: #2BA55D;
-        border-bottom: 4px solid #2BA55D;
     }
 `
 

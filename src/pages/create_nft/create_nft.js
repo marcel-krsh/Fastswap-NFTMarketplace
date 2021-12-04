@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { ethers } from 'ethers';
 import { useWeb3React } from '@web3-react/core';
 import { create } from 'ipfs-http-client';
-
+import Web3 from "web3";
 import small_duke from "../../images/small_duke1.png";
 import icon_logo from "../../images/icon_logo.png";
 import bnb1 from "../../images/bnb1.png";
@@ -65,55 +65,66 @@ const Create_NFT = ({ ctheme }) => {
     display: "flex",
     flexDirection: 'column',
   };
-  // const Web3 = require("web3");
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const IPFS = require('ipfs-core')
 
   const upload_image = async () => {
-    let file = image_file;
+    // var dns = require('dns');
+    // dns.resolve('denverpost.com', 'TXT', function (err, addresses) {
+    //   console.log(err, addresses);
+    // });
     try {
-      // activate(walletConnectors['MetaMask']);
-      let added = await client.add(file)
-      let url = `https://ipfs.io/ipfs/${added.path}`
+      // const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
+      //const cid = await ipfs.add(image_file);
+      const cid = await client.add(image_file);
+      // await ipfs.pin.remote.sevice.add('pinata', {
+      //   endpoint: new URL('https://api.pinata.cloud'),
+      //   key: '2c1e6d82793fb7f61cc2' // thomas-pinata-api-key
+      // })
+      // const res = await ipfs.pin.add(cid)
+      let url = `https://ipfs.io/ipfs/${cid.path}`
       set_url(url);
-      set_hash(added.path);
-      console.log(added.path)
       console.log(url)
+      set_hash(cid.path);
     } catch (error) {
       console.log('Error uploading file: ', error)
     }
   }
 
   const upload_ipfs = async () => {
-
-    if (account === undefined) {
+    window.web3 = new Web3(window.web3.currentProvider);
+    const accounts = await window.web3.eth.getAccounts();
+    // const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
+    if (accounts[0] === undefined) {
       alert("Please connect wallet");
       return;
     }
     else {
       setOpen(true);
+
       const dict = {
         "name": name,
         "description": description,
         "image": image_url,
       };
-      const hash = await client.add(JSON.stringify(dict))
-      // let contract = new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT)
-      // let start_price = 0, end_price = 100000, duration = 10;
+      const temp_hash = await client.add(JSON.stringify(dict))
+      console.log(temp_hash.path)
+      const contract_market = new window.web3.eth.Contract( NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
+      const createNFT = await contract_market.methods.createNewProduction(temp_hash.path, 1).call()
+      console.log(createNFT)
+      //await createNFT.wait()  
 
-      console.log(hash, account)
-      const createNFT = await marketplaceContract.createNewProduction(hash.path, 1)
-      await createNFT.wait()
-      const nftIDs = await marketplaceContract.getNFTIDsByHash(hash.path)
-      // tokenid = await contract.methods.mint(accounts[0], added1.path).send({ from: accounts[0] })
-      //   .then(async (res) => {
-      //     console.log(res);
-      //     //setOpen(false);
+      const nftIDs = await contract_market.methods.getNFTIDsByHash(temp_hash.path)
+      console.log("here", nftIDs)
+      // await contract.methods.mint(accounts[0], temp_hash.path).send({ from: accounts[0] })
+      //   .then((res) => {
+      //     console.log(res)
       //     set_process("Created!");
       //   });
-      console.log("here", nftIDs)
+      // let contract = new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT)
+      // let start_price = 0, end_price = 100000, duration = 10;
 
       let price1;
       let pay_method;
