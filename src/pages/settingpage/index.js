@@ -10,19 +10,9 @@ import Support from "./support";
 const SettingPage = ({ ctheme }) => {
   const [currentSubPage, setCurrentSubPage] = useState("Profile");
   return (
-    <StyledContainer
-      ctheme={ctheme ? 1 : 0}
-      ltheme={lightTheme}
-      dtheme={darkTheme}
-    >
+    <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
       <Header1>
-        <Header1space
-          display="flex"
-          flex="1"
-          justifyContent="space-between"
-          marginLeft="20%"
-          marginRight="20%"
-        >
+        <Header1space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
           <HLetter>Overview</HLetter>
           <HLetter>Explore</HLetter>
           <HLetter>Rankings</HLetter>
@@ -77,8 +67,7 @@ const SettingPage = ({ ctheme }) => {
 
 const StyledContainer = styled(Box)`
   position: relative;
-  background: ${({ ctheme, ltheme, dtheme }) =>
-    ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main};
+  background: ${({ ctheme, ltheme, dtheme }) => (ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main)};
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -96,9 +85,7 @@ const Header1space = styled(Box)`
   @media (max-width: 800px) {
     margin-left: 5% !important;
     margin-right: 5% !important;
-  }import ProfileContent from './profile';
-import Notification from './notification';
-
+  }
 `;
 const HLetter = styled(Box)`
   display: flex;
@@ -111,7 +98,6 @@ const HLetter = styled(Box)`
   font-size: 18px;
   line-height: 22px;
   color: #2ba55d;
-  border-top: 4px solid rgba(0, 0, 0, 0);
   &:hover {
     border-top: 4px solid #2ba55d;
     cursor: pointer;
@@ -138,6 +124,21 @@ const PageTitle = styled.h4`
   line-height: 34px;
   letter-spacing: 0.5px;
   color: #131413;
+  @media (max-width: 1000px) {
+    font-size: 34px;
+    line-height: 34px;
+    margin-top: 60px;
+  }
+  @media (max-width: 800px) {
+    font-size: 25px;
+    line-height: 30px;
+    margin-top: 40px;
+  }
+  @media (max-width: 600px) {
+    font-size: 20px;
+    line-height: 20x;
+    margin-top: 20px;
+  }
 `;
 const SettingTap = styled(Box)`
   margin-top: 42px;
@@ -147,6 +148,21 @@ const SettingTap = styled(Box)`
   display: flex;
   justify-content: flex-start;
   gap: 32px;
+  @media (max-width: 1000px) {
+    font-size: 34px;
+    line-height: 34px;
+    margin-top: 60px;
+  }
+  @media (max-width: 800px) {
+    font-size: 25px;
+    line-height: 30px;
+    margin-top: 40px;
+  }
+  @media (max-width: 600px) {
+    font-size: 20px;
+    line-height: 20x;
+    margin-top: 20px;
+  }
 `;
 const SettingTapBtn = styled.button`
   background: transparent;
@@ -161,11 +177,30 @@ const SettingTapBtn = styled.button`
   line-height: 20px;
   color: ${(p) => (p.selected ? "#2BA55D" : "#757B75")};
   cursor: pointer;
+  @media (max-width: 1000px) {
+    font-size: 18px;
+  }
+  @media (max-width: 800px) {
+    font-size: 12px;
+  }
+  @media (max-width: 600px) {
+    font-size: 8px;
+  }
 `;
 const SettingTapContent = styled(Box)`
   margin-top: 40px;
   margin-left: 5%;
   margin-right: 5%;
+  
+  @media (max-width: 1000px) {
+    margin-top: 40px;
+  }
+  @media (max-width: 800px) {
+    margin-top: 32px;
+  }
+  @media (max-width: 600px) {
+    margin-top: 16px;
+  }
 `;
 
 export default SettingPage;

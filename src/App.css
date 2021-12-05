@@ -37,13 +37,23 @@
   }
 }
 
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   .sidebar1 {
+    position: fixed;
+    top: 0px;
+    background-color: white;
+    padding-top: 70px;
+    z-index: 1;
     display: unset !important;
-    
+    transition: 300ms;
+  }
+  .sidebar1.collapse {
+    left: -100%;
+  }
+  .sidebar1.expand {
+    left: 0%;
   }
   .sidebar2 {
     display: none !important;
   }
-}
-
+} */

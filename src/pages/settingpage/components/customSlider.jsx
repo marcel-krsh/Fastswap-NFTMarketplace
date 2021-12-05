@@ -26,6 +26,18 @@ const SliderContainer = styled(Box)`
   display: flex;
   align-items: center;
   gap: 8px;
+  @media (max-width: 1000px) {
+    width: 304px;
+    margin-top: 11px;
+  }
+  @media (max-width: 800px) {
+    width: 270px;
+    margin-top: 30px;
+  }
+  @media (max-width: 600px) {
+    width: 240px;
+    margin-top: 70px;
+  }
   > button {
     background: transparent;
     width: 14px;
