@@ -24,7 +24,7 @@ const Create_NFT = ({ ctheme }) => {
   const [toggle2, set_toggle2] = useState(true);
   const [flag_down1, set_down1] = useState(false);
   const [flag_down2, set_down2] = useState(true);
-  const [supply, set_supply] = useState(0);
+  const [supply, set_supply] = useState(1);
   const [type_trans, set_trans] = useState(false);
   const [choose, set_choose] = useState("Choose Collection");
   const [image_file, set_image] = useState("");
@@ -71,22 +71,11 @@ const Create_NFT = ({ ctheme }) => {
   const IPFS = require('ipfs-core')
 
   const upload_image = async () => {
-    // var dns = require('dns');
-    // dns.resolve('denverpost.com', 'TXT', function (err, addresses) {
-    //   console.log(err, addresses);
-    // });
     try {
-      // const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
-      //const cid = await ipfs.add(image_file);
       const cid = await client.add(image_file);
-      // await ipfs.pin.remote.sevice.add('pinata', {
-      //   endpoint: new URL('https://api.pinata.cloud'),
-      //   key: '2c1e6d82793fb7f61cc2' // thomas-pinata-api-key
-      // })
-      // const res = await ipfs.pin.add(cid)
       let url = `https://ipfs.io/ipfs/${cid.path}`
       set_url(url);
-      console.log(url)
+      console.log(url);
       set_hash(cid.path);
     } catch (error) {
       console.log('Error uploading file: ', error)
@@ -94,96 +83,77 @@ const Create_NFT = ({ ctheme }) => {
   }
 
   const upload_ipfs = async () => {
-    window.web3 = new Web3(window.web3.currentProvider);
-    const accounts = await window.web3.eth.getAccounts();
-    // const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
-    if (accounts[0] === undefined) {
+    if (account === undefined) {
       alert("Please connect wallet");
       return;
     }
     else {
       setOpen(true);
-
       const dict = {
         "name": name,
         "description": description,
         "image": image_url,
       };
-      const temp_hash = await client.add(JSON.stringify(dict))
-      console.log(temp_hash.path)
-      const contract_market = new window.web3.eth.Contract( NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
-      const createNFT = await contract_market.methods.createNewProduction(temp_hash.path, 1).call()
-      console.log(createNFT)
-      //await createNFT.wait()  
 
-      const nftIDs = await contract_market.methods.getNFTIDsByHash(temp_hash.path)
-      console.log("here", nftIDs)
-      // await contract.methods.mint(accounts[0], temp_hash.path).send({ from: accounts[0] })
-      //   .then((res) => {
-      //     console.log(res)
-      //     set_process("Created!");
-      //   });
-      // let contract = new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT)
-      // let start_price = 0, end_price = 100000, duration = 10;
-
+      let start_price = 0, end_price = 100000, duration = 10;
       let price1;
       let pay_method;
-      // if (toggle1 === true) {
-      //   if (type_trans === false) {
-      //     let contract_auction = new window.web3.eth.Contract(NFT_AUCTION_ABI, CONTRACTS.AUCTION_HALL)
-      //     await contract_auction.methods.createAuction(tokenid, start_price, end_price, pay_method, duration, accounts[0]).send({ from: accounts[0] }).then(async (res) => {
-      //       set_process1("Created successfully.");
-      //       setTimeout(() => {
-      //         handleClose();
-      //       }, 2000);
-      //       history.push({ pathname: "/" });
-      //     }).catch((error) => {
-      //       set_process1("Fault! Try again.");
-      //       setTimeout(() => {
-      //         handleClose();
-      //       }, 2000);
-      //     });
-      //   }
-      //   else {
-      //     // let t = Math.floor(value_faith).toString(16);
-      //     if (price_type.duke === true) {
-      //       pay_method = "DUKE"
-      //       price1 = (price.duke * Math.pow(10, 9)).toString(16);
+      console.log(marketplaceContract)
+      if (toggle1 === true) {
+        if (type_trans === false) {
+          return;
+          // let contract_auction = new window.web3.eth.Contract(NFT_AUCTION_ABI, CONTRACTS.AUCTION_HALL)
+          // await contract_auction.methods.createAuction(tokenid, start_price, end_price, pay_method, duration, accounts[0]).send({ from: accounts[0] }).then(async (res) => {
+          //   set_process1("Created successfully.");
+          //   setTimeout(() => {
+          //     handleClose();
+          //   }, 2000);
+          //   history.push({ pathname: "/" });
+          // }).catch((error) => {
+          //   set_process1("Fault! Try again.");
+          //   setTimeout(() => {
+          //     handleClose();
+          //   }, 2000);
+          // });
+        }
+        else {
+          const temp_hash = await client.add(JSON.stringify(dict))
+          console.log(temp_hash.path)
+          console.log("1");
+          const amount = "0x"+ supply.toString(16);
+          const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount);
+          await createNFT.wait();
+          console.log("2");
+          const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path)
+          console.log(nftIDs);
 
-      //     }
-      //     if (price_type.fast === true) {
-      //       pay_method = "FAST"
-      //       price1 = (price.fast * Math.pow(10, 18)).toString(16);
-      //     }
-      //     if (price_type.bnb === true) {
-      //       pay_method = "BNB"
-      //       price1 = (price.bnb * Math.pow(10, 18)).toString(16);
-      //     }
-      //     let price_wei = "0x" + price1;
-      //     let contract1 = new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE)
-      //     const [ids] = await makeBatchCall(contract1, [
-      //       { methodName: "getNFTList", args: [] },
-      //     ]);
-      //     console.log(ids)
-      //     await contract1.methods.registerForSale(ids[ids.length - 1], price_wei, hash, pay_method).send({ from: accounts[0] }).then(async (res) => {
+          // for (var i = 0; i < nftIDs.length; i++) {
 
-      //       set_process1("Created successfully.");
-      //       setTimeout(() => {
-      //         handleClose();
-      //       }, 2000);
-      //       history.push({ pathname: "/" });
+          // }
+          if (price_type.duke === true) {
+            pay_method = "DUKE"
+            price1 = (price.duke * Math.pow(10, 9)).toString(16);
 
+          }
+          if (price_type.fast === true) {
+            pay_method = "FAST"
+            price1 = (price.fast * Math.pow(10, 18)).toString(16);
+          }
+          if (price_type.bnb === true) {
+            pay_method = "BNB"
+            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+          }
+          let price_wei = "0x" + price1;
 
-      //     }).catch((error) => {
-      //       set_process1("Fault! Try again.");
-      //       setTimeout(() => {
-      //         handleClose();
-      //       }, 2000);
+          console.log(price_wei)
+          console.log(temp_hash.path)
+          console.log("3");
+          const approve_flag = await nftContract.approve(CONTRACTS.MARKETPLACE, nftIDs[0]);
+          console.log(approve_flag);
+          //await marketplaceContract.registerForSale(nftIDs[0]._hex, price_wei, temp_hash.path, pay_method);
+        }
 
-      //     });
-      //   }
-
-      // }
+      }
     }
 
   };
@@ -485,6 +455,10 @@ const Create_NFT = ({ ctheme }) => {
                   onClick={() => {
                     var temp = supply;
                     temp -= 1;
+                    if (temp <= 0) {
+                      alert('The inputed value must not be less than 1.');
+                      return;
+                    }
                     set_supply(temp);
                   }}
                 >
@@ -523,19 +497,20 @@ const Create_NFT = ({ ctheme }) => {
                 onClick={() => {
                   set_trans(false);
                 }}
+                type_trans={type_trans?1:0}
               >
                 Auction
               </Transbut1>
-              <Transbut1
+              <Transbut2
                 marginLeft="1%"
                 onClick={() => {
                   set_trans(true);
                 }}
-
+                type_trans={type_trans?1:0}
               // border={!type_trans?"3px solid #237745 !important":''}
               >
                 Fixed Price
-              </Transbut1>
+              </Transbut2>
             </Box>
             <Box display="flex" width="60%" marginTop="1%">
               <Downletter1>Buyers make bids on your collectible</Downletter1>
@@ -1101,6 +1076,29 @@ const Transbut1 = styled(Box)`
   display: flex;
   flex: 1;
   height: 116px;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  border-radius: 16px;
+  color: #757b75;
+  &:hover {
+    cursor: pointer;
+    border: 3px solid #237745 !important;
+    /* box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+      0 0 0 0px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  } */
+  }
+  border: ${({ type_trans }) => !type_trans ? '3px solid #237745' : '1px solid #cecece'};
+`;
+
+const Transbut2 = styled(Box)`
+  display: flex;
+  flex: 1;
+  height: 116px;
   border: 1px solid #cecece;
   justify-content: center;
   align-items: center;
@@ -1118,6 +1116,8 @@ const Transbut1 = styled(Box)`
       0 0 0 0px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   } */
   }
+  border: ${({ type_trans }) => type_trans ? '3px solid #237745' : '1px solid #cecece'};
+ 
 `;
 
 const Letterdis1 = styled(Box)`

@@ -29,7 +29,6 @@ const getProducts =
       const [ids] = await makeBatchCall(contractInstance, [
         { methodName: "getNFTList", args: [] },
       ]);
-      console.log("step2")
       console.log("ids: ", ids);
       if (ids.length < 1) {
         return;
