@@ -6,6 +6,7 @@ import { FaShareAlt, FaHeart } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
 import { Box } from "@material-ui/core";
 import styled from "styled-components";
+import { useWeb3React } from "@web3-react/core";
 import small_ellipse from "../../images/small_ellipse2.png";
 import small_duke from "../../images/small_duke1.png";
 import cover from "../../images/cover/cover.png";
@@ -41,7 +42,9 @@ const Detail_Page = ({ ctheme }) => {
   const nftsIndex = parseInt(history.location.search.slice(1));
   const { nfts } = useSelector((store) => store.product);
   const mainData = nfts[nftsIndex];
+  const { connector, account, activate, deactivate } = useWeb3React();
   useEffect(() => {
+    console.log("------------------------");
     console.log(mainData);
   });
   if (mainData === undefined || mainData === null) {
@@ -51,7 +54,8 @@ const Detail_Page = ({ ctheme }) => {
   const handleBuyNow = async () => {
     window.web3 = new Web3(window.web3.currentProvider);
     const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
-    contract.methods.buy("BNB", mainData.ids, mainData.price);
+    const buy_nft = await contract.methods.buy(mainData.ids, mainData.price).send({ from: account });
+    console.log(buy_nft);
   };
   return (
     <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
