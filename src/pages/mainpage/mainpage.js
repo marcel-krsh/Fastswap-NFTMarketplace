@@ -6,6 +6,8 @@ import { useHistory } from "react-router";
 import cover_big1 from '../../images/cover/cover_big1.png';
 import small_ellipse from "../../images/small_ellipse2.png"
 import small_duke from "../../images/small_duke1.png";
+import icon_logo from "../../images/icon_logo.png";
+import bnb1 from "../../images/bnb1.png";
 import Btn_Customize from "../../components/buttons/btn_container"
 import Last_Drop from "../../components/carts/cart_drop"
 import Img_Letter from "../../components/letters/img_letter"
@@ -90,7 +92,7 @@ const Mainpage = ({ ctheme }) => {
                             nfts.length > 0 && nfts.map((item, index) => {
                                 return (
                                     <Box key={index} maxWidth="260px" display="flex" flex="1" marginRight="2%" borderRadius="10px" marginBottom="2%">
-                                        <Last_Drop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={small_duke} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme}></Last_Drop>
+                                        <Last_Drop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE'? small_duke: item.payment_method === 'FAST' ?icon_logo : item.payment_method === 'BNB'? bnb1: ''} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme} payment = {item.payment_method}></Last_Drop>
                                     </Box>
                                 )
                             })

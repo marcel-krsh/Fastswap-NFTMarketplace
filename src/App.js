@@ -45,15 +45,23 @@ function App() {
   return (
     <>
       <Web3ReactProvider getLibrary={getLibrary}>
+      <Router>
         <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar} ctheme={ctheme}></Header>
-        <div style={styles.contentDiv}>
+        {/* <div style={styles.contentDiv}>
           <div className={"sidebar1" + (flag_sidebar ? " collapse" : " expand")} style={{ display: "none" }}>
             <Sidebar flag_sidebar={false} ctheme={ctheme} setTheme={setTheme}></Sidebar>
           </div>
           <div className="sidebar2">
             <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+          </div> */}
+        <div style={styles.contentDiv} >
+          <div className="sidebar1" style={{ display: "none", minHeight:'100vh'}} >
+            <Sidebar flag_sidebar={1} ctheme={ctheme} setTheme={setTheme}></Sidebar>
           </div>
-          <Router>
+          <div className="sidebar2" style={{minHeight:'100vh'}}>
+            <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+          </div>
+
             <Switch>
               <Route exact path="/">
                 <Mainpage ctheme={ctheme} />
@@ -78,8 +86,9 @@ function App() {
                 <SettingPage ctheme={ctheme} />
               </Route>
             </Switch>
-          </Router>
+
         </div>
+        </Router>
       </Web3ReactProvider>
     </>
   );

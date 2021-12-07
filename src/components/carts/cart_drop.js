@@ -5,10 +5,31 @@ import styled from "styled-components";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
-const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
+const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, payment }) => {
   const history = useHistory();
   const price_format = (value) => {
-    return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    var temp;
+    if(payment === 'DUKE')
+    {
+      temp = value / Math.pow(10,9);
+    }
+    else if(payment === 'FAST')
+    {
+      temp = value / Math.pow(10,18);
+    }
+    else if(payment === 'BNB')
+    {
+      temp = value / Math.pow(10,18);
+    }
+
+    if(temp>=0)
+    {
+      return temp.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    }
+    else{
+      return temp;
+    }
+
   }
   return (
     <HCollection
@@ -22,14 +43,14 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme }) => {
       <Box display="flex" flex="1">
         <img
           src={img}
-          width="260px"
-          height="260px"
+          width="258px"
+          height="258px"
           style={{
             borderRadius: "8px 8px 0px 0px",
           }}
         ></img>
       </Box>
-      <Box display="flex" flex="75" borderBottom="1px solid #CECECE">
+      <Box display="flex" flex="75" borderBottom="1px solid #CECECE" borderTop="1px solid #CECECE">
         <Box
           display="flex"
           flex="2"
