@@ -12,13 +12,13 @@ const SettingPage = ({ ctheme }) => {
   return (
     <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
       <Header1>
-        <Header1_space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
+        <Header1space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
           <HLetter>Overview</HLetter>
           <HLetter>Explore</HLetter>
           <HLetter>Rankings</HLetter>
           <HLetter>Activities</HLetter>
           <HLetter>Manage</HLetter>
-        </Header1_space>
+        </Header1space>
       </Header1>
       <PageTitle>Settings</PageTitle>
       <SettingTap>
@@ -77,7 +77,7 @@ const Header1 = styled(Box)`
   display: flex;
   width: 100%;
 `;
-const Header1_space = styled(Box)`
+const Header1space = styled(Box)`
   @media (max-width: 1000px) {
     margin-left: 8% !important;
     margin-right: 8% !important;

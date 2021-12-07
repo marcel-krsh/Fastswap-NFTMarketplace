@@ -37,7 +37,7 @@
   }
 }
 
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   .sidebar1 {
     position: fixed;
     top: 0px;
@@ -56,4 +56,4 @@
   .sidebar2 {
     display: none !important;
   }
-}
+} */

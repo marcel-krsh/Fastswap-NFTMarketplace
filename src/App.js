@@ -1,23 +1,25 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Web3ReactProvider } from "@web3-react/core";
-import Web3 from "web3";
-
-import Header from "./pages/header/header";
-import Sidebar from "./pages/sidebar/sidebar";
-import Mainpage from "./pages/mainpage/mainpage";
-import Collection_page from "./pages/collection_page/collection_page";
-import Detail_page from "./pages/detail_page/detail_page";
-import Profile_page_prev from "./pages/profile_page/profile_page_prev";
-import Profile_page_empty from "./pages/profile_page/profile_page_empty";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Web3Provider } from '@ethersproject/providers'
+import { Web3ReactProvider } from '@web3-react/core'
+import Header from "./pages/header/header"
+import Sidebar from "./pages/sidebar/sidebar"
+import Mainpage from "./pages/mainpage/mainpage"
+import Collection_page from './pages/collection_page/collection_page'
+import Detail_page from './pages/detail_page/detail_page'
+import Profile_page_prev from './pages/profile_page/profile_page_prev'
+import Profile_page_empty from './pages/profile_page/profile_page_empty'
+import Create_NFT from './pages/create_nft/create_nft'
 import getProducts from "./actions/product";
 import SettingPage from "./pages/settingpage";
 import "./App.css";
 
 function getLibrary(provider) {
-  return new Web3(provider);
+  const library = new Web3Provider(provider)
+  library.pollingInterval = 8000
+  return library
 }
 
 function App() {
@@ -68,6 +70,10 @@ function App() {
               <Route exact path="/Profile_empty">
                 <Profile_page_empty ctheme={ctheme} />
               </Route>
+              <Route exact path="/Create_NFT">
+                <Create_NFT ctheme={ctheme} />
+              </Route>
+
               <Route exact path="/Setting_page">
                 <SettingPage ctheme={ctheme} />
               </Route>

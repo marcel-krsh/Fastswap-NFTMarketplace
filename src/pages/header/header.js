@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-pascal-case */
-/* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
-import { Box, Modal } from "@material-ui/core";
-import styled from "styled-components";
+import React from "react";
+import { useState, useEffect } from 'react'
+import { Box, Modal} from '@material-ui/core'
+import styled from 'styled-components';
 import { MdMenuOpen } from "react-icons/md";
 import { injected, walletConnect, trustWallet, binance_wallet } from "../../utils/connectors";
 import _ from "lodash";

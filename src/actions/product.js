@@ -10,6 +10,7 @@ const getProducts =
   (search = "", page = "", refresh = false) =>
   async (dispatch, getState) => {
     try {
+      console.log("step1")
       const {
         product: { results = [] },
       } = getState();
@@ -22,17 +23,18 @@ const getProducts =
         NFT_MARKETPLACE_ABI,
         CONTRACTS.MARKETPLACE
       );
+
       const nftInstance = new web3.eth.Contract(NFT_ABI, CONTRACTS.NFT);
 
-      console.log("contractInstance: ", contractInstance);
       const [ids] = await makeBatchCall(contractInstance, [
         { methodName: "getNFTList", args: [] },
       ]);
+      console.log("ids: ", ids);
       if (ids.length < 1) {
         return;
       }
 
-      console.log("ids: ", ids);
+
       const tokenProducts = [];
       for (let i = 0; i < ids.length; i++) {
         const [product] = await makeBatchCall(contractInstance, [
