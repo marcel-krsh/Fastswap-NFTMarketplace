@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { useWeb3React } from "@web3-react/core";
 import small_ellipse from "../../images/small_ellipse2.png";
 import small_duke from "../../images/small_duke1.png";
+import bnb1 from "../../images/bnb1.png";
 import cover4 from "../../images/cover/cover-4.png";
 import cover5 from "../../images/cover/cover-5.png";
 import cover6 from "../../images/cover/cover-6.png";
@@ -44,6 +45,22 @@ const Detail_Page = ({ ctheme }) => {
     const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
     const buy_nft = await contract.methods.buy(mainData.ids, mainData.price).send({ from: account });
     console.log(buy_nft);
+  };
+  const price_format = (payment, value) => {
+    var temp;
+    if (payment === "DUKE") {
+      temp = value / Math.pow(10, 9);
+    } else if (payment === "FAST") {
+      temp = value / Math.pow(10, 18);
+    } else if (payment === "BNB") {
+      temp = value / Math.pow(10, 18);
+    }
+
+    if (temp >= 0) {
+      return temp.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    } else {
+      return temp;
+    }
   };
   return (
     <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
@@ -104,10 +121,10 @@ const Detail_Page = ({ ctheme }) => {
                 <Box display="flex" flex="1" alignItems="flex-start" marginTop="10px">
                   <Box display="flex" alignItems="center">
                     <Box display="flex" justifyContent="center" alignItems="center">
-                      <img src={icon_logo} width="24px" height="24px"></img>
+                      <img src={mainData.payment_method === "DUKE" ? small_duke : mainData.payment_method === "FAST" ? icon_logo : mainData.payment_method === "BNB" ? bnb1 : ""} width="24px" height="24px" />
                     </Box>
                     <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize={["14px", "18px"]} fontWeight="400" color="#131413">
-                      {mainData.price}
+                      {price_format(mainData.payment_method, mainData.price)}
                       {/* 200.1 FAST */}
                     </Box>
                     <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
