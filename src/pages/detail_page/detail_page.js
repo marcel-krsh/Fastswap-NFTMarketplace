@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-pascal-case */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { FaShareAlt, FaHeart } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
 import { Box } from "@material-ui/core";
@@ -21,14 +21,22 @@ import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import Web3 from "web3";
-import { NFT_MARKETPLACE_ABI } from "../../utils/abi";
+import { NFT_MARKETPLACE_ABI, NFT_ABI, NFT_AUCTION_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
+import { useWeb3React } from '@web3-react/core';
+import { ethers } from 'ethers';
 
 const Detail_Page = ({ ctheme }) => {
   const history = useHistory();
   const nftsIndex = parseInt(history.location.search.slice(1));
   const { nfts } = useSelector((store) => store.product);
   const mainData = nfts[nftsIndex];
+
+  const { account, library, chainId } = useWeb3React()
+  const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
+  const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
+  const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
+
   useEffect(() => {
     console.log(mainData);
   });
@@ -37,9 +45,16 @@ const Detail_Page = ({ ctheme }) => {
     return <></>;
   }
   const handleBuyNow = async () => {
-    window.web3 = new Web3(window.web3.currentProvider);
-    const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
-    contract.methods.buy("BNB", mainData.ids, mainData.price);
+    const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
+    await approve.wait();
+    
+    await marketplaceContract.buy(mainData.ids, mainData.price);
+    // window.web3 = new Web3(window.web3.currentProvider);
+    // const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
+    // const contract_nft = await new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT);
+    // await contract_nft.methods.approve(CONTRACTS.MARKETPLACE , mainData.ids).call();
+
+    //contract.methods.buy("BNB", mainData.ids, mainData.price);
   };
   return (
     <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
