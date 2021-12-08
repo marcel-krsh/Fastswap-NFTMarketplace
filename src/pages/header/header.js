@@ -35,6 +35,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     display: "flex",
     flexDirection: "column",
   };
+
   const DESKTOP_CONNECTORS = {
     MetaMask: injected,
     WalletConnect: walletConnect,
@@ -47,33 +48,40 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     TrustWallet: trustWallet,
     BinanceWallet: binance_wallet,
   };
+
   const walletConnectors = DESKTOP_CONNECTORS;
   const { connector, account, activate, deactivate } = useWeb3React();
   const handleDisconnect = () => {
     deactivate();
     window.localStorage.removeItem("CurrentWalletConnect");
   };
+
   const handleConnect = (currentConnector) => {
     setOpen(false);
     activate(walletConnectors[currentConnector]);
     window.localStorage.setItem("CurrentWalletConnect", currentConnector);
   };
+
   const getShortTxHash = (txHash, margin = 4) => {
     if (_.isEmpty(txHash)) {
       return "";
     }
     return txHash.replace(txHash.substring(margin + 2, txHash.length - margin), "....");
   };
+
   useEffect(() => {
     const currentWalletState = window.localStorage.getItem("CurrentWalletConnect");
     currentWalletState && activate(walletConnectors[currentWalletState]);
   }, []);
+
   return (
     <StyledContainer px="20px" boxSizing="border-box" ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} zIndex={2}>
       {/* {theme? <div>123</div>:<div>KKK</div>} */}
       <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
         <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D" />
-        <Logo_img>
+        <Logo_img onClick={()=>{
+          history.push({ pathname: "/" });
+        }}>
           <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }}></img>
           FASTSWAP
         </Logo_img>
@@ -239,6 +247,9 @@ const Connect_btn_letter = styled(Box)`
 
 const Logo_img = styled(Box)`
   display: flex;
+  &:hover{
+    cursor: pointer;
+  }
   @media (max-width: 600px) {
     display: none;
   }

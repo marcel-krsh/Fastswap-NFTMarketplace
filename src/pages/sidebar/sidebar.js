@@ -10,36 +10,31 @@ import {
     SubMenu,
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-
 import 'react-pro-sidebar/dist/css/styles.css';
+import { useHistory } from "react-router";
 import { lightTheme, darkTheme } from '../../theme/theme';
 import "./style.css"
 
 const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
-
+    const history = useHistory();
     const styles = {
         sideBarHeight: {
             height: "unset",
             backgroundColor: `${lightTheme.bgcolor_bar}`,
-
             color: "#757B75",
-            minHeight: "100VH",
+            minHeight: "100vh",
             fontStyle: "Work sans",
         },
         sideBarHeight1: {
             height: "unset",
             backgroundColor: `${darkTheme.bgcolor_bar}`,
-
             color: "#757B75",
-            minHeight: "100VH",
+            minHeight: "100vh",
             fontStyle: "Work sans",
-
-
         },
         menuIcon: {
             float: "right",
             margin: "10px",
-
         },
         color_back: {
             backgroundColor: `${lightTheme.bgcolor_bar}`,
@@ -61,7 +56,7 @@ const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
             <ProSidebar style={ctheme ? styles.sideBarHeight : styles.sideBarHeight1} collapsed={flag_sidebar}  >
                 <SidebarContent>
                     <Menu style={ctheme ? styles.color_back : styles.color_back1} >
-                        <MenuItem icon={<MdHome fontSize="30px" />} fontStyle="Work sans" onClick={()=>{window.history.pushState(null, null, '/')}}>Home</MenuItem>
+                        <MenuItem icon={<MdHome fontSize="30px" />} fontStyle="Work sans" onClick={()=>{history.push({ pathname: "/" });}}>Home</MenuItem>
                         <MenuItem icon={<MdOutlineMonetizationOn fontSize="30px" />} fontStyle="Work sans">Trade</MenuItem>
                         <MenuItem icon={<MdOutlineImage fontSize="30px" />} fontStyle="Work sans">NFT Marketplace</MenuItem>
                         <MenuItem icon={<FaTractor fontSize="30px" />} fontStyle="Work sans">Farms</MenuItem>
