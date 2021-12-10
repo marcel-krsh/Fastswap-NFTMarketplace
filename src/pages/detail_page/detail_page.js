@@ -62,7 +62,6 @@ const Detail_Page = ({ ctheme }) => {
     // } else if (payment === "BNB") {
     //   temp = value / Math.pow(10, 18);
     // }
-
     if (temp >= 0) {
       return temp.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     } else {
