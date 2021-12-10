@@ -6,8 +6,10 @@ import { FaShareAlt, FaHeart } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
 import { Box } from "@material-ui/core";
 import styled from "styled-components";
+import { useWeb3React } from "@web3-react/core";
 import small_ellipse from "../../images/small_ellipse2.png";
 import small_duke from "../../images/small_duke1.png";
+import bnb1 from "../../images/bnb1.png";
 import cover4 from "../../images/cover/cover-4.png";
 import cover5 from "../../images/cover/cover-5.png";
 import cover6 from "../../images/cover/cover-6.png";
@@ -23,22 +25,21 @@ import { useSelector } from "react-redux";
 import Web3 from "web3";
 import { NFT_MARKETPLACE_ABI, NFT_ABI, NFT_AUCTION_ABI, FAST_TOKEN_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
-import { useWeb3React } from '@web3-react/core';
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 
 const Detail_Page = ({ ctheme }) => {
   const history = useHistory();
   const nftsIndex = parseInt(history.location.search.slice(1));
   const { nfts } = useSelector((store) => store.product);
   const mainData = nfts[nftsIndex];
-
-  const { account, library, chainId } = useWeb3React()
+  const { connector, account, library, chainId, activate, deactivate } = useWeb3React();
   const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
   const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
   const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
   const fastContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.FAST_TOKEN, FAST_TOKEN_ABI, library.getSigner()) : null, [library])
 
   useEffect(() => {
+    console.log("------------------------");
     console.log(mainData);
   });
   if (mainData === undefined || mainData === null) {
@@ -51,11 +52,22 @@ const Detail_Page = ({ ctheme }) => {
     const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
     await approve1.wait();
     await marketplaceContract.buy(mainData.ids, mainData.price);
-    // window.web3 = new Web3(window.web3.currentProvider);
-    // const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
-    // const contract_nft = await new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT);
-    // await contract_nft.methods.approve(CONTRACTS.MARKETPLACE , mainData.ids).call();
-    //contract.methods.buy("BNB", mainData.ids, mainData.price);
+  };
+  const price_format = (payment, value) => {
+    var temp = value;
+    // if (payment === "DUKE") {
+    //   temp = value / Math.pow(10, 9);
+    // } else if (payment === "FAST") {
+    //   temp = value / Math.pow(10, 18);
+    // } else if (payment === "BNB") {
+    //   temp = value / Math.pow(10, 18);
+    // }
+
+    if (temp >= 0) {
+      return temp.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    } else {
+      return temp;
+    }
   };
   return (
     <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
@@ -116,10 +128,10 @@ const Detail_Page = ({ ctheme }) => {
                 <Box display="flex" flex="1" alignItems="flex-start" marginTop="10px">
                   <Box display="flex" alignItems="center">
                     <Box display="flex" justifyContent="center" alignItems="center">
-                      <img src={icon_logo} width="24px" height="24px"></img>
+                      <img src={mainData.payment_method === "DUKE" ? small_duke : mainData.payment_method === "FAST" ? icon_logo : mainData.payment_method === "BNB" ? bnb1 : ""} width="24px" height="24px" />
                     </Box>
                     <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize={["14px", "18px"]} fontWeight="400" color="#131413">
-                      {mainData.price}
+                      {price_format(mainData.payment_method, mainData.price)}
                       {/* 200.1 FAST */}
                     </Box>
                     <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
