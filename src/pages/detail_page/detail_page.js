@@ -21,7 +21,7 @@ import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import Web3 from "web3";
-import { NFT_MARKETPLACE_ABI, NFT_ABI, NFT_AUCTION_ABI } from "../../utils/abi";
+import { NFT_MARKETPLACE_ABI, NFT_ABI, NFT_AUCTION_ABI, FAST_TOKEN_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
 import { useWeb3React } from '@web3-react/core';
 import { ethers } from 'ethers';
@@ -36,6 +36,7 @@ const Detail_Page = ({ ctheme }) => {
   const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
   const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
   const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
+  const fastContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.FAST_TOKEN, FAST_TOKEN_ABI, library.getSigner()) : null, [library])
 
   useEffect(() => {
     console.log(mainData);
@@ -45,15 +46,15 @@ const Detail_Page = ({ ctheme }) => {
     return <></>;
   }
   const handleBuyNow = async () => {
-    const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
+    const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, 100000);
     await approve.wait();
-    
+    const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
+    await approve1.wait();
     await marketplaceContract.buy(mainData.ids, mainData.price);
     // window.web3 = new Web3(window.web3.currentProvider);
     // const contract = await new window.web3.eth.Contract(NFT_MARKETPLACE_ABI, CONTRACTS.MARKETPLACE);
     // const contract_nft = await new window.web3.eth.Contract(NFT_ABI, CONTRACTS.NFT);
     // await contract_nft.methods.approve(CONTRACTS.MARKETPLACE , mainData.ids).call();
-
     //contract.methods.buy("BNB", mainData.ids, mainData.price);
   };
   return (

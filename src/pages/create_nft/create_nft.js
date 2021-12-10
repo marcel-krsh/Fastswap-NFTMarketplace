@@ -25,6 +25,7 @@ const Create_NFT = ({ ctheme }) => {
   const [flag_down1, set_down1] = useState(false);
   const [flag_down2, set_down2] = useState(true);
   const [supply, set_supply] = useState(1);
+  const [duration, set_duration] = useState(1);
   const [type_trans, set_trans] = useState(false);
   const [choose, set_choose] = useState("Choose Collection");
   const [image_file, set_image] = useState("");
@@ -68,8 +69,7 @@ const Create_NFT = ({ ctheme }) => {
   };
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => 
-  {
+  const handleClose = () => {
     setOpen(false);
   }
   const IPFS = require('ipfs-core')
@@ -114,42 +114,40 @@ const Create_NFT = ({ ctheme }) => {
           console.log(token_id);
           var start = '0x' + start_price.toString(16);
           var end = '0x' + end_price.toString(16);
-          var dur = '0x' + duration.toString(16);
+          var dur = "0x"+(duration * 24 * 60 * 60).toString(16);
           console.log("iii")
           if (price_type.duke === true) {
             pay_method = 2
-            price1 = (price.duke * Math.pow(10, 9)).toString(16);
+            price1 = (price.duke ).toString(16);
 
           }
           if (price_type.fast === true) {
             pay_method = 1
-            price1 = (price.fast * Math.pow(10, 18)).toString(16);
+            price1 = (price.fast).toString(16);
           }
           if (price_type.bnb === true) {
             pay_method = 0
-            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+            price1 = (price.bnb ).toString(16);
           }
           let price_wei = "0x" + price1;
-          console.log("iiikkk")
           const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
           await approve.wait();
-          // console.log("iiittt")
           await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account)  // 0: BNB, 1: FAST, 2: DUKE
-          .then((res) => {
-            set_process("Created successfully.");
-            setTimeout(() => {
-              history.push({ pathname: "/" });
-              set_process("Processing...");
-              handleClose();
-            }, 2000);
-            
-          }).catch((error) => {
-            set_process("Fault! Try again.")
-            setTimeout(() => {
-              set_process("Processing...");
-              handleClose();
-            }, 2000);
-          });
+            .then((res) => {
+              set_process("Created successfully.");
+              setTimeout(() => {
+                history.push({ pathname: "/" });
+                set_process("Processing...");
+                handleClose();
+              }, 2000);
+
+            }).catch((error) => {
+              set_process("Fault! Try again.")
+              setTimeout(() => {
+                set_process("Processing...");
+                handleClose();
+              }, 2000);
+            });
           //   set_process1("Created successfully.");
           //   setTimeout(() => {
           //     handleClose();
@@ -164,21 +162,22 @@ const Create_NFT = ({ ctheme }) => {
         }
         else {
           const amount = "0x" + supply.toString(16);
+          console.log(temp_hash.path)
           const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount)
           await createNFT.wait();
           const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path)
 
           if (price_type.duke === true) {
             pay_method = "DUKE"
-            price1 = (price.duke * Math.pow(10, 9)).toString(16);
+            price1 = (price.duke).toString(16);
           }
           if (price_type.fast === true) {
             pay_method = "FAST"
-            price1 = (price.fast * Math.pow(10, 18)).toString(16);
+            price1 = (price.fast).toString(16);
           }
           if (price_type.bnb === true) {
             pay_method = "BNB"
-            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+            price1 = (price.bnb).toString(16);
           }
           let price_wei = "0x" + price1;
 
@@ -295,13 +294,13 @@ const Create_NFT = ({ ctheme }) => {
                 set_image1(URL.createObjectURL(e.target.files[0]));
                 set_image(e.target.files[0]);
                 await client.add(e.target.files[0])
-                .then((res)=>{
-                  console.log(res)
-                  let url = `https://ipfs.io/ipfs/${res.path}`
-                  set_url(url);
-                  console.log(url);
-                  set_hash(res.path);
-                })
+                  .then((res) => {
+                    console.log(res)
+                    let url = `https://ipfs.io/ipfs/${res.path}`
+                    set_url(url);
+                    console.log(url);
+                    set_hash(res.path);
+                  })
                 // console.log(cid)
 
                 // upload_image();
@@ -578,6 +577,68 @@ const Create_NFT = ({ ctheme }) => {
               <Downletter1>Buyers make bids on your collectible</Downletter1>
               <Downletter1>Collectible can be instantly purchased </Downletter1>
             </Box>
+
+            {!type_trans ?
+              <>
+                <Letterdis1>Duration</Letterdis1>
+                <Letterdis2>
+                  Selected value shows one day
+                </Letterdis2>
+                <Box display="flex" width="60%" marginTop="1%">
+                  <Box
+                    display="flex"
+                    width="40%"
+                    border="1px solid #CECECE"
+                    borderRadius="8px"
+                    height="40px"
+                  >
+                    <PMbtn
+                      display="flex"
+                      flex="1"
+                      borderRight="1px solid #CECECE"
+                      onClick={() => {
+                        var temp = duration;
+                        temp -= 1;
+                        if (temp <= 0) {
+                          alert('The inputed value must not be less than 1.');
+                          return;
+                        }
+                        set_duration(temp);
+                      }}
+                    >
+                      -
+                    </PMbtn>
+                    <Box
+                      display="flex"
+                      flex="2"
+                      fontSize="16px"
+                      fontWeight="600"
+                      color="black"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      {duration}
+                    </Box>
+                    <PMbtn
+                      display="flex"
+                      flex="1"
+                      borderLeft="1px solid #CECECE"
+                      onClick={() => {
+                        var temp = duration;
+                        temp += 1;
+                        set_duration(temp);
+                      }}
+                    >
+                      +
+                    </PMbtn>
+                  </Box>
+                </Box>
+              </>
+              : ''
+            }
+
+
+
             {type_trans === false ? (
               <>
                 <Letterdis1>Reserve Price</Letterdis1>
@@ -591,6 +652,7 @@ const Create_NFT = ({ ctheme }) => {
                 <Letterdis2>Price per item copies</Letterdis2>
               </>
             )}
+
 
             <Box display="flex" width="60%" marginTop="1%">
               <Box
@@ -1037,14 +1099,20 @@ const Create_NFT = ({ ctheme }) => {
       >
         <Box style={style1}>
           <MHeader>Status</MHeader>
-          <MContent alignItems="center"  marginTop="3%">Create NFT:{'\u00a0'}{process}</MContent>
-          <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating NFT.</MContent>
+          {!type_trans ? <>
+            <MContent alignItems="center" marginTop="3%">Create Auction:{'\u00a0'}{process}</MContent>
+            <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating Aucion.</MContent></> :
+            <>
+              <MContent alignItems="center" marginTop="3%">Create NFT:{'\u00a0'}{process}</MContent>
+              <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating NFT.</MContent>
+            </>}
+
           {/* <MContent alignItems="flex-start" marginTop="3%">Register for sale:{'\u00a0'}{process1}</MContent> */}
 
           {/* <MFooter></MFooter> */}
         </Box>
       </Modal>
-    </StyledContainer>
+    </StyledContainer >
   );
 };
 
