@@ -137,6 +137,7 @@ const Create_NFT = ({ ctheme }) => {
               set_process("Created successfully.");
               setTimeout(() => {
                 history.push({ pathname: "/" });
+                window.location.reload();
                 set_process("Processing...");
                 handleClose();
               }, 2000);

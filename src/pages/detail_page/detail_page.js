@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-pascal-case */
 
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { FaShareAlt, FaHeart } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
-import { Box } from "@material-ui/core";
+import { Box, Modal } from "@material-ui/core";
 import styled from "styled-components";
 import { useWeb3React } from "@web3-react/core";
 import small_ellipse from "../../images/small_ellipse2.png";
@@ -37,21 +37,66 @@ const Detail_Page = ({ ctheme }) => {
   const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
   const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
   const fastContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.FAST_TOKEN, FAST_TOKEN_ABI, library.getSigner()) : null, [library])
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+  }
+  const [type_trans, set_trans] = useState(false);
 
+  const [process, set_process] = useState("Processing...");
   useEffect(() => {
-    console.log("------------------------");
-    console.log(mainData);
+    // console.log("------------------------");
+    // console.log(mainData);
   });
+  const style1 = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '40%',
+    height: 250,
+    boxShadow: 24,
+    p: 4,
+    borderRadius: '10px',
+    backgroundColor: '#2BA55D',
+    border: 'none',
+    display: "flex",
+    flexDirection: 'column',
+  };
+
+
   if (mainData === undefined || mainData === null) {
     history.push("/");
     return <></>;
   }
   const handleBuyNow = async () => {
+    set_trans(true);
+    handleOpen();
     const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, 100000);
     await approve.wait();
     const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
     await approve1.wait();
-    await marketplaceContract.buy(mainData.ids, mainData.price);
+    await marketplaceContract.buy(mainData.ids, mainData.price)
+      .then((res) => {
+        set_process("Baught successfully.");
+        setTimeout(() => {
+          history.push({ pathname: "/" });
+          set_process("Processing...");
+          window.location.reload();
+          handleClose();
+          set_trans(false);
+        }, 2000);
+
+      }).catch((error) => {
+        set_process("Fault! Try again.");
+        setTimeout(() => {
+          set_process("Processing...");
+          handleClose();
+          set_trans(false);
+        }, 2000);
+      });
+
   };
   const price_format = (payment, value) => {
     var temp = value;
@@ -243,7 +288,30 @@ const Detail_Page = ({ ctheme }) => {
           </Box>
         </Box>
       </Part_Drop>
-    </StyledContainer>
+      <Modal
+        open={open}
+        // onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box style={style1}>
+          <MHeader>Status</MHeader>
+          <MContent alignItems="center" marginTop="3%">Buy NFT:{'\u00a0'}{process}</MContent>
+          <MContent alignItems="flex-start" marginTop="1%">Just a moment until buying Aucion.</MContent>
+        {/* {!type_trans ? <>
+            <MContent alignItems="center" marginTop="3%">Create Auction:{'\u00a0'}{process}</MContent>
+            <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating Aucion.</MContent></> :
+            <>
+              <MContent alignItems="center" marginTop="3%">Create NFT:{'\u00a0'}{process}</MContent>
+              <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating NFT.</MContent>
+            </>} */}
+
+        {/* <MContent alignItems="flex-start" marginTop="3%">Register for sale:{'\u00a0'}{process1}</MContent> */}
+
+        {/* <MFooter></MFooter> */}
+      </Box>
+    </Modal>
+    </StyledContainer >
   );
 };
 
@@ -359,4 +427,27 @@ const Header1 = styled(Box)`
   display: flex;
   width: 100%;
 `;
+
+const MHeader = styled(Box)`
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+  font-size: 38px;
+  color: white;
+  margin-top: 3%;
+  align-items: center;
+
+`
+
+const MContent = styled(Box)`
+    display: flex;
+  flex: 2;
+  width: 100%;
+  justify-content: center;
+  font-size: 25px;
+  color: white;
+`
+
+
 export default Detail_Page;
