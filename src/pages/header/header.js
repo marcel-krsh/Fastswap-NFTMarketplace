@@ -246,6 +246,7 @@ const Connect_btn_letter = styled(Box)`
 `;
 
 const Logo_img = styled(Box)`
+font-family:Poppins;
   display: flex;
   &:hover{
     cursor: pointer;

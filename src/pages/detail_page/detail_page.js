@@ -63,6 +63,7 @@ const Detail_Page = ({ ctheme }) => {
     border: 'none',
     display: "flex",
     flexDirection: 'column',
+    fontFamily: "Poppins"
   };
 
 
@@ -73,29 +74,39 @@ const Detail_Page = ({ ctheme }) => {
   const handleBuyNow = async () => {
     set_trans(true);
     handleOpen();
-    const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, 100000);
-    await approve.wait();
-    const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
-    await approve1.wait();
-    await marketplaceContract.buy(mainData.ids, mainData.price)
-      .then((res) => {
-        set_process("Baught successfully.");
-        setTimeout(() => {
-          history.push({ pathname: "/" });
-          set_process("Processing...");
-          window.location.reload();
-          handleClose();
-          set_trans(false);
-        }, 2000);
+    try {
+      const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, 100000);
+      await approve.wait();
+      const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
+      await approve1.wait();
+      await marketplaceContract.buy(mainData.ids, mainData.price)
+        .then((res) => {
+          set_process("Baught successfully.");
+          setTimeout(() => {
+            history.push({ pathname: "/" });
+            set_process("Processing...");
+            window.location.reload();
+            handleClose();
+            set_trans(false);
+          }, 2000);
 
-      }).catch((error) => {
-        set_process("Fault! Try again.");
-        setTimeout(() => {
-          set_process("Processing...");
-          handleClose();
-          set_trans(false);
-        }, 2000);
+        }).catch((error) => {
+          set_process("Fault! Try again.");
+          setTimeout(() => {
+            set_process("Processing...");
+            handleClose();
+            set_trans(false);
+          }, 2000);
+        });
+    }
+    catch (error) {
+      set_process("Fault! Try again.");
+      setTimeout(() => {
+        set_process("Processing...");
+        handleClose();
+        set_trans(false);
       });
+    }
 
   };
   const price_format = (payment, value) => {
@@ -297,8 +308,8 @@ const Detail_Page = ({ ctheme }) => {
         <Box style={style1}>
           <MHeader>Status</MHeader>
           <MContent alignItems="center" marginTop="3%">Buy NFT:{'\u00a0'}{process}</MContent>
-          <MContent alignItems="flex-start" marginTop="1%">Just a moment until buying Aucion.</MContent>
-        {/* {!type_trans ? <>
+          <MContent alignItems="flex-start" marginTop="1%">Just a moment until buy auction.</MContent>
+          {/* {!type_trans ? <>
             <MContent alignItems="center" marginTop="3%">Create Auction:{'\u00a0'}{process}</MContent>
             <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating Aucion.</MContent></> :
             <>
@@ -306,11 +317,11 @@ const Detail_Page = ({ ctheme }) => {
               <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating NFT.</MContent>
             </>} */}
 
-        {/* <MContent alignItems="flex-start" marginTop="3%">Register for sale:{'\u00a0'}{process1}</MContent> */}
+          {/* <MContent alignItems="flex-start" marginTop="3%">Register for sale:{'\u00a0'}{process1}</MContent> */}
 
-        {/* <MFooter></MFooter> */}
-      </Box>
-    </Modal>
+          {/* <MFooter></MFooter> */}
+        </Box>
+      </Modal>
     </StyledContainer >
   );
 };

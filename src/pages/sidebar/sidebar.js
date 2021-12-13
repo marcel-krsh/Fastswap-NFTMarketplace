@@ -56,19 +56,19 @@ const Sidebar = ({ flag_sidebar, ctheme, setTheme }) => {
             <ProSidebar style={ctheme ? styles.sideBarHeight : styles.sideBarHeight1} collapsed={flag_sidebar}  >
                 <SidebarContent>
                     <Menu style={ctheme ? styles.color_back : styles.color_back1} >
-                        <MenuItem icon={<MdHome fontSize="30px" />} fontFamily="Poppins" onClick={()=>{history.push({ pathname: "/" });}}>Home</MenuItem>
-                        <MenuItem icon={<MdOutlineMonetizationOn fontSize="30px" />} fontFamily="Poppins">Trade</MenuItem>
-                        <MenuItem icon={<MdOutlineImage fontSize="30px" />} fontFamily="Poppins">NFT Marketplace</MenuItem>
-                        <MenuItem icon={<FaTractor fontSize="30px" />} fontFamily="Poppins">Farms</MenuItem>
-                        <MenuItem icon={<FaTractor fontSize="30px" />} fontFamily="Poppins">New Farms</MenuItem>
-                        <MenuItem icon={<FaTractor fontSize="30px" />} fontFamily="Poppins">New Farms V3</MenuItem>
+                        <MenuItem icon={<MdHome fontSize="30px" />} fontFamily="Poppins" onClick={()=>{history.push({ pathname: "/" });}} fontWeight="500">Home</MenuItem>
+                        <MenuItem icon={<MdOutlineMonetizationOn fontSize="30px" />} fontFamily="Poppins" fontWeight="500">Trade</MenuItem>
+                        <MenuItem icon={<MdOutlineImage fontSize="30px" />} fontFamily="Poppins" fontWeight="500">NFT Marketplace</MenuItem>
+                        <MenuItem icon={<FaTractor fontSize="30px" />} fontFamily="Poppins" fontWeight="500">Farms</MenuItem>
+                        <MenuItem icon={<FaTractor fontSize="30px" />} fontFamily="Poppins" fontWeight="500">New Farms</MenuItem>
+                        <MenuItem icon={<FaTractor fontSize="30px" />} fontFamily="Poppins" fontWeight="500">New Farms V3</MenuItem>
                         <SubMenu title="Info" icon={<MdOutlineBarChart fontSize="30px" />}>
-                            <MenuItem icon={<MdNotificationsActive fontSize="30px" />} fontFamily="Poppins">Notification</MenuItem>
+                            <MenuItem icon={<MdNotificationsActive fontSize="30px" />} fontFamily="Poppins" fontWeight="500">Notification</MenuItem>
                         </SubMenu>
                         <Box onClick={() => {
                             setTheme(!ctheme)
                         }}>
-                            <MenuItem icon={<VscColorMode fontSize="30px" />} >Theme Light/Dark</MenuItem>
+                            <MenuItem icon={<VscColorMode fontSize="30px" />} fontWeight="500" >Theme Light/Dark</MenuItem>
                         </Box>
 
                     </Menu>

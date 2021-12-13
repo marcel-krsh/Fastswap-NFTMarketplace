@@ -57,7 +57,7 @@ const Mainpage = ({ ctheme }) => {
                 <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%">
                     <Box display="flex" flex="3" alignItems="center" marginBottom="20px" width="100%">
                         <Box width="16px" height="16px" borderRadius="100%" bgcolor="#2BA55D"></Box>
-                        <Box marginLeft="10px" font="Poppins" fontSize="18px" fontWeight="bold" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Auction in progress</Box>
+                        <Box marginLeft="10px" fontFamily="Poppins" fontSize="18px" fontWeight="bold" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Auction in progress</Box>
                     </Box>
                     <Box display="flex" flex="9" alignItems="center" width="100%">
                         <img src={cover_big1} width="100%" height="100%" />

@@ -21,3 +21,10 @@
 .pro-sidebar > .pro-sidebar-inner{
     background-color: white;
 }
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-item-content {
+    font-weight: 500;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 20px;
+}
