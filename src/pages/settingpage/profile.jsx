@@ -50,7 +50,7 @@ const ProfileContent = () => {
             <input type="text" placeholder="Wallet disconnected" readOnly={true} />
           </div>
         </InputGroupType>
-        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" fontFamily="Poppins" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
+        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" fontFamily="Poppins" lineheight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" sx={{ cursor: "pointer" }}>
           <MdSave fontSize="20px" />
           Save
         </Box>

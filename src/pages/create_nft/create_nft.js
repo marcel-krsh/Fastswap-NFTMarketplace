@@ -1,23 +1,21 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, { useState, useMemo } from "react";
 import { useHistory } from "react-router";
-import { MdImage } from "react-icons/md";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { Box, TextField, Modal } from "@material-ui/core";
 import styled from "styled-components";
 import { ethers } from 'ethers';
 import { useWeb3React } from '@web3-react/core';
 import { create } from 'ipfs-http-client';
-import Web3 from "web3";
 import small_duke from "../../images/small_duke1.png";
 import icon_logo from "../../images/icon_logo.png";
 import bnb1 from "../../images/bnb1.png";
-import Btn_Customize from "../../components/buttons/btn_container";
+import BtnCustomize from "../../components/buttons/btn_container";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { NFT_ABI, NFT_MARKETPLACE_ABI, NFT_AUCTION_ABI } from '../../utils/abi';
 import { CONTRACTS } from '../../utils/constants';
 
 const Create_NFT = ({ ctheme }) => {
-  const { account, library, chainId } = useWeb3React()
+  const { account, library } = useWeb3React()
   const history = useHistory();
   const client = create('https://ipfs.infura.io:5001/api/v0')
   const [toggle1, set_toggle1] = useState(false);
@@ -28,20 +26,20 @@ const Create_NFT = ({ ctheme }) => {
   const [duration, set_duration] = useState(1);
   const [type_trans, set_trans] = useState(false);
   const [choose, set_choose] = useState("Choose Collection");
-  const [image_file, set_image] = useState("");
+  // const [image_file, set_image] = useState("");
   const [image_file1, set_image1] = useState("");
   const [name, set_name] = useState("");
   const [description, set_description] = useState("");
   const [image_url, set_url] = useState("");
-  const [hash, set_hash] = useState("");
+  // const [hash, set_hash] = useState("");
   const [price_type, set_price_type] = useState({
     duke: true,
     fast: false,
     bnb: false,
   });
   const [process, set_process] = useState("Processing...");
-  const [process1, set_process1] = useState("Processing...");
-  const [process2, set_process2] = useState("Processing...");
+  // const [process1, set_process1] = useState("Processing...");
+  // const [process2, set_process2] = useState("Processing...");
 
   const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
   const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
@@ -68,22 +66,21 @@ const Create_NFT = ({ ctheme }) => {
     flexDirection: 'column',
   };
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
     set_process("Processing...");
   }
-  const IPFS = require('ipfs-core')
 
-  const upload_image = async () => {
-    console.log(image_file);
-    console.log(image_file1);
-    const cid = await client.add(image_file);
-    let url = `https://ipfs.io/ipfs/${cid.path}`
-    set_url(url);
-    console.log(url);
-    set_hash(cid.path);
-  }
+  // const upload_image = async () => {
+  //   console.log(image_file);
+  //   console.log(image_file1);
+  //   const cid = await client.add(image_file);
+  //   let url = `https://ipfs.io/ipfs/${cid.path}`
+  //   set_url(url);
+  //   console.log(url);
+  //   // set_hash(cid.path);
+  // }
 
   const upload_ipfs = async () => {
     if (account === undefined) {
@@ -105,7 +102,7 @@ const Create_NFT = ({ ctheme }) => {
         const temp_hash = await client.add(JSON.stringify(dict))
         if (type_trans === false) {
           console.log("i")
-          let start_price = 0, end_price = 100000, duration = 600;
+          // let start_price = 0, end_price = 100000, duration = 600;
           try {
             const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, '0x1');
             await createNFT.wait();
@@ -114,8 +111,8 @@ const Create_NFT = ({ ctheme }) => {
             console.log(nftIDs)
             var token_id = parseInt(nftIDs[0]._hex, 16);
             console.log(token_id);
-            var start = '0x' + start_price.toString(16);
-            var end = '0x' + end_price.toString(16);
+            // var start = '0x' + start_price.toString(16);
+            // var end = '0x' + end_price.toString(16);
             var dur = "0x" + (duration * 24 * 60 * 60).toString(16);
             console.log("iii")
             if (price_type.duke === true) {
@@ -182,10 +179,10 @@ const Create_NFT = ({ ctheme }) => {
             let price_wei = price1;
   
             for (var i = 0; i < nftIDs.length; i++) {
-              var token_id = parseInt(nftIDs[i]._hex, 16);
-              const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id)
+              var token_id1 = parseInt(nftIDs[i]._hex, 16);
+              const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id1)
               await approve.wait();
-              await marketplaceContract.registerForSale(token_id, price_wei, temp_hash.path, pay_method)
+              await marketplaceContract.registerForSale(token_id1, price_wei, temp_hash.path, pay_method)
                 .then((res) => {
                   set_process("Created successfully.");
                   setTimeout(() => {
@@ -223,7 +220,7 @@ const Create_NFT = ({ ctheme }) => {
       dtheme={darkTheme}
     >
       <Header1>
-        <Header1_space
+        <Header1space
           display="flex"
           flex="1"
           justifyContent="space-between"
@@ -235,7 +232,7 @@ const Create_NFT = ({ ctheme }) => {
           <HLetter>Rankings</HLetter>
           <HLetter>Activities</HLetter>
           <HLetter>Manage</HLetter>
-        </Header1_space>
+        </Header1space>
       </Header1>
       <Box
         display="flex"
@@ -250,7 +247,7 @@ const Create_NFT = ({ ctheme }) => {
           fontFamily="Poppins, sans-serif"
           fontWeight="bold"
           fontSize="34px"
-          lineHeight="34px"
+          lineheight="34px"
           letterSpacing="0.5"
           color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
         >
@@ -263,7 +260,7 @@ const Create_NFT = ({ ctheme }) => {
             fontFamily="Poppins, sans-serif"
             fontWeight="600"
             fontSize="20px"
-            lineHeight="20px"
+            lineheight="20px"
             letterSpacing="0.5"
             color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
           >
@@ -275,7 +272,7 @@ const Create_NFT = ({ ctheme }) => {
             fontFamily="Poppins, sans-serif"
             fontWeight="normal"
             fontSize="12px"
-            lineHeight="12px"
+            lineheight="12px"
             letterSpacing="0.5"
             color="#757B75"
             marginTop="2%"
@@ -298,14 +295,14 @@ const Create_NFT = ({ ctheme }) => {
               type="file"
               onChange={async (e) => {
                 set_image1(URL.createObjectURL(e.target.files[0]));
-                set_image(e.target.files[0]);
+                // set_image(e.target.files[0]);
                 await client.add(e.target.files[0])
                   .then((res) => {
                     console.log(res)
                     let url = `https://ipfs.io/ipfs/${res.path}`
                     set_url(url);
                     console.log(url);
-                    set_hash(res.path);
+                    // set_hash(res.path);
                   })
                 // console.log(cid)
 
@@ -322,7 +319,7 @@ const Create_NFT = ({ ctheme }) => {
           marginTop="5%"
           fontFamily="Poppins, sans-serif"
           fontSize="20px"
-          lineHeight="20px"
+          lineheight="20px"
           fontWeight="600"
           letterSpacing="0.5"
           color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
@@ -351,7 +348,7 @@ const Create_NFT = ({ ctheme }) => {
           marginTop="5%"
           fontFamily="Poppins, sans-serif"
           fontSize="20px"
-          lineHeight="20px"
+          lineheight="20px"
           fontWeight="600"
           letterSpacing="0.5"
           color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
@@ -364,7 +361,7 @@ const Create_NFT = ({ ctheme }) => {
           marginTop="1%"
           fontFamily="Poppins, sans-serif"
           fontSize="12px"
-          lineHeight="12px"
+          lineheight="12px"
           fontWeight="normal"
           letterSpacing="0.5"
           color={ctheme ? "#757B75" : darkTheme.font_color1}
@@ -400,7 +397,7 @@ const Create_NFT = ({ ctheme }) => {
           marginTop="1%"
           fontFamily="Poppins, sans-serif"
           fontSize="12px"
-          lineHeight="12px"
+          lineheight="12px"
           fontWeight="normal"
           letterSpacing="0.5"
           color="#757B75"
@@ -416,7 +413,7 @@ const Create_NFT = ({ ctheme }) => {
               marginTop="5%"
               fontFamily="Poppins, sans-serif"
               fontSize="20px"
-              lineHeight="20px"
+              lineheight="20px"
               fontWeight="600"
               letterSpacing="0.5"
               color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
@@ -429,7 +426,7 @@ const Create_NFT = ({ ctheme }) => {
               marginTop="1%"
               fontFamily="Poppins, sans-serif"
               fontSize="12px"
-              lineHeight="12px"
+              lineheight="12px"
               fontWeight="normal"
               letterSpacing="0.5"
               color="#757B75"
@@ -487,7 +484,7 @@ const Create_NFT = ({ ctheme }) => {
               marginTop="5%"
               fontFamily="Poppins, sans-serif"
               fontSize="20px"
-              lineHeight="20px"
+              lineheight="20px"
               fontWeight="600"
               letterSpacing="0.5"
               color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
@@ -500,7 +497,7 @@ const Create_NFT = ({ ctheme }) => {
               marginTop="1%"
               fontFamily="Poppins, sans-serif"
               fontSize="12px"
-              lineHeight="12px"
+              lineheight="12px"
               fontWeight="normal"
               letterSpacing="0.5"
               color="#757B75"
@@ -685,7 +682,7 @@ const Create_NFT = ({ ctheme }) => {
                       width="80%"
                     >
                       <Box display="flex" bgcolor="#54DADE" borderRadius="100%" flex="1" justifyContent="center">
-                        {price_type.duke ? <img src={small_duke} width="90%" height="90%" /> : price_type.fast ? <img src={icon_logo} width="90%" height="90%" /> : <img src={bnb1} width="90%" height="90%" />}
+                        {price_type.duke ? <img src={small_duke} width="90%" height="90%" alt=""/> : price_type.fast ? <img src={icon_logo} width="90%" height="90%" alt=""/> : <img src={bnb1} width="90%" height="90%" alt=""/>}
                       </Box>
                       <Box
                         color="black"
@@ -723,7 +720,7 @@ const Create_NFT = ({ ctheme }) => {
                           flex="1"
                           justifyContent="center"
                         >
-                          <img src={small_duke} width="90%" height="90%"></img>
+                          <img src={small_duke} width="90%" height="90%" alt=""></img>
                         </Box>
                         <Box
                           color="black"
@@ -749,7 +746,7 @@ const Create_NFT = ({ ctheme }) => {
                       </Box>
                       <Box display="flex" flex="1" marginTop="10px" width="80%">
                         <Box display="flex" flex="1" justifyContent="center">
-                          <img src={icon_logo} width="90%" height="90%"></img>
+                          <img src={icon_logo} width="90%" height="90%" alt=""></img>
                         </Box>
                         <Box
                           color="black"
@@ -781,7 +778,7 @@ const Create_NFT = ({ ctheme }) => {
                         width="80%"
                       >
                         <Box display="flex" flex="1" justifyContent="center">
-                          <img src={bnb1} width="90%" height="90%"></img>
+                          <img src={bnb1} width="90%" height="90%" alt=""></img>
                         </Box>
                         <Box
                           color="black"
@@ -876,7 +873,7 @@ const Create_NFT = ({ ctheme }) => {
                   display="flex"
                   fontFamily="Poppins, sans-serif"
                   fontSize="20px"
-                  lineHeight="20px"
+                  lineheight="20px"
                   fontWeight="600"
                   letterSpacing="0.5"
                   color="black"
@@ -888,7 +885,7 @@ const Create_NFT = ({ ctheme }) => {
                   marginTop="2%"
                   fontFamily="Poppins, sans-serif"
                   fontSize="12px"
-                  lineHeight="12px"
+                  lineheight="12px"
                   fontWeight="normal"
                   letterSpacing="0.5"
                   color="#757B75"
@@ -1087,7 +1084,7 @@ const Create_NFT = ({ ctheme }) => {
           ""
         )}
         <Box display="flex" width="60%" marginTop="10%" onClick={() => { upload_ipfs(); }} marginBottom="5%">
-          <Btn_Customize
+          <BtnCustomize
             color={"white"}
             back={"#2BA55D"}
             width={"100%"}
@@ -1147,10 +1144,10 @@ const MContent = styled(Box)`
   color: white;
 `
 
-const MFooter = styled(Box)`
-    display: flex;
-  flex: 1;
-`
+// const MFooter = styled(Box)`
+//     display: flex;
+//   flex: 1;
+// `
 
 const Loadimg = styled(Box)`
   background-image: url(${({ image_file }) => image_file});
@@ -1297,7 +1294,7 @@ const StyledContainer = styled(Box)`
     ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main};
 `;
 
-const Header1_space = styled(Box)`
+const Header1space = styled(Box)`
   @media (max-width: 1000px) {
     margin-left: 8% !important;
     margin-right: 8% !important;

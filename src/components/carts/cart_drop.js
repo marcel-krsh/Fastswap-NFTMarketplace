@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
-const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, payment }) => {
+const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment }) => {
   const history = useHistory();
   const price_format = (value) => {
     var temp = value;
@@ -82,7 +82,7 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, paymen
             fontFamily="Poppins"
             fontSize="16px"
             color={ctheme ? "#757B75" : darkTheme.font_color_grey}
-            lineHeight="22px"
+            lineheight="22px"
             fontWeight="normal"
 
           >
@@ -113,7 +113,7 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, paymen
           fontSize="14px"
           maxWidth="240px"
           color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
-          lineHeight="22px"
+          lineheight="22px"
           fontWeight="bold"
           whiteSpace="nowrap"
         >
@@ -147,4 +147,4 @@ const HCollection = styled(Box)`
   }
 `;
 
-export default Last_Drop;
+export default LastDrop;

@@ -16,14 +16,13 @@ import cover6 from "../../images/cover/cover-6.png";
 import cover7 from "../../images/cover/cover-7.png";
 import icon_logo from "../../images/icon_logo.png";
 import detail_chart1 from "../../images/detail_chart1.png";
-import Btn_Customize from "../../components/buttons/btn_container";
+import BtnCustomize from "../../components/buttons/btn_container";
 import Last_Drop from "../../components/carts/cart_drop";
 import List_ULetter from "../../components/letters/list_uletter";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
-import Web3 from "web3";
-import { NFT_MARKETPLACE_ABI, NFT_ABI, NFT_AUCTION_ABI, FAST_TOKEN_ABI } from "../../utils/abi";
+import { NFT_MARKETPLACE_ABI, NFT_ABI, FAST_TOKEN_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
 import { ethers } from "ethers";
 
@@ -32,17 +31,17 @@ const Detail_Page = ({ ctheme }) => {
   const nftsIndex = parseInt(history.location.search.slice(1));
   const { nfts } = useSelector((store) => store.product);
   const mainData = nfts[nftsIndex];
-  const { connector, account, library, chainId, activate, deactivate } = useWeb3React();
+  const { library } = useWeb3React();
   const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
   const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
-  const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
+  // const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
   const fastContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.FAST_TOKEN, FAST_TOKEN_ABI, library.getSigner()) : null, [library])
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
   }
-  const [type_trans, set_trans] = useState(false);
+  // const [type_trans, set_trans] = useState(false);
 
   const [process, set_process] = useState("Processing...");
   useEffect(() => {
@@ -72,7 +71,7 @@ const Detail_Page = ({ ctheme }) => {
     return <></>;
   }
   const handleBuyNow = async () => {
-    set_trans(true);
+    // set_trans(true);
     handleOpen();
     try {
       const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, 100000);
@@ -87,7 +86,7 @@ const Detail_Page = ({ ctheme }) => {
             set_process("Processing...");
             window.location.reload();
             handleClose();
-            set_trans(false);
+            // set_trans(false);
           }, 2000);
 
         }).catch((error) => {
@@ -95,7 +94,7 @@ const Detail_Page = ({ ctheme }) => {
           setTimeout(() => {
             set_process("Processing...");
             handleClose();
-            set_trans(false);
+            // set_trans(false);
           }, 2000);
         });
     }
@@ -104,7 +103,7 @@ const Detail_Page = ({ ctheme }) => {
       setTimeout(() => {
         set_process("Processing...");
         handleClose();
-        set_trans(false);
+        // set_trans(false);
       });
     }
 
@@ -138,7 +137,7 @@ const Detail_Page = ({ ctheme }) => {
       <Box display="flex" width="100%" marginTop="5%">
         <Detail_Img display="flex" marginLeft="5%" marginRight="5%" width="100%">
           <Box display="flex" flex="4" borderRadius="8px">
-            <img src={mainData.img} width="100%" height="100%" borderRadius="8px"></img>
+            <img src={mainData.img} width="100%" height="100%" borderradius="8px"></img>
           </Box>
           <Box display="flex" flex="5" justifyContent="center">
             <Box display="flex" flexDirection="column" width="90%">
@@ -196,7 +195,7 @@ const Detail_Page = ({ ctheme }) => {
                 </Box>
               </Box>
               <Box display="flex" flex="2" alignItems="flex-start" marginTop="1%">
-                <Btn_Customize
+                <BtnCustomize
                   flexGrow={1}
                   marginTop={"20px"}
                   color={"white"}

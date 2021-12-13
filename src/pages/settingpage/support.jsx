@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Box, Select, MenuItem } from "@material-ui/core";
 import { MdLockOutline } from "react-icons/md";
@@ -8,7 +8,7 @@ const Support = () => {
   return (
     <>
       <SupportMain pb="80px" fontFamily="Poppins">
-        <Box mb="unset" fontSize="18px" lineHeight="20px">
+        <Box mb="unset" fontSize="18px" lineheight="20px">
           Set a minimum offer for collections to ignore low offers.
         </Box>
         <TextBox>
@@ -47,12 +47,12 @@ const Support = () => {
           <MenuItem value={30}>Thirty</MenuItem>
         </CustomSelect>
         <Box mt="30px" display="flex" justifyContent="center" alignItems="center" gridColumnGap="18px">
-          <IoMdCheckmarkCircle fontSize="40px" lineHeight="40px" color="#2BA55D" />
-          <Box fontSize="18px" lineHeight="20px" flexGrow="1">
+          <IoMdCheckmarkCircle fontSize="40px" lineheight="40px" color="#2BA55D" />
+          <Box fontSize="18px" lineheight="20px" flexGrow="1">
             I understand I must provide a sworn statement certified by a notary public to unlock my account.
           </Box>
         </Box>
-        <Box marginTop={["20px", "25px", "30px", "40px"]} bgcolor="#F16868" borderRadius="8px" fontSize="18px" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
+        <Box marginTop={["20px", "25px", "30px", "40px"]} bgcolor="#F16868" borderRadius="8px" fontSize="18px" lineheight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" sx={{ cursor: "pointer" }}>
           <MdLockOutline fontSize="20px" />
           Lock Account
         </Box>

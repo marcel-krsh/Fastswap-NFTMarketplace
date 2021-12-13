@@ -34,19 +34,19 @@ export const DropDown = ({ text, children }) => {
           borderRadius="8px"
           fontSize="16px"
           fontFamily="Poppins"
-          lineHeight="16px"
+          lineheight="16px"
           textAlign="center"
           fontWeight="600"
           color="#2BA55D"
           display="flex"
           gridColumnGap="5px"
-          css={{ cursor: "pointer" }}
+          style={{ cursor: "pointer" }}
         >
           {text + "  "}
           {show ? (
-            <BiChevronUp fontSize="20px" lineHeight="16px" />
+            <BiChevronUp fontSize="20px" lineheight="16px" />
           ) : (
-            <BiChevronDown fontSize="20px" lineHeight="16px" />
+            <BiChevronDown fontSize="20px" lineheight="16px" />
           )}
         </Box>
       </Box>
@@ -66,7 +66,7 @@ export const DropDown = ({ text, children }) => {
         gridRowGap="16px"
         justifyContent="center"
         alignItems="stretch"
-        css={{ cursor: "pointer", transform: "translateX(-50%)" }}
+        style={{ cursor: "pointer", transform: "translateX(-50%)" }}
       >
         {children}
       </Box>
@@ -85,7 +85,7 @@ export const DropDownItem = ({ onClick, children }) => {
       fontFamily="Poppins"
       fontSize="14px"
       fontWeight="500"
-      lineHeight="20px"
+      lineheight="20px"
       color="#757B75"
       textAlign="left"
       display="flex"

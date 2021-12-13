@@ -1,9 +1,8 @@
 import React from "react";
-import { useState } from "react";
-import { Box, Button, Modal } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import styled from "styled-components";
 
-const Btn_Customize = ({
+const BtnCustomize = ({
   color,
   back,
   width,
@@ -15,7 +14,7 @@ const Btn_Customize = ({
   ...props
 }) => {
   return (
-    <Btn_Cus
+    <BtnCus
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -31,17 +30,17 @@ const Btn_Customize = ({
         fontStyle: "normal",
         fontWeight: "600",
         fontSize: "18px",
-        lineHeight: "24px",
+        lineheight: "24px",
       }}
       {...props}
     >
       {" "}
       {str}
-    </Btn_Cus>
+    </BtnCus>
   );
 };
 
-const Btn_Cus = styled(Box)`
+const BtnCus = styled(Box)`
   @media (max-width: 800px) {
     font-size: 15px !important;
   }
@@ -56,4 +55,4 @@ const Btn_Cus = styled(Box)`
   }
 `;
 
-export default Btn_Customize;
+export default BtnCustomize;

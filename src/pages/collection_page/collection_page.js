@@ -17,7 +17,7 @@ import cover9 from "../../images/cover/cover-9.png";
 import cover10 from "../../images/cover/cover-10.png";
 import cover11 from "../../images/cover/cover-11.png";
 import bnb1 from "../../images/bnb1.png";
-import Btn_Customize from "../../components/buttons/btn_container";
+import BtnCustomize from "../../components/buttons/btn_container";
 import Last_Drop from "../../components/carts/cart_drop";
 import Img_Letter from "../../components/letters/img_letter";
 import { lightTheme, darkTheme } from "../../theme/theme";
@@ -66,7 +66,7 @@ const Collection_page = ({ ctheme }) => {
             <Detail_Letter0 alignItems="flex-start" fontFamily="Poppins" fontSize="24px" fontWeight="600">
               <span>Collection name</span>
             </Detail_Letter0>
-            <Detail_letter1 fontFamily="Poppins" fontSize="18px" color="#363936" lineHeight="22px">
+            <Detail_letter1 fontFamily="Poppins" fontSize="18px" color="#363936" lineheight="22px">
               <pre>
                 Lorem ipsum dolor sit amet, consectetur <br />
                 adipiscing elit. Placerat praesent in dictum <br />
@@ -117,7 +117,7 @@ const Collection_page = ({ ctheme }) => {
       <Box display="flex" width="100%">
         <Box display="flex" marginLeft="5%" marginRight="5%" marginTop="3%" width="100%">
           <Box display="flex" flex="1" alignItems="center" marginRight="2%">
-            <Btn_Customize color={"white"} back={"#2BA55D"} width={"100%"} height={"32px"} border={"1px solid #2BA55D"} str={"All 7"} borderRadius={"8px"} />
+            <BtnCustomize color={"white"} back={"#2BA55D"} width={"100%"} height={"32px"} border={"1px solid #2BA55D"} str={"All 7"} borderRadius={"8px"} />
           </Box>
           <Tab_letter1 display="flex" flex="2" fontSize="14px" fontFamily="Poppins" fontWeight="600" alignItems="center" justifyContent="center" marginRight="2%">
             On auction 4
@@ -127,7 +127,7 @@ const Collection_page = ({ ctheme }) => {
           </Tab_letter1>
           <Tab_letter1 display="flex" flex="5"></Tab_letter1>
           <Box display="flex" flex="3" alignItems="center" justifyContent="flex-end">
-            <Btn_Customize color={"#757B75"} back={"white"} width={"100%"} height={"32px"} border={"1px solid #757B75"} str={"Price - lowest"} borderRadius={"8px"} />
+            <BtnCustomize color={"#757B75"} back={"white"} width={"100%"} height={"32px"} border={"1px solid #757B75"} str={"Price - lowest"} borderRadius={"8px"} />
           </Box>
         </Box>
       </Box>
@@ -165,7 +165,7 @@ const Collection_page = ({ ctheme }) => {
             </Collection_Image>
           </Box>
           <Box my="30px" display="flex" justifyContent="center">
-            <Btn_Customize display="flex" color={"white"} back={"#2BA55D"} width={"230px"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
+            <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"230px"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
           </Box>
         </Box>
       </Part_Drop>

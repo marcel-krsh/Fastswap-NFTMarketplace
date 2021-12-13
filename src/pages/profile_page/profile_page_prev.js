@@ -28,8 +28,8 @@ const Profile_page_prev = ({ ctheme }) => {
                     <Box display="flex" flex="5"justifyContent="center">
                         <Box display="flex" flexDirection="column" width="90%">
                             <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
-                                <ImgTitle1 display="flex" flex="1" fontFamily="Poppins" fontWeight="800" fontSize="34px" color="#363936" lineHeight="40px" alignItems="center">Profile Activation</ImgTitle1>
-                                <ImgTitle1 display="flex" flex="1" fontFamily="Poppins" fontWeight="500" fontSize="18px" color="black" lineHeight="40px" alignItems="flex-start">Show off your stats and collectible with your profile  </ImgTitle1>
+                                <ImgTitle1 display="flex" flex="1" fontFamily="Poppins" fontWeight="800" fontSize="34px" color="#363936" lineheight="40px" alignItems="center">Profile Activation</ImgTitle1>
+                                <ImgTitle1 display="flex" flex="1" fontFamily="Poppins" fontWeight="500" fontSize="18px" color="black" lineheight="40px" alignItems="flex-start">Show off your stats and collectible with your profile  </ImgTitle1>
                             </Box>
                             <Box display="flex" flex="1" flexDirection="column" marginTop="1%">
                                 <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Poppins" fontSize="10px" fontWeight="400" color="#757B75">

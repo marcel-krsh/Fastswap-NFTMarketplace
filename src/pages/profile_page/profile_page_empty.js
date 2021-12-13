@@ -18,8 +18,8 @@ import cover8 from "../../images/cover/cover-8.png";
 import cover9 from "../../images/cover/cover-9.png";
 import cover10 from "../../images/cover/cover-10.png";
 import cover11 from "../../images/cover/cover-11.png";
-import Btn_Customize from "../../components/buttons/btn_container"
-import Btn_Customize_Save from "../../components/buttons/btn_customize_save"
+import BtnCustomize from "../../components/buttons/btn_container"
+import BtnCustomizeSave from "../../components/buttons/btn_customize_save"
 import Last_Drop from "../../components/carts/cart_drop"
 import { lightTheme, darkTheme } from "../../theme/theme"
 
@@ -59,7 +59,7 @@ const Profile_page_empty = ({ ctheme }) => {
                         {flag_move === true ? <Box position="absolute" display="flex" width="100%" justifyContent="flex-end" alignItems="center">
                             <Box display="flex" width="30%" fontSize="20px" fontWeight="800" fontFamily="Poppins" alignItems="center" bgcolor="#FFFFFF" border="1px solid #CECECE" borderRadius="8px" marginRight="2%">
                                 {'\u00a0'}{'\u00a0'}-{'\u00a0'}{'\u00a0'}<Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />{'\u00a0'}{'\u00a0'}+{'\u00a0'}{'\u00a0'}</Box>
-                            <Btn_Customize_Save color={'white'} back={'#2BA55D'} width={'10%'} height={'40px'} border={'1px solid #2BA55D'} str={'Save'} borderRadius={'8px'} />
+                            <BtnCustomizeSave color={'white'} back={'#2BA55D'} width={'10%'} height={'40px'} border={'1px solid #2BA55D'} str={'Save'} borderRadius={'8px'} />
                         </Box> : null}
                     </Box>
                     <Tiger_img1 position="absolute" bottom="-15%" left="10%" width="7%">
@@ -79,7 +79,7 @@ const Profile_page_empty = ({ ctheme }) => {
                                 <FaPencilAlt fontSize="20px" color="#323232"></FaPencilAlt>
                             </Box>
                         </Detail_Letter0>
-                        <Detail_letter1 display="flex" fontFamily="Poppins" fontSize="18px" color="#363936" lineHeight="22px">
+                        <Detail_letter1 display="flex" fontFamily="Poppins" fontSize="18px" color="#363936" lineheight="22px">
                             <pre>Lorem ipsum dolor sit amet, <br />
                                 consectetur adipiscing elit. Placerat <br />
                                 praesent in dictum arcu consequat.<br />
@@ -123,7 +123,7 @@ const Profile_page_empty = ({ ctheme }) => {
 
                         </Box>
                         <Box_create_nft display="flex" flex="1" width="80%" justifyContent="flex-end">
-                            <Btn_Customize color={'white'} back={'#2BA55D'} width={'60%'} height={'56px'} border={'1px solid #2BA55D'} str={'+ Create NFT'} borderRadius={'8px'} />
+                            <BtnCustomize color={'white'} back={'#2BA55D'} width={'60%'} height={'56px'} border={'1px solid #2BA55D'} str={'+ Create NFT'} borderRadius={'8px'} />
                         </Box_create_nft>
                     </Box_Price1>
                 </Box>
@@ -160,13 +160,13 @@ const Profile_page_empty = ({ ctheme }) => {
             <Box display="flex" width="100%" marginTop="3%">
                 <Box display="flex" marginLeft="5%" marginRight="5%" marginTop="3%" width="100%">
                     <Box display="flex" flex="1" alignItems="center" marginRight="2%">
-                        <Btn_Customize color={'white'} back={'#2BA55D'} width={'100%'} height={'32px'} border={'1px solid #2BA55D'} str={'All 7'} borderRadius={'8px'} />
+                        <BtnCustomize color={'white'} back={'#2BA55D'} width={'100%'} height={'32px'} border={'1px solid #2BA55D'} str={'All 7'} borderRadius={'8px'} />
                     </Box>
                     <Tab_letter1 display="flex" flex="2" fontSize="14px" fontFamily="Poppins" fontWeight="600" alignItems="center" justifyContent="center" marginRight="2%">On auction 4</Tab_letter1>
                     <Tab_letter1 display="flex" flex="1" fontSize="14px" fontFamily="Poppins" fontWeight="600" alignItems="center" marginRight="2%">Sold 3</Tab_letter1>
                     <Tab_letter1 display="flex" flex="5"></Tab_letter1>
                     <Box display="flex" flex="3" alignItems="center" justifyContent="flex-end">
-                        <Btn_Customize color={'#757B75'} back={'white'} width={'100%'} height={'32px'} border={'1px solid #757B75'} str={'Price - lowest'} borderRadius={'8px'} />
+                        <BtnCustomize color={'#757B75'} back={'white'} width={'100%'} height={'32px'} border={'1px solid #757B75'} str={'Price - lowest'} borderRadius={'8px'} />
                     </Box>
                 </Box>
             </Box>
@@ -204,7 +204,7 @@ const Profile_page_empty = ({ ctheme }) => {
                         </Collection_Image>
                     </Box>
                     <Box my="30px" display="flex" justifyContent="center">
-                        <Btn_Customize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
+                        <BtnCustomize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
 
                     </Box>
                 </Box>
