@@ -82,7 +82,7 @@ export const DropDownItem = ({ onClick, children }) => {
   `;
   return (
     <Item
-      fontFamily="Poppines"
+      fontFamily="Poppins"
       fontSize="14px"
       fontWeight="500"
       lineHeight="20px"

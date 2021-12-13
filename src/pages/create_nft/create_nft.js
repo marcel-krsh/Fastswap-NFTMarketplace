@@ -106,105 +106,108 @@ const Create_NFT = ({ ctheme }) => {
         if (type_trans === false) {
           console.log("i")
           let start_price = 0, end_price = 100000, duration = 600;
-          const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, '0x1');
-          await createNFT.wait();
-          console.log("ii")
-          const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path)
-          console.log(nftIDs)
-          var token_id = parseInt(nftIDs[0]._hex, 16);
-          console.log(token_id);
-          var start = '0x' + start_price.toString(16);
-          var end = '0x' + end_price.toString(16);
-          var dur = "0x"+(duration * 24 * 60 * 60).toString(16);
-          console.log("iii")
-          if (price_type.duke === true) {
-            pay_method = 2
-            price1 = (price.duke ).toString(16);
+          try {
+            const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, '0x1');
+            await createNFT.wait();
+            // console.log("ii")
+            const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path)
+            console.log(nftIDs)
+            var token_id = parseInt(nftIDs[0]._hex, 16);
+            console.log(token_id);
+            var start = '0x' + start_price.toString(16);
+            var end = '0x' + end_price.toString(16);
+            var dur = "0x" + (duration * 24 * 60 * 60).toString(16);
+            console.log("iii")
+            if (price_type.duke === true) {
+              pay_method = 2
+              price1 = (price.duke).toString(16);
 
-          }
-          if (price_type.fast === true) {
-            pay_method = 1
-            price1 = (price.fast).toString(16);
-          }
-          if (price_type.bnb === true) {
-            pay_method = 0
-            price1 = (price.bnb ).toString(16);
-          }
-          // let price_wei = "0x" + price1;
-          let price_wei = price1;
-          const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
-          await approve.wait();
-          await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account)  // 0: BNB, 1: FAST, 2: DUKE
-            .then((res) => {
-              set_process("Created successfully.");
-              setTimeout(() => {
-                history.push({ pathname: "/" });
-                window.location.reload();
-                set_process("Processing...");
-                handleClose();
-              }, 2000);
-
-            }).catch((error) => {
-              set_process("Fault! Try again.")
-              setTimeout(() => {
-                set_process("Processing...");
-                handleClose();
-              }, 2000);
-            });
-          //   set_process1("Created successfully.");
-          //   setTimeout(() => {
-          //     handleClose();
-          //   }, 2000);
-          //   history.push({ pathname: "/" });
-          // }).catch((error) => {
-          //   set_process1("Fault! Try again.");
-          //   setTimeout(() => {
-          //     handleClose();
-          //   }, 2000);
-          // });
-        }
-        else {
-          const amount = "0x" + supply.toString(16);
-          console.log(temp_hash.path)
-          const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount)
-          await createNFT.wait();
-          const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path)
-
-          if (price_type.duke === true) {
-            pay_method = "DUKE"
-            price1 = (price.duke).toString(16);
-          }
-          if (price_type.fast === true) {
-            pay_method = "FAST"
-            price1 = (price.fast).toString(16);
-          }
-          if (price_type.bnb === true) {
-            pay_method = "BNB"
-            price1 = (price.bnb).toString(16);
-          }
-          let price_wei =price1;
-
-          for (var i = 0; i < nftIDs.length; i++) {
-            var token_id = parseInt(nftIDs[i]._hex, 16);
-            const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id)
+            }
+            if (price_type.fast === true) {
+              pay_method = 1
+              price1 = (price.fast).toString(16);
+            }
+            if (price_type.bnb === true) {
+              pay_method = 0
+              price1 = (price.bnb).toString(16);
+            }
+            // let price_wei = "0x" + price1;
+            let price_wei = price1;
+            const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
             await approve.wait();
-            await marketplaceContract.registerForSale(token_id, price_wei, temp_hash.path, pay_method)
+            await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account)  // 0: BNB, 1: FAST, 2: DUKE
               .then((res) => {
                 set_process("Created successfully.");
                 setTimeout(() => {
-                  handleClose();
                   history.push({ pathname: "/" });
                   window.location.reload();
-                  set_process("Processing...");
+                  handleClose();
                 }, 2000);
+
               }).catch((error) => {
-                set_process("Fault! Try again.");
+                set_process("Fault! Try again.")
                 setTimeout(() => {
                   handleClose();
-                  set_process("Processing...");
                 }, 2000);
               });
           }
+          catch (err) {
+            set_process("Fault! Try again.")
+            setTimeout(() => {
+              handleClose();
+            }, 2000);
+            console.log(err)
+          }
+        }
+        else {
+          try{
+            const amount = "0x" + supply.toString(16);
+            console.log(temp_hash.path)
+            const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount)
+            await createNFT.wait();
+            const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path)
+  
+            if (price_type.duke === true) {
+              pay_method = "DUKE"
+              price1 = (price.duke).toString(16);
+            }
+            if (price_type.fast === true) {
+              pay_method = "FAST"
+              price1 = (price.fast).toString(16);
+            }
+            if (price_type.bnb === true) {
+              pay_method = "BNB"
+              price1 = (price.bnb).toString(16);
+            }
+            let price_wei = price1;
+  
+            for (var i = 0; i < nftIDs.length; i++) {
+              var token_id = parseInt(nftIDs[i]._hex, 16);
+              const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id)
+              await approve.wait();
+              await marketplaceContract.registerForSale(token_id, price_wei, temp_hash.path, pay_method)
+                .then((res) => {
+                  set_process("Created successfully.");
+                  setTimeout(() => {
+                    handleClose();
+                    history.push({ pathname: "/" });
+                    window.location.reload();
+                  }, 2000);
+                }).catch((error) => {
+                  set_process("Fault! Try again.");
+                  setTimeout(() => {
+                    handleClose();
+                  }, 2000);
+                });
+            }
+          }
+          catch(err){
+            set_process("Fault! Try again.");
+            setTimeout(() => {
+              handleClose();
+            }, 2000);
+          }
+          
 
         }
 

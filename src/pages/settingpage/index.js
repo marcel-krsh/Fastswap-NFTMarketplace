@@ -171,6 +171,7 @@ const SettingTapBtn = styled.button`
   padding-bottom: 8px;
   border: none;
   border-bottom: 3px solid ${(p) => (p.selected ? "#2BA55D" : "transparent")};
+  font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
