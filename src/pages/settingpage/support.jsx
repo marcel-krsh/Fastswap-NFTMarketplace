@@ -7,7 +7,7 @@ import { IoMdCheckmarkCircle } from "react-icons/io";
 const Support = () => {
   return (
     <>
-      <SupportMain pb="80px">
+      <SupportMain pb="80px" fontFamily="Poppins">
         <Box mb="unset" fontSize="18px" lineHeight="20px">
           Set a minimum offer for collections to ignore low offers.
         </Box>

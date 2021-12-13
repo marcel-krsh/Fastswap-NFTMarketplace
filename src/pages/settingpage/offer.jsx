@@ -9,7 +9,7 @@ import { MdSave } from "react-icons/md";
 const Offer = () => {
   return (
     <>
-      <OfferMain pb="80px">
+      <OfferMain pb="80px" fontFamily="Poppins">
         <Box marginBottom={["30px", "35px", "40px"]} fontSize={["10px", "14px", "18px"]} lineHeight="20px">
           Set a minimum offer for collections to ignore low offers.
         </Box>

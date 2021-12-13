@@ -1127,6 +1127,7 @@ const MHeader = styled(Box)`
   flex: 1;
   width: 100%;
   justify-content: center;
+  font-family: "Poppins", sans-serif;
   font-size: 38px;
   color: white;
   margin-top: 3%;
@@ -1139,6 +1140,7 @@ const MContent = styled(Box)`
   flex: 2;
   width: 100%;
   justify-content: center;
+  font-family: "Poppins", sans-serif;
   font-size: 25px;
   color: white;
 `
@@ -1161,6 +1163,7 @@ const Loadimg = styled(Box)`
 const PMbtn = styled(Box)`
   font-size: 16px;
   font-weight: 600;
+  font-family: "Poppins", sans-serif;
   color: #757b75;
   align-items: center;
   justify-content: center;
@@ -1308,7 +1311,7 @@ const HLetter = styled(Box)`
   height: 34px;
   justify-content: center;
   align-items: center;
-  font-family: Work Sans;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

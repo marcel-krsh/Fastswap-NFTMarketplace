@@ -10,7 +10,7 @@ const Notification = () => {
   return (
     <>
       <Header>
-        <Box fontSize="18px" lineHeight="20px">
+        <Box fontSize="18px" lineHeight="20px" fontFamily="Poppins">
           Select which notifications you would like to receive for 0x2ce5...c081
         </Box>
       </Header>
@@ -148,7 +148,7 @@ const Notification = () => {
             </Box>
           </BottomInforBox>
         </Box>
-        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
+        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontFamily="Poppins" fontSize="18px" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
           <MdSave fontSize="20px" />
           Save
         </Box>
