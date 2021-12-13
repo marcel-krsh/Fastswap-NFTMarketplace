@@ -43,8 +43,8 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, paymen
       <Box display="flex" flex="1">
         <img
           src={img}
-          width="258px"
-          height="258px"
+          width="238Poppinspx"
+          height="238px"
           style={{
             borderRadius: "8px 8px 0px 0px",
           }}
@@ -67,7 +67,7 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, paymen
             flex="1"
             justifyContent="flex-start"
             alignItems="flex-end"
-            fontFamily="Work Sans"
+            fontFamily="Poppins"
             fontSize="16px"
             color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
             fontWeight="500"
@@ -79,7 +79,7 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, paymen
             flex="1"
             justifyContent="flex-start"
             alignItems="center"
-            fontFamily="Work Sans"
+            fontFamily="Poppins"
             fontSize="16px"
             color={ctheme ? "#757B75" : darkTheme.font_color_grey}
             lineHeight="22px"
@@ -97,7 +97,7 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, paymen
           flex="1"
           justifyContent="flex-start"
           alignItems="flex-end"
-          fontFamily="Work Sans"
+          fontFamily="Poppins"
           fontSize="10px"
           color={ctheme ? "#757B75" : darkTheme.font_color_grey}
         >
@@ -109,7 +109,7 @@ const Last_Drop = ({ index, img, simg, simg1, title, name, price, ctheme, paymen
           flex="2"
           justifyContent="flex-start"
           alignItems="center"
-          fontFamily="Work Sans"
+          fontFamily="Poppins"
           fontSize="14px"
           maxWidth="240px"
           color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}

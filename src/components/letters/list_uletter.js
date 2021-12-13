@@ -16,7 +16,7 @@ const List_ULetter = ({ ctheme, str, width1, height1 }) => {
 const ILtter = styled(Box)`
     display: flex;
     align-items: flex-start;
-    font-family: 'Work Sans';
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 16px;

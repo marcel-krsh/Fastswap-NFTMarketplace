@@ -132,7 +132,7 @@ const Detail_Page = ({ ctheme }) => {
           <Box display="flex" flex="5" justifyContent="center">
             <Box display="flex" flexDirection="column" width="90%">
               <Box display="flex" flex="1" alignItems="center">
-                <Box display="flex" mt={["10px", "20px"]} flex="1" justifyContent="flex-start" fontFamily="Work Sans" fontWeight="500" fontSize={["14px", "18px"]} color="#2BA55D">
+                <Box display="flex" mt={["10px", "20px"]} flex="1" justifyContent="flex-start" fontFamily="Poppins" fontWeight="500" fontSize={["14px", "18px"]} color="#2BA55D">
                   Collection name
                 </Box>
                 <Box display="flex" flex="1" justifyContent="flex-end">
@@ -140,33 +140,33 @@ const Detail_Page = ({ ctheme }) => {
                 </Box>
               </Box>
               <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
-                <Img_Title1 display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize={["20px", "30px", "34px"]} color="#363936" lineHeight={["20px", "30px", "40px"]} alignItems="center">
+                <Img_Title1 display="flex" flex="1" fontFamily="Poppins" fontWeight="800" fontSize={["20px", "30px", "34px"]} color="#363936" lineHeight={["20px", "30px", "40px"]} alignItems="center">
                   {/* NFT artwork titleNFT */}
                   {mainData.title}
                 </Img_Title1>
-                <Img_Title1 display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize={["20px", "30px", "34px"]} color="#363936" lineHeight={["20px", "30px", "40px"]} alignItems="center">
+                <Img_Title1 display="flex" flex="1" fontFamily="Poppins" fontWeight="800" fontSize={["20px", "30px", "34px"]} color="#363936" lineHeight={["20px", "30px", "40px"]} alignItems="center">
                   artwork title
                 </Img_Title1>
               </Box>
               <Box display="flex" flex="1" alignItems="center" marginTop="1%">
-                <Box display="flex" flex="60" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
+                <Box display="flex" flex="60" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
                   Owned by{" "}
                 </Box>
-                <Box display="flex" flex="75" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#2BA55D">
+                <Box display="flex" flex="75" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#2BA55D">
                   User's name
                 </Box>
-                <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
+                <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
                   <MdRemoveRedEye fontSize="20px" />
                   {"\u00a0"}2.4 K views
                 </Box>
-                <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
+                <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
                   <FaHeart fontSize="20px" />
                   {"\u00a0"}201 favorited
                 </Box>
-                {/* <Box display="flex" flex="100" alignItems="center" justifyContent="center" fontFamily="Work Sans" fontSize="12px" fontWeight="500" color=""></Box> */}
+                {/* <Box display="flex" flex="100" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="500" color=""></Box> */}
               </Box>
               <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
-                <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Work Sans" fontSize="10px" fontWeight="400" color="#757B75">
+                <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Poppins" fontSize="10px" fontWeight="400" color="#757B75">
                   Lowest price
                 </Box>
                 <Box display="flex" flex="1" alignItems="flex-start" marginTop="10px">
@@ -174,11 +174,11 @@ const Detail_Page = ({ ctheme }) => {
                     <Box display="flex" justifyContent="center" alignItems="center">
                       <img src={mainData.payment_method === "DUKE" ? small_duke : mainData.payment_method === "FAST" ? icon_logo : mainData.payment_method === "BNB" ? bnb1 : ""} width="24px" height="24px" />
                     </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize={["14px", "18px"]} fontWeight="400" color="#131413">
+                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize={["14px", "18px"]} fontWeight="400" color="#131413">
                       {price_format(mainData.payment_method, mainData.price)}
                       {/* 200.1 FAST */}
                     </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">
+                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
                       $4.05
                     </Box>
                   </Box>
@@ -232,10 +232,10 @@ const Detail_Page = ({ ctheme }) => {
             <Box display="flex" width="95%" flexDirection="column">
               <List_ULetter ctheme={ctheme} str={"Description"} width1={"100%"} height1={"40px"}></List_ULetter>
               <Box display="flex" flexDirection="column" marginTop="30px" width="100%">
-                <Box display="flex" flex="1" alignItems="center" justifyContent="flex-start" fontFamily="Work Sans" fontSize="18px" fontWeight="400" color="#363936">
+                <Box display="flex" flex="1" alignItems="center" justifyContent="flex-start" fontFamily="Poppins" fontSize="18px" fontWeight="400" color="#363936">
                   Create by <Box color="#2BA55D">{"\u00a0"}username</Box>
                 </Box>
-                <Box display="flex" flex="1" alignItems="center" justifyContent="flex-start" fontFamily="Work Sans" fontSize="18px" fontWeight="400" color="#363936">
+                <Box display="flex" flex="1" alignItems="center" justifyContent="flex-start" fontFamily="Poppins" fontSize="18px" fontWeight="400" color="#363936">
                   {mainData.description}
                 </Box>
               </Box>
@@ -368,7 +368,7 @@ const Drop_chart1 = styled(Box)`
   width: 100%;
   height: 160px;
   background: linear-gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14%, rgba(198, 231, 255, 0.31) 97.12%);
-  font-family: Work Sans;
+  font-family: Poppins;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -401,7 +401,7 @@ const HLetter = styled(Box)`
   height: 34px;
   justify-content: center;
   align-items: center;
-  font-family: Work Sans;
+  font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

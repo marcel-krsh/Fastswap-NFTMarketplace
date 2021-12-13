@@ -12,7 +12,7 @@ const Img_Letter = ({ letter, ctheme }) => {
 };
 
 const ILtter = styled(Box)`
-font-family: 'Work Sans';
+font-family: 'Poppins';
 font-style: normal;
 font-weight: 600;
 font-size: 24px;

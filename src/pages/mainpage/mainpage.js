@@ -37,11 +37,11 @@ const Mainpage = ({ ctheme }) => {
             <Part_Header>
                 <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%">
                     <Left_img_letter display="flex" flex="4" flexDirection="column" width="100%" fontSize="72px">
-                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" fontWeight="bold" lineHeight="80px" fontFamily="Work Sans" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Collect </Box>
-                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" fontWeight="bold" lineHeight="80px" fontFamily="Work Sans" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>digital art</Box>
+                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" fontWeight="bold" lineHeight="80px" fontFamily="Poppins" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Collect </Box>
+                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" fontWeight="bold" lineHeight="80px" fontFamily="Poppins" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>digital art</Box>
                     </Left_img_letter>
                     <Left_img_letter1 display="flex" flex="1" width="100%" fontSize="20px">
-                        <Box display="flex" justifyContent="flex-start" alignItems="center" fontFamily="Work Sans" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey}>Buy and Sell NFTs on Binance Smart Chain</Box>
+                        <Box display="flex" justifyContent="flex-start" alignItems="center" fontFamily="Poppins" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey}>Buy and Sell NFTs on Binance Smart Chain</Box>
                     </Left_img_letter1>
                     <Box display="flex" flex="4" justifyContent="flex-start" alignItems="flex-start" marginTop="5%" width="100%">
                         <Box display="flex" width="40%">
@@ -57,7 +57,7 @@ const Mainpage = ({ ctheme }) => {
                 <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%">
                     <Box display="flex" flex="3" alignItems="center" marginBottom="20px" width="100%">
                         <Box width="16px" height="16px" borderRadius="100%" bgcolor="#2BA55D"></Box>
-                        <Box marginLeft="10px" font="Work Sans" fontSize="18px" fontWeight="bold" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Auction in progress</Box>
+                        <Box marginLeft="10px" font="Poppins" fontSize="18px" fontWeight="bold" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Auction in progress</Box>
                     </Box>
                     <Box display="flex" flex="9" alignItems="center" width="100%">
                         <img src={cover_big1} width="100%" height="100%" />
@@ -65,16 +65,16 @@ const Mainpage = ({ ctheme }) => {
                     <Box display="flex" flex="3" flexDirection="column" marginTop="15px" width="100%">
                         <Box display="flex" flex="1" flexDirection="column">
                             <Img_down_letter display="flex" flex="1" fontSize="12px">
-                                <Box display="flex" flex="5" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Work Sans" >Artist</Box>
-                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Work Sans" >Current</Box>
-                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Work Sans" >Action Ends in</Box>
+                                <Box display="flex" flex="5" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Poppins" >Artist</Box>
+                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Poppins" >Current</Box>
+                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Poppins" >Action Ends in</Box>
                             </Img_down_letter>
                             <Img_down_letter1 display="flex" flex="2" marginTop="10px" fontSize="18px">
-                                <Box display="flex" flex="5" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Work Sans">
+                                <Box display="flex" flex="5" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Poppins">
                                     <img src={small_ellipse} width="24px" height="24px" ></img>{`\u00a0`}{`\u00a0`}creator name
                                 </Box>
-                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Work Sans" >$22.2K</Box>
-                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Work Sans">hh:mm:ss</Box>
+                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Poppins" >$22.2K</Box>
+                                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Poppins">hh:mm:ss</Box>
                             </Img_down_letter1>
                         </Box>
                         <Box display="flex" flex="1"></Box>
@@ -85,13 +85,13 @@ const Mainpage = ({ ctheme }) => {
             </Part_Header>
 
             <Part_Drop>
-                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" width="100%">
+                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
                     <Img_Letter letter={'Latest drops 🚀'} ctheme={ctheme} />
                     <Box display="flex" marginTop="2%" width="100%" flexWrap="wrap">
                         {
                             nfts.length > 0 && nfts.map((item, index) => {
                                 return (
-                                    <Box key={index} maxWidth="260px" display="flex" flex="1" marginRight="2%" borderRadius="10px" marginBottom="2%">
+                                    <Box key={index} maxWidth="240px" display="flex" flex="1" marginRight="2%" borderRadius="10px" marginBottom="2%">
                                         <Last_Drop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE'? small_duke: item.payment_method === 'FAST' ?icon_logo : item.payment_method === 'BNB'? bnb1: ''} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme} payment = {item.payment_method}></Last_Drop>
                                     </Box>
                                 )
@@ -123,7 +123,7 @@ const HLetter = styled(Box)`
     height:34px;
     justify-content: center;
     align-items: center;
-    font-family: Work Sans;
+    font-family: Poppins;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;

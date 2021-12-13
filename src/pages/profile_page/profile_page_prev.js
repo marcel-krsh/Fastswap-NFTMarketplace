@@ -28,11 +28,11 @@ const Profile_page_prev = ({ ctheme }) => {
                     <Box display="flex" flex="5"justifyContent="center">
                         <Box display="flex" flexDirection="column" width="90%">
                             <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
-                                <ImgTitle1 display="flex" flex="1" fontFamily="Work Sans" fontWeight="800" fontSize="34px" color="#363936" lineHeight="40px" alignItems="center">Profile Activation</ImgTitle1>
-                                <ImgTitle1 display="flex" flex="1" fontFamily="Work Sans" fontWeight="500" fontSize="18px" color="black" lineHeight="40px" alignItems="flex-start">Show off your stats and collectible with your profile  </ImgTitle1>
+                                <ImgTitle1 display="flex" flex="1" fontFamily="Poppins" fontWeight="800" fontSize="34px" color="#363936" lineHeight="40px" alignItems="center">Profile Activation</ImgTitle1>
+                                <ImgTitle1 display="flex" flex="1" fontFamily="Poppins" fontWeight="500" fontSize="18px" color="black" lineHeight="40px" alignItems="flex-start">Show off your stats and collectible with your profile  </ImgTitle1>
                             </Box>
                             <Box display="flex" flex="1" flexDirection="column" marginTop="1%">
-                                <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Work Sans" fontSize="10px" fontWeight="400" color="#757B75">
+                                <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Poppins" fontSize="10px" fontWeight="400" color="#757B75">
                                     Lowest price
                                 </Box>
                                 <Box display="flex" flex="1" alignItems="flex-start" marginTop="10px">
@@ -40,8 +40,8 @@ const Profile_page_prev = ({ ctheme }) => {
                                         <Box display="flex" justifyContent="center" alignItems="center">
                                             <img src={icon_logo} width="24px" height="24px" alt=""></img>
                                         </Box>
-                                        <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize="18px" fontWeight="400" color="#131413">200.1 FAST</Box>
-                                        <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Work Sans" fontSize="12px" fontWeight="400" color="#757B75">$4.05</Box>
+                                        <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="18px" fontWeight="400" color="#131413">200.1 FAST</Box>
+                                        <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">$4.05</Box>
                                     </Box>
                                 </Box>
                             </Box>
@@ -95,7 +95,7 @@ const HLetter = styled(Box)`
     height:34px;
     justify-content: center;
     align-items: center;
-    font-family: Work Sans;
+    font-family: Poppins;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;

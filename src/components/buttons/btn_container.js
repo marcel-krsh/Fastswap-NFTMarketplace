@@ -27,7 +27,7 @@ const Btn_Customize = ({
       borderRadius={borderRadius}
       marginLeft={marginL}
       sx={{
-        fontFamily: "Work Sans",
+        fontFamily: "Poppins",
         fontStyle: "normal",
         fontWeight: "600",
         fontSize: "18px",

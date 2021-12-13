@@ -63,10 +63,10 @@ const Collection_page = ({ ctheme }) => {
         <Box display="flex" flex="1"></Box>
         <Box display="flex" flex="1" marginLeft="5%" marginRight="5%" marginTop="1%">
           <Box display="flex" flex="1" flexDirection="column" justifyContent="center" marginLeft="5%">
-            <Detail_Letter0 alignItems="flex-start" fontFamily="Work Sans" fontSize="24px" fontWeight="600">
+            <Detail_Letter0 alignItems="flex-start" fontFamily="Poppins" fontSize="24px" fontWeight="600">
               <span>Collection name</span>
             </Detail_Letter0>
-            <Detail_letter1 fontFamily="Work Sans" fontSize="18px" color="#363936" lineHeight="22px">
+            <Detail_letter1 fontFamily="Poppins" fontSize="18px" color="#363936" lineHeight="22px">
               <pre>
                 Lorem ipsum dolor sit amet, consectetur <br />
                 adipiscing elit. Placerat praesent in dictum <br />
@@ -79,27 +79,27 @@ const Collection_page = ({ ctheme }) => {
           <Box_Price1 display="flex" flex="1" justifyContent="center" alignItems="center">
             <Box_Letter1 width="80%" height="62px" border="1px solid #CECECE" borderRadius="8px">
               <Box_Letter2 display="flex" flex="1" flexDirection="column" borderRight="1px solid #CECECE">
-                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Work Sans" fontWeight="800">
+                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Poppins" fontWeight="800">
                   7
                 </Detail_letter2>
-                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Work Sans" color="#757B75">
+                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Poppins" color="#757B75">
                   Items
                 </Detail_letter3>
               </Box_Letter2>
               <Box_Letter2 display="flex" flex="1" flexDirection="column" borderRight="1px solid #CECECE">
-                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Work Sans" fontWeight="800">
+                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Poppins" fontWeight="800">
                   $9,251
                 </Detail_letter2>
-                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Work Sans" color="#757B75">
+                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Poppins" color="#757B75">
                   Floor price
                 </Detail_letter3>
               </Box_Letter2>
               <Box display="flex" flex="1.2" flexDirection="column">
-                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Work Sans" fontWeight="800">
+                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Poppins" fontWeight="800">
                   <img src={bnb1} width="16px" height="16px" />
                   {"\u00a0"}424.1K
                 </Detail_letter2>
-                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Work Sans" color="#757B75">
+                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Poppins" color="#757B75">
                   voL traded
                 </Detail_letter3>
               </Box>
@@ -119,10 +119,10 @@ const Collection_page = ({ ctheme }) => {
           <Box display="flex" flex="1" alignItems="center" marginRight="2%">
             <Btn_Customize color={"white"} back={"#2BA55D"} width={"100%"} height={"32px"} border={"1px solid #2BA55D"} str={"All 7"} borderRadius={"8px"} />
           </Box>
-          <Tab_letter1 display="flex" flex="2" fontSize="14px" fontFamily="Work Sans" fontWeight="600" alignItems="center" justifyContent="center" marginRight="2%">
+          <Tab_letter1 display="flex" flex="2" fontSize="14px" fontFamily="Poppins" fontWeight="600" alignItems="center" justifyContent="center" marginRight="2%">
             On auction 4
           </Tab_letter1>
-          <Tab_letter1 display="flex" flex="1" fontSize="14px" fontFamily="Work Sans" fontWeight="600" alignItems="center" marginRight="2%">
+          <Tab_letter1 display="flex" flex="1" fontSize="14px" fontFamily="Poppins" fontWeight="600" alignItems="center" marginRight="2%">
             Sold 3
           </Tab_letter1>
           <Tab_letter1 display="flex" flex="5"></Tab_letter1>
@@ -260,7 +260,7 @@ const Part_Drop = styled(Box)`
   flex-direction: column;
 `;
 const LItem = styled(Box)`
-  font-family: "Work Sans";
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -274,7 +274,7 @@ const LItem = styled(Box)`
 `;
 
 const LItem1 = styled(Box)`
-  font-family: "Work Sans";
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -324,7 +324,7 @@ const HLetter = styled(Box)`
   height: 34px;
   justify-content: center;
   align-items: center;
-  font-family: Work Sans;
+  font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

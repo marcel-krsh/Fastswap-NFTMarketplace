@@ -8,7 +8,7 @@ const Btn_Customize_Save = ({ color, back, width, height, border, str, borderRad
         <BtnCus display="flex" justifyContent="center" alignItems="center" width={width} height={height} color={color}
             bgcolor={back} border={border} borderRadius={borderRadius} marginLeft={marginL}
             sx={{
-                fontFamily: 'Work Sans',
+                fontFamily: 'Poppins',
                 fontStyle: 'normal',
                 fontWeight: '600',
                 fontSize: '18px',

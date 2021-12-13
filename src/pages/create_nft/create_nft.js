@@ -71,6 +71,7 @@ const Create_NFT = ({ ctheme }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
+    set_process("Processing...");
   }
   const IPFS = require('ipfs-core')
 
@@ -129,7 +130,8 @@ const Create_NFT = ({ ctheme }) => {
             pay_method = 0
             price1 = (price.bnb ).toString(16);
           }
-          let price_wei = "0x" + price1;
+          // let price_wei = "0x" + price1;
+          let price_wei = price1;
           const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
           await approve.wait();
           await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account)  // 0: BNB, 1: FAST, 2: DUKE
@@ -180,7 +182,7 @@ const Create_NFT = ({ ctheme }) => {
             pay_method = "BNB"
             price1 = (price.bnb).toString(16);
           }
-          let price_wei = "0x" + price1;
+          let price_wei =price1;
 
           for (var i = 0; i < nftIDs.length; i++) {
             var token_id = parseInt(nftIDs[i]._hex, 16);

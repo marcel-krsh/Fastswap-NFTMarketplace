@@ -33,8 +33,10 @@ export const DropDown = ({ text, children }) => {
           border="1px solid #2BA55D"
           borderRadius="8px"
           fontSize="16px"
+          fontFamily="Poppins"
           lineHeight="16px"
           textAlign="center"
+          fontWeight="600"
           color="#2BA55D"
           display="flex"
           gridColumnGap="5px"
@@ -80,7 +82,9 @@ export const DropDownItem = ({ onClick, children }) => {
   `;
   return (
     <Item
+      fontFamily="Poppines"
       fontSize="14px"
+      fontWeight="500"
       lineHeight="20px"
       color="#757B75"
       textAlign="left"

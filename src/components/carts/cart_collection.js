@@ -16,8 +16,8 @@ const Hot_Collection = ({ img, simg, title, price, ctheme }) => {
                 <img src={img} width="100%" height="100%"></img>
             </Box>
             <Box display="flex" flex="92" flexDirection="column">
-                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-end" fontFamily="Work Sans" fontSize="18px" color={ctheme?"#363936":darkTheme.font_color1 } >{title}</Box>
-                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-start" fontFamily="Work Sans" fontSize="12px" color={ctheme?"#757B75": darkTheme.font_color_grey}>{price}</Box>
+                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-end" fontFamily="Poppins" fontSize="18px" color={ctheme?"#363936":darkTheme.font_color1 } >{title}</Box>
+                <Box display="flex" flex="1" justifyContent="center" alignItems="flex-start" fontFamily="Poppins" fontSize="12px" color={ctheme?"#757B75": darkTheme.font_color_grey}>{price}</Box>
             </Box>
             <Box position="absolute" left="40%" top="45%">
                 <img src={simg} width="100%" height="100%"></img>

@@ -274,7 +274,7 @@ const Btn_connect = styled(Box)`
   background: #2ba55d;
   border-radius: 8px;
   color: white;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
