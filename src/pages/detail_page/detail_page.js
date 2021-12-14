@@ -74,16 +74,17 @@ const Detail_Page = ({ ctheme }) => {
     // set_trans(true);
     handleOpen();
     try {
-      const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, 10000000);
+      const price = "0x"+parseInt(mainData.price).toString(16);
+      const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, price);
       await approve.wait();
       const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
       await approve1.wait();
       // console.log(mainData.price)
       // const price = "0x"+ parseInt(mainData.price).toString(16);
       // console.log(price)
-      const price = "0x"+(parseInt(mainData.price)*Math.pow(10,18)).toString(16);
 
-      await marketplaceContract.buy(mainData.ids, mainData.price)
+
+      await marketplaceContract.buy(mainData.ids, price)
         .then((res) => {
           set_process("Baught successfully.");
           setTimeout(() => {
@@ -117,13 +118,13 @@ const Detail_Page = ({ ctheme }) => {
   };
   const price_format = (payment, value) => {
     var temp = value;
-    // if (payment === "DUKE") {
-    //   temp = value / Math.pow(10, 9);
-    // } else if (payment === "FAST") {
-    //   temp = value / Math.pow(10, 18);
-    // } else if (payment === "BNB") {
-    //   temp = value / Math.pow(10, 18);
-    // }
+    if (payment === "DUKE") {
+      temp = value / Math.pow(10, 9);
+    } else if (payment === "FAST") {
+      temp = value / Math.pow(10, 18);
+    } else if (payment === "BNB") {
+      temp = value / Math.pow(10, 18);
+    }
     if (temp >= 0) {
       return temp.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     } else {

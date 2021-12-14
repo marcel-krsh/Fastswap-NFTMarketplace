@@ -87,7 +87,7 @@ const Mainpage = ({ ctheme }) => {
             <PartDrop>
                 <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
                     <ImgLetter letter={'Latest drops 🚀'} ctheme={ctheme} />
-                    <Box display="flex" justifyContent="center" marginTop="2%">
+                    <Box display="flex" marginTop="2%">
                         <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
                             {
                                 nfts.length > 0 && nfts.map((item, index) => {

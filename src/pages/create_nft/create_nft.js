@@ -108,28 +108,26 @@ const Create_NFT = ({ ctheme }) => {
             await createNFT.wait();
             // console.log("ii")
             const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path)
-            console.log(nftIDs)
             var token_id = parseInt(nftIDs[0]._hex, 16);
             console.log(token_id);
             // var start = '0x' + start_price.toString(16);
             // var end = '0x' + end_price.toString(16);
             var dur = "0x" + (duration * 24 * 60 * 60).toString(16);
-            console.log("iii")
             if (price_type.duke === true) {
               pay_method = 2
-              price1 = (price.duke).toString(16);
+              price1 = (price.duke*Math.pow(10,9)).toString(16);
 
             }
             if (price_type.fast === true) {
               pay_method = 1
-              price1 = (price.fast).toString(16);
+              price1 = (price.fast*Math.pow(10,18)).toString(16);
             }
             if (price_type.bnb === true) {
               pay_method = 0
-              price1 = (price.bnb).toString(16);
+              price1 = (price.bnb*Math.pow(10,18)).toString(16);
             }
             // let price_wei = "0x" + price1;
-            let price_wei = price1;
+            let price_wei = "0x"+price1;
             const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
             await approve.wait();
             await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account)  // 0: BNB, 1: FAST, 2: DUKE
@@ -166,17 +164,17 @@ const Create_NFT = ({ ctheme }) => {
   
             if (price_type.duke === true) {
               pay_method = "DUKE"
-              price1 = (price.duke).toString(16);
+              price1 = (price.duke*Math.pow(10,9)).toString(16);
             }
             if (price_type.fast === true) {
               pay_method = "FAST"
-              price1 = (price.fast).toString(16);
+              price1 = (price.fast*Math.pow(10,18)).toString(16);
             }
             if (price_type.bnb === true) {
               pay_method = "BNB"
-              price1 = (price.bnb).toString(16);
+              price1 = (price.bnb*Math.pow(10,18)).toString(16);
             }
-            let price_wei = price1;
+            let price_wei = "0x"+price1;
   
             for (var i = 0; i < nftIDs.length; i++) {
               var token_id1 = parseInt(nftIDs[i]._hex, 16);
@@ -186,9 +184,9 @@ const Create_NFT = ({ ctheme }) => {
                 .then((res) => {
                   set_process("Created successfully.");
                   setTimeout(() => {
-                    handleClose();
                     history.push({ pathname: "/" });
                     window.location.reload();
+                    handleClose();
                   }, 2000);
                 }).catch((error) => {
                   set_process("Fault! Try again.");
@@ -203,6 +201,7 @@ const Create_NFT = ({ ctheme }) => {
             setTimeout(() => {
               handleClose();
             }, 2000);
+            console.log(err)
           }
           
 

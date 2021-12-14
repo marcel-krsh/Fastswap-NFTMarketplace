@@ -9,18 +9,18 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
   const history = useHistory();
   const price_format = (value) => {
     var temp = value;
-    // if(payment === 'DUKE')
-    // {
-    //   temp = value / Math.pow(10,9);
-    // }
-    // else if(payment === 'FAST')
-    // {
-    //   temp = value / Math.pow(10,18);
-    // }
-    // else if(payment === 'BNB')
-    // {
-    //   temp = value / Math.pow(10,18);
-    // }
+    if(payment === 'DUKE')
+    {
+      temp = value / Math.pow(10,9);
+    }
+    else if(payment === 'FAST')
+    {
+      temp = value / Math.pow(10,18);
+    }
+    else if(payment === 'BNB')
+    {
+      temp = value / Math.pow(10,18);
+    }
 
     if(temp>=0)
     {
