@@ -20,57 +20,6 @@ import TokenImage from "../../images/small_duke1.png";
 const CardImages = [require("../../images/explore/1.png").default, require("../../images/explore/2.png").default, require("../../images/explore/3.png").default, require("../../images/explore/4.png").default, require("../../images/explore/5.png").default, require("../../images/explore/6.png").default, require("../../images/explore/7.png").default, require("../../images/explore/8.png").default, require("../../images/explore/9.png").default, require("../../images/explore/10.png").default, require("../../images/explore/11.png").default, require("../../images/explore/12.png").default, require("../../images/explore/13.png").default];
 
 const ExplorePage = ({ ctheme }) => {
-  const [currentSubPage, setCurrentSubPage] = useState("Profile");
-  const mainData = [
-    {
-      event: "Sale",
-      nft: ["NFT name", "NFT name"],
-      price: ["152.25 DUKE", "$234.88"],
-      quantity: "1",
-      from: "Josh",
-      time: "1 Second ago",
-    },
-    {
-      event: "Sale",
-      nft: ["NFT name", "NFT name"],
-      price: ["152.25 DUKE", "$234.88"],
-      quantity: "1",
-      from: "Josh",
-      time: "1 Second ago",
-    },
-    {
-      event: "Sale",
-      nft: ["NFT name", "NFT name"],
-      price: ["152.25 DUKE", "$234.88"],
-      quantity: "1",
-      from: "Josh",
-      time: "1 Second ago",
-    },
-  ];
-  const getIcon = (type) => {
-    let result;
-    switch (type) {
-      case "Minted":
-        result = MintedIcon;
-        break;
-      case "Listed":
-        result = <FaTag />;
-        break;
-      case "Bid":
-        result = <FaHandPaper />;
-        break;
-      case "Sale":
-        result = <HiShoppingCart />;
-        break;
-      case "Transfer":
-        result = <IoSwapVerticalOutline />;
-        break;
-      default:
-        result = <AiFillQuestionCircle />;
-        break;
-    }
-    return result;
-  };
   return (
     <Box px={[6, 7, 9, 11]} maxWidth={1010}>
       <Box mt={6} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
