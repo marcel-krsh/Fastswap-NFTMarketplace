@@ -74,10 +74,15 @@ const Detail_Page = ({ ctheme }) => {
     // set_trans(true);
     handleOpen();
     try {
-      const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, 100000);
+      const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, 10000000);
       await approve.wait();
       const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
       await approve1.wait();
+      // console.log(mainData.price)
+      // const price = "0x"+ parseInt(mainData.price).toString(16);
+      // console.log(price)
+      const price = "0x"+(parseInt(mainData.price)*Math.pow(10,18)).toString(16);
+
       await marketplaceContract.buy(mainData.ids, mainData.price)
         .then((res) => {
           set_process("Baught successfully.");
@@ -90,6 +95,7 @@ const Detail_Page = ({ ctheme }) => {
           }, 2000);
 
         }).catch((error) => {
+          console.log(error)
           set_process("Fault! Try again.");
           setTimeout(() => {
             set_process("Processing...");
@@ -105,6 +111,7 @@ const Detail_Page = ({ ctheme }) => {
         handleClose();
         // set_trans(false);
       });
+      console.log(error)
     }
 
   };
@@ -281,17 +288,17 @@ const Detail_Page = ({ ctheme }) => {
       <Part_Drop>
         <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
           <Box display="flex" flexDirection="column" marginTop="2%">
-            <Collection_Image display="flex" flex="1" marginBottom="2%">
-              <Box display="flex" flex="1" marginRight="2%">
+            <Collection_Image display="flex" flex="1" marginBottom="2%" flexWrap="wrap" justifyContent="space-between">
+              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
                 <Last_Drop index={1} img={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
-              <Box display="flex" flex="1" marginRight="2%">
+              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
                 <Last_Drop index={1} img={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
-              <Box display="flex" flex="1" marginRight="2%">
+              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
                 <Last_Drop index={1} img={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
-              <Box display="flex" flex="1">
+              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
                 <Last_Drop index={1} img={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
             </Collection_Image>
