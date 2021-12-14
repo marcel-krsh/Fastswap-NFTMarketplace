@@ -14,7 +14,7 @@ import { lightTheme, darkTheme } from "../../theme/theme";
 import NFTImage1 from "../../images/cover/cover-3.png";
 import TokenImage from "../../images/small_duke1.png";
 
-const SettingPage = ({ ctheme }) => {
+const ActivitiesPage = ({ ctheme }) => {
   const [currentSubPage, setCurrentSubPage] = useState("Profile");
   const mainData = [
     {
@@ -200,25 +200,29 @@ const TypeSelector = ({ mt }) => {
   const [isCollapse, setCollapse] = useState(true);
   return (
     <Box mt={mt} display={"flex"} flexDirection={"column"} border={isCollapse ? "" : "1px solid #CECECE"} borderRadius={8}>
-      <Box
-        px={2}
-        py={2}
-        display={"flex"}
-        alignItems={"center"}
-        css={{ cursor: "pointer", gridGap: "10px" }}
-        onClick={() => {
-          setCollapse(!isCollapse);
-        }}
-      >
-        <SimpleSwitch />
-        <Box fontSize={28} color={"#363936"} display={"flex"} alignItems={"center"}>
-          <CgSortAz />
+      <Box display={"flex"} alignItems={"stretch"}>
+        <Box px={2} py={2} display={"flex"} alignItems={"center"}>
+          <SimpleSwitch />
         </Box>
-        <Box mr={"auto"} fontFamily={"Poppins"} fontSize={["12px", "16px", "18px"]} lineHeight={["20px", "30px", "34px"]} fontWeight={"normal"} color={"#01070B"} letterSpacing={"0.5px"}>
-          Types
-        </Box>
-        <Box fontSize={24} color={"#363936"} display={"flex"} alignItems={"center"} css={{ transform: `rotate(${isCollapse ? `0deg` : `180deg`})` }}>
-          <TiArrowSortedDown />
+        <Box
+          flexGrow={1}
+          pr={2}
+          display={"flex"}
+          alignItems={"center"}
+          css={{ cursor: "pointer", gridGap: "10px" }}
+          onClick={() => {
+            setCollapse(!isCollapse);
+          }}
+        >
+          <Box fontSize={28} color={"#363936"} display={"flex"} alignItems={"center"}>
+            <CgSortAz />
+          </Box>
+          <Box mr={"auto"} fontFamily={"Poppins"} fontSize={["12px", "16px", "18px"]} lineHeight={["20px", "30px", "34px"]} fontWeight={"normal"} color={"#01070B"} letterSpacing={"0.5px"}>
+            Types
+          </Box>
+          <Box fontSize={24} color={"#363936"} display={"flex"} alignItems={"center"} css={{ transform: `rotate(${isCollapse ? `0deg` : `180deg`})` }}>
+            <TiArrowSortedDown />
+          </Box>
         </Box>
       </Box>
       <Box maxHeight={isCollapse ? "0px" : "600px"} overflow={"hidden"} css={{ transition: "300ms" }}>
@@ -250,4 +254,4 @@ const TypeSelector = ({ mt }) => {
   );
 };
 
-export default SettingPage;
+export default ActivitiesPage;

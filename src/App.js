@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Web3Provider } from "@ethersproject/providers";
 import { Web3ReactProvider } from "@web3-react/core";
 
-import { StyledContainer, PageHeader1_space, PageHLetter, PageHeader1 } from "./components/pageComps";
+import PageHeader, { StyledContainer } from "./components/pageComps";
 import Header from "./pages/header/header";
 import Sidebar from "./pages/sidebar/sidebar";
 import Mainpage from "./pages/mainpage/mainpage";
@@ -17,8 +17,10 @@ import Create_NFT from "./pages/create_nft/create_nft";
 import getProducts from "./actions/product";
 import SettingPage from "./pages/settingpage";
 import Activities from "./pages/activities";
+import Explore from "./pages/explore";
 import { lightTheme, darkTheme } from "./theme/theme";
 import "./App.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider);
@@ -45,7 +47,6 @@ function App() {
   useEffect(async () => {
     dispatch(await getProducts());
   }, [dispatch]);
-
   return (
     <>
       <Web3ReactProvider getLibrary={getLibrary}>
@@ -66,15 +67,7 @@ function App() {
               <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
             </div>
             <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
-              <PageHeader1>
-                <PageHeader1_space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
-                  <PageHLetter onClick={() => (window.location.href = "")}>Overview</PageHLetter>
-                  <PageHLetter onClick={() => (window.location.href = "")}>Explore</PageHLetter>
-                  <PageHLetter onClick={() => (window.location.href = "")}>Rankings</PageHLetter>
-                  <PageHLetter onClick={() => (window.location.href = "/activities")}>Activities</PageHLetter>
-                  <PageHLetter onClick={() => (window.location.href = "")}>Manage</PageHLetter>
-                </PageHeader1_space>
-              </PageHeader1>
+              <PageHeader />
               <Switch>
                 <Route exact path="/">
                   <Mainpage ctheme={ctheme} />
@@ -99,6 +92,9 @@ function App() {
                 </Route>
                 <Route exact path="/activities">
                   <Activities ctheme={ctheme} />
+                </Route>
+                <Route exact path="/explore">
+                  <Explore ctheme={ctheme} />
                 </Route>
               </Switch>
             </StyledContainer>

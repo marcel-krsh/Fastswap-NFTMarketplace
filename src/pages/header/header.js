@@ -13,7 +13,7 @@ import trust from "../../images/TrustWallet.png";
 import img_logo from "../../images/logo_mark1.png";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
-import { DropDown, DropDownItem } from "./components/dropdown.jsx";
+import { DropDown, DropDownItem } from "../../components/elements/dropdown.jsx";
 import { MdLogout } from "react-icons/md";
 
 const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
@@ -120,7 +120,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
             >
               Offers
             </DropDownItem>
-            <Box width="100%" borderTop="1px solid #cecece" />
+            <Box width="80%" my={1} marginLeft={"10%"} borderTop="1px solid #cecece" />
             <DropDownItem
               onClick={() => {
                 window.location.href = "/Profile_prev";
@@ -142,7 +142,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
             >
               Transactions
             </DropDownItem>
-            <Box width="100%" borderTop="1px solid #cecece" />
+            <Box width="80%" my={1} marginLeft={"10%"} borderTop="1px solid #cecece" />
             <DropDownItem
               onClick={() => {
                 handleDisconnect();
