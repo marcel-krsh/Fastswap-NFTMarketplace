@@ -63,16 +63,7 @@ const Detail_Page = ({ ctheme }) => {
     }
   };
   return (
-    <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
-      <Header1>
-        <Header1_space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
-          <HLetter>Overview</HLetter>
-          <HLetter>Explore</HLetter>
-          <HLetter>Rankings</HLetter>
-          <HLetter>Activities</HLetter>
-          <HLetter>Manage</HLetter>
-        </Header1_space>
-      </Header1>
+    <>
       <Box display="flex" width="100%" marginTop="5%">
         <Detail_Img display="flex" marginLeft="5%" marginRight="5%" width="100%">
           <Box display="flex" flex="4" borderRadius="8px">
@@ -203,20 +194,17 @@ const Detail_Page = ({ ctheme }) => {
           </Underline3>
         </Underline1>
       </Box>
-
       <Box display="flex" width="100%">
         <Box display="flex" marginLeft="5%" marginRight="5%" width="90%" marginTop="2%" flexDirection="column">
           <List_ULetter ctheme={ctheme} str={"Items activity"} width1={"100%"} height1={"40px"}></List_ULetter>
           <Drop_chart1>Need to make table here</Drop_chart1>
         </Box>
       </Box>
-
       <Box display="flex" width="100%">
         <Box display="flex" marginLeft="5%" marginRight="5%" width="90%" marginTop="2%" flexDirection="column">
           <List_ULetter ctheme={ctheme} str={"Other items in this collection"} width1={"100%"} height1={"40px"}></List_ULetter>
         </Box>
       </Box>
-
       <Part_Drop>
         <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
           <Box display="flex" flexDirection="column" marginTop="2%">
@@ -237,7 +225,7 @@ const Detail_Page = ({ ctheme }) => {
           </Box>
         </Box>
       </Part_Drop>
-    </StyledContainer>
+    </>
   );
 };
 

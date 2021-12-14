@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Box } from "@material-ui/core";
 import { MdSave } from "react-icons/md";
-import { Switch } from "@material-ui/core";
 import AvatarImage from "../../images/small_ellipse2.png";
 import { BsFillCaretDownFill } from "react-icons/bs";
+import { SimpleSwitch } from "../../components/elements";
 
 const Notification = () => {
   return (
@@ -15,7 +15,7 @@ const Notification = () => {
         </Box>
       </Header>
       <NotificationMain pb="80px">
-        <Box borderRadius="16px" border="1px solid #cecece">
+        <Box className="mainList" borderRadius="16px" border="1px solid #cecece">
           <NotificationItem display="flex" flexDirection="column">
             <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
@@ -157,30 +157,6 @@ const Notification = () => {
   );
 };
 
-const SimpleSwitch = styled(Switch)`
-  width: 40px !important;
-  height: 20px !important;
-  padding: 0px !important;
-  border-radius: 100px;
-  .MuiButtonBase-root {
-    padding: 0;
-    background: transparent;
-    .MuiSwitch-thumb {
-      background: white;
-      margin: 4px;
-      width: 12px;
-      height: 12px;
-      box-shadow: none;
-    }
-  }
-  .Mui-checked {
-    & + .MuiSwitch-track {
-      background: #2ba55d !important;
-      opacity: 1 !important;
-    }
-  }
-`;
-
 const Header = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -206,7 +182,7 @@ const NotificationMain = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 39px;
-  > div {
+  > div.mainList {
     padding: 60px;
     @media (max-width: 1000px) {
       padding: 60px;

@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from 'react'
-import { Box, Modal} from '@material-ui/core'
-import styled from 'styled-components';
+import { useState, useEffect } from "react";
+import { Box, Modal } from "@material-ui/core";
+import styled from "styled-components";
 import { MdMenuOpen } from "react-icons/md";
 import { injected, walletConnect, trustWallet, binance_wallet } from "../../utils/connectors";
 import _ from "lodash";
@@ -79,9 +79,11 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
       {/* {theme? <div>123</div>:<div>KKK</div>} */}
       <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
         <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D" />
-        <Logo_img onClick={()=>{
-          history.push({ pathname: "/" });
-        }}>
+        <Logo_img
+          onClick={() => {
+            history.push({ pathname: "/" });
+          }}
+        >
           <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }}></img>
           FASTSWAP
         </Logo_img>
@@ -90,12 +92,42 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
       <Box display="flex" flex="1" alignItems="center" justifyContent="center">
         {account ? (
           <DropDown text={account.slice(0, 7) + "..." + account.slice(-4)}>
-            <DropDownItem>Items</DropDownItem>
-            <DropDownItem>Collections</DropDownItem>
-            <DropDownItem>WatchList</DropDownItem>
-            <DropDownItem>Offers</DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                window.location.href = "/";
+              }}
+            >
+              Items
+            </DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                window.location.href = "/Collection_page";
+              }}
+            >
+              Collections
+            </DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                window.location.href = "/Setting_page";
+              }}
+            >
+              WatchList
+            </DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                window.location.href = "/Setting_page";
+              }}
+            >
+              Offers
+            </DropDownItem>
             <Box width="100%" borderTop="1px solid #cecece" />
-            <DropDownItem>Profile</DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                window.location.href = "/Profile_prev";
+              }}
+            >
+              Profile
+            </DropDownItem>
             <DropDownItem
               onClick={() => {
                 window.location.href = "/Setting_page";
@@ -103,7 +135,13 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
             >
               Settings
             </DropDownItem>
-            <DropDownItem>Transactions</DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                window.location.href = "/Setting_page";
+              }}
+            >
+              Transactions
+            </DropDownItem>
             <Box width="100%" borderTop="1px solid #cecece" />
             <DropDownItem
               onClick={() => {
@@ -247,7 +285,7 @@ const Connect_btn_letter = styled(Box)`
 
 const Logo_img = styled(Box)`
   display: flex;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
   @media (max-width: 600px) {

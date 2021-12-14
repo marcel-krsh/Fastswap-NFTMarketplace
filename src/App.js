@@ -1,25 +1,29 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { Web3Provider } from '@ethersproject/providers'
-import { Web3ReactProvider } from '@web3-react/core'
-import Header from "./pages/header/header"
-import Sidebar from "./pages/sidebar/sidebar"
-import Mainpage from "./pages/mainpage/mainpage"
-import Collection_page from './pages/collection_page/collection_page'
-import Detail_page from './pages/detail_page/detail_page'
-import Profile_page_prev from './pages/profile_page/profile_page_prev'
-import Profile_page_empty from './pages/profile_page/profile_page_empty'
-import Create_NFT from './pages/create_nft/create_nft'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Web3Provider } from "@ethersproject/providers";
+import { Web3ReactProvider } from "@web3-react/core";
+
+import { StyledContainer, PageHeader1_space, PageHLetter, PageHeader1 } from "./components/pageComps";
+import Header from "./pages/header/header";
+import Sidebar from "./pages/sidebar/sidebar";
+import Mainpage from "./pages/mainpage/mainpage";
+import Collection_page from "./pages/collection_page/collection_page";
+import Detail_page from "./pages/detail_page/detail_page";
+import Profile_page_prev from "./pages/profile_page/profile_page_prev";
+import Profile_page_empty from "./pages/profile_page/profile_page_empty";
+import Create_NFT from "./pages/create_nft/create_nft";
 import getProducts from "./actions/product";
 import SettingPage from "./pages/settingpage";
+import Activities from "./pages/activities";
+import { lightTheme, darkTheme } from "./theme/theme";
 import "./App.css";
 
 function getLibrary(provider) {
-  const library = new Web3Provider(provider)
-  library.pollingInterval = 8000
-  return library
+  const library = new Web3Provider(provider);
+  library.pollingInterval = 8000;
+  return library;
 }
 
 function App() {
@@ -45,49 +49,60 @@ function App() {
   return (
     <>
       <Web3ReactProvider getLibrary={getLibrary}>
-      <Router>
-        <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar} ctheme={ctheme}></Header>
-        {/* <div style={styles.contentDiv}>
+        <Router>
+          <Header flag_sidebar={flag_sidebar} set_sidebar={set_sidebar} ctheme={ctheme}></Header>
+          {/* <div style={styles.contentDiv}>
           <div className={"sidebar1" + (flag_sidebar ? " collapse" : " expand")} style={{ display: "none" }}>
             <Sidebar flag_sidebar={false} ctheme={ctheme} setTheme={setTheme}></Sidebar>
           </div>
           <div className="sidebar2">
             <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
           </div> */}
-        <div style={styles.contentDiv} >
-          <div className="sidebar1" style={{ display: "none", minHeight:'100vh'}} >
-            <Sidebar flag_sidebar={1} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+          <div style={styles.contentDiv}>
+            <div className="sidebar1" style={{ display: "none", minHeight: "100vh" }}>
+              <Sidebar flag_sidebar={1} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+            </div>
+            <div className="sidebar2" style={{ minHeight: "100vh" }}>
+              <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
+            </div>
+            <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
+              <PageHeader1>
+                <PageHeader1_space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
+                  <PageHLetter onClick={() => (window.location.href = "")}>Overview</PageHLetter>
+                  <PageHLetter onClick={() => (window.location.href = "")}>Explore</PageHLetter>
+                  <PageHLetter onClick={() => (window.location.href = "")}>Rankings</PageHLetter>
+                  <PageHLetter onClick={() => (window.location.href = "/activities")}>Activities</PageHLetter>
+                  <PageHLetter onClick={() => (window.location.href = "")}>Manage</PageHLetter>
+                </PageHeader1_space>
+              </PageHeader1>
+              <Switch>
+                <Route exact path="/">
+                  <Mainpage ctheme={ctheme} />
+                </Route>
+                <Route exact path="/Collection_page">
+                  <Collection_page ctheme={ctheme} />
+                </Route>
+                <Route exact path="/Detail_page">
+                  <Detail_page ctheme={ctheme} />
+                </Route>
+                <Route exact path="/Profile_prev">
+                  <Profile_page_prev ctheme={ctheme} />
+                </Route>
+                <Route exact path="/Profile_empty">
+                  <Profile_page_empty ctheme={ctheme} />
+                </Route>
+                <Route exact path="/Create_NFT">
+                  <Create_NFT ctheme={ctheme} />
+                </Route>
+                <Route exact path="/Setting_page">
+                  <SettingPage ctheme={ctheme} />
+                </Route>
+                <Route exact path="/activities">
+                  <Activities ctheme={ctheme} />
+                </Route>
+              </Switch>
+            </StyledContainer>
           </div>
-          <div className="sidebar2" style={{minHeight:'100vh'}}>
-            <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
-          </div>
-
-            <Switch>
-              <Route exact path="/">
-                <Mainpage ctheme={ctheme} />
-              </Route>
-              <Route exact path="/Collection_page">
-                <Collection_page ctheme={ctheme} />
-              </Route>
-              <Route exact path="/Detail_page">
-                <Detail_page ctheme={ctheme} />
-              </Route>
-              <Route exact path="/Profile_prev">
-                <Profile_page_prev ctheme={ctheme} />
-              </Route>
-              <Route exact path="/Profile_empty">
-                <Profile_page_empty ctheme={ctheme} />
-              </Route>
-              <Route exact path="/Create_NFT">
-                <Create_NFT ctheme={ctheme} />
-              </Route>
-
-              <Route exact path="/Setting_page">
-                <SettingPage ctheme={ctheme} />
-              </Route>
-            </Switch>
-
-        </div>
         </Router>
       </Web3ReactProvider>
     </>
