@@ -26,7 +26,7 @@ export const DropDown = ({ text, children, color = "#2BA55D" }) => {
           setShow(!show);
         }}
       >
-        <Box ref={dropPannel} padding="8px 24px" paddingRight="5px" border={`1px solid ${color}`} borderRadius="8px" fontSize="16px" lineHeight="16px" textAlign="center" color={color} display="flex" gridColumnGap="5px" css={{ cursor: "pointer" }} alignItems={"center"}>
+        <Box ref={dropPannel} padding="8px 24px" paddingRight="5px" border={`1px solid ${color}`} borderRadius="8px" fontFamily="Poppins" fontSize="16px" fontWeight="600" lineHeight="16px" textAlign="center" color={color} display="flex" gridColumnGap="5px" css={{ cursor: "pointer" }} alignItems={"center"}>
           {text + "  "}
           <Box ml={"auto"}>{show ? <BiChevronUp fontSize="20px" lineHeight="16px" /> : <BiChevronDown fontSize="20px" lineHeight="16px" />}</Box>
         </Box>
@@ -40,8 +40,10 @@ export const DropDown = ({ text, children, color = "#2BA55D" }) => {
 
 export const DropDownItem = styled(Box)({
   padding: "8px 24px",
+  fontFamily: "Poppins",
   fontSize: "14px",
-  lineHeight: "20px",
+  fontWeight: "500",
+  lineheight: "20px",
   color: "#757B75",
   textAlign: "left",
   display: "flex",

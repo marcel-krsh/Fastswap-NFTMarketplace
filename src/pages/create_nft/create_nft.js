@@ -1,23 +1,21 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, { useState, useMemo } from "react";
 import { useHistory } from "react-router";
-import { MdImage } from "react-icons/md";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { Box, TextField, Modal } from "@material-ui/core";
 import styled from "styled-components";
 import { ethers } from "ethers";
 import { useWeb3React } from "@web3-react/core";
 import { create } from "ipfs-http-client";
-import Web3 from "web3";
 import small_duke from "../../images/small_duke1.png";
 import icon_logo from "../../images/icon_logo.png";
 import bnb1 from "../../images/bnb1.png";
-import Btn_Customize from "../../components/buttons/btn_container";
+import BtnCustomize from "../../components/buttons/btn_container";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { NFT_ABI, NFT_MARKETPLACE_ABI, NFT_AUCTION_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
 
 const Create_NFT = ({ ctheme }) => {
-  const { account, library, chainId } = useWeb3React();
+  const { account, library } = useWeb3React();
   const history = useHistory();
   const client = create("https://ipfs.infura.io:5001/api/v0");
   const [toggle1, set_toggle1] = useState(false);
@@ -25,22 +23,23 @@ const Create_NFT = ({ ctheme }) => {
   const [flag_down1, set_down1] = useState(false);
   const [flag_down2, set_down2] = useState(true);
   const [supply, set_supply] = useState(1);
+  const [duration, set_duration] = useState(1);
   const [type_trans, set_trans] = useState(false);
   const [choose, set_choose] = useState("Choose Collection");
-  const [image_file, set_image] = useState("");
+  // const [image_file, set_image] = useState("");
   const [image_file1, set_image1] = useState("");
   const [name, set_name] = useState("");
   const [description, set_description] = useState("");
   const [image_url, set_url] = useState("");
-  const [hash, set_hash] = useState("");
+  // const [hash, set_hash] = useState("");
   const [price_type, set_price_type] = useState({
     duke: true,
     fast: false,
     bnb: false,
   });
   const [process, set_process] = useState("Processing...");
-  const [process1, set_process1] = useState("Processing...");
-  const [process2, set_process2] = useState("Processing...");
+  // const [process1, set_process1] = useState("Processing...");
+  // const [process2, set_process2] = useState("Processing...");
 
   const nftContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null), [library]);
   const marketplaceContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null), [library]);
@@ -67,21 +66,21 @@ const Create_NFT = ({ ctheme }) => {
     flexDirection: "column",
   };
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
+    set_process("Processing...");
   };
-  const IPFS = require("ipfs-core");
 
-  const upload_image = async () => {
-    console.log(image_file);
-    console.log(image_file1);
-    const cid = await client.add(image_file);
-    let url = `https://ipfs.io/ipfs/${cid.path}`;
-    set_url(url);
-    console.log(url);
-    set_hash(cid.path);
-  };
+  // const upload_image = async () => {
+  //   console.log(image_file);
+  //   console.log(image_file1);
+  //   const cid = await client.add(image_file);
+  //   let url = `https://ipfs.io/ipfs/${cid.path}`
+  //   set_url(url);
+  //   console.log(url);
+  //   // set_hash(cid.path);
+  // }
 
   const upload_ipfs = async () => {
     if (account === undefined) {
@@ -101,107 +100,115 @@ const Create_NFT = ({ ctheme }) => {
         const temp_hash = await client.add(JSON.stringify(dict));
         if (type_trans === false) {
           console.log("i");
-          let start_price = 0,
-            end_price = 100000,
-            duration = 600;
-          const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, "0x1");
-          await createNFT.wait();
-          console.log("ii");
-          const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path);
-          console.log(nftIDs);
-          var token_id = parseInt(nftIDs[0]._hex, 16);
-          console.log(token_id);
-          var start = "0x" + start_price.toString(16);
-          var end = "0x" + end_price.toString(16);
-          var dur = "0x" + duration.toString(16);
-          console.log("iii");
-          if (price_type.duke === true) {
-            pay_method = 2;
-            price1 = (price.duke * Math.pow(10, 9)).toString(16);
+          // let start_price = 0, end_price = 100000, duration = 600;
+          try {
+            const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, "0x1");
+            await createNFT.wait();
+            // console.log("ii")
+            const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path);
+            var token_id = parseInt(nftIDs[0]._hex, 16);
+            console.log(token_id);
+            // var start = '0x' + start_price.toString(16);
+            // var end = '0x' + end_price.toString(16);
+            var dur = "0x" + (duration * 24 * 60 * 60).toString(16);
+            if (price_type.duke === true) {
+              pay_method = 2;
+              price1 = (price.duke * Math.pow(10, 9)).toString(16);
+            }
+            if (price_type.fast === true) {
+              pay_method = 1;
+              price1 = (price.fast * Math.pow(10, 18)).toString(16);
+            }
+            if (price_type.bnb === true) {
+              pay_method = 0;
+              price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+            }
+            // let price_wei = "0x" + price1;
+            let price_wei = "0x" + price1;
+            const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
+            await approve.wait();
+            let auction = await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account); // 0: BNB, 1: FAST, 2: DUKE
+            await auction.wait();
+            // .then((res) => {
+            //   set_process("Created successfully.");
+            //   setTimeout(() => {
+            //     history.push({ pathname: "/" });
+            //     window.location.reload();
+            //     handleClose();
+            //   }, 3000);
+
+            // }).catch((error) => {
+            //   set_process("Fault! Try again.")
+            //   setTimeout(() => {
+            //     handleClose();
+            //   }, 3000);
+            // });
+            set_process("Created successfully.");
+            setTimeout(() => {
+              history.push({ pathname: "/" });
+              window.location.reload();
+              handleClose();
+            }, 3000);
+          } catch (err) {
+            set_process("Fault! Try again.");
+            setTimeout(() => {
+              handleClose();
+            }, 3000);
+            console.log(err);
           }
-          if (price_type.fast === true) {
-            pay_method = 1;
-            price1 = (price.fast * Math.pow(10, 18)).toString(16);
-          }
-          if (price_type.bnb === true) {
-            pay_method = 0;
-            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
-          }
-          let price_wei = "0x" + price1;
-          console.log("iiikkk");
-          const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
-          await approve.wait();
-          // console.log("iiittt")
-          await auctionContract
-            .createAuction(token_id, price_wei, price_wei, pay_method, dur, account) // 0: BNB, 1: FAST, 2: DUKE
-            .then((res) => {
+        } else {
+          try {
+            const amount = "0x" + supply.toString(16);
+            console.log(temp_hash.path);
+            const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount);
+            await createNFT.wait();
+            const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path);
+            if (price_type.duke === true) {
+              pay_method = "DUKE";
+              price1 = (price.duke * Math.pow(10, 9)).toString(16);
+            }
+            if (price_type.fast === true) {
+              pay_method = "FAST";
+              price1 = (price.fast * Math.pow(10, 18)).toString(16);
+            }
+            if (price_type.bnb === true) {
+              pay_method = "BNB";
+              price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+            }
+            let price_wei = "0x" + price1;
+
+            for (var i = 0; i < nftIDs.length; i++) {
+              var token_id1 = parseInt(nftIDs[i]._hex, 16);
+              const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id1);
+              await approve.wait();
+              let sale = await marketplaceContract.registerForSale(token_id1, price_wei, temp_hash.path, pay_method);
+              await sale.wait();
+              // .then((res) => {
+              // set_process("Created successfully.");
+              // setTimeout(() => {
+              //   history.push({ pathname: "/" });
+              //   window.location.reload();
+              //   handleClose();
+              // }, 3000);
+              // }).catch((error) => {
+              //   set_process("Fault! Try again.");
+              //   setTimeout(() => {
+              //     handleClose();
+              //   }, 3000);
+              // });
               set_process("Created successfully.");
               setTimeout(() => {
                 history.push({ pathname: "/" });
-                set_process("Processing...");
+                window.location.reload();
                 handleClose();
-              }, 2000);
-            })
-            .catch((error) => {
-              set_process("Fault! Try again.");
-              setTimeout(() => {
-                set_process("Processing...");
-                handleClose();
-              }, 2000);
-            });
-          //   set_process1("Created successfully.");
-          //   setTimeout(() => {
-          //     handleClose();
-          //   }, 2000);
-          //   history.push({ pathname: "/" });
-          // }).catch((error) => {
-          //   set_process1("Fault! Try again.");
-          //   setTimeout(() => {
-          //     handleClose();
-          //   }, 2000);
-          // });
-        } else {
-          const amount = "0x" + supply.toString(16);
-          const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount);
-          await createNFT.wait();
-          const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path);
-
-          if (price_type.duke === true) {
-            pay_method = "DUKE";
-            price1 = (price.duke * Math.pow(10, 9)).toString(16);
-          }
-          if (price_type.fast === true) {
-            pay_method = "FAST";
-            price1 = (price.fast * Math.pow(10, 18)).toString(16);
-          }
-          if (price_type.bnb === true) {
-            pay_method = "BNB";
-            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
-          }
-          let price_wei = "0x" + price1;
-
-          for (var i = 0; i < nftIDs.length; i++) {
-            var token_id = parseInt(nftIDs[i]._hex, 16);
-            const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id);
-            await approve.wait();
-            await marketplaceContract
-              .registerForSale(token_id, price_wei, temp_hash.path, pay_method)
-              .then((res) => {
-                set_process("Created successfully.");
-                setTimeout(() => {
-                  handleClose();
-                  history.push({ pathname: "/" });
-                  window.location.reload();
-                  set_process("Processing...");
-                }, 2000);
-              })
-              .catch((error) => {
-                set_process("Fault! Try again.");
-                setTimeout(() => {
-                  handleClose();
-                  set_process("Processing...");
-                }, 2000);
-              });
+              }, 3000);
+            }
+          } catch (err) {
+            set_process("Fault! Try again.");
+            setTimeout(() => {
+              handleClose();
+            }, 3000);
+            console.log(err);
           }
         }
       }
@@ -227,13 +234,13 @@ const Create_NFT = ({ ctheme }) => {
               type="file"
               onChange={async (e) => {
                 set_image1(URL.createObjectURL(e.target.files[0]));
-                set_image(e.target.files[0]);
+                // set_image(e.target.files[0]);
                 await client.add(e.target.files[0]).then((res) => {
                   console.log(res);
                   let url = `https://ipfs.io/ipfs/${res.path}`;
                   set_url(url);
                   console.log(url);
-                  set_hash(res.path);
+                  // set_hash(res.path);
                 });
                 // console.log(cid)
 
@@ -397,6 +404,51 @@ const Create_NFT = ({ ctheme }) => {
               <Downletter1>Buyers make bids on your collectible</Downletter1>
               <Downletter1>Collectible can be instantly purchased </Downletter1>
             </Box>
+
+            {!type_trans ? (
+              <>
+                <Letterdis1>Duration</Letterdis1>
+                <Letterdis2>Selected value shows one day</Letterdis2>
+                <Box display="flex" width="60%" marginTop="1%">
+                  <Box display="flex" width="40%" border="1px solid #CECECE" borderRadius="8px" height="40px">
+                    <PMbtn
+                      display="flex"
+                      flex="1"
+                      borderRight="1px solid #CECECE"
+                      onClick={() => {
+                        var temp = duration;
+                        temp -= 1;
+                        if (temp <= 0) {
+                          alert("The inputed value must not be less than 1.");
+                          return;
+                        }
+                        set_duration(temp);
+                      }}
+                    >
+                      -
+                    </PMbtn>
+                    <Box display="flex" flex="2" fontSize="16px" fontFamily="Poppins" fontWeight="600" color="black" alignItems="center" justifyContent="center">
+                      {duration}
+                    </Box>
+                    <PMbtn
+                      display="flex"
+                      flex="1"
+                      borderLeft="1px solid #CECECE"
+                      onClick={() => {
+                        var temp = duration;
+                        temp += 1;
+                        set_duration(temp);
+                      }}
+                    >
+                      +
+                    </PMbtn>
+                  </Box>
+                </Box>
+              </>
+            ) : (
+              ""
+            )}
+
             {type_trans === false ? (
               <>
                 <Letterdis1>Reserve Price</Letterdis1>
@@ -415,7 +467,7 @@ const Create_NFT = ({ ctheme }) => {
                   {flag_down2 ? (
                     <Box display="flex" alignItems="center" justifyContent="center" width="80%">
                       <Box display="flex" bgcolor="#54DADE" borderRadius="100%" flex="1" justifyContent="center">
-                        {price_type.duke ? <img src={small_duke} width="90%" height="90%" /> : price_type.fast ? <img src={icon_logo} width="90%" height="90%" /> : <img src={bnb1} width="90%" height="90%" />}
+                        {price_type.duke ? <img src={small_duke} width="90%" height="90%" alt="" /> : price_type.fast ? <img src={icon_logo} width="90%" height="90%" alt="" /> : <img src={bnb1} width="90%" height="90%" alt="" />}
                       </Box>
                       <Box color="black" display="flex" fontSize="18px" fontFamily="Poppins, sans-serif" fontWeight="500" alignItems="center" justifyContent="flex-start" marginLeft="10px" flex="2.5">
                         {price_type.duke ? "DUKE" : price_type.fast ? "FAST" : "BNB"}
@@ -425,7 +477,7 @@ const Create_NFT = ({ ctheme }) => {
                     <Box display="flex" width="100%" height="100px" bgcolor="white" position="absolute" alignItems="center" justifyContent="center" flexDirection="column" boxShadow="1px 3px 3px #9E9E9E" top="9%" left="3%">
                       <Box display="flex" flex="1" marginTop="10px" width="80%">
                         <Box display="flex" bgcolor="#54DADE" borderRadius="100%" flex="1" justifyContent="center">
-                          <img src={small_duke} width="90%" height="90%"></img>
+                          <img src={small_duke} width="90%" height="90%" alt=""></img>
                         </Box>
                         <Box
                           color="black"
@@ -451,7 +503,7 @@ const Create_NFT = ({ ctheme }) => {
                       </Box>
                       <Box display="flex" flex="1" marginTop="10px" width="80%">
                         <Box display="flex" flex="1" justifyContent="center">
-                          <img src={icon_logo} width="90%" height="90%"></img>
+                          <img src={icon_logo} width="90%" height="90%" alt=""></img>
                         </Box>
                         <Box
                           color="black"
@@ -477,7 +529,7 @@ const Create_NFT = ({ ctheme }) => {
                       </Box>
                       <Box display="flex" flex="1" marginTop="10px" marginBottom="10px" width="80%">
                         <Box display="flex" flex="1" justifyContent="center">
-                          <img src={bnb1} width="90%" height="90%"></img>
+                          <img src={bnb1} width="90%" height="90%" alt=""></img>
                         </Box>
                         <Box
                           color="black"
@@ -683,7 +735,7 @@ const Create_NFT = ({ ctheme }) => {
           }}
           marginBottom="5%"
         >
-          <Btn_Customize color={"white"} back={"#2BA55D"} width={"100%"} height={"56px"} border={"1px solid #2BA55D"} str={"+ Create"} borderRadius={"8px"} />
+          <BtnCustomize color={"white"} back={"#2BA55D"} width={"100%"} height={"56px"} border={"1px solid #2BA55D"} str={"+ Create"} borderRadius={"8px"} />
         </Box>
       </Box>
       <Modal
@@ -715,6 +767,7 @@ const MHeader = styled(Box)`
   flex: 1;
   width: 100%;
   justify-content: center;
+  font-family: "Poppins", sans-serif;
   font-size: 38px;
   color: white;
   margin-top: 3%;
@@ -726,14 +779,15 @@ const MContent = styled(Box)`
   flex: 2;
   width: 100%;
   justify-content: center;
+  font-family: "Poppins", sans-serif;
   font-size: 25px;
   color: white;
 `;
 
-const MFooter = styled(Box)`
-  display: flex;
-  flex: 1;
-`;
+// const MFooter = styled(Box)`
+//     display: flex;
+//   flex: 1;
+// `
 
 const Loadimg = styled(Box)`
   background-image: url(${({ image_file }) => image_file});
@@ -748,6 +802,7 @@ const Loadimg = styled(Box)`
 const PMbtn = styled(Box)`
   font-size: 16px;
   font-weight: 600;
+  font-family: "Poppins", sans-serif;
   color: #757b75;
   align-items: center;
   justify-content: center;
@@ -864,58 +919,5 @@ const Letterdis2 = styled(Box)`
   line-height: 12px;
   letter-spacing: 0.5;
   color: #757b75;
-`;
-
-const StyledContainer = styled(Box)`
-  position: relative;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  /* margin-bottom: 5%; */
-  background: ${({ ctheme, ltheme, dtheme }) => (ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main)};
-`;
-
-const Header1_space = styled(Box)`
-  @media (max-width: 1000px) {
-    margin-left: 8% !important;
-    margin-right: 8% !important;
-  }
-  @media (max-width: 800px) {
-    margin-left: 5% !important;
-    margin-right: 5% !important;
-  }
-`;
-
-const HLetter = styled(Box)`
-  display: flex;
-  height: 34px;
-  justify-content: center;
-  align-items: center;
-  font-family: Work Sans;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-  color: #2ba55d;
-  border-top: 4px solid rgba(0, 0, 0, 0);
-  &:hover {
-    border-top: 4px solid #2ba55d;
-    cursor: pointer;
-  }
-  @media (max-width: 1000px) {
-    font-size: 12px;
-  }
-  @media (max-width: 800px) {
-    font-size: 12px;
-  }
-  @media (max-width: 600px) {
-    font-size: 8px;
-  }
-`;
-
-const Header1 = styled(Box)`
-  display: flex;
-  width: 100%;
 `;
 export default Create_NFT;

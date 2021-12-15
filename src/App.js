@@ -15,14 +15,15 @@ import Profile_page_prev from "./pages/profile_page/profile_page_prev";
 import Profile_page_empty from "./pages/profile_page/profile_page_empty";
 import Create_NFT from "./pages/create_nft/create_nft";
 import getProducts from "./actions/product";
+import getAuctions from "./actions/productAuction";
 import SettingPage from "./pages/settingpage";
 import Activities from "./pages/activities";
 import Explore from "./pages/explore";
 import Rankings from "./pages/rankings";
-
+import Items from "./pages/items/items";
 import { lightTheme, darkTheme } from "./theme/theme";
+
 import "./App.css";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider);
@@ -48,6 +49,7 @@ function App() {
 
   useEffect(async () => {
     dispatch(await getProducts());
+    dispatch(await getAuctions());
   }, [dispatch]);
   return (
     <>
@@ -100,6 +102,9 @@ function App() {
                 </Route>
                 <Route exact path="/rankings">
                   <Rankings ctheme={ctheme} />
+                </Route>
+                <Route exact path="/Items">
+                  <Items ctheme={ctheme} />
                 </Route>
               </Switch>
             </StyledContainer>

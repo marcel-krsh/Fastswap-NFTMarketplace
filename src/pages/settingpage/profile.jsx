@@ -13,7 +13,7 @@ const ProfileContent = () => {
       <Header>
         <DragImage />
       </Header>
-      <ProfileMain pb="80px">
+      <ProfileMain pb="80px" fontFamily="Poppins">
         <InputGroupType>
           <h1 className="name">Name</h1>
           <div className="inputTags">
@@ -50,7 +50,7 @@ const ProfileContent = () => {
             <input type="text" placeholder="Wallet disconnected" readOnly={true} />
           </div>
         </InputGroupType>
-        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
+        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" fontFamily="Poppins" lineheight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" sx={{ cursor: "pointer" }}>
           <MdSave fontSize="20px" />
           Save
         </Box>
@@ -86,6 +86,7 @@ const InputGroupType = styled(Box)`
     margin-bottom: 0px;
     right: 63.36%;
     top: -5%;
+    font-family: Poppins;
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -120,6 +121,7 @@ const InputGroupType = styled(Box)`
       flex-grow: 1;
       border: none;
       padding: ${(p) => (p.fontMd ? "10px 24px" : "14px 24px")};
+      font-family: Poppins;
       font-style: normal;
       font-weight: normal;
       font-size: ${(p) => (p.fontMd ? "18px" : "12px")};
@@ -146,6 +148,7 @@ const InputGroupType = styled(Box)`
     margin-top: 10px;
     margin-bottom: 0px;
     font-style: normal;
+    font-family: Poppins;
     font-weight: normal;
     font-size: 12px;
     line-height: 12px;

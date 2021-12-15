@@ -3,7 +3,7 @@ import { Box } from '@material-ui/core'
 import styled from 'styled-components';
 import { lightTheme, darkTheme } from "../../theme/theme"
 
-const Img_Letter = ({ letter, ctheme }) => {
+const ImgLetter = ({ letter, ctheme }) => {
     return (
         <ILtter ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
             {letter}
@@ -12,7 +12,7 @@ const Img_Letter = ({ letter, ctheme }) => {
 };
 
 const ILtter = styled(Box)`
-font-family: 'Work Sans';
+font-family: 'Poppins';
 font-style: normal;
 font-weight: 600;
 font-size: 24px;
@@ -21,4 +21,4 @@ color: ${({ ctheme, ltheme, dtheme }) => ctheme ? ltheme.font_color1 : dtheme.fo
 `
 
 
-export default Img_Letter;
+export default ImgLetter;

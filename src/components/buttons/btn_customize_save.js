@@ -3,16 +3,16 @@ import { Box } from '@material-ui/core'
 import { MdSave } from "react-icons/md";
 import styled from 'styled-components';
 
-const Btn_Customize_Save = ({ color, back, width, height, border, str, borderRadius, marginL }) => {
+const BtnCustomizeSave = ({ color, back, width, height, border, str, borderRadius, marginL }) => {
     return (
         <BtnCus display="flex" justifyContent="center" alignItems="center" width={width} height={height} color={color}
             bgcolor={back} border={border} borderRadius={borderRadius} marginLeft={marginL}
             sx={{
-                fontFamily: 'Work Sans',
+                fontFamily: 'Poppins',
                 fontStyle: 'normal',
                 fontWeight: '600',
                 fontSize: '18px',
-                lineHeight: '24px',
+                lineheight: '24px',
             }}
         > <MdSave color="#FCFCFC"></MdSave>{'\u00a0'}{str}</BtnCus >
     );
@@ -38,4 +38,4 @@ const BtnCus = styled(Box)`
 `
 
 
-export default Btn_Customize_Save;
+export default BtnCustomizeSave;

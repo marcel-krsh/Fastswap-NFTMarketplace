@@ -10,145 +10,145 @@ const Notification = () => {
   return (
     <>
       <Header>
-        <Box fontSize="18px" lineHeight="20px">
+        <Box fontSize="18px" lineheight="20px" fontFamily="Poppins">
           Select which notifications you would like to receive for 0x2ce5...c081
         </Box>
       </Header>
       <NotificationMain pb="80px">
         <Box className="mainList" borderRadius="16px" border="1px solid #cecece">
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <NotificationItem mb="20px" display="flex" flexDirection="column">
-            <Box fontSize="20px" lineHeight="20px" fontWeight="600" letterSpacing="0.5px">
+            <Box fontSize="20px" lineheight="20px" fontWeight="600" letterSpacing="0.5px">
               Item Sold
             </Box>
             <Box display="flex" justifyContent="space-between">
-              <Box mt="9px" fontSize="12px" lineHeight="12px" color="#757B75;">
+              <Box mt="9px" fontSize="12px" lineheight="12px" color="#757B75;">
                 When someone purchased one of your items
               </Box>
               <SimpleSwitch defaultChecked />
             </Box>
           </NotificationItem>
           <BottomInforBox border="1px solid #CECECE" borderRadius="8px" display="flex">
-            <Box height="40px" px="20px" fontSize="18px" lineHeight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
+            <Box height="40px" px="20px" fontSize="18px" lineheight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
               <img src={AvatarImage} alt="" style={{ width: "24px", height: "24px", borderRadius: "100%" }} />
               <span>duke</span>
               <BsFillCaretDownFill />
             </Box>
-            <Box flexGrow="1" width="150px" height="40px" pl="20px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="flex-start">
+            <Box flexGrow="1" width="150px" height="40px" pl="20px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="flex-start">
               1000
             </Box>
           </BottomInforBox>
         </Box>
-        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
+        <Box marginTop={["0px", "25px", "32px", "42px"]} bgcolor="#2BA55D" borderRadius="8px" fontFamily="Poppins" fontSize="18px" lineheight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" sx={{ cursor: "pointer" }}>
           <MdSave fontSize="20px" />
           Save
         </Box>

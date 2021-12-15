@@ -9,11 +9,11 @@ import { MdSave } from "react-icons/md";
 const Offer = () => {
   return (
     <>
-      <OfferMain pb="80px">
-        <Box marginBottom={["30px", "35px", "40px"]} fontSize={["10px", "14px", "18px"]} lineHeight="20px">
+      <OfferMain pb="80px" fontFamily="Poppins">
+        <Box marginBottom={["30px", "35px", "40px"]} fontSize={["10px", "14px", "18px"]} lineheight="20px">
           Set a minimum offer for collections to ignore low offers.
         </Box>
-        <Box marginBottom={["30px", "35px", "40px"]} fontSize={["8px", "8px", "12px"]} lineHeight="12px" color="#757B75">
+        <Box marginBottom={["30px", "35px", "40px"]} fontSize={["8px", "8px", "12px"]} lineheight="12px" color="#757B75">
           You will not be notified on offers below your minimum amounts for items is that collection.
         </Box>
         <CardGroup>
@@ -25,16 +25,16 @@ const Offer = () => {
               <Box position="absolute" top="0px" left="50%" border="4px solid white" borderRadius="8px" mt-37px width="48px" height="48px" overflow="hidden" style={{ transform: "translate(-50%, -50%)" }}>
                 <img src={CardImage} alt="" style={{ width: "100%", height: "100%" }} />
               </Box>
-              <Box mt="39px" fontSize="18px" lineHeight="20px" textAlign="center" fontWeight="500">
+              <Box mt="39px" fontSize="18px" lineheight="20px" textAlign="center" fontWeight="500">
                 Kingkooog
               </Box>
-              <Box mt="16px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75">
+              <Box mt="16px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75">
                 Minimum Price
               </Box>
-              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center">
+              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center">
                 1000
               </Box>
-              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="18px" lineHeight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
+              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="18px" lineheight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
                 <img
                   src={AvatarImage}
                   alt=""
@@ -57,16 +57,16 @@ const Offer = () => {
               <Box position="absolute" top="0px" left="50%" border="4px solid white" borderRadius="8px" mt-37px width="48px" height="48px" overflow="hidden" style={{ transform: "translate(-50%, -50%)" }}>
                 <img src={CardImage} alt="" style={{ width: "100%", height: "100%" }} />
               </Box>
-              <Box mt="39px" fontSize="18px" lineHeight="20px" textAlign="center" fontWeight="500">
+              <Box mt="39px" fontSize="18px" lineheight="20px" textAlign="center" fontWeight="500">
                 Kingkooog
               </Box>
-              <Box mt="16px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75">
+              <Box mt="16px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75">
                 Minimum Price
               </Box>
-              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center">
+              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center">
                 1000
               </Box>
-              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="18px" lineHeight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
+              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="18px" lineheight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
                 <img
                   src={AvatarImage}
                   alt=""
@@ -89,16 +89,16 @@ const Offer = () => {
               <Box position="absolute" top="0px" left="50%" border="4px solid white" borderRadius="8px" mt-37px width="48px" height="48px" overflow="hidden" style={{ transform: "translate(-50%, -50%)" }}>
                 <img src={CardImage} alt="" style={{ width: "100%", height: "100%" }} />
               </Box>
-              <Box mt="39px" fontSize="18px" lineHeight="20px" textAlign="center" fontWeight="500">
+              <Box mt="39px" fontSize="18px" lineheight="20px" textAlign="center" fontWeight="500">
                 Kingkooog
               </Box>
-              <Box mt="16px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75">
+              <Box mt="16px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75">
                 Minimum Price
               </Box>
-              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center">
+              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center">
                 1000
               </Box>
-              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="18px" lineHeight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
+              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="18px" lineheight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
                 <img
                   src={AvatarImage}
                   alt=""
@@ -121,16 +121,16 @@ const Offer = () => {
               <Box position="absolute" top="0px" left="50%" border="4px solid white" borderRadius="8px" mt-37px width="48px" height="48px" overflow="hidden" style={{ transform: "translate(-50%, -50%)" }}>
                 <img src={CardImage} alt="" style={{ width: "100%", height: "100%" }} />
               </Box>
-              <Box mt="39px" fontSize="18px" lineHeight="20px" textAlign="center" fontWeight="500">
+              <Box mt="39px" fontSize="18px" lineheight="20px" textAlign="center" fontWeight="500">
                 Kingkooog
               </Box>
-              <Box mt="16px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75">
+              <Box mt="16px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75">
                 Minimum Price
               </Box>
-              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="12px" lineHeight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center">
+              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="12px" lineheight="12px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center">
                 1000
               </Box>
-              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="18px" lineHeight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
+              <Box mt="4px" border="1px solid #CECECE" borderRadius="8px" width="150px" height="40px" fontSize="18px" lineheight="20px" textAlign="center" color="#757B75" display="flex" alignItems="center" justifyContent="center" gridColumnGap="10px" style={{ textTransform: "uppercase" }}>
                 <img
                   src={AvatarImage}
                   alt=""
@@ -146,7 +146,7 @@ const Offer = () => {
             </Box>
           </Box>
         </CardGroup>
-        <Box maxWidth="495px" marginTop="42px" bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" lineHeight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" css={{ cursor: "pointer" }}>
+        <Box maxWidth="495px" marginTop="42px" bgcolor="#2BA55D" borderRadius="8px" fontSize="18px" lineheight="18px" textAlign="center" paddingY="19px" color="white" display="flex" justifyContent="center" alignItems="center" gridColumnGap="11px" sx={{ cursor: "pointer" }}>
           <MdSave fontSize="20px" />
           Save
         </Box>

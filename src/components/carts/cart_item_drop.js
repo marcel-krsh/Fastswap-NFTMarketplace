@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
-const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment }) => {
+const LastDrop = ({ index, img, simg, simg1, title, name, ctheme, payment }) => {
   const history = useHistory();
   const price_format = (value) => {
     var temp = value;
@@ -31,13 +31,22 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
     }
 
   }
+  const str_format = (str) =>{
+    let str_simple;
+    if(str.length>15)
+    {
+      str_simple = str.slice(0,15)+"..."
+    }
+    return str_simple
+  }
+
   return (
     <HCollection
       ctheme={ctheme ? 1 : 0}
       ltheme={lightTheme}
       dtheme={darkTheme}
       onClick={() => {
-        history.push({ pathname: "/Detail_page", search: index.toString() });
+        // history.push({ pathname: "/Detail_page", search: index.toString() });
       }}
     >
       <Box display="flex" flex="238" width="238px" height="238px" overflow="hidden" style={{background: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center", borderRadius: "8px 8px 0px 0px"}}>
@@ -51,7 +60,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
           }}
         ></img> */}
       </Box>
-      <Box display="flex" flex="75" borderBottom="1px solid #CECECE" borderTop="1px solid #CECECE">
+      <Box display="flex" flex="75"  borderTop="1px solid #CECECE">
         <Box
           display="flex"
           flex="2"
@@ -73,7 +82,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
             color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
             fontWeight="500"
           >
-            {title}
+            {str_format(title)}
           </Box>
           <Box
             display="flex"
@@ -87,42 +96,11 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
             fontWeight="normal"
 
           >
-            {name.slice(0,7)} ... {name.slice(-5)}
+            {str_format(name)}
           </Box>
         </Box>
       </Box>
-      <Box display="flex" flex="75" flexDirection="column">
-        <Box
-          marginLeft="20px"
-          display="flex"
-          flex="1"
-          justifyContent="flex-start"
-          alignItems="flex-end"
-          fontFamily="Poppins"
-          fontSize="10px"
-          color={ctheme ? "#757B75" : darkTheme.font_color_grey}
-        >
-          Lowest price
-        </Box>
-        <Box
-          marginLeft="20px"
-          display="flex"
-          flex="2"
-          justifyContent="flex-start"
-          alignItems="center"
-          fontFamily="Poppins"
-          fontSize="14px"
-          maxWidth="240px"
-          color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
-          lineheight="22px"
-          fontWeight="bold"
-          whiteSpace="nowrap"
-        >
-          <img src={simg1} width="24px" height="24px"></img>
-          {`\u00a0`}
-          {price_format(price)}
-        </Box>
-      </Box>
+    
     </HCollection>
   );
 };
@@ -131,7 +109,7 @@ const HCollection = styled(Box)`
   display: flex;
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 330px;
   flex-direction: column;
   background: ${({ ctheme, ltheme, dtheme }) =>
     ctheme ? ltheme.bgcolor_bar : dtheme.bgcolor_bar};

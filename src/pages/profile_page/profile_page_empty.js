@@ -18,8 +18,8 @@ import cover8 from "../../images/cover/cover-8.png";
 import cover9 from "../../images/cover/cover-9.png";
 import cover10 from "../../images/cover/cover-10.png";
 import cover11 from "../../images/cover/cover-11.png";
-import Btn_Customize from "../../components/buttons/btn_container";
-import Btn_Customize_Save from "../../components/buttons/btn_customize_save";
+import BtnCustomize from "../../components/buttons/btn_container";
+import BtnCustomizeSave from "../../components/buttons/btn_customize_save";
 import Last_Drop from "../../components/carts/cart_drop";
 import { lightTheme, darkTheme } from "../../theme/theme";
 
@@ -50,7 +50,7 @@ const Profile_page_empty = ({ ctheme }) => {
                 <FiMove fontSize="18px" color="#323232" fontWeight="bold"></FiMove>
               </Box>
             </Box>
-            <Drag_reposition display="none" position="absolute" top="40%" left="40%" width="25%" height="40px" bgcolor="#FCFCFC" borderRadius="8px" fontSize="20px" fontWeight="300" fontFamily="Work Sans" alignItems="center" justifyContent="center">
+            <Drag_reposition display="none" position="absolute" top="40%" left="40%" width="25%" height="40px" bgcolor="#FCFCFC" borderRadius="8px" fontSize="20px" fontWeight="300" fontFamily="Poppins" alignItems="center" justifyContent="center">
               Drag to reposition{"\u00a0"}
               {"\u00a0"}
               <FiMove />
@@ -59,7 +59,7 @@ const Profile_page_empty = ({ ctheme }) => {
           <Box display="flex" flex="50" marginTop="1%" width="100%">
             {flag_move === true ? (
               <Box position="absolute" display="flex" width="100%" justifyContent="flex-end" alignItems="center">
-                <Box display="flex" width="30%" fontSize="20px" fontWeight="800" fontFamily="Work Sans" alignItems="center" bgcolor="#FFFFFF" border="1px solid #CECECE" borderRadius="8px" marginRight="2%">
+                <Box display="flex" width="30%" fontSize="20px" fontWeight="800" fontFamily="Poppins" alignItems="center" bgcolor="#FFFFFF" border="1px solid #CECECE" borderRadius="8px" marginRight="2%">
                   {"\u00a0"}
                   {"\u00a0"}-{"\u00a0"}
                   {"\u00a0"}
@@ -68,7 +68,7 @@ const Profile_page_empty = ({ ctheme }) => {
                   {"\u00a0"}+{"\u00a0"}
                   {"\u00a0"}
                 </Box>
-                <Btn_Customize_Save color={"white"} back={"#2BA55D"} width={"10%"} height={"40px"} border={"1px solid #2BA55D"} str={"Save"} borderRadius={"8px"} />
+                <BtnCustomizeSave color={"white"} back={"#2BA55D"} width={"10%"} height={"40px"} border={"1px solid #2BA55D"} str={"Save"} borderRadius={"8px"} />
               </Box>
             ) : null}
           </Box>
@@ -81,13 +81,13 @@ const Profile_page_empty = ({ ctheme }) => {
         </Box>
         <Box display="flex" flex="1" marginLeft="5%" marginRight="5%" marginTop="5%">
           <Box display="flex" flex="1" flexDirection="column" justifyContent="center" marginLeft="5%">
-            <Detail_Letter0 display="flex" alignItems="flex-start" fontFamily="Work Sans" fontSize="24px" fontWeight="600">
+            <Detail_Letter0 display="flex" alignItems="flex-start" fontFamily="Poppins" fontSize="24px" fontWeight="600">
               Name
               <Box marginLeft="3%" display="none">
                 <FaPencilAlt fontSize="20px" color="#323232"></FaPencilAlt>
               </Box>
             </Detail_Letter0>
-            <Detail_letter1 display="flex" fontFamily="Work Sans" fontSize="18px" color="#363936" lineHeight="22px">
+            <Detail_letter1 display="flex" fontFamily="Poppins" fontSize="18px" color="#363936" lineheight="22px">
               <pre>
                 Lorem ipsum dolor sit amet, <br />
                 consectetur adipiscing elit. Placerat <br />
@@ -107,33 +107,33 @@ const Profile_page_empty = ({ ctheme }) => {
             <Box display="flex" flex="1"></Box>
             <Box_Letter1 width="80%" display="flex" flex="1" border="1px solid #CECECE" borderRadius="8px">
               <Box_Letter2 display="flex" flex="1" flexDirection="column" borderRight="1px solid #CECECE">
-                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Work Sans" fontWeight="800">
+                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Poppins" fontWeight="800">
                   47
                 </Detail_letter2>
-                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Work Sans" color="#757B75">
+                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Poppins" color="#757B75">
                   Items
                 </Detail_letter3>
               </Box_Letter2>
               <Box_Letter2 display="flex" flex="1" flexDirection="column" borderRight="1px solid #CECECE">
-                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Work Sans" fontWeight="800">
+                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Poppins" fontWeight="800">
                   $9,251
                 </Detail_letter2>
-                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Work Sans" color="#757B75">
+                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Poppins" color="#757B75">
                   Ave. Value
                 </Detail_letter3>
               </Box_Letter2>
               <Box display="flex" flex="1.2" flexDirection="column">
-                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Work Sans" fontWeight="800">
+                <Detail_letter2 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="20px" fontFamily="Poppins" fontWeight="800">
                   $24,239
                 </Detail_letter2>
-                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Work Sans" color="#757B75">
+                <Detail_letter3 display="flex" flex="1" justifyContent="center" alignItems="center" fontSize="12px" fontFamily="Poppins" color="#757B75">
                   Total Value
                 </Detail_letter3>
               </Box>
             </Box_Letter1>
             <Box width="80%" display="flex" flex="1"></Box>
             <Box_create_nft display="flex" flex="1" width="80%" justifyContent="flex-end">
-              <Btn_Customize color={"white"} back={"#2BA55D"} width={"60%"} height={"56px"} border={"1px solid #2BA55D"} str={"+ Create NFT"} borderRadius={"8px"} />
+              <BtnCustomize color={"white"} back={"#2BA55D"} width={"60%"} height={"56px"} border={"1px solid #2BA55D"} str={"+ Create NFT"} borderRadius={"8px"} />
             </Box_create_nft>
           </Box_Price1>
         </Box>
@@ -190,20 +190,21 @@ const Profile_page_empty = ({ ctheme }) => {
           </LItem_group>
         </Underline_link>
       </Show_Items>
+
       <Box display="flex" width="100%" marginTop="3%">
         <Box display="flex" marginLeft="5%" marginRight="5%" marginTop="3%" width="100%">
           <Box display="flex" flex="1" alignItems="center" marginRight="2%">
-            <Btn_Customize color={"white"} back={"#2BA55D"} width={"100%"} height={"32px"} border={"1px solid #2BA55D"} str={"All 7"} borderRadius={"8px"} />
+            <BtnCustomize color={"white"} back={"#2BA55D"} width={"100%"} height={"32px"} border={"1px solid #2BA55D"} str={"All 7"} borderRadius={"8px"} />
           </Box>
-          <Tab_letter1 display="flex" flex="2" fontSize="14px" fontFamily="Work Sans" fontWeight="600" alignItems="center" justifyContent="center" marginRight="2%">
+          <Tab_letter1 display="flex" flex="2" fontSize="14px" fontFamily="Poppins" fontWeight="600" alignItems="center" justifyContent="center" marginRight="2%">
             On auction 4
           </Tab_letter1>
-          <Tab_letter1 display="flex" flex="1" fontSize="14px" fontFamily="Work Sans" fontWeight="600" alignItems="center" marginRight="2%">
+          <Tab_letter1 display="flex" flex="1" fontSize="14px" fontFamily="Poppins" fontWeight="600" alignItems="center" marginRight="2%">
             Sold 3
           </Tab_letter1>
           <Tab_letter1 display="flex" flex="5"></Tab_letter1>
           <Box display="flex" flex="3" alignItems="center" justifyContent="flex-end">
-            <Btn_Customize color={"#757B75"} back={"white"} width={"100%"} height={"32px"} border={"1px solid #757B75"} str={"Price - lowest"} borderRadius={"8px"} />
+            <BtnCustomize color={"#757B75"} back={"white"} width={"100%"} height={"32px"} border={"1px solid #757B75"} str={"Price - lowest"} borderRadius={"8px"} />
           </Box>
         </Box>
       </Box>
@@ -241,7 +242,7 @@ const Profile_page_empty = ({ ctheme }) => {
             </Collection_Image>
           </Box>
           <Box my="30px" display="flex" justifyContent="center">
-            <Btn_Customize display="flex" color={"white"} back={"#2BA55D"} width={"230px"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
+            <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"230px"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
           </Box>
         </Box>
       </Part_Drop>
@@ -381,7 +382,7 @@ const Part_Drop = styled(Box)`
 `;
 
 const LItem_group = styled(Box)`
-  font-family: "Work Sans";
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
   line-height: 22px;
@@ -422,55 +423,4 @@ const Show_Detail = styled(Box)`
   flex-direction: column;
 `;
 
-const StyledContainer = styled(Box)`
-  position: relative;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  background: ${({ ctheme, ltheme, dtheme }) => (ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main)};
-`;
-
-const Header1_space = styled(Box)`
-  @media (max-width: 1000px) {
-    margin-left: 8% !important;
-    margin-right: 8% !important;
-  }
-  @media (max-width: 800px) {
-    margin-left: 5% !important;
-    margin-right: 5% !important;
-  }
-`;
-
-const HLetter = styled(Box)`
-  display: flex;
-  height: 34px;
-  justify-content: center;
-  align-items: center;
-  font-family: Work Sans;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-  color: #2ba55d;
-  border-top: 4px solid rgba(0, 0, 0, 0);
-  &:hover {
-    border-top: 4px solid #2ba55d;
-    cursor: pointer;
-  }
-  @media (max-width: 1000px) {
-    font-size: 12px;
-  }
-  @media (max-width: 800px) {
-    font-size: 12px;
-  }
-  @media (max-width: 600px) {
-    font-size: 8px;
-  }
-`;
-
-const Header1 = styled(Box)`
-  display: flex;
-  width: 100%;
-`;
 export default Profile_page_empty;

@@ -4,7 +4,7 @@ import { Box, Modal } from "@material-ui/core";
 import styled from "styled-components";
 import { MdMenuOpen } from "react-icons/md";
 import { injected, walletConnect, trustWallet, binance_wallet } from "../../utils/connectors";
-import _ from "lodash";
+// import _ from "lodash";
 import { useWeb3React } from "@web3-react/core";
 import metamask from "../../images/MetaMask.png";
 import walletconnect from "../../images/WalletConnect.png";
@@ -43,17 +43,18 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     TrustWallet: trustWallet,
   };
 
-  const MOBILE_CONNECTORS = {
-    MetaMask: injected,
-    TrustWallet: trustWallet,
-    BinanceWallet: binance_wallet,
-  };
+  // const MOBILE_CONNECTORS = {
+  //   MetaMask: injected,
+  //   TrustWallet: trustWallet,
+  //   BinanceWallet: binance_wallet,
+  // };
 
   const walletConnectors = DESKTOP_CONNECTORS;
-  const { connector, account, activate, deactivate } = useWeb3React();
+  const { account, activate, deactivate } = useWeb3React();
   const handleDisconnect = () => {
     deactivate();
     window.localStorage.removeItem("CurrentWalletConnect");
+    window.localStorage.removeItem("CurrentAccount");
   };
 
   const handleConnect = (currentConnector) => {
@@ -62,12 +63,12 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     window.localStorage.setItem("CurrentWalletConnect", currentConnector);
   };
 
-  const getShortTxHash = (txHash, margin = 4) => {
-    if (_.isEmpty(txHash)) {
-      return "";
-    }
-    return txHash.replace(txHash.substring(margin + 2, txHash.length - margin), "....");
-  };
+  // const getShortTxHash = (txHash, margin = 4) => {
+  //   if (_.isEmpty(txHash)) {
+  //     return "";
+  //   }
+  //   return txHash.replace(txHash.substring(margin + 2, txHash.length - margin), "....");
+  // };
 
   useEffect(() => {
     const currentWalletState = window.localStorage.getItem("CurrentWalletConnect");
@@ -79,14 +80,20 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
       {/* {theme? <div>123</div>:<div>KKK</div>} */}
       <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
         <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D" />
-        <Logo_img
+        <Logoimg
           onClick={() => {
             history.push({ pathname: "/" });
           }}
         >
           <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }}></img>
+        </Logoimg>
+        {/* <Logoimg onClick={() => {
+          history.push({ pathname: "/" });
+          window.localStorage.setItem("CurrentAccount", account);
+        }}>
+          <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }} alt=""></img>
           FASTSWAP
-        </Logo_img>
+        </Logoimg> */}
       </Box>
       <Box display="flex" flex="3"></Box>
       <Box display="flex" flex="1" alignItems="center" justifyContent="center">
@@ -94,7 +101,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
           <DropDown text={account.slice(0, 7) + "..." + account.slice(-4)}>
             <DropDownItem
               onClick={() => {
-                history.push("/");
+                history.push("/Items");
               }}
             >
               Items
@@ -152,7 +159,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
             </DropDownItem>
           </DropDown>
         ) : (
-          <Btn_connect onClick={handleOpen}>Connect</Btn_connect>
+          <Btnconnect onClick={handleOpen}>Connect</Btnconnect>
         )}
       </Box>
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
@@ -162,7 +169,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
               height: "68px",
               display: "flex",
               alignItems: "flex-start",
-              lineHeight: "initial",
+              lineheight: "initial",
             }}
           >
             <Box fontSize="28px" fontWeight="bold" color="white">
@@ -189,10 +196,10 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   handleConnect("MetaMask");
                 }}
               >
-                <img src={metamask} width="40px" height="40px"></img>
-                <Connect_btn_letter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
+                <img src={metamask} width="40px" height="40px" alt=""></img>
+                <Connectbtnletter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
                   MetaMask
-                </Connect_btn_letter>
+                </Connectbtnletter>
               </Box>
             </Box>
             <Box display="flex" alignItems="center" height="100%" flex="1">
@@ -214,10 +221,10 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   handleConnect("WalletConnect");
                 }}
               >
-                <img src={walletconnect} width="40px" height="40px"></img>
-                <Connect_btn_letter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
+                <img src={walletconnect} width="40px" height="40px" alt=""></img>
+                <Connectbtnletter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
                   WalletConnect
-                </Connect_btn_letter>
+                </Connectbtnletter>
               </Box>
             </Box>
             <Box display="flex" alignItems="center" height="100%" flex="1">
@@ -239,10 +246,10 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   handleConnect("BinanceWallet");
                 }}
               >
-                <img src={binance} width="40px" height="40px"></img>
-                <Connect_btn_letter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
+                <img src={binance} width="40px" height="40px" alt=""></img>
+                <Connectbtnletter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
                   BinanceWallet
-                </Connect_btn_letter>
+                </Connectbtnletter>
               </Box>
             </Box>
             <Box display="flex" alignItems="center" height="100%" flex="1">
@@ -264,10 +271,10 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
                   handleConnect("TrustWallet");
                 }}
               >
-                <img src={trust} width="40px" height="40px"></img>
-                <Connect_btn_letter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
+                <img src={trust} width="40px" height="40px" alt=""></img>
+                <Connectbtnletter fontWeight="bold" margin="20px" color="#337ab7" fontSize="1.25rem">
                   TrustWallet
-                </Connect_btn_letter>
+                </Connectbtnletter>
               </Box>
             </Box>
           </Box>
@@ -277,13 +284,14 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
   );
 };
 
-const Connect_btn_letter = styled(Box)`
+const Connectbtnletter = styled(Box)`
   @media (max-width: 400px) {
     font-size: 0.75rem !important;
   }
 `;
 
-const Logo_img = styled(Box)`
+const Logoimg = styled(Box)`
+  font-family: Poppins;
   display: flex;
   &:hover {
     cursor: pointer;
@@ -303,7 +311,7 @@ const StyledContainer = styled(Box)`
   // box-shadow: 0px 4px 3px -4px rgba(0, 0, 0, 0.08);
 `;
 
-const Btn_connect = styled(Box)`
+const Btnconnect = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -312,7 +320,7 @@ const Btn_connect = styled(Box)`
   background: #2ba55d;
   border-radius: 8px;
   color: white;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
