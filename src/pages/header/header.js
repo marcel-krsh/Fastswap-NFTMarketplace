@@ -94,28 +94,28 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
           <DropDown text={account.slice(0, 7) + "..." + account.slice(-4)}>
             <DropDownItem
               onClick={() => {
-                window.location.href = "/";
+                history.push("/");
               }}
             >
               Items
             </DropDownItem>
             <DropDownItem
               onClick={() => {
-                window.location.href = "/Collection_page";
+                history.push("/Collection_page");
               }}
             >
               Collections
             </DropDownItem>
             <DropDownItem
               onClick={() => {
-                window.location.href = "/Setting_page";
+                history.push("/watchlist");
               }}
             >
               WatchList
             </DropDownItem>
             <DropDownItem
               onClick={() => {
-                window.location.href = "/Setting_page";
+                history.push("/offers");
               }}
             >
               Offers
@@ -123,21 +123,21 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
             <Box width="80%" my={1} marginLeft={"10%"} borderTop="1px solid #cecece" />
             <DropDownItem
               onClick={() => {
-                window.location.href = "/Profile_prev";
+                history.push("/Profile_empty");
               }}
             >
               Profile
             </DropDownItem>
             <DropDownItem
               onClick={() => {
-                window.location.href = "/Setting_page";
+                history.push("/Setting_page");
               }}
             >
               Settings
             </DropDownItem>
             <DropDownItem
               onClick={() => {
-                window.location.href = "/Setting_page";
+                history.push("/transactions");
               }}
             >
               Transactions
