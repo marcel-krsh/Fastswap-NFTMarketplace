@@ -38,14 +38,11 @@ const Items = ({ ctheme }) => {
             // let response_ipfs = 
             await fetch(token_uri).then(async (res) => {
                 let json_ipfs = await res.json();
-                // console.log(json_ipfs)
                 tokens.push({
                     image: json_ipfs.image,
                     name: json_ipfs.name,
                     description: json_ipfs.description
                 });
-
-
             }).catch((error) => {
                 // console.log(error);
             });
@@ -58,14 +55,13 @@ const Items = ({ ctheme }) => {
     }
     useEffect(() => {
         get_items();
-
     }, [])
 
     return (
         <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} position="relative">
             { !loading?
                 <Box position="fixed" top="50%" left="50%" zIndex="100">
-                    <Loader type="Circles" color="#00BFFF" height={80} width={80} />
+                    <Loader type="Oval" color="#2BA55D" height={100} width={100} />
                 </Box>:''
             }
 
@@ -94,9 +90,6 @@ const Items = ({ ctheme }) => {
                             }
                         </GridShow>
                     </Box>
-                    {/* <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
-                        <BtnCustomize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
-                    </Box> */}
                 </Box>
             </PartDrop>
         </StyledContainer>
@@ -116,17 +109,6 @@ const GridShow = styled(Box)`
     @media (max-width: 850px) {
         grid-template-columns: auto !important;
     }
-    /* @media (max-width: 1600px) {
-        grid-template-columns:auto auto auto auto;
-
-    }
-    @media (max-width: 1600px) {
-        grid-template-columns:auto auto auto auto;
-
-    }
-    @media (max-width: 1600px) {
-        grid-template-columns:auto auto auto auto;
-    } */
 `
 
 const Header1space = styled(Box)`

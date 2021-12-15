@@ -114,36 +114,43 @@ const Create_NFT = ({ ctheme }) => {
             var dur = "0x" + (duration * 24 * 60 * 60).toString(16);
             if (price_type.duke === true) {
               pay_method = 2
-              price1 = (price.duke*Math.pow(10,9)).toString(16);
+              price1 = (price.duke * Math.pow(10, 9)).toString(16);
 
             }
             if (price_type.fast === true) {
               pay_method = 1
-              price1 = (price.fast*Math.pow(10,18)).toString(16);
+              price1 = (price.fast * Math.pow(10, 18)).toString(16);
             }
             if (price_type.bnb === true) {
               pay_method = 0
-              price1 = (price.bnb*Math.pow(10,18)).toString(16);
+              price1 = (price.bnb * Math.pow(10, 18)).toString(16);
             }
             // let price_wei = "0x" + price1;
-            let price_wei = "0x"+price1;
+            let price_wei = "0x" + price1;
             const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
             await approve.wait();
-            await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account)  // 0: BNB, 1: FAST, 2: DUKE
-              .then((res) => {
-                set_process("Created successfully.");
-                setTimeout(() => {
-                  history.push({ pathname: "/" });
-                  window.location.reload();
-                  handleClose();
-                }, 3000);
+            let auction = await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account)  // 0: BNB, 1: FAST, 2: DUKE
+            await auction.wait();
+              // .then((res) => {
+              //   set_process("Created successfully.");
+              //   setTimeout(() => {
+              //     history.push({ pathname: "/" });
+              //     window.location.reload();
+              //     handleClose();
+              //   }, 3000);
 
-              }).catch((error) => {
-                set_process("Fault! Try again.")
-                setTimeout(() => {
-                  handleClose();
-                }, 3000);
-              });
+              // }).catch((error) => {
+              //   set_process("Fault! Try again.")
+              //   setTimeout(() => {
+              //     handleClose();
+              //   }, 3000);
+              // });
+              set_process("Created successfully.");
+              setTimeout(() => {
+                history.push({ pathname: "/" });
+                window.location.reload();
+                handleClose();
+              }, 3000);
           }
           catch (err) {
             set_process("Fault! Try again.")
@@ -154,48 +161,54 @@ const Create_NFT = ({ ctheme }) => {
           }
         }
         else {
-          try{
+          try {
             const amount = "0x" + supply.toString(16);
             console.log(temp_hash.path)
             const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount)
             await createNFT.wait();
             const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path)
-  
             if (price_type.duke === true) {
               pay_method = "DUKE"
-              price1 = (price.duke*Math.pow(10,9)).toString(16);
+              price1 = (price.duke * Math.pow(10, 9)).toString(16);
             }
             if (price_type.fast === true) {
               pay_method = "FAST"
-              price1 = (price.fast*Math.pow(10,18)).toString(16);
+              price1 = (price.fast * Math.pow(10, 18)).toString(16);
             }
             if (price_type.bnb === true) {
               pay_method = "BNB"
-              price1 = (price.bnb*Math.pow(10,18)).toString(16);
+              price1 = (price.bnb * Math.pow(10, 18)).toString(16);
             }
-            let price_wei = "0x"+price1;
-  
+            let price_wei = "0x" + price1;
+
             for (var i = 0; i < nftIDs.length; i++) {
               var token_id1 = parseInt(nftIDs[i]._hex, 16);
               const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id1)
               await approve.wait();
-              await marketplaceContract.registerForSale(token_id1, price_wei, temp_hash.path, pay_method)
-                .then((res) => {
-                  set_process("Created successfully.");
-                  setTimeout(() => {
-                    history.push({ pathname: "/" });
-                    window.location.reload();
-                    handleClose();
-                  }, 3000);
-                }).catch((error) => {
-                  set_process("Fault! Try again.");
-                  setTimeout(() => {
-                    handleClose();
-                  }, 3000);
-                });
+              let sale = await marketplaceContract.registerForSale(token_id1, price_wei, temp_hash.path, pay_method)
+              await sale.wait();
+              // .then((res) => {
+              // set_process("Created successfully.");
+              // setTimeout(() => {
+              //   history.push({ pathname: "/" });
+              //   window.location.reload();
+              //   handleClose();
+              // }, 3000);
+              // }).catch((error) => {
+              //   set_process("Fault! Try again.");
+              //   setTimeout(() => {
+              //     handleClose();
+              //   }, 3000);
+              // });
+              set_process("Created successfully.");
+              setTimeout(() => {
+                history.push({ pathname: "/" });
+                window.location.reload();
+                handleClose();
+              }, 3000);
             }
           }
-          catch(err){
+          catch (err) {
             set_process("Fault! Try again.");
             setTimeout(() => {
               handleClose();
@@ -678,7 +691,7 @@ const Create_NFT = ({ ctheme }) => {
                       width="80%"
                     >
                       <Box display="flex" bgcolor="#54DADE" borderRadius="100%" flex="1" justifyContent="center">
-                        {price_type.duke ? <img src={small_duke} width="90%" height="90%" alt=""/> : price_type.fast ? <img src={icon_logo} width="90%" height="90%" alt=""/> : <img src={bnb1} width="90%" height="90%" alt=""/>}
+                        {price_type.duke ? <img src={small_duke} width="90%" height="90%" alt="" /> : price_type.fast ? <img src={icon_logo} width="90%" height="90%" alt="" /> : <img src={bnb1} width="90%" height="90%" alt="" />}
                       </Box>
                       <Box
                         color="black"

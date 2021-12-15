@@ -81,24 +81,33 @@ const Detail_Page = ({ ctheme }) => {
       // await approve1.wait();
       // console.log(mainData.price)
       // console.log(price)
-      await marketplaceContract.buy(mainData.ids, price)
-        .then((res) => {
-          set_process("Baught successfully.");
-          setTimeout(() => {
-            history.push({ pathname: "/" });
-            set_process("Processing...");
-            window.location.reload();
-            handleClose();
-          }, 5000);
+      let buy = await marketplaceContract.buy(mainData.ids, price)
+      await buy.wait()
+      set_process("Baught successfully.");
+      setTimeout(() => {
+        history.push({ pathname: "/" });
+        set_process("Processing...");
+        window.location.reload();
+        handleClose();
+      }, 3000);
 
-        }).catch((error) => {
-          console.log(error)
-          set_process("Fault! Try again.");
-          setTimeout(() => {
-            set_process("Processing...");
-            handleClose();
-          }, 5000);
-        });
+        // .then((res) => {
+        //   set_process("Baught successfully.");
+        //   setTimeout(() => {
+        //     history.push({ pathname: "/" });
+        //     set_process("Processing...");
+        //     window.location.reload();
+        //     handleClose();
+        //   }, 3000);
+
+        // }).catch((error) => {
+        //   console.log(error)
+        //   set_process("Fault! Try again.");
+        //   setTimeout(() => {
+        //     set_process("Processing...");
+        //     handleClose();
+        //   }, 3000);
+        // });
     }
     catch (error) {
       set_process("Fault! Try again.");

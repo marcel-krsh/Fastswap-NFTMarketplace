@@ -52,7 +52,7 @@ const getProducts =
         const genesisIPFSData = await requestAPICall(item.uri).then((res) => {
           return res.data;
         });
-        console.log("KKK:",genesisIPFSData)
+        // console.log("KKK:",genesisIPFSData)
         products.push({
           img: genesisIPFSData.image,
           title: genesisIPFSData.name,
