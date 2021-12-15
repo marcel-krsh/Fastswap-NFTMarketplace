@@ -17,6 +17,7 @@ import { ethers } from 'ethers';
 import { NFT_ABI } from '../../utils/abi';
 import { CONTRACTS } from '../../utils/constants';
 import { useWeb3React } from '@web3-react/core';
+import Loader from 'react-loader-spinner';
 
 const Items = ({ ctheme }) => {
     // const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Items = ({ ctheme }) => {
     const history = useHistory();
     const { nfts } = useSelector(state => state.product);
     const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
+    const [loading, set_loading] = useState(false);
 
     const [tokens_uri, set_tokens_uri] = useState([]);
 
@@ -34,7 +36,7 @@ const Items = ({ ctheme }) => {
             let owner_index = await nftContract.tokenOfOwnerByIndex(account, i);
             let token_uri = await nftContract.tokenURI(owner_index);
             // let response_ipfs = 
-            await fetch(token_uri).then(async(res) => {
+            await fetch(token_uri).then(async (res) => {
                 let json_ipfs = await res.json();
                 // console.log(json_ipfs)
                 tokens.push({
@@ -42,11 +44,15 @@ const Items = ({ ctheme }) => {
                     name: json_ipfs.name,
                     description: json_ipfs.description
                 });
-                
+
 
             }).catch((error) => {
                 // console.log(error);
             });
+            if( i === parseInt(balance_owner._hex)-1)
+            {
+                set_loading(true);
+            }
         }
         set_tokens_uri(tokens);
     }
@@ -56,7 +62,13 @@ const Items = ({ ctheme }) => {
     }, [])
 
     return (
-        <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
+        <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} position="relative">
+            { !loading?
+                <Box position="fixed" top="50%" left="50%" zIndex="100">
+                    <Loader type="Circles" color="#00BFFF" height={80} width={80} />
+                </Box>:''
+            }
+
             <Header1>
                 <Header1space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
                     <HLetter>Overview</HLetter>
@@ -75,7 +87,7 @@ const Items = ({ ctheme }) => {
                                 tokens_uri.length > 0 && tokens_uri.map((item, index) => {
                                     return (
                                         <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
-                                            <LastDrop index={index} img={item.image} simg={small_ellipse} title={item.name}  name={item.description} ctheme={ctheme}></LastDrop>
+                                            <LastDrop index={index} img={item.image} simg={small_ellipse} title={item.name} name={item.description} ctheme={ctheme}></LastDrop>
                                         </Box>
                                     )
                                 })

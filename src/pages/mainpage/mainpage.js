@@ -14,6 +14,7 @@ import CartAuction from "../../components/carts/cart_auction"
 import ImgLetter from "../../components/letters/img_letter"
 import { lightTheme, darkTheme } from "../../theme/theme"
 
+
 const Mainpage = ({ ctheme }) => {
     // const dispatch = useDispatch();
     const history = useHistory();
@@ -21,7 +22,7 @@ const Mainpage = ({ ctheme }) => {
     const { nfts } = useSelector(state => state.product);
     const { auctions } = useSelector(state => state.product1);
     useEffect(() => {
-        console.log("auctions111", auctions);
+        // console.log("auctions111", auctions);
         // console.log("123:",nfts);
         // setRerender('Hello World');
     })
@@ -40,8 +41,8 @@ const Mainpage = ({ ctheme }) => {
             <PartHeader>
                 <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%">
                     <Leftimgletter display="flex" flex="4" flexDirection="column" width="100%" fontSize="72px">
-                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" fontWeight="bold" lineheight="80px" fontFamily="Poppins" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Collect </Box>
-                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="center" fontWeight="bold" lineheight="80px" fontFamily="Poppins" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>digital art</Box>
+                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="flex-end" fontWeight="bold" lineheight="80px" fontFamily="Poppins" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Collect </Box>
+                        <Box display="flex" flex="1" justifyContent="flex-start" alignItems="flex-start" fontWeight="bold" lineheight="80px" fontFamily="Poppins" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>Digital art</Box>
                     </Leftimgletter>
                     <Leftimgletter1 display="flex" flex="1" width="100%" fontSize="20px">
                         <Box display="flex" justifyContent="flex-start" alignItems="center" fontFamily="Poppins" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey}>Buy and Sell NFTs on Binance Smart Chain</Box>
@@ -88,8 +89,9 @@ const Mainpage = ({ ctheme }) => {
             </PartHeader>
 
             <PartDrop>
-                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
+                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"} position="relative">
                     <ImgLetter letter={'Latest drops 🚀'} ctheme={ctheme} />
+
                     <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center">
                         <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
                             {
@@ -103,14 +105,14 @@ const Mainpage = ({ ctheme }) => {
                             }
                         </GridShow>
                     </Box>
-                    <ImgLetter letter={'Auctions'} ctheme={ctheme}/>
+                    <ImgLetter letter={'Auctions'} ctheme={ctheme} />
                     <Box display="flex" marginTop="2%" justifyContent="center">
                         <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px" >
                             {
                                 auctions.length > 0 && auctions.map((item, index) => {
                                     return (
                                         <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
-                                            <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE' ? small_duke : item.payment_method === 'FAST' ? icon_logo : item.payment_method === 'BNB' ? bnb1 : ''} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration ={item.duration} ctheme={ctheme} payment={item.payment_method}></CartAuction>
+                                            <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE' ? small_duke : item.payment_method === 'FAST' ? icon_logo : item.payment_method === 'BNB' ? bnb1 : ''} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration={item.duration} ctheme={ctheme} payment={item.payment_method}></CartAuction>
                                         </Box>
                                     )
                                 })

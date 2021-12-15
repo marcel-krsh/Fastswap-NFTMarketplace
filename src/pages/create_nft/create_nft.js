@@ -95,7 +95,6 @@ const Create_NFT = ({ ctheme }) => {
         "image": image_url,
       };
 
-
       let price1;
       let pay_method;
       if (toggle1 === true) {
@@ -137,20 +136,20 @@ const Create_NFT = ({ ctheme }) => {
                   history.push({ pathname: "/" });
                   window.location.reload();
                   handleClose();
-                }, 2000);
+                }, 3000);
 
               }).catch((error) => {
                 set_process("Fault! Try again.")
                 setTimeout(() => {
                   handleClose();
-                }, 2000);
+                }, 3000);
               });
           }
           catch (err) {
             set_process("Fault! Try again.")
             setTimeout(() => {
               handleClose();
-            }, 2000);
+            }, 3000);
             console.log(err)
           }
         }
@@ -187,12 +186,12 @@ const Create_NFT = ({ ctheme }) => {
                     history.push({ pathname: "/" });
                     window.location.reload();
                     handleClose();
-                  }, 2000);
+                  }, 3000);
                 }).catch((error) => {
                   set_process("Fault! Try again.");
                   setTimeout(() => {
                     handleClose();
-                  }, 2000);
+                  }, 3000);
                 });
             }
           }
@@ -200,11 +199,9 @@ const Create_NFT = ({ ctheme }) => {
             set_process("Fault! Try again.");
             setTimeout(() => {
               handleClose();
-            }, 2000);
+            }, 3000);
             console.log(err)
           }
-          
-
         }
 
       }

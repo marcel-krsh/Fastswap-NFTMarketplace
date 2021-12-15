@@ -26,12 +26,13 @@ import { NFT_MARKETPLACE_ABI, NFT_ABI, FAST_TOKEN_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
 import { ethers } from "ethers";
 
+
 const Detail_Page = ({ ctheme }) => {
   const history = useHistory();
   const nftsIndex = parseInt(history.location.search.slice(1));
   const { nfts } = useSelector((store) => store.product);
   const mainData = nfts[nftsIndex];
-  const {account,  library } = useWeb3React();
+  const { account, library } = useWeb3React();
   const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
   const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
   // const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
@@ -73,7 +74,7 @@ const Detail_Page = ({ ctheme }) => {
   const handleBuyNow = async () => {
     handleOpen();
     try {
-      const price = "0x"+parseInt(mainData.price).toString(16);
+      const price = "0x" + parseInt(mainData.price).toString(16);
       const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, price);
       await approve.wait();
       //const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
@@ -88,7 +89,7 @@ const Detail_Page = ({ ctheme }) => {
             set_process("Processing...");
             window.location.reload();
             handleClose();
-          }, 2000);
+          }, 5000);
 
         }).catch((error) => {
           console.log(error)
@@ -96,7 +97,7 @@ const Detail_Page = ({ ctheme }) => {
           setTimeout(() => {
             set_process("Processing...");
             handleClose();
-          }, 2000);
+          }, 5000);
         });
     }
     catch (error) {
