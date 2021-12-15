@@ -49,15 +49,16 @@ const LastDrop = ({ index, img, simg, simg1, title, name, ctheme, payment }) => 
         // history.push({ pathname: "/Detail_page", search: index.toString() });
       }}
     >
-      <Box display="flex" flex="1">
-        <img
+      <Box display="flex" flex="238" width="238px" height="238px" overflow="hidden" style={{background: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center", borderRadius: "8px 8px 0px 0px"}}>
+        {/* <img
           src={img}
-          width="238Poppinspx"
-          height="238px"
+          width=""
+          height=""
           style={{
             borderRadius: "8px 8px 0px 0px",
+
           }}
-        ></img>
+        ></img> */}
       </Box>
       <Box display="flex" flex="75"  borderTop="1px solid #CECECE">
         <Box

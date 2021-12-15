@@ -58,7 +58,7 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
       //   history.push({ pathname: "/Detail_page", search: index.toString() });
       // }}
     >
-      <Box display="flex" flex="1">
+      {/* <Box display="flex" flex="1">
         <img
           src={img}
           width="238Poppinspx"
@@ -66,7 +66,17 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
           style={{
             borderRadius: "8px 8px 0px 0px",
           }}
-        ></img>
+        ></img> */}
+              <Box display="flex" flex="238" width="238px" height="238px" overflow="hidden" style={{background: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center", borderRadius: "8px 8px 0px 0px"}}>
+        {/* <img
+          src={img}
+          width=""
+          height=""
+          style={{
+            borderRadius: "8px 8px 0px 0px",
+
+          }}
+        ></img> */}
       </Box>
       <Box display="flex" flex="75" borderBottom="1px solid #CECECE" borderTop="1px solid #CECECE">
         <Box
