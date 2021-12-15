@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Box, Select, MenuItem } from "@material-ui/core";
 import { MdLockOutline } from "react-icons/md";
 import { IoMdCheckmarkCircle } from "react-icons/io";
+import { CustomSelect } from "../../components/elements";
 
 const Support = () => {
   return (
@@ -41,7 +42,7 @@ const Support = () => {
             Visit our <CustomLink>help center</CustomLink> to learn how to get started with buying, selling, and creating.
           </div>
         </TextBox>
-        <CustomSelect labelId="demo-simple-select-label" id="demo-simple-select" value={"1"} label="Age" onChange={() => {}}>
+        <CustomSelect labelId="demo-simple-select-label" id="demo-simple-select" value={10} label="Age" onChange={() => {}}>
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
@@ -64,16 +65,6 @@ const SupportMain = styled(Box)`
   max-width: 617px;
   display: flex;
   flex-direction: column;
-`;
-const CustomSelect = styled(Select)`
-  padding: 5px;
-  border: 1px solid gray;
-  border: 1px solid #cecece;
-  box-sizing: border-box;
-  border-radius: 8px;
-  &::before {
-    display: none;
-  }
 `;
 const TextBox = styled(Box)`
   margin-top: 20px;

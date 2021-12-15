@@ -19,13 +19,11 @@ import detail_chart1 from "../../images/detail_chart1.png";
 import BtnCustomize from "../../components/buttons/btn_container";
 import Last_Drop from "../../components/carts/cart_drop";
 import List_ULetter from "../../components/letters/list_uletter";
-import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { NFT_MARKETPLACE_ABI, NFT_ABI, FAST_TOKEN_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
 import { ethers } from "ethers";
-
 
 const Detail_Page = ({ ctheme }) => {
   const history = useHistory();
@@ -33,15 +31,15 @@ const Detail_Page = ({ ctheme }) => {
   const { nfts } = useSelector((store) => store.product);
   const mainData = nfts[nftsIndex];
   const { account, library } = useWeb3React();
-  const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
-  const marketplaceContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null, [library])
+  const nftContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null), [library]);
+  const marketplaceContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null), [library]);
   // const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
-  const fastContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.FAST_TOKEN, FAST_TOKEN_ABI, library.getSigner()) : null, [library])
+  const fastContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.FAST_TOKEN, FAST_TOKEN_ABI, library.getSigner()) : null), [library]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-  }
+  };
   // const [type_trans, set_trans] = useState(false);
 
   const [process, set_process] = useState("Processing...");
@@ -50,22 +48,21 @@ const Detail_Page = ({ ctheme }) => {
     // console.log(nfts);
   });
   const style1 = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '40%',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "40%",
     height: 250,
     boxShadow: 24,
     p: 4,
-    borderRadius: '10px',
-    backgroundColor: '#2BA55D',
-    border: 'none',
+    borderRadius: "10px",
+    backgroundColor: "#2BA55D",
+    border: "none",
     display: "flex",
-    flexDirection: 'column',
-    fontFamily: "Poppins"
+    flexDirection: "column",
+    fontFamily: "Poppins",
   };
-
 
   if (mainData === undefined || mainData === null) {
     history.push("/");
@@ -81,8 +78,8 @@ const Detail_Page = ({ ctheme }) => {
       // await approve1.wait();
       // console.log(mainData.price)
       // console.log(price)
-      let buy = await marketplaceContract.buy(mainData.ids, price)
-      await buy.wait()
+      let buy = await marketplaceContract.buy(mainData.ids, price);
+      await buy.wait();
       set_process("Baught successfully.");
       setTimeout(() => {
         history.push({ pathname: "/" });
@@ -91,34 +88,32 @@ const Detail_Page = ({ ctheme }) => {
         handleClose();
       }, 3000);
 
-        // .then((res) => {
-        //   set_process("Baught successfully.");
-        //   setTimeout(() => {
-        //     history.push({ pathname: "/" });
-        //     set_process("Processing...");
-        //     window.location.reload();
-        //     handleClose();
-        //   }, 3000);
+      // .then((res) => {
+      //   set_process("Baught successfully.");
+      //   setTimeout(() => {
+      //     history.push({ pathname: "/" });
+      //     set_process("Processing...");
+      //     window.location.reload();
+      //     handleClose();
+      //   }, 3000);
 
-        // }).catch((error) => {
-        //   console.log(error)
-        //   set_process("Fault! Try again.");
-        //   setTimeout(() => {
-        //     set_process("Processing...");
-        //     handleClose();
-        //   }, 3000);
-        // });
-    }
-    catch (error) {
+      // }).catch((error) => {
+      //   console.log(error)
+      //   set_process("Fault! Try again.");
+      //   setTimeout(() => {
+      //     set_process("Processing...");
+      //     handleClose();
+      //   }, 3000);
+      // });
+    } catch (error) {
       set_process("Fault! Try again.");
       setTimeout(() => {
         set_process("Processing...");
         handleClose();
         // set_trans(false);
       });
-      console.log(error)
+      console.log(error);
     }
-
   };
   const price_format = (payment, value) => {
     var temp = value;
@@ -136,16 +131,7 @@ const Detail_Page = ({ ctheme }) => {
     }
   };
   return (
-    <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
-      <Header1>
-        <Header1_space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
-          <HLetter>Overview</HLetter>
-          <HLetter>Explore</HLetter>
-          <HLetter>Rankings</HLetter>
-          <HLetter>Activities</HLetter>
-          <HLetter>Manage</HLetter>
-        </Header1_space>
-      </Header1>
+    <>
       <Box display="flex" width="100%" marginTop="5%">
         <Detail_Img display="flex" marginLeft="5%" marginRight="5%" width="100%">
           <Box display="flex" flex="4" borderRadius="8px">
@@ -276,20 +262,17 @@ const Detail_Page = ({ ctheme }) => {
           </Underline3>
         </Underline1>
       </Box>
-
       <Box display="flex" width="100%">
         <Box display="flex" marginLeft="5%" marginRight="5%" width="90%" marginTop="2%" flexDirection="column">
           <List_ULetter ctheme={ctheme} str={"Items activity"} width1={"100%"} height1={"40px"}></List_ULetter>
           <Drop_chart1>Need to make table here</Drop_chart1>
         </Box>
       </Box>
-
       <Box display="flex" width="100%">
         <Box display="flex" marginLeft="5%" marginRight="5%" width="90%" marginTop="2%" flexDirection="column">
           <List_ULetter ctheme={ctheme} str={"Other items in this collection"} width1={"100%"} height1={"40px"}></List_ULetter>
         </Box>
       </Box>
-
       <Part_Drop>
         <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
           <Box display="flex" flexDirection="column" marginTop="2%">
@@ -318,8 +301,13 @@ const Detail_Page = ({ ctheme }) => {
       >
         <Box style={style1}>
           <MHeader>Status</MHeader>
-          <MContent alignItems="center" marginTop="3%">Buy NFT:{'\u00a0'}{process}</MContent>
-          <MContent alignItems="flex-start" marginTop="1%">Just a moment until buy auction.</MContent>
+          <MContent alignItems="center" marginTop="3%">
+            Buy NFT:{"\u00a0"}
+            {process}
+          </MContent>
+          <MContent alignItems="flex-start" marginTop="1%">
+            Just a moment until buy auction.
+          </MContent>
           {/* {!type_trans ? <>
             <MContent alignItems="center" marginTop="3%">Create Auction:{'\u00a0'}{process}</MContent>
             <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating Aucion.</MContent></> :
@@ -333,7 +321,7 @@ const Detail_Page = ({ ctheme }) => {
           {/* <MFooter></MFooter> */}
         </Box>
       </Modal>
-    </StyledContainer >
+    </>
   );
 };
 
@@ -398,57 +386,6 @@ const Drop_chart1 = styled(Box)`
   color: black;
   // color: ${({ ctheme, ltheme, dtheme }) => (ctheme ? "black" : "white")};
 `;
-const StyledContainer = styled(Box)`
-  position: relative;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  background: ${({ ctheme, ltheme, dtheme }) => (ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main)};
-`;
-
-const Header1_space = styled(Box)`
-  @media (max-width: 1000px) {
-    margin-left: 8% !important;
-    margin-right: 8% !important;
-  }
-  @media (max-width: 800px) {
-    margin-left: 5% !important;
-    margin-right: 5% !important;
-  }
-`;
-
-const HLetter = styled(Box)`
-  display: flex;
-  height: 34px;
-  justify-content: center;
-  align-items: center;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-  color: #2ba55d;
-  border-top: 4px solid rgba(0, 0, 0, 0);
-  &:hover {
-    border-top: 4px solid #2ba55d;
-    cursor: pointer;
-  }
-  @media (max-width: 1000px) {
-    font-size: 12px;
-  }
-  @media (max-width: 800px) {
-    font-size: 12px;
-  }
-  @media (max-width: 600px) {
-    font-size: 8px;
-  }
-`;
-
-const Header1 = styled(Box)`
-  display: flex;
-  width: 100%;
-`;
 
 const MHeader = styled(Box)`
   display: flex;
@@ -459,17 +396,15 @@ const MHeader = styled(Box)`
   color: white;
   margin-top: 3%;
   align-items: center;
-
-`
+`;
 
 const MContent = styled(Box)`
-    display: flex;
+  display: flex;
   flex: 2;
   width: 100%;
   justify-content: center;
   font-size: 25px;
   color: white;
-`
-
+`;
 
 export default Detail_Page;

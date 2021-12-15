@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from 'react'
-import { Box, Modal } from '@material-ui/core'
-import styled from 'styled-components';
+import { useState, useEffect } from "react";
+import { Box, Modal } from "@material-ui/core";
+import styled from "styled-components";
 import { MdMenuOpen } from "react-icons/md";
 import { injected, walletConnect, trustWallet, binance_wallet } from "../../utils/connectors";
 // import _ from "lodash";
@@ -13,7 +13,7 @@ import trust from "../../images/TrustWallet.png";
 import img_logo from "../../images/logo_mark1.png";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
-import { DropDown, DropDownItem } from "./components/dropdown.jsx";
+import { DropDown, DropDownItem } from "../../components/elements/dropdown.jsx";
 import { MdLogout } from "react-icons/md";
 
 const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
@@ -80,35 +80,76 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
       {/* {theme? <div>123</div>:<div>KKK</div>} */}
       <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
         <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D" />
-        <Logoimg onClick={() => {
+        <Logoimg
+          onClick={() => {
+            history.push({ pathname: "/" });
+          }}
+        >
+          <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }}></img>
+        </Logoimg>
+        {/* <Logoimg onClick={() => {
           history.push({ pathname: "/" });
           window.localStorage.setItem("CurrentAccount", account);
         }}>
           <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }} alt=""></img>
           FASTSWAP
-        </Logoimg>
+        </Logoimg> */}
       </Box>
       <Box display="flex" flex="3"></Box>
       <Box display="flex" flex="1" alignItems="center" justifyContent="center">
         {account ? (
           <DropDown text={account.slice(0, 7) + "..." + account.slice(-4)}>
-            <DropDownItem onClick={() => {
-              history.push({ pathname: "/Items" });
-            }}>Items</DropDownItem>
-            <DropDownItem>Collections</DropDownItem>
-            <DropDownItem>WatchList</DropDownItem>
-            <DropDownItem>Offers</DropDownItem>
-            <Box width="100%" borderTop="1px solid #cecece" />
-            <DropDownItem>Profile</DropDownItem>
             <DropDownItem
               onClick={() => {
-                window.location.href = "/Setting_page";
+                history.push("/Items");
+              }}
+            >
+              Items
+            </DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                history.push("/Collection_page");
+              }}
+            >
+              Collections
+            </DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                history.push("/watchlist");
+              }}
+            >
+              WatchList
+            </DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                history.push("/offers");
+              }}
+            >
+              Offers
+            </DropDownItem>
+            <Box width="80%" my={1} marginLeft={"10%"} borderTop="1px solid #cecece" />
+            <DropDownItem
+              onClick={() => {
+                history.push("/Profile_empty");
+              }}
+            >
+              Profile
+            </DropDownItem>
+            <DropDownItem
+              onClick={() => {
+                history.push("/Setting_page");
               }}
             >
               Settings
             </DropDownItem>
-            <DropDownItem>Transactions</DropDownItem>
-            <Box width="100%" borderTop="1px solid #cecece" />
+            <DropDownItem
+              onClick={() => {
+                history.push("/transactions");
+              }}
+            >
+              Transactions
+            </DropDownItem>
+            <Box width="80%" my={1} marginLeft={"10%"} borderTop="1px solid #cecece" />
             <DropDownItem
               onClick={() => {
                 handleDisconnect();
@@ -250,9 +291,9 @@ const Connectbtnletter = styled(Box)`
 `;
 
 const Logoimg = styled(Box)`
-font-family:Poppins;
+  font-family: Poppins;
   display: flex;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
   @media (max-width: 600px) {

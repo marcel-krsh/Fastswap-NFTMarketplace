@@ -10,16 +10,7 @@ import Support from "./support";
 const SettingPage = ({ ctheme }) => {
   const [currentSubPage, setCurrentSubPage] = useState("Profile");
   return (
-    <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
-      <Header1>
-        <Header1space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
-          <HLetter>Overview</HLetter>
-          <HLetter>Explore</HLetter>
-          <HLetter>Rankings</HLetter>
-          <HLetter>Activities</HLetter>
-          <HLetter>Manage</HLetter>
-        </Header1space>
-      </Header1>
+    <>
       <PageTitle>Settings</PageTitle>
       <SettingTap>
         <SettingTapBtn
@@ -61,7 +52,7 @@ const SettingPage = ({ ctheme }) => {
         {currentSubPage === "Notifications" && <Notification />}
         {currentSubPage === "Profile" && <ProfileContent />}
       </SettingTapContent>
-    </StyledContainer>
+    </>
   );
 };
 
@@ -192,7 +183,7 @@ const SettingTapContent = styled(Box)`
   margin-top: 40px;
   margin-left: 5%;
   margin-right: 5%;
-  
+
   @media (max-width: 1000px) {
     margin-top: 40px;
   }

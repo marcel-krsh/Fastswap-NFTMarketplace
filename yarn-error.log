@@ -1,20 +1,20 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-loader-spinner --save
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-loader-spinner
 
 PATH: 
-  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\THOMAS\AppData\Local\Microsoft\WindowsApps;;C:\Users\THOMAS\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\THOMAS\AppData\Roaming\npm;C:\Users\THOMAS\AppData\Local\Yarn\bin
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\xampp\php;C:\composer;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\Atos\AppData\Roaming\npm;C:\Users\Atos\AppData\Local\Programs\Microsoft VS Code\bin
 
 Yarn version: 
   1.22.5
 
 Node version: 
-  16.13.0
+  16.9.0
 
 Platform: 
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'E:\Project\blockchain\Front\react\Fastswap\fastswap-nft-marketplace\node_modules\bufferutil\prebuilds\win32-x64\node.napi.node'
+  Error: EPERM: operation not permitted, unlink 'E:\1.RealWork\11-22(FastSwap)\node_modules\optimize-css-assets-webpack-plugin\node_modules\.bin'
 
 npm manifest: 
   {
