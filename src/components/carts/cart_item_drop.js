@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
-const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment }) => {
+const LastDrop = ({ index, img, simg, simg1, title, name, ctheme, payment }) => {
   const history = useHistory();
   const price_format = (value) => {
     var temp = value;
@@ -37,7 +37,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
       ltheme={lightTheme}
       dtheme={darkTheme}
       onClick={() => {
-        history.push({ pathname: "/Detail_page", search: index.toString() });
+        // history.push({ pathname: "/Detail_page", search: index.toString() });
       }}
     >
       <Box display="flex" flex="1">
@@ -50,7 +50,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
           }}
         ></img>
       </Box>
-      <Box display="flex" flex="75" borderBottom="1px solid #CECECE" borderTop="1px solid #CECECE">
+      <Box display="flex" flex="75"  borderTop="1px solid #CECECE">
         <Box
           display="flex"
           flex="2"
@@ -90,38 +90,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
           </Box>
         </Box>
       </Box>
-      <Box display="flex" flex="75" flexDirection="column">
-        <Box
-          marginLeft="20px"
-          display="flex"
-          flex="1"
-          justifyContent="flex-start"
-          alignItems="flex-end"
-          fontFamily="Poppins"
-          fontSize="10px"
-          color={ctheme ? "#757B75" : darkTheme.font_color_grey}
-        >
-          Lowest price
-        </Box>
-        <Box
-          marginLeft="20px"
-          display="flex"
-          flex="2"
-          justifyContent="flex-start"
-          alignItems="center"
-          fontFamily="Poppins"
-          fontSize="14px"
-          maxWidth="240px"
-          color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
-          lineheight="22px"
-          fontWeight="bold"
-          whiteSpace="nowrap"
-        >
-          <img src={simg1} width="24px" height="24px"></img>
-          {`\u00a0`}
-          {price_format(price)}
-        </Box>
-      </Box>
+    
     </HCollection>
   );
 };
@@ -130,7 +99,7 @@ const HCollection = styled(Box)`
   display: flex;
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 330px;
   flex-direction: column;
   background: ${({ ctheme, ltheme, dtheme }) =>
     ctheme ? ltheme.bgcolor_bar : dtheme.bgcolor_bar};

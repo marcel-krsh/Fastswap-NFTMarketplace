@@ -54,6 +54,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
   const handleDisconnect = () => {
     deactivate();
     window.localStorage.removeItem("CurrentWalletConnect");
+    window.localStorage.removeItem("CurrentAccount");
   };
 
   const handleConnect = (currentConnector) => {
@@ -81,6 +82,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
         <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D" />
         <Logoimg onClick={()=>{
           history.push({ pathname: "/" });
+          window.localStorage.setItem("CurrentAccount", account);
         }}>
           <img src={img_logo} width="55px" height="35px" style={{ marginLeft: "30px" }} alt=""></img>
           FASTSWAP
@@ -90,7 +92,9 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
       <Box display="flex" flex="1" alignItems="center" justifyContent="center">
         {account ? (
           <DropDown text={account.slice(0, 7) + "..." + account.slice(-4)}>
-            <DropDownItem>Items</DropDownItem>
+            <DropDownItem onClick={()=>{
+              history.push({ pathname: "/Items" });
+            }}>Items</DropDownItem>
             <DropDownItem>Collections</DropDownItem>
             <DropDownItem>WatchList</DropDownItem>
             <DropDownItem>Offers</DropDownItem>

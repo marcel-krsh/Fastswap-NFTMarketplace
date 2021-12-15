@@ -10,6 +10,7 @@ import icon_logo from "../../images/icon_logo.png";
 import bnb1 from "../../images/bnb1.png";
 import BtnCustomize from "../../components/buttons/btn_container"
 import LastDrop from "../../components/carts/cart_drop"
+import CartAuction from "../../components/carts/cart_auction"
 import ImgLetter from "../../components/letters/img_letter"
 import { lightTheme, darkTheme } from "../../theme/theme"
 
@@ -18,7 +19,9 @@ const Mainpage = ({ ctheme }) => {
     const history = useHistory();
     // const [rerender, setRerender] = useState('Hello');
     const { nfts } = useSelector(state => state.product);
+    const { auctions } = useSelector(state => state.product1);
     useEffect(() => {
+        console.log("auctions111", auctions);
         // console.log("123:",nfts);
         // setRerender('Hello World');
     })
@@ -87,13 +90,27 @@ const Mainpage = ({ ctheme }) => {
             <PartDrop>
                 <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
                     <ImgLetter letter={'Latest drops 🚀'} ctheme={ctheme} />
-                    <Box display="flex" marginTop="2%">
+                    <Box display="flex" marginTop="2%" marginBottom="2%">
                         <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
                             {
                                 nfts.length > 0 && nfts.map((item, index) => {
                                     return (
                                         <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
-                                            <LastDrop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE' ? small_duke : item.payment_method === 'FAST' ? icon_logo : item.payment_method === 'BNB' ? bnb1 : ''} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme} payment={item.payment_method}></LastDrop>
+                                            <LastDrop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE' ? small_duke : item.payment_method === 'FAST' ? icon_logo : item.payment_method === 'BNB' ? bnb1 : ''} name={item.owner} price={`${item.price} `} ctheme={ctheme} payment={item.payment_method}></LastDrop>
+                                        </Box>
+                                    )
+                                })
+                            }
+                        </GridShow>
+                    </Box>
+                    <ImgLetter letter={'Auctions'} ctheme={ctheme}/>
+                    <Box display="flex" marginTop="2%">
+                        <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
+                            {
+                                auctions.length > 0 && auctions.map((item, index) => {
+                                    return (
+                                        <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
+                                            <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE' ? small_duke : item.payment_method === 'FAST' ? icon_logo : item.payment_method === 'BNB' ? bnb1 : ''} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration ={item.duration} ctheme={ctheme} payment={item.payment_method}></CartAuction>
                                         </Box>
                                     )
                                 })
@@ -113,7 +130,6 @@ const Mainpage = ({ ctheme }) => {
                             }
                         </Box>
                     </Box> */}
-
                     <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
                         <BtnCustomize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
                     </Box>

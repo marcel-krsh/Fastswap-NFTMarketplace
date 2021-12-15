@@ -80,7 +80,6 @@ const Detail_Page = ({ ctheme }) => {
       const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
       await approve1.wait();
       // console.log(mainData.price)
-      // const price = "0x"+ parseInt(mainData.price).toString(16);
       // console.log(price)
 
 

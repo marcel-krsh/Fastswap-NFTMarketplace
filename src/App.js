@@ -13,7 +13,10 @@ import Profile_page_prev from './pages/profile_page/profile_page_prev'
 import Profile_page_empty from './pages/profile_page/profile_page_empty'
 import Create_NFT from './pages/create_nft/create_nft'
 import getProducts from "./actions/product";
+import getAuctions from "./actions/productAuction";
 import SettingPage from "./pages/settingpage";
+import Items from "./pages/items/items"
+
 import "./App.css";
 
 function getLibrary(provider) {
@@ -40,6 +43,7 @@ function App() {
 
   useEffect(async () => {
     dispatch(await getProducts());
+    dispatch(await getAuctions());
   }, [dispatch]);
 
   return (
@@ -84,6 +88,9 @@ function App() {
 
               <Route exact path="/Setting_page">
                 <SettingPage ctheme={ctheme} />
+              </Route>
+              <Route exact path="/Items">
+                <Items ctheme={ctheme}/>
               </Route>
             </Switch>
 

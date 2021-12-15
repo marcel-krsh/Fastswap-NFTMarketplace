@@ -5,23 +5,24 @@ import styled from "styled-components";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
-const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment }) => {
+const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice, eprice, ctheme, payment }) => {
   const history = useHistory();
+  
   const price_format = (value) => {
     var temp = value;
-    if(payment === 'DUKE')
-    {
-      temp = value / Math.pow(10,9);
-    }
-    else if(payment === 'FAST')
-    {
-      temp = value / Math.pow(10,18);
-    }
-    else if(payment === 'BNB')
-    {
-      temp = value / Math.pow(10,18);
-    }
-
+    // if(payment === 'DUKE')
+    // {
+    //   temp = value / Math.pow(10,9);
+    // }
+    // else if(payment === 'FAST')
+    // {
+    //   temp = value / Math.pow(10,18);
+    // }
+    // else if(payment === 'BNB')
+    // {
+    //   temp = value / Math.pow(10,18);
+    // }
+    temp = value / Math.pow(10,18);
     if(temp>=0)
     {
       return temp.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -29,16 +30,33 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
     else{
       return temp;
     }
-
   }
+
+  const duratoin_format = (value) =>{
+    let dur = value/(60*60*24);
+    let dur_str;
+    if(dur>1)
+    {
+      dur_str = dur+" days"
+    }
+    else if( dur === 1)
+    {
+      dur_str = dur+" day"
+    }
+    else{
+      dur_str = dur.toFixed(5)+" days"
+    }
+    return dur_str;
+  }
+
   return (
     <HCollection
       ctheme={ctheme ? 1 : 0}
       ltheme={lightTheme}
       dtheme={darkTheme}
-      onClick={() => {
-        history.push({ pathname: "/Detail_page", search: index.toString() });
-      }}
+      // onClick={() => {
+      //   history.push({ pathname: "/Detail_page", search: index.toString() });
+      // }}
     >
       <Box display="flex" flex="1">
         <img
@@ -86,7 +104,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
             fontWeight="normal"
 
           >
-            {name.slice(0,7)} ... {name.slice(-5)}
+            {seller.slice(0,7)}...{seller.slice(seller.length-5, seller.length)}
           </Box>
         </Box>
       </Box>
@@ -101,7 +119,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
           fontSize="10px"
           color={ctheme ? "#757B75" : darkTheme.font_color_grey}
         >
-          Lowest price
+          Duration: {duratoin_format(duration)}
         </Box>
         <Box
           marginLeft="20px"
@@ -119,7 +137,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, price, ctheme, payment
         >
           <img src={simg1} width="24px" height="24px"></img>
           {`\u00a0`}
-          {price_format(price)}
+          {price_format(sprice)} ~ {price_format(eprice)}
         </Box>
       </Box>
     </HCollection>
@@ -147,4 +165,4 @@ const HCollection = styled(Box)`
   }
 `;
 
-export default LastDrop;
+export default CartAuction;
