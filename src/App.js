@@ -18,6 +18,8 @@ import getProducts from "./actions/product";
 import SettingPage from "./pages/settingpage";
 import Activities from "./pages/activities";
 import Explore from "./pages/explore";
+import Rankings from "./pages/rankings";
+
 import { lightTheme, darkTheme } from "./theme/theme";
 import "./App.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -95,6 +97,9 @@ function App() {
                 </Route>
                 <Route exact path="/explore">
                   <Explore ctheme={ctheme} />
+                </Route>
+                <Route exact path="/rankings">
+                  <Rankings ctheme={ctheme} />
                 </Route>
               </Switch>
             </StyledContainer>

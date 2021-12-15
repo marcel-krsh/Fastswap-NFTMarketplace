@@ -1,21 +1,12 @@
 import React, { useState } from "react";
 import styledComp from "styled-components";
-import { Box, Table, TableHead, TableBody, TableCell, TableRow, styled, Button } from "@material-ui/core";
-import { CgSortAz } from "react-icons/cg";
-import { AiFillQuestionCircle } from "react-icons/ai";
+import { Box, styled, Button } from "@material-ui/core";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { FaHandPaper, FaTag } from "react-icons/fa";
-import { HiShoppingCart } from "react-icons/hi";
-import { IoSwapVerticalOutline } from "react-icons/io5";
-import { VscLinkExternal } from "react-icons/vsc";
 import { SimpleSwitch } from "../../components/elements/index";
 import { DropDown, DropDownItem } from "../../components/elements/dropdown";
-import { lightTheme, darkTheme } from "../../theme/theme";
 
 import { PageTitile, PageTitileContent, HeaderCard, HeaderCardBase, MainCard } from "./index.component";
-import NFTImage1 from "../../images/cover/cover-3.png";
-import TokenImage from "../../images/small_duke1.png";
+import { FillMdBtn } from "../../components/buttons";
 
 const CardImages = [require("../../images/explore/1.png").default, require("../../images/explore/2.png").default, require("../../images/explore/3.png").default, require("../../images/explore/4.png").default, require("../../images/explore/5.png").default, require("../../images/explore/6.png").default, require("../../images/explore/7.png").default, require("../../images/explore/8.png").default, require("../../images/explore/9.png").default, require("../../images/explore/10.png").default, require("../../images/explore/11.png").default, require("../../images/explore/12.png").default, require("../../images/explore/13.png").default];
 
@@ -61,7 +52,7 @@ const ExplorePage = ({ ctheme }) => {
         <MainCard />
       </Box>
       <Box mt={6} mb={9} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
-        <NormalBtn variant="contained">Load more</NormalBtn>
+        <FillMdBtn variant="contained">Load more</FillMdBtn>
       </Box>
     </Box>
   );

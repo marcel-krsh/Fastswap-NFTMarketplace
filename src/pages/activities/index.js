@@ -13,6 +13,7 @@ import { lightTheme, darkTheme } from "../../theme/theme";
 
 import NFTImage1 from "../../images/cover/cover-3.png";
 import TokenImage from "../../images/small_duke1.png";
+import { FillMdBtn, OutlineSmBtn } from "../../components/buttons";
 
 const ActivitiesPage = ({ ctheme }) => {
   const [currentSubPage, setCurrentSubPage] = useState("Profile");
@@ -118,10 +119,10 @@ const ActivitiesPage = ({ ctheme }) => {
                       <img width={"32px"} height={"32px"} src={TokenImage} alt="" />
                     </Box>
                     <Box display={"flex"} flexDirection={"column"}>
-                      <Box fontSize={[10, 12, 14, 16]} fontWeight={500} color={"#2BA55D"}>
+                      <Box fontSize={[10, 12, 14, 16]} fontWeight={500} color={"#131413"}>
                         {each.price[0]}
                       </Box>
-                      <Box mt={0.5} fontSize={[10, 10, 12, 12]} fontWeight={500} color={"#2BA55D"}>
+                      <Box mt={0.5} fontSize={[10, 10, 12, 12]} fontWeight={500} color={"#757B75"}>
                         {each.price[1]}
                       </Box>
                     </Box>
@@ -149,13 +150,11 @@ const ActivitiesPage = ({ ctheme }) => {
         </Table>
       </Box>
       <Box mt={[2, 3, 4, 5]} display={"flex"} justifyContent={"center"}>
-        <NormalBtn variant="outlined">Load more</NormalBtn>
+        <OutlineSmBtn>Load more</OutlineSmBtn>
       </Box>
     </Box>
   );
 };
-
-const NormalBtn = styled(Button)({ borderRadius: "8px", borderColor: "#2BA55D", fontWeight: "600", color: "#2BA55D", textTransform: "initial" });
 
 const MintedIcon = (
   <svg width="1em" height="1.5em" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
