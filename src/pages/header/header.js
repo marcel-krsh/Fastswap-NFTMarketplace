@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react'
-import { Box, Modal} from '@material-ui/core'
+import { Box, Modal } from '@material-ui/core'
 import styled from 'styled-components';
 import { MdMenuOpen } from "react-icons/md";
 import { injected, walletConnect, trustWallet, binance_wallet } from "../../utils/connectors";
@@ -80,7 +80,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
       {/* {theme? <div>123</div>:<div>KKK</div>} */}
       <Box display="flex" flex="1.3" alignItems="center" justifyContent="center" fontWeight="bold" fontSize="20px" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
         <MdMenuOpen onClick={() => set_sidebar(!flag_sidebar)} fontSize="30px" color="#2BA55D" />
-        <Logoimg onClick={()=>{
+        <Logoimg onClick={() => {
           history.push({ pathname: "/" });
           window.localStorage.setItem("CurrentAccount", account);
         }}>
@@ -92,7 +92,7 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
       <Box display="flex" flex="1" alignItems="center" justifyContent="center">
         {account ? (
           <DropDown text={account.slice(0, 7) + "..." + account.slice(-4)}>
-            <DropDownItem onClick={()=>{
+            <DropDownItem onClick={() => {
               history.push({ pathname: "/Items" });
             }}>Items</DropDownItem>
             <DropDownItem>Collections</DropDownItem>

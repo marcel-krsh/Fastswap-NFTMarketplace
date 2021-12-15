@@ -46,7 +46,7 @@ const Detail_Page = ({ ctheme }) => {
   const [process, set_process] = useState("Processing...");
   useEffect(() => {
     // console.log("------------------------");
-    // console.log(mainData);
+    // console.log(nfts);
   });
   const style1 = {
     position: 'absolute',

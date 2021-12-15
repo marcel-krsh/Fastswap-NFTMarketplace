@@ -31,6 +31,15 @@ const LastDrop = ({ index, img, simg, simg1, title, name, ctheme, payment }) => 
     }
 
   }
+  const str_format = (str) =>{
+    let str_simple;
+    if(str.length>15)
+    {
+      str_simple = str.slice(0,15)+"..."
+    }
+    return str_simple
+  }
+
   return (
     <HCollection
       ctheme={ctheme ? 1 : 0}
@@ -72,7 +81,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, ctheme, payment }) => 
             color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}
             fontWeight="500"
           >
-            {title}
+            {str_format(title)}
           </Box>
           <Box
             display="flex"
@@ -86,7 +95,7 @@ const LastDrop = ({ index, img, simg, simg1, title, name, ctheme, payment }) => 
             fontWeight="normal"
 
           >
-            {name.slice(0,7)} ... {name.slice(-5)}
+            {str_format(name)}
           </Box>
         </Box>
       </Box>

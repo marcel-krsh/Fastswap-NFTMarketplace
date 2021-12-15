@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
@@ -13,17 +13,47 @@ import LastDrop from "../../components/carts/cart_item_drop"
 import CartAuction from "../../components/carts/cart_auction"
 import ImgLetter from "../../components/letters/img_letter"
 import { lightTheme, darkTheme } from "../../theme/theme"
+import { ethers } from 'ethers';
+import { NFT_ABI } from '../../utils/abi';
+import { CONTRACTS } from '../../utils/constants';
+import { useWeb3React } from '@web3-react/core';
 
 const Items = ({ ctheme }) => {
     // const dispatch = useDispatch();
+    const { account, library } = useWeb3React()
     const history = useHistory();
     const { nfts } = useSelector(state => state.product);
-    const { auctions } = useSelector(state => state.product1);
-    const [cur_account, set_cur_account] = useState('');
+    const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
+
+    const [tokens_uri, set_tokens_uri] = useState([]);
+
+    const get_items = async () => {
+        const balance_owner = await nftContract.balanceOf(account);
+        let tokens = [];
+        for (let i = 0; i < parseInt(balance_owner._hex); i++) {
+            let owner_index = await nftContract.tokenOfOwnerByIndex(account, i);
+            let token_uri = await nftContract.tokenURI(owner_index);
+            // let response_ipfs = 
+            await fetch(token_uri).then(async(res) => {
+                let json_ipfs = await res.json();
+                // console.log(json_ipfs)
+                tokens.push({
+                    image: json_ipfs.image,
+                    name: json_ipfs.name,
+                    description: json_ipfs.description
+                });
+                
+
+            }).catch((error) => {
+                // console.log(error);
+            });
+        }
+        set_tokens_uri(tokens);
+    }
     useEffect(() => {
-        let temp_account = window.localStorage.getItem("CurrentAccount");
-        set_cur_account(temp_account);
-    })
+        get_items();
+
+    }, [])
 
     return (
         <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
@@ -39,25 +69,22 @@ const Items = ({ ctheme }) => {
             <PartDrop>
                 <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
                     <ImgLetter letter={'Items 🚀'} ctheme={ctheme} />
-                    <Box display="flex" marginTop="2%" marginBottom="2%">
+                    <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center" marginBottom="5%">
                         <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
                             {
-                                nfts.length > 0 && nfts.map((item, index) => {
-                                    if (item.owner === cur_account) {
-                                        return (
-                                            <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
-                                                <LastDrop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE' ? small_duke : item.payment_method === 'FAST' ? icon_logo : item.payment_method === 'BNB' ? bnb1 : ''} name={item.owner} price={`${item.price} `} ctheme={ctheme} payment={item.payment_method}></LastDrop>
-                                            </Box>
-                                        )
-                                    }
-
+                                tokens_uri.length > 0 && tokens_uri.map((item, index) => {
+                                    return (
+                                        <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
+                                            <LastDrop index={index} img={item.image} simg={small_ellipse} title={item.name}  name={item.description} ctheme={ctheme}></LastDrop>
+                                        </Box>
+                                    )
                                 })
                             }
                         </GridShow>
                     </Box>
-                    <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
+                    {/* <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
                         <BtnCustomize display="flex" color={'white'} back={'#2BA55D'} width={'230px'} height={'56px'} border={'1px solid #2BA55D'} str={'Explore more'} borderRadius={'8px'} />
-                    </Box>
+                    </Box> */}
                 </Box>
             </PartDrop>
         </StyledContainer>
