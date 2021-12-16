@@ -26,13 +26,19 @@ const Items = ({ ctheme }) => {
     const { nfts } = useSelector(state => state.product);
     const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
     const [loading, set_loading] = useState(false);
-
+    const [total_item, set_total_item] = useState(0);
     const [tokens_uri, set_tokens_uri] = useState([]);
+    const [cnt, set_cnt] = useState(1);
 
     const get_items = async () => {
         const balance_owner = await nftContract.balanceOf(account);
+        let total = parseInt(balance_owner._hex);
+        if (total > 12) {
+            total = total - 12;
+            set_total_item(total);
+        }
         let tokens = [];
-        for (let i = 0; i < parseInt(balance_owner._hex); i++) {
+        for (let i = 0; i < 12; i++) {
             let owner_index = await nftContract.tokenOfOwnerByIndex(account, i);
             let token_uri = await nftContract.tokenURI(owner_index);
             // let response_ipfs = 
@@ -46,12 +52,69 @@ const Items = ({ ctheme }) => {
             }).catch((error) => {
                 // console.log(error);
             });
-            if( i === parseInt(balance_owner._hex)-1)
-            {
+            // if (i === parseInt(balance_owner._hex) - 1) {
+            //     set_loading(true);
+            // }
+            if (i === 11) {
                 set_loading(true);
             }
         }
         set_tokens_uri(tokens);
+    }
+
+    const get_more_items = async () => {
+        let t_cnt = cnt;
+        t_cnt++;
+        set_cnt(t_cnt);
+        if (total_item > 12) {
+            set_loading(false);
+            let tokens = tokens_uri;
+            let temp = total_item;
+            temp = temp - 12;
+            set_total_item(temp);
+            for (let i = 12 * cnt; i < 12 * (cnt + 1); i++) {
+                let owner_index = await nftContract.tokenOfOwnerByIndex(account, i);
+                let token_uri = await nftContract.tokenURI(owner_index);
+                await fetch(token_uri).then(async (res) => {
+                    let json_ipfs = await res.json();
+                    tokens.push({
+                        image: json_ipfs.image,
+                        name: json_ipfs.name,
+                        description: json_ipfs.description
+                    });
+                }).catch((error) => {
+                    // console.log(error);
+                });
+                if (i === 12 * (cnt + 1) - 1) {
+                    set_loading(true);
+                }
+            }
+            set_tokens_uri(tokens);
+        }
+        else {
+            set_loading(false);
+            let tokens = tokens_uri;
+            for (let i = 12 * cnt; i < 12 * cnt + total_item; i++) {
+                let owner_index = await nftContract.tokenOfOwnerByIndex(account, i);
+                let token_uri = await nftContract.tokenURI(owner_index);
+                await fetch(token_uri).then(async (res) => {
+                    let json_ipfs = await res.json();
+                    tokens.push({
+                        image: json_ipfs.image,
+                        name: json_ipfs.name,
+                        description: json_ipfs.description
+                    });
+                }).catch((error) => {
+                    // console.log(error);
+                });
+                if (i === 12 * cnt + total_item - 1) {
+                    set_loading(true);
+                }
+            }
+            set_tokens_uri(tokens);
+        }
+
+
     }
     useEffect(() => {
         get_items();
@@ -59,39 +122,72 @@ const Items = ({ ctheme }) => {
 
     return (
         <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} position="relative">
-            { !loading?
-                <Box position="fixed" top="50%" left="50%" zIndex="100">
-                    <Loader type="Oval" color="#2BA55D" height={100} width={100} />
-                </Box>:''
+            {cnt !== 1 ?
+                <>
+                    {!loading ?
+                        <Box position="fixed" top="50%" left="50%" zIndex="100">
+                            <Loader type="Oval" color="#2BA55D" height={100} width={100} />
+                        </Box> : ''
+                    }
+                    <PartDrop>
+                        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
+                            <ImgLetter letter={'Items 🚀'} ctheme={ctheme} />
+                            <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center">
+                                <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
+                                    {
+                                        tokens_uri.length > 0 && tokens_uri.map((item, index) => {
+                                            return (
+                                                <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
+                                                    <LastDrop index={index} img={item.image} simg={small_ellipse} title={item.name} name={item.description} ctheme={ctheme}></LastDrop>
+                                                </Box>
+                                            )
+                                        })
+                                    }
+                                </GridShow>
+                            </Box>
+                            <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
+                                <Box display="flex" width="40%" onClick={() => { get_more_items() }}>
+                                    <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"100%"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
+                                </Box>
+                            </Box>
+                        </Box>
+                    </PartDrop>
+                </> :
+                <>
+                    {!loading ?
+                        <Box position="fixed" top="50%" left="50%" zIndex="100">
+                            <Loader type="Oval" color="#2BA55D" height={100} width={100} />
+                        </Box> : <PartDrop>
+                            <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
+                                <ImgLetter letter={'Items 🚀'} ctheme={ctheme} />
+                                <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center">
+                                    <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
+                                        {
+                                            tokens_uri.length > 0 && tokens_uri.map((item, index) => {
+                                                return (
+                                                    <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
+                                                        <LastDrop index={index} img={item.image} simg={small_ellipse} title={item.name} name={item.description} ctheme={ctheme}></LastDrop>
+                                                    </Box>
+                                                )
+                                            })
+                                        }
+                                    </GridShow>
+                                </Box>
+                                <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
+                                    <Box display="flex" width="40%" onClick={() => { get_more_items() }}>
+                                        <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"100%"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </PartDrop>
+                    }
+
+                </>
+
             }
 
-            <Header1>
-                <Header1space display="flex" flex="1" justifyContent="space-between" marginLeft="20%" marginRight="20%">
-                    <HLetter>Overview</HLetter>
-                    <HLetter>Explore</HLetter>
-                    <HLetter>Rankings</HLetter>
-                    <HLetter>Activities</HLetter>
-                    <HLetter>Manage</HLetter>
-                </Header1space>
-            </Header1>
-            <PartDrop>
-                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
-                    <ImgLetter letter={'Items 🚀'} ctheme={ctheme} />
-                    <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center" marginBottom="5%">
-                        <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
-                            {
-                                tokens_uri.length > 0 && tokens_uri.map((item, index) => {
-                                    return (
-                                        <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
-                                            <LastDrop index={index} img={item.image} simg={small_ellipse} title={item.name} name={item.description} ctheme={ctheme}></LastDrop>
-                                        </Box>
-                                    )
-                                })
-                            }
-                        </GridShow>
-                    </Box>
-                </Box>
-            </PartDrop>
+
+
         </StyledContainer>
     );
 };

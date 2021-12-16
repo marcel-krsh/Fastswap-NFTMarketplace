@@ -76,7 +76,7 @@ const PageHLetter = styled(Box)`
   height: 34px;
   justify-content: center;
   align-items: center;
-  font-family: Work Sans;
+  font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
