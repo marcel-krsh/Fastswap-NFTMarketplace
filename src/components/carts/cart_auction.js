@@ -32,8 +32,8 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
   }
 
   const duratoin_format = (value) => {
-    // let dur = value/(60*60*24);
-    let dur = value;
+    let dur = value/(60*60*24);
+    // let dur = value;
     let dur_str;
 
     if (parseInt(dur) === 1) {
