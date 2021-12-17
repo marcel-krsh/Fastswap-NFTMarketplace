@@ -39,6 +39,9 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
     if (parseInt(dur) === 1) {
       dur_str = dur + " day"
     }
+    else if (parseInt(dur) === 0){
+      dur_str = "no date"
+    }
     else{
       dur_str = dur + " days"
     }
