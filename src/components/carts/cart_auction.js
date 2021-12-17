@@ -39,7 +39,7 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
     if (parseInt(dur) === 1) {
       dur_str = dur + " day"
     }
-    else if (parseInt(dur) === 0){
+    else if (parseInt(dur) <= 0){
       dur_str = "no date"
     }
     else{
@@ -56,9 +56,9 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
       ctheme={ctheme ? 1 : 0}
       ltheme={lightTheme}
       dtheme={darkTheme}
-    // onClick={() => {
-    //   history.push({ pathname: "/Detail_page", search: index.toString() });
-    // }}
+    onClick={() => {
+      history.push({ pathname: "/Detail_page_auction", search: index.toString() });
+    }}
     >
       {/* <Box display="flex" flex="1">
         <img

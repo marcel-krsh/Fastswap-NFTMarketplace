@@ -11,6 +11,7 @@ import Sidebar from "./pages/sidebar/sidebar";
 import Mainpage from "./pages/mainpage/mainpage";
 import Collection_page from "./pages/collection_page/collection_page";
 import Detail_page from "./pages/detail_page/detail_page";
+import Detail_Page_Auction from "./pages/detail_page_auction/detail_page_auction";
 import Profile_page_prev from "./pages/profile_page/profile_page_prev";
 import Profile_page_empty from "./pages/profile_page/profile_page_empty";
 import Create_NFT from "./pages/create_nft/create_nft";
@@ -81,6 +82,9 @@ function App() {
                 </Route>
                 <Route exact path="/Detail_page">
                   <Detail_page ctheme={ctheme} />
+                </Route>
+                <Route exact path="/Detail_page_auction">
+                  <Detail_Page_Auction ctheme={ctheme} />
                 </Route>
                 <Route exact path="/Profile_prev">
                   <Profile_page_prev ctheme={ctheme} />

@@ -28,7 +28,7 @@ const getAuctions =
         }
       ])
 
-
+      console.log(ids_auc)
       if(ids_auc < 1){
         return;
       }

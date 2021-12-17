@@ -21,19 +21,19 @@ import Last_Drop from "../../components/carts/cart_drop";
 import List_ULetter from "../../components/letters/list_uletter";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
-import { NFT_MARKETPLACE_ABI, NFT_ABI, FAST_TOKEN_ABI } from "../../utils/abi";
+import { NFT_MARKETPLACE_ABI, NFT_ABI, FAST_TOKEN_ABI, NFT_AUCTION_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
 import { ethers } from "ethers";
 
 const Detail_Page = ({ ctheme }) => {
   const history = useHistory();
-  const nftsIndex = parseInt(history.location.search.slice(1));
-  const { nfts } = useSelector((store) => store.product);
-  const mainData = nfts[nftsIndex];
+  const auctionIndex = parseInt(history.location.search.slice(1));
+  const { auctions } = useSelector((store) => store.product1);
+  const mainData = auctions[auctionIndex];
   const { account, library } = useWeb3React();
   const nftContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null), [library]);
   const marketplaceContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null), [library]);
-  // const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
+  const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
   const fastContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.FAST_TOKEN, FAST_TOKEN_ABI, library.getSigner()) : null), [library]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -68,43 +68,20 @@ const Detail_Page = ({ ctheme }) => {
     history.push("/");
     return <></>;
   }
-  const handleBuyNow = async () => {
+  const placebid = async () => {
+    console.log(mainData)
     handleOpen();
     try {
-      const price = "0x" + parseInt(mainData.price).toString(16);
-      const approve = await fastContract.approve(CONTRACTS.MARKETPLACE, price);
-      await approve.wait();
-      //const approve1 = await nftContract.approve(CONTRACTS.MARKETPLACE, mainData.ids);
-      // await approve1.wait();
-      // console.log(mainData.price)
-      // console.log(price)
-      let buy = await marketplaceContract.buy(mainData.ids, price);
-      await buy.wait();
-      set_process("Baught successfully.");
+      const price = "0x" + parseInt(mainData.startingPrice).toString(16);
+      let bid = await auctionContract.bid(mainData.ids_auc, price);
+      await bid.wait();
+      set_process("Bid successfully.");
       setTimeout(() => {
         history.push({ pathname: "/" });
         set_process("Processing...");
         window.location.reload();
         handleClose();
       }, 3000);
-
-      // .then((res) => {
-      //   set_process("Baught successfully.");
-      //   setTimeout(() => {
-      //     history.push({ pathname: "/" });
-      //     set_process("Processing...");
-      //     window.location.reload();
-      //     handleClose();
-      //   }, 3000);
-
-      // }).catch((error) => {
-      //   console.log(error)
-      //   set_process("Fault! Try again.");
-      //   setTimeout(() => {
-      //     set_process("Processing...");
-      //     handleClose();
-      //   }, 3000);
-      // });
     } catch (error) {
       set_process("Fault! Try again.");
       setTimeout(() => {
@@ -201,10 +178,10 @@ const Detail_Page = ({ ctheme }) => {
                   width={"100%"}
                   height={"56px"}
                   border={"1px solid #2BA55D"}
-                  str={"Buy now"}
+                  str={"Place a bid"}
                   borderRadius={"8px"}
                   onClick={() => {
-                    handleBuyNow();
+                    placebid();
                   }}
                 />
                 {/* <Btn_Customize
@@ -302,11 +279,11 @@ const Detail_Page = ({ ctheme }) => {
         <Box style={style1}>
           <MHeader>Status</MHeader>
           <MContent alignItems="center" marginTop="3%">
-            Buy NFT:{"\u00a0"}
+            Bid:{"\u00a0"}
             {process}
           </MContent>
           <MContent alignItems="flex-start" marginTop="1%">
-            Just a moment until buy auction.
+            Just a moment until bid auction.
           </MContent>
           {/* {!type_trans ? <>
             <MContent alignItems="center" marginTop="3%">Create Auction:{'\u00a0'}{process}</MContent>
