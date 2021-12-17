@@ -94,13 +94,14 @@ const Detail_Page = ({ ctheme }) => {
   };
   const price_format = (payment, value) => {
     var temp = value;
-    if (payment === "DUKE") {
-      temp = value / Math.pow(10, 18);
-    } else if (payment === "FAST") {
-      temp = value / Math.pow(10, 18);
-    } else if (payment === "BNB") {
-      temp = value / Math.pow(10, 18);
-    }
+    temp = temp / Math.pow(10,18)
+    // if (payment === "DUKE") {
+    //   temp = value / Math.pow(10, 18);
+    // } else if (payment === "FAST") {
+    //   temp = value / Math.pow(10, 18);
+    // } else if (payment === "BNB") {
+    //   temp = value / Math.pow(10, 18);
+    // }
     if (temp >= 0) {
       return temp.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     } else {
@@ -160,7 +161,7 @@ const Detail_Page = ({ ctheme }) => {
                       <img src={mainData.payment_method === "DUKE" ? small_duke : mainData.payment_method === "FAST" ? icon_logo : mainData.payment_method === "BNB" ? bnb1 : ""} width="24px" height="24px" />
                     </Box>
                     <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize={["14px", "18px"]} fontWeight="400" color="#131413">
-                      {price_format(mainData.payment_method, mainData.price)}
+                      {price_format( mainData.startingPrice)}~{price_format( mainData.endingPrice)}
                       {/* 200.1 FAST */}
                     </Box>
                     <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
