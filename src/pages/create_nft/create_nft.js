@@ -113,7 +113,7 @@ const Create_NFT = ({ ctheme }) => {
             var dur = "0x" + (duration * 24 * 60 * 60).toString(16);
             if (price_type.duke === true) {
               pay_method = 2;
-              price1 = (price.duke * Math.pow(10, 9)).toString(16);
+              price1 = (price.duke * Math.pow(10, 18)).toString(16);
             }
             if (price_type.fast === true) {
               pay_method = 1;

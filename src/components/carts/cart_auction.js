@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 
 const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice, eprice, ctheme, payment }) => {
   const history = useHistory();
-  
+
   const price_format = (value) => {
     var temp = value;
     // if(payment === 'DUKE')
@@ -22,30 +22,29 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
     // {
     //   temp = value / Math.pow(10,18);
     // }
-    temp = value / Math.pow(10,18);
-    if(temp>=0)
-    {
+    temp = value / Math.pow(10, 18);
+    if (temp >= 0) {
       return temp.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
     }
-    else{
+    else {
       return temp;
     }
   }
 
-  const duratoin_format = (value) =>{
-    let dur = value/(60*60*24);
+  const duratoin_format = (value) => {
+    // let dur = value/(60*60*24);
+    let dur = value;
     let dur_str;
-    if(dur>1)
-    {
-      dur_str = dur+" days"
-    }
-    else if( dur === 1)
-    {
-      dur_str = dur+" day"
+
+    if (parseInt(dur) === 1) {
+      dur_str = dur + " day"
     }
     else{
-      dur_str = dur.toFixed(5)+" days"
+      dur_str = dur + " days"
     }
+    // else {
+    //   dur_str = dur.toFixed(5) + " days"
+    // }
     return dur_str;
   }
 
@@ -54,9 +53,9 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
       ctheme={ctheme ? 1 : 0}
       ltheme={lightTheme}
       dtheme={darkTheme}
-      // onClick={() => {
-      //   history.push({ pathname: "/Detail_page", search: index.toString() });
-      // }}
+    // onClick={() => {
+    //   history.push({ pathname: "/Detail_page", search: index.toString() });
+    // }}
     >
       {/* <Box display="flex" flex="1">
         <img
@@ -67,7 +66,7 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
             borderRadius: "8px 8px 0px 0px",
           }}
         ></img> */}
-              <Box display="flex" flex="238" width="238px" height="238px" overflow="hidden" style={{background: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center", borderRadius: "8px 8px 0px 0px"}}>
+      <Box display="flex" flex="238" width="238px" height="238px" overflow="hidden" style={{ background: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center", borderRadius: "8px 8px 0px 0px" }}>
         {/* <img
           src={img}
           width=""
@@ -114,7 +113,7 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
             fontWeight="normal"
 
           >
-            {seller.slice(0,7)}...{seller.slice(seller.length-5, seller.length)}
+            {seller.slice(0, 7)}...{seller.slice(seller.length - 5, seller.length)}
           </Box>
         </Box>
       </Box>

@@ -52,6 +52,7 @@ const getAuctions =
         const genesisIPFSData = await requestAPICall(item.uri).then((res) => {
           return res.data;
         });
+        console.log(item)
         products.push({
           img: genesisIPFSData.image,
           title: genesisIPFSData.name,
