@@ -40,6 +40,7 @@ const Detail_Page = ({ ctheme }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const applicant = '0xb68ed8463f1896b18e000103af9e73c3d1edca1d';
   // const [type_trans, set_trans] = useState(false);
 
   const [process, set_process] = useState("Processing...");
@@ -70,11 +71,16 @@ const Detail_Page = ({ ctheme }) => {
   }
   const placebid = async () => {
     console.log(mainData)
+    console.log(mainData.ids_auc)
     handleOpen();
     try {
       const price = "0x" + parseInt(mainData.startingPrice).toString(16);
       let bid = await auctionContract.bid(mainData.ids_auc, price);
       await bid.wait();
+      
+      let accept = await auctionContract.accept(mainData.ids_auc, applicant);
+      await accept.wait();
+
       set_process("Bid successfully.");
       setTimeout(() => {
         history.push({ pathname: "/" });
@@ -92,7 +98,7 @@ const Detail_Page = ({ ctheme }) => {
       console.log(error);
     }
   };
-  const price_format = (payment, value) => {
+  const price_format = (value) => {
     var temp = value;
     temp = temp / Math.pow(10,18)
     // if (payment === "DUKE") {
