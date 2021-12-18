@@ -86,7 +86,7 @@ const Detail_Page = ({ ctheme }) => {
         set_process("Processing...");
         window.location.reload();
         handleClose();
-      }, 3000);
+      }, 2000);
 
       // .then((res) => {
       //   set_process("Baught successfully.");
@@ -95,7 +95,7 @@ const Detail_Page = ({ ctheme }) => {
       //     set_process("Processing...");
       //     window.location.reload();
       //     handleClose();
-      //   }, 3000);
+      //   }, 2000);
 
       // }).catch((error) => {
       //   console.log(error)
@@ -103,7 +103,7 @@ const Detail_Page = ({ ctheme }) => {
       //   setTimeout(() => {
       //     set_process("Processing...");
       //     handleClose();
-      //   }, 3000);
+      //   }, 2000);
       // });
     } catch (error) {
       set_process("Fault! Try again.");
@@ -317,13 +317,13 @@ const Detail_Page = ({ ctheme }) => {
         aria-describedby="modal-modal-description"
       >
         <Box style={style1}>
-          <MHeader>Status</MHeader>
+          <MHeader>{mainData.title}</MHeader>
           <MContent alignItems="center" marginTop="3%">
             Buy NFT:{"\u00a0"}
             {process}
           </MContent>
           <MContent alignItems="flex-start" marginTop="1%">
-            Just a moment until buy auction.
+            Just a moment until buy NFT.
           </MContent>
           {/* {!type_trans ? <>
             <MContent alignItems="center" marginTop="3%">Create Auction:{'\u00a0'}{process}</MContent>

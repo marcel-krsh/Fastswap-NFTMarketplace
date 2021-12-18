@@ -135,25 +135,25 @@ const Create_NFT = ({ ctheme }) => {
             //     history.push({ pathname: "/" });
             //     window.location.reload();
             //     handleClose();
-            //   }, 3000);
+            //   }, 2000);
 
             // }).catch((error) => {
             //   set_process("Fault! Try again.")
             //   setTimeout(() => {
             //     handleClose();
-            //   }, 3000);
+            //   }, 2000);
             // });
             set_process("Created successfully.");
             setTimeout(() => {
               history.push({ pathname: "/" });
               window.location.reload();
               handleClose();
-            }, 3000);
+            }, 2000);
           } catch (err) {
             set_process("Fault! Try again.");
             setTimeout(() => {
               handleClose();
-            }, 3000);
+            }, 2000);
             console.log(err);
           }
         } else {
@@ -189,25 +189,25 @@ const Create_NFT = ({ ctheme }) => {
               //   history.push({ pathname: "/" });
               //   window.location.reload();
               //   handleClose();
-              // }, 3000);
+              // }, 2000);
               // }).catch((error) => {
               //   set_process("Fault! Try again.");
               //   setTimeout(() => {
               //     handleClose();
-              //   }, 3000);
+              //   }, 2000);
               // });
               set_process("Created successfully.");
               setTimeout(() => {
                 history.push({ pathname: "/" });
                 window.location.reload();
                 handleClose();
-              }, 3000);
+              }, 2000);
             }
           } catch (err) {
             set_process("Fault! Try again.");
             setTimeout(() => {
               handleClose();
-            }, 3000);
+            }, 2000);
             console.log(err);
           }
         }

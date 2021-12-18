@@ -96,7 +96,7 @@ const Detail_Page = ({ ctheme }) => {
         window.location.reload();
         handleClose();
         set_bidvalue('');
-      }, 3000);
+      }, 2000);
     } catch (error) {
       set_process("Fault! Try again.");
       setTimeout(() => {
@@ -347,7 +347,7 @@ const Detail_Page = ({ ctheme }) => {
         aria-describedby="modal-modal-description"
       >
         <Box style={style1}>
-          <MHeader>Status</MHeader>
+          <MHeader>{mainData.title}</MHeader>
           <MContent alignItems="center" marginTop="3%">
             Bid:{"\u00a0"}
             {process}
@@ -372,6 +372,7 @@ const Detail_Page = ({ ctheme }) => {
                 display="flex"
                 flex="4"
                 component="input"
+                type='number'
                 placeholder="Input bid price correctly."
                 borderRadius="8px"
                 height="50px"
@@ -380,20 +381,19 @@ const Detail_Page = ({ ctheme }) => {
                   border: "1px solid #CECECE",
                 }}
                 onChange={(e) => {
-                  const price = mainData.startingPrice / Math.pow(10, 18);
-                  if (e.target.value < price) {
-                    alert("You must input value more than" + price);
-                    set_bidvalue('');
-                    return;
-                  }
-
+                  // const price = mainData.startingPrice / Math.pow(10, 18);
+                  // if (e.target.value < price) {
+                  //   alert("You must input value more than" + price);
+                  //   set_bidvalue('');
+                  //   return;
+                  // }
                   set_bidvalue(e.target.value);
                 }}
                 value={bidvalue}
               ></Box>
             </Box>
           </MContent>
-          <MContent alignItems="flex-start" marginTop="1%">
+          <MContent alignItems="flex-start" marginTop="1%" marginBottom="5%">
             <BtnCustomize
               color={"#2BA55D"}
               back={"white"}
@@ -403,6 +403,12 @@ const Detail_Page = ({ ctheme }) => {
               str={"Place a bid"}
               borderRadius={"8px"}
               onClick={() => {
+                const price = mainData.startingPrice / Math.pow(10, 18);
+                if (bidvalue < price) {
+                  alert("You must input value more than" + price);
+                  set_bidvalue('');
+                  return;
+                }
                 if (bidvalue === '') {
                   alert("You must input bid price.");
                   return;
