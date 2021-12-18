@@ -8,7 +8,7 @@ import { Box, Modal } from "@material-ui/core";
 import styled from "styled-components";
 import { useWeb3React } from "@web3-react/core";
 import small_ellipse from "../../images/small_ellipse2.png";
-import small_duke from "../../images/small_duke1.png";
+import small_duke from "../../images/Duke.png";
 import bnb1 from "../../images/bnb1.png";
 import cover4 from "../../images/cover/cover-4.png";
 import cover5 from "../../images/cover/cover-5.png";
@@ -35,11 +35,18 @@ const Detail_Page = ({ ctheme }) => {
   const marketplaceContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null), [library]);
   const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
   const fastContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.FAST_TOKEN, FAST_TOKEN_ABI, library.getSigner()) : null), [library]);
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
   };
+  const [open_bid, setOpen_bid] = useState(false);
+  const handleOpen_bid = () => setOpen_bid(true);
+  const handleClose_bid = () => {
+    setOpen_bid(false);
+  };
+  const [bidvalue, set_bidvalue] = useState();
   // const applicant = '0xb68ed8463f1896b18e000103af9e73c3d1edca1d';
   // const [type_trans, set_trans] = useState(false);
 
@@ -67,17 +74,18 @@ const Detail_Page = ({ ctheme }) => {
     history.push("/");
     return <></>;
   }
-  const placebid = async () => {
-    console.log(mainData)
-    console.log(mainData.ids_auc)
+  const placebid_accept = async () => {
+    const bid_price = bidvalue * Math.pow(10, 18);
+    console.log("step1");
     handleOpen();
     try {
       const applicant = await auctionContract.owner();
-      console.log(applicant)
-      const price = "0x" + parseInt(mainData.startingPrice).toString(16);
+      console.log("step2");
+      const price = "0x" + bid_price.toString(16);
       let bid = await auctionContract.bid(mainData.ids_auc, price);
+      console.log("step3");
       await bid.wait();
-      
+      console.log("step4");
       let accept = await auctionContract.accept(mainData.ids_auc, applicant);
       await accept.wait();
 
@@ -87,20 +95,26 @@ const Detail_Page = ({ ctheme }) => {
         set_process("Processing...");
         window.location.reload();
         handleClose();
+        set_bidvalue('');
       }, 3000);
     } catch (error) {
       set_process("Fault! Try again.");
       setTimeout(() => {
         set_process("Processing...");
         handleClose();
-        // set_trans(false);
+        set_bidvalue('');
       });
       console.log(error);
     }
   };
+
+  const placebid = () => {
+    handleOpen_bid();
+  };
+
   const price_format = (value) => {
     var temp = value;
-    temp = temp / Math.pow(10,18)
+    temp = temp / Math.pow(10, 18)
     // if (payment === "DUKE") {
     //   temp = value / Math.pow(10, 18);
     // } else if (payment === "FAST") {
@@ -114,6 +128,52 @@ const Detail_Page = ({ ctheme }) => {
       return temp;
     }
   };
+
+  const duratoin_format = (value) => {
+    let dur = value / (60 * 60 * 24);
+    let dur_str;
+
+    if (parseInt(dur) === 1) {
+      dur_str = dur + " day"
+    }
+    else if (parseInt(dur) <= 0) {
+      dur_str = "no date"
+    }
+    else {
+      dur_str = dur + " days"
+    }
+    return dur_str;
+  }
+
+  const durtaion_date = (value) => {
+    const sep1 = '-';
+    const sep2 = ':';
+    const sep3 = ' ';
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth();
+    let year = newDate.getFullYear();
+    var hours = newDate.getHours();
+    var minutes = newDate.getMinutes();
+    date = date + parseInt(value);
+    if (date > 30) {
+      date = date - 30;
+      month += 1;
+    }
+    if (month > 12) {
+      month = month - 12;
+      year += 1;
+    }
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var str = monthNames[month] + " " + date + " " + year + " - " + hours + ":" + minutes + ampm;
+    return str;
+    // return `${year}${sep1}${month < 10 ? `0${month}` : `${month}`}${sep1}${date}${hours}${sep2}${minutes}${ampm}`
+  }
+
+
   return (
     <>
       <Box display="flex" width="100%" marginTop="5%">
@@ -131,7 +191,7 @@ const Detail_Page = ({ ctheme }) => {
                   <FaShareAlt fontSize="18px" color="#757B75"></FaShareAlt>
                 </Box>
               </Box>
-              <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
+              <Box display="flex" flex="2" flexDirection="column" marginTop="2%">
                 <Img_Title1 display="flex" flex="1" fontFamily="Poppins" fontWeight="800" fontSize={["20px", "30px", "34px"]} color="#363936" lineHeight={["20px", "30px", "40px"]} alignItems="center">
                   {/* NFT artwork titleNFT */}
                   {mainData.title}
@@ -140,7 +200,7 @@ const Detail_Page = ({ ctheme }) => {
                   artwork title
                 </Img_Title1>
               </Box>
-              <Box display="flex" flex="1" alignItems="center" marginTop="1%">
+              <Box display="flex" flex="1" alignItems="center" marginTop="2%">
                 <Box display="flex" flex="60" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
                   Owned by{" "}
                 </Box>
@@ -152,27 +212,41 @@ const Detail_Page = ({ ctheme }) => {
                   {"\u00a0"}2.4 K views
                 </Box>
                 <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
-                  <FaHeart fontSize="20px" />
+                  <FaHeart fontSize="20px" color="#F16868" />
                   {"\u00a0"}201 favorited
                 </Box>
                 {/* <Box display="flex" flex="100" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="500" color=""></Box> */}
               </Box>
-              <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
-                <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Poppins" fontSize="10px" fontWeight="400" color="#757B75">
-                  Lowest price
-                </Box>
-                <Box display="flex" flex="1" alignItems="flex-start" marginTop="10px">
-                  <Box display="flex" alignItems="center">
-                    <Box display="flex" justifyContent="center" alignItems="center">
-                      <img src={mainData.payment_method === "DUKE" ? small_duke : mainData.payment_method === "FAST" ? icon_logo : mainData.payment_method === "BNB" ? bnb1 : ""} width="24px" height="24px" />
+              <Box display="flex" flex="2" flexDirection="column" marginTop="2%">
+                <Box display="flex" flex="1" alignItems="center" marginTop="1%">
+                  <Box display="flex" alignItems="center" flex="1" >
+                    <Box display="flex" flexDirection="column" alignItems="center" marginRight="3%">
+                      <Box display="flex" flex="3" width="50px" height="50px" border="1px solid #CECECE" borderRadius="100%" >
+                        <img src={mainData.paymentType === "2" ? small_duke : mainData.paymentType === "1" ? icon_logo : mainData.paymentType === "0" ? bnb1 : ""} width="100%" height="100%" alt="" />
+                      </Box>
+                      <Box display="flex" flex="1" justifyContent="center" alignItems="center" fontFamily="Poppins" fontSize="18px" fontWeight="500" color="#131413">
+                        {
+                          mainData.paymentType === "2" ? "DUKE" : mainData.paymentType === "1" ? "FAST" : mainData.paymentType === "0" ? "BNB" : ""
+                        }
+                      </Box>
                     </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize={["14px", "18px"]} fontWeight="400" color="#131413">
-                      {price_format( mainData.startingPrice)}~{price_format( mainData.endingPrice)}
-                      {/* 200.1 FAST */}
+                    <Box display="flex" flex="3" flexDirection="column" borderLeft="1px solid #CECECE">
+                      <Box display="flex" justifyContent="flex-start" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="18px" fontWeight="400" color="#757B75">
+                        Last Bid
+                      </Box>
+                      <Box display="flex" justifyContent="flex-start" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize={["18px", "24px"]} fontWeight="500" color="#131413">
+                        {price_format(mainData.startingPrice)}~{price_format(mainData.endingPrice)}
+                        {/* 200.1 FAST */}
+                      </Box>
+                      <Box display="flex" justifyContent="flex-start" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="14px" fontWeight="400" color="#757B75">
+                        $4.05
+                      </Box>
                     </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
-                      $4.05
-                    </Box>
+                  </Box>
+                  <Box display="flex" flex="1" flexDirection="column">
+                    <Box display="flex" justifyContent="flex-end" fontFamily="Poppins" fontWeight="500" fontSize="18px" color="#757B75">Time Left</Box>
+                    <Box display="flex" justifyContent="flex-end" fontFamily="Poppins" fontWeight="600" fontSize="24px" color="#2BA55D">{duratoin_format(mainData.duration)}</Box>
+                    <Box display="flex" justifyContent="flex-end" fontFamily="Poppins" fontWeight="500" fontSize="14px" color="#757B75">{durtaion_date(duratoin_format(mainData.duration))}</Box>
                   </Box>
                 </Box>
               </Box>
@@ -182,7 +256,7 @@ const Detail_Page = ({ ctheme }) => {
                   marginTop={"20px"}
                   color={"white"}
                   back={"#2BA55D"}
-                  width={"100%"}
+                  width={"80%"}
                   height={"56px"}
                   border={"1px solid #2BA55D"}
                   str={"Place a bid"}
@@ -191,28 +265,18 @@ const Detail_Page = ({ ctheme }) => {
                     placebid();
                   }}
                 />
-                {/* <Btn_Customize
+                <BtnCustomize
                   flexGrow={1}
-                  marginL={1}
-                  color={"white"}
-                  back={"#2BA55D"}
-                  width={"100%"}
-                  height={"56px"}
-                  border={"1px solid #2BA55D"}
-                  str={"Make an offer"}
-                  borderRadius={"8px"}
-                />
-                <Btn_Customize
-                  marginL={1}
+                  marginTop={"20px"}
                   color={"#2BA55D"}
                   back={"white"}
-                  width={"100%"}
+                  width={"12%"}
                   height={"56px"}
                   border={"1px solid #2BA55D"}
-                  str={"Buy now"}
+                  str={<MdRemoveRedEye fontSize="30px" />}
                   borderRadius={"8px"}
-                  style={{maxWidth: 63}}
-                /> */}
+                  marginLeft="2%"
+                />
               </Box>
             </Box>
           </Box>
@@ -279,7 +343,6 @@ const Detail_Page = ({ ctheme }) => {
       </Part_Drop>
       <Modal
         open={open}
-        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -292,17 +355,62 @@ const Detail_Page = ({ ctheme }) => {
           <MContent alignItems="flex-start" marginTop="1%">
             Just a moment until bid auction.
           </MContent>
-          {/* {!type_trans ? <>
-            <MContent alignItems="center" marginTop="3%">Create Auction:{'\u00a0'}{process}</MContent>
-            <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating Aucion.</MContent></> :
-            <>
-              <MContent alignItems="center" marginTop="3%">Create NFT:{'\u00a0'}{process}</MContent>
-              <MContent alignItems="flex-start" marginTop="1%">Just a moment until creating NFT.</MContent>
-            </>} */}
+        </Box>
+      </Modal>
 
-          {/* <MContent alignItems="flex-start" marginTop="3%">Register for sale:{'\u00a0'}{process1}</MContent> */}
+      <Modal
+        open={open_bid}
+        onClose={handleClose_bid}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box style={style1}>
+          <MHeader>{mainData.title}</MHeader>
+          <MContent alignItems="center" marginTop="3%">
+            <Box display="flex" width="50%" marginTop="1%">
+              <Box
+                display="flex"
+                flex="4"
+                component="input"
+                placeholder="Input bid price correctly."
+                borderRadius="8px"
+                height="50px"
+                paddingLeft="3%"
+                style={{
+                  border: "1px solid #CECECE",
+                }}
+                onChange={(e) => {
+                  const price = mainData.startingPrice / Math.pow(10, 18);
+                  if (e.target.value < price) {
+                    alert("You must input value more than" + price);
+                    set_bidvalue('');
+                    return;
+                  }
 
-          {/* <MFooter></MFooter> */}
+                  set_bidvalue(e.target.value);
+                }}
+                value={bidvalue}
+              ></Box>
+            </Box>
+          </MContent>
+          <MContent alignItems="flex-start" marginTop="1%">
+            <BtnCustomize
+              color={"#2BA55D"}
+              back={"white"}
+              width={"50%"}
+              height={"50px"}
+              border={"1px solid #2BA55D"}
+              str={"Place a bid"}
+              borderRadius={"8px"}
+              onClick={() => {
+                if (bidvalue === '') {
+                  alert("You must input bid price.");
+                  return;
+                }
+                placebid_accept();
+              }}
+            />
+          </MContent>
         </Box>
       </Modal>
     </>

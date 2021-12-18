@@ -8,7 +8,7 @@ import { Box, Modal } from "@material-ui/core";
 import styled from "styled-components";
 import { useWeb3React } from "@web3-react/core";
 import small_ellipse from "../../images/small_ellipse2.png";
-import small_duke from "../../images/small_duke1.png";
+import small_duke from "../../images/Duke.png";
 import bnb1 from "../../images/bnb1.png";
 import cover4 from "../../images/cover/cover-4.png";
 import cover5 from "../../images/cover/cover-5.png";
@@ -147,7 +147,7 @@ const Detail_Page = ({ ctheme }) => {
                   <FaShareAlt fontSize="18px" color="#757B75"></FaShareAlt>
                 </Box>
               </Box>
-              <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
+              <Box display="flex" flex="2" flexDirection="column" marginTop="2%">
                 <Img_Title1 display="flex" flex="1" fontFamily="Poppins" fontWeight="800" fontSize={["20px", "30px", "34px"]} color="#363936" lineHeight={["20px", "30px", "40px"]} alignItems="center">
                   {/* NFT artwork titleNFT */}
                   {mainData.title}
@@ -156,7 +156,7 @@ const Detail_Page = ({ ctheme }) => {
                   artwork title
                 </Img_Title1>
               </Box>
-              <Box display="flex" flex="1" alignItems="center" marginTop="1%">
+              <Box display="flex" flex="1" alignItems="center" marginTop="2%">
                 <Box display="flex" flex="60" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
                   Owned by{" "}
                 </Box>
@@ -168,67 +168,84 @@ const Detail_Page = ({ ctheme }) => {
                   {"\u00a0"}2.4 K views
                 </Box>
                 <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
-                  <FaHeart fontSize="20px" />
+                  <FaHeart fontSize="20px" color="#F16868" />
                   {"\u00a0"}201 favorited
                 </Box>
                 {/* <Box display="flex" flex="100" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="500" color=""></Box> */}
               </Box>
-              <Box display="flex" flex="2" flexDirection="column" marginTop="1%">
-                <Box display="flex" flex="1" alignItems="flex-end" fontFamily="Poppins" fontSize="10px" fontWeight="400" color="#757B75">
-                  Lowest price
-                </Box>
-                <Box display="flex" flex="1" alignItems="flex-start" marginTop="10px">
-                  <Box display="flex" alignItems="center">
-                    <Box display="flex" justifyContent="center" alignItems="center">
-                      <img src={mainData.payment_method === "DUKE" ? small_duke : mainData.payment_method === "FAST" ? icon_logo : mainData.payment_method === "BNB" ? bnb1 : ""} width="24px" height="24px" />
+              <Box display="flex" flex="2" flexDirection="column" marginTop="2%">
+                <Box display="flex" flex="1" alignItems="center" marginTop="1%">
+                  <Box display="flex" alignItems="center" flex="1" >
+                    <Box display="flex" flexDirection="column" alignItems="center" marginRight="3%">
+                      <Box display="flex" flex="3" width="50px" height="50px" border="1px solid #CECECE" borderRadius="100%" >
+                        <img src={mainData.payment_method === "DUKE" ? small_duke : mainData.payment_method === "FAST" ? icon_logo : mainData.payment_method === "BNB" ? bnb1 : ""} width="100%" height="100%" alt="" />
+                      </Box>
+                      <Box display="flex" flex="1" justifyContent="center" alignItems="center" fontFamily="Poppins" fontSize="18px" fontWeight="500" color="#131413">
+                        {
+                          mainData.payment_method === "DUKE" ? "DUKE" : mainData.payment_method === "FAST" ? "FAST" : mainData.payment_method === "BNB" ? "BNB" : ""
+                        }
+                      </Box>
                     </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize={["14px", "18px"]} fontWeight="400" color="#131413">
-                      {price_format(mainData.payment_method, mainData.price)}
-                      {/* 200.1 FAST */}
-                    </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
-                      $4.05
+                    <Box display="flex" flex="3" flexDirection="column" borderLeft="1px solid #CECECE">
+                      <Box display="flex" justifyContent="flex-start" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="18px" fontWeight="400" color="#757B75">
+                        Buy Now
+                      </Box>
+                      <Box display="flex" justifyContent="flex-start" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize={["18px", "24px"]} fontWeight="500" color="#131413">
+                        {price_format(mainData.payment_method, mainData.price)}
+                        {/* 200.1 FAST */}
+                      </Box>
+                      <Box display="flex" justifyContent="flex-start" alignItems="center" marginLeft="10px" fontFamily="Poppins" fontSize="14px" fontWeight="400" color="#757B75">
+                        $4.05
+                      </Box>
                     </Box>
                   </Box>
+
                 </Box>
               </Box>
-              <Box display="flex" flex="2" alignItems="flex-start" marginTop="1%">
-                <BtnCustomize
-                  flexGrow={1}
-                  marginTop={"20px"}
-                  color={"white"}
-                  back={"#2BA55D"}
-                  width={"100%"}
-                  height={"56px"}
-                  border={"1px solid #2BA55D"}
-                  str={"Buy now"}
-                  borderRadius={"8px"}
-                  onClick={() => {
-                    handleBuyNow();
-                  }}
-                />
-                {/* <Btn_Customize
-                  flexGrow={1}
-                  marginL={1}
-                  color={"white"}
-                  back={"#2BA55D"}
-                  width={"100%"}
-                  height={"56px"}
-                  border={"1px solid #2BA55D"}
-                  str={"Make an offer"}
-                  borderRadius={"8px"}
-                />
-                <Btn_Customize
-                  marginL={1}
-                  color={"#2BA55D"}
-                  back={"white"}
-                  width={"100%"}
-                  height={"56px"}
-                  border={"1px solid #2BA55D"}
-                  str={"Buy now"}
-                  borderRadius={"8px"}
-                  style={{maxWidth: 63}}
-                /> */}
+              <Box display="flex" flex="2" marginTop="1%">
+                <Box display="flex" flex="1" justifyContent="flex-start" marginRight="1%">
+                  <BtnCustomize
+                    flexGrow={1}
+                    marginTop={"20px"}
+                    color={"white"}
+                    back={"#2BA55D"}
+                    width={"100%"}
+                    height={"50px"}
+                    border={"1px solid #2BA55D"}
+                    str={"Buy now"}
+                    borderRadius={"8px"}
+                    onClick={() => {
+                      handleBuyNow();
+                    }}
+                  />
+                </Box>
+                <Box display="flex" flex="1" justifyContent="center" marginRight="1%">
+                  <BtnCustomize
+                    flexGrow={1}
+                    marginTop={"20px"}
+                    color={"white"}
+                    back={"#2BA55D"}
+                    width={"100%"}
+                    height={"50px"}
+                    border={"1px solid #2BA55D"}
+                    str={"Make an offer"}
+                    borderRadius={"8px"}
+                  />
+                </Box>
+                <Box display="flex" flex="0.3" justifyContent="flex-end">
+                  <BtnCustomize
+                    flexGrow={1}
+                    marginTop={"20px"}
+                    color={"#2BA55D"}
+                    back={"white"}
+                    width={"100%"}
+                    height={"50px"}
+                    border={"1px solid #2BA55D"}
+                    str={<MdRemoveRedEye fontSize="30px" />}
+                    borderRadius={"8px"}
+                    marginLeft="2%"
+                  />
+                </Box>
               </Box>
             </Box>
           </Box>

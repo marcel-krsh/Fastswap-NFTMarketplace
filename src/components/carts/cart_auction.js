@@ -149,7 +149,7 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
         >
           <img src={simg1} width="24px" height="24px"></img>
           {`\u00a0`}
-          {price_format(sprice)} ~ {price_format(eprice)}
+          {price_format(sprice)}~{price_format(eprice)}
         </Box>
       </Box>
     </HCollection>

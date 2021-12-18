@@ -52,7 +52,6 @@ const getAuctions =
         const genesisIPFSData = await requestAPICall(item.uri).then((res) => {
           return res.data;
         });
-        console.log(item)
         products.push({
           img: genesisIPFSData.image,
           title: genesisIPFSData.name,
@@ -63,7 +62,7 @@ const getAuctions =
           seller: item.seller,
           isAuction: true,
           ids_auc: ids_auc[i],
-          payment_method: item.paymentMethod,
+          paymentType: item.paymentType,
         });
         if (i === tokenAuctions.length - 1) {
           await dispatch({

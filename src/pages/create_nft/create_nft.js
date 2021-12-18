@@ -395,7 +395,7 @@ const Create_NFT = ({ ctheme }) => {
                   set_trans(true);
                 }}
                 type_trans={type_trans ? 1 : 0}
-                // border={!type_trans?"3px solid #237745 !important":''}
+              // border={!type_trans?"3px solid #237745 !important":''}
               >
                 Fixed Price
               </Transbut2>

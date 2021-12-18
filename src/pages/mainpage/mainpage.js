@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 import cover_big1 from "../../images/cover/cover_big1.png";
 import small_ellipse from "../../images/small_ellipse2.png";
-import small_duke from "../../images/small_duke1.png";
+import small_duke from "../../images/Duke.png";
 import icon_logo from "../../images/icon_logo.png";
 import bnb1 from "../../images/bnb1.png";
 import BtnCustomize from "../../components/buttons/btn_container";
@@ -121,9 +121,10 @@ const Mainpage = ({ ctheme }) => {
             <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
               {auctions.length > 0 &&
                 auctions.map((item, index) => {
+                  // console.log(item)
                   return (
                     <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
-                      <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === "DUKE" ? small_duke : item.payment_method === "FAST" ? icon_logo : item.payment_method === "BNB" ? bnb1 : ""} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration={item.duration} ctheme={ctheme} payment={item.payment_method}></CartAuction>
+                      <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.paymentType === '2' ? small_duke : item.paymentType === '1' ? icon_logo : item.paymentType === '0' ? bnb1 : ""} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration={item.duration} ctheme={ctheme} payment={item.payment_method}></CartAuction>
                     </Box>
                   );
                 })}
