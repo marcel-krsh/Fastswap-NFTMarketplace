@@ -40,13 +40,11 @@ const Detail_Page = ({ ctheme }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const applicant = '0xb68ed8463f1896b18e000103af9e73c3d1edca1d';
+  // const applicant = '0xb68ed8463f1896b18e000103af9e73c3d1edca1d';
   // const [type_trans, set_trans] = useState(false);
 
   const [process, set_process] = useState("Processing...");
   useEffect(() => {
-    // console.log("------------------------");
-    // console.log(nfts);
   });
   const style1 = {
     position: "absolute",
@@ -74,6 +72,8 @@ const Detail_Page = ({ ctheme }) => {
     console.log(mainData.ids_auc)
     handleOpen();
     try {
+      const applicant = await auctionContract.owner();
+      console.log(applicant)
       const price = "0x" + parseInt(mainData.startingPrice).toString(16);
       let bid = await auctionContract.bid(mainData.ids_auc, price);
       await bid.wait();
