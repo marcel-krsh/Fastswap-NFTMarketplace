@@ -107,7 +107,7 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
   return (
     <Box fontFamily={"Poppins"} background={"#FCFCFC"} border={"1px solid #CECECE"} borderRadius={"8px"} overflow={"hidden"}
       onClick={() => {
-        history.push({ pathname: "/Detail_page", search: index.toString() });
+        history.push({ pathname: "/detail_page_auction", search: index.toString() });
       }}>
       <HeaderCardBase>
         <img src={img} width={"100%"} height={"100%"} alt="" />

@@ -349,63 +349,63 @@ const GridShow = styled(Box)`
 `;
 
 const Collection_Image = styled(Box)`
-flex - direction: row;
+flex-direction: row;
 
-@media(max - width: 600px) {
-  flex - direction: column;
+@media(max-width: 600px) {
+  flex-direction: column;
 }
 `;
 
 const Underline1 = styled(Box)`
-flex - direction: row;
-@media(max - width: 800px) {
-  flex - direction: column;
+flex-direction: row;
+@media(max-width: 800px) {
+  flex-direction: column;
 }
 `;
 
 const Underline2 = styled(Box)`
-@media(max - width: 800px) {
+@media(max-width: 800px) {
   width: 95 % !important;
 }
 `;
 
 const Underline3 = styled(Box)`
-@media(max - width: 800px) {
-  justify - content: flex - start!important;
+@media(max-width: 800px) {
+  justify-content: flex-start!important;
 }
 `;
 
 const Detail_Img = styled(Box)`
-flex - direction: row;
-@media(max - width: 600px) {
-  flex - direction: column;
+flex-direction: row;
+@media(max-width: 600px) {
+  flex-direction: column;
 }
 `;
 
 const Img_Title1 = styled(Box)`
-@media(max - width: 1000px) {
+@media(max-width: 1000px) {
 }
 `;
 
 const Part_Drop = styled(Box)`
 display: flex;
 width: 100 %;
-margin - top: 20px;
-flex - direction: column;
+margin-top: 20px;
+flex-direction: column;
 `;
 
 const Drop_chart1 = styled(Box)`
 display: flex;
-align - items: center;
-justify - content: center;
+align-items: center;
+justify-content: center;
 width: 100 %;
 height: 160px;
-background: linear - gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14 %, rgba(198, 231, 255, 0.31) 97.12 %);
-font - family: Poppins;
-font - style: normal;
-font - weight: 600;
-font - size: 16px;
-line - height: 24px;
+background: linear-gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14 %, rgba(198, 231, 255, 0.31) 97.12 %);
+font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 24px;
 color: black;
 // color: ${({ ctheme, ltheme, dtheme }) => (ctheme ? "black" : "white")};
 `;
@@ -414,19 +414,19 @@ const MHeader = styled(Box)`
 display: flex;
 flex: 1;
 width: 100 %;
-justify - content: center;
-font - size: 38px;
+justify-content: center;
+font-size: 38px;
 color: white;
-margin - top: 3 %;
-align - items: center;
+margin-top: 3 %;
+align-items: center;
 `;
 
 const MContent = styled(Box)`
 display: flex;
 flex: 2;
 width: 100 %;
-justify - content: center;
-font - size: 25px;
+justify-content: center;
+font-size: 25px;
 color: white;
 `;
 
