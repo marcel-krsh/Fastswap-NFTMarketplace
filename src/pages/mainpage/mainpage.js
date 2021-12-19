@@ -44,7 +44,9 @@ const Mainpage = ({ ctheme }) => {
             </Box>
           </Leftimgletter1>
           <Box display="flex" flex="4" justifyContent="flex-start" alignItems="flex-start" marginTop="5%" width="100%">
-            <Box display="flex" width="40%">
+            <Box display="flex" width="40%" onClick={() => {
+              history.push({ pathname: "/explore" });
+            }}>
               <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"100%"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore"} borderRadius={"8px"} />
             </Box>
             <Box
