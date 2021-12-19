@@ -81,8 +81,11 @@ const Mainpage = ({ ctheme }) => {
       </Part2>
 
       <Part2>
-        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
+        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"} width={"100%"}>
           <ImgLetter letter={"Made by FastSwap"} ctheme={ctheme} />
+          <BoxGadient marginTop={"2%"} justifyContent={"center"} alignItems={"center"}>
+            Placeholder for FastSwap’s own collection
+          </BoxGadient>
         </Box>
       </Part2>
 
@@ -100,7 +103,7 @@ const Mainpage = ({ ctheme }) => {
                     </Box>
                   );
                 })}
-                {auctions.length > 0 &&
+              {auctions.length > 0 &&
                 auctions.map((item, index) => {
                   console.log(item)
                   return (
@@ -134,6 +137,18 @@ const Mainpage = ({ ctheme }) => {
   );
 };
 
+const BoxGadient = styled(Box)`
+  display: flex;
+  width: 100%;
+  height: 196px;
+  font-family: Poppins;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 20px;
+color: #000000;
+  background: linear-gradient(88.83deg, rgba(157, 209, 178, 0.57) 0.54%, rgba(157, 209, 178, 0.19) 99.61%), linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+`
 const Part2 = styled(Box)`
   display: flex;
   width: 100%;
