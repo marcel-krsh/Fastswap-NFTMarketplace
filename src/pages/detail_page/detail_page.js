@@ -291,22 +291,16 @@ const Detail_Page = ({ ctheme }) => {
         </Box>
       </Box>
       <Part_Drop>
-        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
+        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" marginBottom="5%">
           <Box display="flex" flexDirection="column" marginTop="2%">
-            <Collection_Image display="flex" flex="1" marginBottom="2%" flexWrap="wrap" justifyContent="space-between">
-              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
-                <Last_Drop index={1} img={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+            <GridShow display="grid" gridTemplateColumns="auto auto auto auto" gridGap="20px">
+              <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
+                <Last_Drop index={1} img2={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+                <Last_Drop index={1} img2={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+                <Last_Drop index={1} img2={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+                <Last_Drop index={1} img2={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
-              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
-                <Last_Drop index={1} img={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
-                <Last_Drop index={1} img={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
-                <Last_Drop index={1} img={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-            </Collection_Image>
+            </GridShow>
           </Box>
         </Box>
       </Part_Drop>
@@ -342,86 +336,98 @@ const Detail_Page = ({ ctheme }) => {
   );
 };
 
-const Collection_Image = styled(Box)`
-  flex-direction: row;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
+const GridShow = styled(Box)`
+  @media (max-width: 1800px) {
+    grid-template-columns: auto auto auto!important;
   }
+  @media (max-width: 1385px) {
+    grid-template-columns: auto auto !important;
+  }
+  @media (max-width: 1022px) {
+    grid-template-columns: auto!important;
+  }
+`;
+
+const Collection_Image = styled(Box)`
+flex - direction: row;
+
+@media(max - width: 600px) {
+  flex - direction: column;
+}
 `;
 
 const Underline1 = styled(Box)`
-  flex-direction: row;
-  @media (max-width: 800px) {
-    flex-direction: column;
-  }
+flex - direction: row;
+@media(max - width: 800px) {
+  flex - direction: column;
+}
 `;
 
 const Underline2 = styled(Box)`
-  @media (max-width: 800px) {
-    width: 95% !important;
-  }
+@media(max - width: 800px) {
+  width: 95 % !important;
+}
 `;
 
 const Underline3 = styled(Box)`
-  @media (max-width: 800px) {
-    justify-content: flex-start !important;
-  }
+@media(max - width: 800px) {
+  justify - content: flex - start!important;
+}
 `;
 
 const Detail_Img = styled(Box)`
-  flex-direction: row;
-  @media (max-width: 600px) {
-    flex-direction: column;
-  }
+flex - direction: row;
+@media(max - width: 600px) {
+  flex - direction: column;
+}
 `;
 
 const Img_Title1 = styled(Box)`
-  @media (max-width: 1000px) {
-  }
+@media(max - width: 1000px) {
+}
 `;
 
 const Part_Drop = styled(Box)`
-  display: flex;
-  width: 100%;
-  margin-top: 20px;
-  flex-direction: column;
+display: flex;
+width: 100 %;
+margin - top: 20px;
+flex - direction: column;
 `;
 
 const Drop_chart1 = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 160px;
-  background: linear-gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14%, rgba(198, 231, 255, 0.31) 97.12%);
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-  color: black;
-  // color: ${({ ctheme, ltheme, dtheme }) => (ctheme ? "black" : "white")};
+display: flex;
+align - items: center;
+justify - content: center;
+width: 100 %;
+height: 160px;
+background: linear - gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14 %, rgba(198, 231, 255, 0.31) 97.12 %);
+font - family: Poppins;
+font - style: normal;
+font - weight: 600;
+font - size: 16px;
+line - height: 24px;
+color: black;
+// color: ${({ ctheme, ltheme, dtheme }) => (ctheme ? "black" : "white")};
 `;
 
 const MHeader = styled(Box)`
-  display: flex;
-  flex: 1;
-  width: 100%;
-  justify-content: center;
-  font-size: 38px;
-  color: white;
-  margin-top: 3%;
-  align-items: center;
+display: flex;
+flex: 1;
+width: 100 %;
+justify - content: center;
+font - size: 38px;
+color: white;
+margin - top: 3 %;
+align - items: center;
 `;
 
 const MContent = styled(Box)`
-  display: flex;
-  flex: 2;
-  width: 100%;
-  justify-content: center;
-  font-size: 25px;
-  color: white;
+display: flex;
+flex: 2;
+width: 100 %;
+justify - content: center;
+font - size: 25px;
+color: white;
 `;
 
 export default Detail_Page;

@@ -92,7 +92,6 @@ const Mainpage = ({ ctheme }) => {
       <PartDrop>
         <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
           <ImgLetter letter={"Latest drops 🚀"} ctheme={ctheme} />
-
           <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center">
             <GridShow display="grid" gridTemplateColumns="auto auto auto auto" gridGap="20px">
               {nfts.length > 0 &&
@@ -253,7 +252,6 @@ const PartHeader = styled(Box)`
 const PartDrop = styled(Box)`
   display: flex;
   width: 100%;
-  margin-top: 5%;
   flex-direction: column;
 `;
 
