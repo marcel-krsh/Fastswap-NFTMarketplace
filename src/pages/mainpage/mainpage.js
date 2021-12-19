@@ -29,7 +29,7 @@ const Mainpage = ({ ctheme }) => {
   return (
     <>
       <PartHeader>
-        <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%">
+        <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%" height="460px">
           <Leftimgletter display="flex" flex="4" flexDirection="column" width="100%" fontSize="72px">
             <Box display="flex" flex="1" justifyContent="flex-start" alignItems="flex-end" fontWeight="bold" lineheight="80px" fontFamily="Poppins" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
               Collect{" "}
@@ -58,91 +58,73 @@ const Mainpage = ({ ctheme }) => {
             </Box>
           </Box>
         </Box>
-        <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%">
-          <Box display="flex" flex="3" alignItems="center" marginBottom="20px" width="100%">
-            <Box width="16px" height="16px" borderRadius="100%" bgcolor="#2BA55D"></Box>
-            <Box marginLeft="10px" fontFamily="Poppins" fontSize="18px" fontWeight="bold" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
-              Auction in progress
-            </Box>
+        <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%" border="1px solid #CECECE" borderRadius="24px" height="460px">
+          <Box display="flex" flex="4" alignItems="center" width="100%" style={{ borderBottom: "1px solid #CECECE" }}>
+            <img src={cover_big1} width="100%" height="367px" alt="" style={{
+              borderRadius: "24px 24px 0px 0px"
+            }} />
           </Box>
-          <Box display="flex" flex="9" alignItems="center" width="100%">
-            <img src={cover_big1} width="100%" height="100%" alt="" />
-          </Box>
-          <Box display="flex" flex="3" flexDirection="column" marginTop="15px" width="100%">
-            <Box display="flex" flex="1" flexDirection="column">
-              <Imgdownletter display="flex" flex="1" fontSize="12px">
-                <Box display="flex" flex="5" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Poppins">
-                  Artist
-                </Box>
-                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Poppins">
-                  Current
-                </Box>
-                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color_grey : darkTheme.font_color_grey} fontFamily="Poppins">
-                  Action Ends in
-                </Box>
-              </Imgdownletter>
-              <Imgdownletter1 display="flex" flex="2" marginTop="10px" fontSize="18px">
-                <Box display="flex" flex="5" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Poppins">
-                  <img src={small_ellipse} width="24px" height="24px" alt=""></img>
-                  {`\u00a0`}
-                  {`\u00a0`}creator name
-                </Box>
-                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Poppins">
-                  $22.2K
-                </Box>
-                <Box display="flex" flex="2" justifyContent="flex-start" alignItems="center" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1} fontFamily="Poppins">
-                  hh:mm:ss
-                </Box>
-              </Imgdownletter1>
-            </Box>
-            <Box display="flex" flex="1"></Box>
+          <Box display="flex" flex="1" width="100%" flexDirection="column" marginLeft="10%">
+            <ImgUpLetter display="flex" flex="1" alignItems="flex-end">
+              Gratification Corner
+            </ImgUpLetter>
+            <ImgDownLetter display="flex" flex="1" alignItems="flex-start">
+              Bridge Connection
+            </ImgDownLetter>
           </Box>
         </Box>
       </PartHeader>
+      <Part2>
+        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
+          <ImgLetter letter={"Hot collections 🔥"} ctheme={ctheme} />
+        </Box>
+      </Part2>
+
+      <Part2>
+        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
+          <ImgLetter letter={"Made by FastSwap"} ctheme={ctheme} />
+        </Box>
+      </Part2>
 
       <PartDrop>
-        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"} position="relative">
+        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
           <ImgLetter letter={"Latest drops 🚀"} ctheme={ctheme} />
 
           <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center">
-            <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
+            <GridShow display="grid" gridTemplateColumns="auto auto auto auto" gridGap="20px">
               {nfts.length > 0 &&
                 nfts.map((item, index) => {
                   return (
-                    <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
-                      <LastDrop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === "DUKE" ? small_duke : item.payment_method === "FAST" ? icon_logo : item.payment_method === "BNB" ? bnb1 : ""} name={item.owner} price={`${item.price} `} ctheme={ctheme} payment={item.payment_method}></LastDrop>
+                    <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
+                      <LastDrop index={index} img2={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === "DUKE" ? small_duke : item.payment_method === "FAST" ? icon_logo : item.payment_method === "BNB" ? bnb1 : ""} name={item.owner} price={`${item.price} `} ctheme={ctheme} payment={item.payment_method}></LastDrop>
                     </Box>
                   );
                 })}
-            </GridShow>
-          </Box>
-          <ImgLetter letter={"Auctions"} ctheme={ctheme} />
-          <Box display="flex" marginTop="2%" justifyContent="center">
-            <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
-              {auctions.length > 0 &&
+                {auctions.length > 0 &&
                 auctions.map((item, index) => {
                   // console.log(item)
                   return (
-                    <Box key={index} maxWidth="240px" display="flex" flex="1" borderRadius="10px" marginBottom="2%">
+                    <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
                       <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.paymentType === '2' ? small_duke : item.paymentType === '1' ? icon_logo : item.paymentType === '0' ? bnb1 : ""} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration={item.duration} ctheme={ctheme} payment={item.payment_method}></CartAuction>
                     </Box>
                   );
                 })}
             </GridShow>
           </Box>
-          {/* <Box display="flex"  marginTop="2%" width="100%" >
-                        <Box display="flex" flex="1"  marginTop="2%" flexDirection="row" width="100%" flexWrap="wrap">
-                            {
-                                nfts.length > 0 && nfts.map((item, index) => {
-                                    return (
-                                        <Box key={index} maxWidth="240px" display="flex" flex="1"   marginLeft="2%" borderRadius="10px" marginBottom="2%">
-                                            <LastDrop index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.payment_method === 'DUKE' ? small_duke : item.payment_method === 'FAST' ? icon_logo : item.payment_method === 'BNB' ? bnb1 : ''} name={'Creator Name'} price={`${item.price} `} ctheme={ctheme} payment={item.payment_method}></LastDrop>
-                                        </Box>
-                                    )
-                                })
-                            }
-                        </Box>
-                    </Box> */}
+          {/* <ImgLetter letter={"Auctions 🚀"} ctheme={ctheme} />
+          <Box display="flex" marginTop="2%" justifyContent="center">
+            <GridShow display="grid" gridTemplateColumns="auto auto auto auto" gridGap="20px">
+              {auctions.length > 0 &&
+                auctions.map((item, index) => {
+                  // console.log(item)
+                  return (
+                    <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
+                      <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.paymentType === '2' ? small_duke : item.paymentType === '1' ? icon_logo : item.paymentType === '0' ? bnb1 : ""} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration={item.duration} ctheme={ctheme} payment={item.payment_method}></CartAuction>
+                    </Box>
+                  );
+                })}
+            </GridShow>
+          </Box> */}
           <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
             <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"230px"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
           </Box>
@@ -152,19 +134,39 @@ const Mainpage = ({ ctheme }) => {
   );
 };
 
+const Part2 = styled(Box)`
+  display: flex;
+  width: 100%;
+  margin-bottom: 5%;
+`
+const ImgDownLetter = styled(Box)`
+font-family: Poppins;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 12px;
+color: #2BA55D;
+`
+const ImgUpLetter = styled(Box)`
+font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 24px;
+color: #131413;
+`
+
 const GridShow = styled(Box)`
   @media (max-width: 1800px) {
-    grid-template-columns: auto auto auto auto !important;
+    grid-template-columns: auto auto auto!important;
   }
-  @media (max-width: 1410px) {
-    grid-template-columns: auto auto auto !important;
-  }
-  @media (max-width: 1200px) {
+  @media (max-width: 1385px) {
     grid-template-columns: auto auto !important;
   }
-  @media (max-width: 850px) {
-    grid-template-columns: auto !important;
+  @media (max-width: 1022px) {
+    grid-template-columns: auto!important;
   }
+
   /* @media (max-width: 1600px) {
         grid-template-columns:auto auto auto auto;
 
@@ -228,8 +230,9 @@ const PartHeader = styled(Box)`
   display: flex;
   width: 100%;
   flex-direction: row;
+  margin-bottom:5%;
   @media (max-width: 1000px) {
-    flex-direction: column;
+    flex-direction: column !important;
   }
 `;
 const PartDrop = styled(Box)`
