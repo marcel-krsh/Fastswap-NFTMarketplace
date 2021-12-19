@@ -86,6 +86,23 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
     // }
     return dur_str;
   }
+  
+  const payment_type = (value) =>{
+    let str;
+    if(value == 0)
+    {
+      str = "BNB"
+    }
+    if(value == 1)
+    {
+      str = "FAST"
+    }
+    if(value == 2)
+    {
+      str = "DUKE"
+    }
+    return str;
+  }
 
   return (
     <Box fontFamily={"Poppins"} background={"#FCFCFC"} border={"1px solid #CECECE"} borderRadius={"8px"} overflow={"hidden"}
@@ -115,7 +132,7 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
                 <img width={"32px"} height={"32px"} src={simg1} alt="" />
               </Box>
               <Box fontSize={12} lineHeight={1} fontWeight={500} color={"#363936"}>
-                {payment}
+                {payment_type(payment)}
               </Box>
             </Box>
             <Box width={"1px"} bgcolor={"#CECECE"} />

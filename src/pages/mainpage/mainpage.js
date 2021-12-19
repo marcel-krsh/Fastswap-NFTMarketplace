@@ -102,10 +102,10 @@ const Mainpage = ({ ctheme }) => {
                 })}
                 {auctions.length > 0 &&
                 auctions.map((item, index) => {
-                  // console.log(item)
+                  console.log(item)
                   return (
                     <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
-                      <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.paymentType === '2' ? small_duke : item.paymentType === '1' ? icon_logo : item.paymentType === '0' ? bnb1 : ""} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration={item.duration} ctheme={ctheme} payment={item.payment_method}></CartAuction>
+                      <CartAuction index={index} img={item.img} simg={small_ellipse} title={item.title} simg1={item.paymentType === '2' ? small_duke : item.paymentType === '1' ? icon_logo : item.paymentType === '0' ? bnb1 : ""} seller={item.seller} sprice={`${item.startingPrice} `} eprice={`${item.endingPrice} `} duration={item.duration} ctheme={ctheme} payment={item.paymentType}></CartAuction>
                     </Box>
                   );
                 })}
