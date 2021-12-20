@@ -100,7 +100,9 @@ const Detail_Page = ({ ctheme }) => {
         // set_process("Processing...");
         // window.location.reload();
         handleClose();
+        handleClose_bid();
         set_bidvalue('');
+        set_process("Processing...");
       }, 2000);
     } catch (error) {
       set_process("Fault! Try again.");
@@ -121,6 +123,7 @@ const Detail_Page = ({ ctheme }) => {
       let accept1 = await auctionContract.accept(mainData.ids_auc, '0xb68ed8463f1896b18e000103af9e73c3d1edca1d');
       await accept1.wait();
       setTimeout(() => {
+        set_process("Accept successfully.");
         handleClose();
         set_bidvalue('');
       }, 2000);
