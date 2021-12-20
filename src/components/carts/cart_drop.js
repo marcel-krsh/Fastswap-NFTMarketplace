@@ -78,10 +78,10 @@ const LastDrop = ({ index, img2, simg, simg1, title, name, price, ctheme, paymen
           </Box>
         </MainCardAvatar>
         <Box flexGrow={1} px={3.5} pt={5} pb={3} display={"flex"} flexDirection={"column"}>
-          <Box whiteSpace={"nowrap"} overflow={"hidden"} fontSize={24} lineHeight={1} fontWeight={"600"} color={"#131413"} textOverflow={"ellipsis"}>
+          <Box whiteSpace={"nowrap"} overflow={"hidden"} fontSize={24} lineHeight={1.3} fontWeight={"600"} color={"#131413"} textOverflow={"ellipsis"}>
             {title}
           </Box>
-          <Box whiteSpace={"nowrap"} overflow={"hidden"} fontSize={12} lineHeight={1} color={"#2BA55D"} textOverflow={"ellipsis"}>
+          <Box whiteSpace={"nowrap"} overflow={"hidden"} fontSize={12} lineHeight={1} color={"#2BA55D"} textOverflow={"ellipsis"} marginTop={"5px"}>
             {name.slice(0, 7)} ... {name.slice(-5)}
           </Box>
           <Box mt={"auto"} py={1} display={"flex"} gridGap={8}>
