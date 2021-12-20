@@ -50,8 +50,8 @@ const Detail_Page = ({ ctheme }) => {
   const [bids, set_bids] = useState([]);
   const [str_bidaccept, set_bidaccept] = useState('');
   const [flag_bidlist, set_bidlist] = useState(false);
-
   const [process, set_process] = useState("Processing...");
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -80,10 +80,11 @@ const Detail_Page = ({ ctheme }) => {
   }
 
   const get_bid = async () => {
+    set_bidlist(!flag_bidlist)
     const get = await auctionContract.getBids(mainData.ids_auc);
     set_bids(get);
-    set_bidlist(!flag_bidlist)
   }
+
   const startbid = async () => {
     const bid_price = bidvalue * Math.pow(10, 18);
     set_bidaccept("Bid");
@@ -347,12 +348,14 @@ const Detail_Page = ({ ctheme }) => {
             </Box>
           </Box>
           <Underline3 display="flex" flex="5" width="100%" justifyContent="center">
-            <Underline2 display="flex" width="90%" flexDirection="column" onClick={() => {
-              // set_bidlist(!flag_bidlist)
-              get_bid();
-            }}>
-              <List_ULetter ctheme={ctheme} str={"Offers"} width1={"100%"} height1={"40px"} flag={!flag_bidlist ? true : false}
-              ></List_ULetter>
+            <Underline2 display="flex" width="90%" flexDirection="column" >
+              <Box onClick={() => {
+                get_bid();
+              }}>
+                <List_ULetter ctheme={ctheme} str={"Offers"} width1={"100%"} height1={"40px"} flag={!flag_bidlist ? true : false}
+                ></List_ULetter>
+              </Box>
+
               {
                 flag_bidlist ? bids.length > 0 ? <>
                   <Box display={"flex"} >
