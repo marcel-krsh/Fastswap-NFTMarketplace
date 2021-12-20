@@ -67,8 +67,8 @@ const LastDrop = ({ index, img2, simg, simg1, title, name, price, ctheme, paymen
       onClick={() => {
         history.push({ pathname: "/Detail_page", search: index.toString() });
       }}>
-      <HeaderCardBase>
-        <img src={img2} width={"100%"} height={"100%"} alt="" />
+      <HeaderCardBase style={{background: `url(${img2})`, backgroundSize: "cover", backgroundPosition: "center"}}>
+        {/* <img src={img2} width={"100%"} height={"100%"} alt="" /> */}
       </HeaderCardBase>
       <HeaderCardBase position={"relative"} display={"flex"} flexDirection={"column"}>
         <MainCardAvatar>

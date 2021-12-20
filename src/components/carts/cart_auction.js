@@ -109,8 +109,8 @@ const CartAuction = ({ index, img, simg, simg1, title, seller, duration, sprice,
       onClick={() => {
         history.push({ pathname: "/detail_page_auction", search: index.toString() });
       }}>
-      <HeaderCardBase>
-        <img src={img} width={"100%"} height={"100%"} alt="" />
+      <HeaderCardBase style={{background: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center"}}>
+        {/* <img src={img} width={"100%"} height={"100%"} alt="" /> */}
       </HeaderCardBase>
       <HeaderCardBase position={"relative"} display={"flex"} flexDirection={"column"}>
         <MainCardAvatar>
