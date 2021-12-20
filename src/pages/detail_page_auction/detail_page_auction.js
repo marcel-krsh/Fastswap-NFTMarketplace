@@ -344,13 +344,14 @@ const Detail_Page = ({ ctheme }) => {
             </Box>
           </Box>
           <Underline3 display="flex" flex="5" width="100%" justifyContent="center">
-            <Underline2 display="flex" width="90%" flexDirection="column" onClick={()=>{
-                set_bidlist(!flag_bidlist)
-              }}>
-              <List_ULetter ctheme={ctheme} str={"Offers"} width1={"100%"} height1={"40px"} flag={!flag_bidlist?true:false}
+            <Underline2 display="flex" width="90%" flexDirection="column" onClick={() => {
+              // set_bidlist(!flag_bidlist)
+              get_bid();
+            }}>
+              <List_ULetter ctheme={ctheme} str={"Offers"} width1={"100%"} height1={"40px"} flag={!flag_bidlist ? true : false}
               ></List_ULetter>
               {
-                flag_bidlist? bids.length > 0 ? <>
+                flag_bidlist ? bids.length > 0 ? <>
                   <Box display={"flex"} >
                     <OffterList>
                       <Box display={"flex"} marginTop={"1%"}>
@@ -397,7 +398,7 @@ const Detail_Page = ({ ctheme }) => {
                                 <BtnCustomize
                                   color={"#2BA55D"}
                                   back={"white"}
-                                  width={"70%"}
+                                  width={"80%"}
                                   height={"30px"}
                                   border={"1px solid #2BA55D"}
                                   str={"Accept"}
@@ -421,7 +422,7 @@ const Detail_Page = ({ ctheme }) => {
                     <OffterList alignItems={"center"} justifyContent={"center"} height={"60px"}>
                       No bid list.
                     </OffterList>
-                  </Box>:""
+                  </Box> : ""
               }
               <List_ULetter ctheme={ctheme} str={"Price history"} width1={"100%"} height1={"40px"}></List_ULetter>
               <Box display="flex">
@@ -554,19 +555,23 @@ const Collection_Image = styled(Box)`
 
 const Underline1 = styled(Box)`
   flex-direction: row;
-  @media (max-width: 800px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
   }
 `;
 
 const Underline2 = styled(Box)`
+
   @media (max-width: 800px) {
     width: 95% !important;
   }
 `;
 
 const Underline3 = styled(Box)`
-  @media (max-width: 800px) {
+  &:hover{
+    cursor: pointer;
+  }
+  @media (max-width: 1000px) {
     justify-content: flex-start !important;
   }
 `;
