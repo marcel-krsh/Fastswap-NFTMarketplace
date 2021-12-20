@@ -352,10 +352,8 @@ const Detail_Page = ({ ctheme }) => {
               <Box onClick={() => {
                 get_bid();
               }}>
-                <List_ULetter ctheme={ctheme} str={"Offers"} width1={"100%"} height1={"40px"} flag={!flag_bidlist ? true : false}
-                ></List_ULetter>
+                <List_ULetter ctheme={ctheme} str={"Offers"} width1={"100%"} height1={"40px"} flag={!flag_bidlist ? true : false}></List_ULetter>
               </Box>
-
               {
                 flag_bidlist ? bids.length > 0 ? <>
                   <Box display={"flex"} >

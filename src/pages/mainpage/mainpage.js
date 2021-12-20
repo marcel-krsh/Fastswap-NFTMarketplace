@@ -61,10 +61,10 @@ const Mainpage = ({ ctheme }) => {
           </Box>
         </Box>
         <Box display="flex" flex="1" flexDirection="column" marginTop="5%" marginLeft="5%" marginRight="5%" border="1px solid #CECECE" borderRadius="24px" height="460px">
-          <Box display="flex" flex="4" alignItems="center" width="100%" style={{ borderBottom: "1px solid #CECECE" }}>
-            <img src={cover_big1} width="100%" height="367px" alt="" style={{
+          <Box display="flex" flex="4" alignItems="center" width="100%" style={{ borderBottom: "1px solid #CECECE" }} style={{background: `url(${cover_big1})`, backgroundSize: "cover", backgroundPosition: "center", borderRadius: "24px 24px 0px 0px"}}>
+            {/* <img src={cover_big1} width="100%" height="367px" alt="" style={{
               borderRadius: "24px 24px 0px 0px"
-            }} />
+            }} /> */}
           </Box>
           <Box display="flex" flex="1" width="100%" flexDirection="column" marginLeft="10%">
             <ImgUpLetter display="flex" flex="1" alignItems="flex-end">

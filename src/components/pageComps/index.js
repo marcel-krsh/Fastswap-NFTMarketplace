@@ -47,13 +47,13 @@ const PageHeader = () => {
           Activities
         </PageHLetter>
         <PageHLetter
-          active={history.location.pathname.slice(1) === "manage"}
+          active={history.location.pathname.slice(1) === "Profile_empty"}
           onClick={() => {
-            history.push("manage");
+            history.push("Profile_empty");
             setRender(!render);
           }}
         >
-          Manage
+          Profile
         </PageHLetter>
       </PageHeader1Space>
     </PageHeader1>
