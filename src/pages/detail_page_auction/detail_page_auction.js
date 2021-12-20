@@ -47,12 +47,16 @@ const Detail_Page = ({ ctheme }) => {
     setOpen_bid(false);
   };
   const [bidvalue, set_bidvalue] = useState();
-  // const applicant = '0xb68ed8463f1896b18e000103af9e73c3d1edca1d';
-  // const [type_trans, set_trans] = useState(false);
+  const [bids, set_bids] = useState([]);
+  const [str_bidaccept, set_bidaccept] = useState('');
+  const [flag_bidlist, set_bidlist] = useState(false);
 
   const [process, set_process] = useState("Processing...");
   useEffect(() => {
-  });
+    window.scrollTo(0, 0);
+  }, []);
+
+
   const style1 = {
     position: "absolute",
     top: "50%",
@@ -74,26 +78,27 @@ const Detail_Page = ({ ctheme }) => {
     history.push("/");
     return <></>;
   }
-  const placebid_accept = async () => {
+
+  const get_bid = async () => {
+    const get = await auctionContract.getBids(mainData.ids_auc);
+    set_bids(get);
+    set_bidlist(!flag_bidlist)
+  }
+  const startbid = async () => {
     const bid_price = bidvalue * Math.pow(10, 18);
-    console.log("step1");
+    set_bidaccept("Bid");
     handleOpen();
     try {
-      const applicant = await auctionContract.owner();
-      console.log("step2");
       const price = "0x" + bid_price.toString(16);
       let bid = await auctionContract.bid(mainData.ids_auc, price);
-      console.log("step3");
       await bid.wait();
-      console.log("step4");
-      let accept = await auctionContract.accept(mainData.ids_auc, applicant);
-      await accept.wait();
-
+      // let accept = await auctionContract.accept(mainData.ids_auc, applicant);
+      // await accept.wait();
       set_process("Bid successfully.");
       setTimeout(() => {
-        history.push({ pathname: "/" });
-        set_process("Processing...");
-        window.location.reload();
+        // history.push({ pathname: "/" });
+        // set_process("Processing...");
+        // window.location.reload();
         handleClose();
         set_bidvalue('');
       }, 2000);
@@ -107,6 +112,28 @@ const Detail_Page = ({ ctheme }) => {
       console.log(error);
     }
   };
+
+  const accept = async (applicant) => {
+    console.log(applicant)
+    handleOpen();
+    set_bidaccept("Accept");
+    try {
+      let accept1 = await auctionContract.accept(mainData.ids_auc, '0xb68ed8463f1896b18e000103af9e73c3d1edca1d');
+      await accept1.wait();
+      setTimeout(() => {
+        handleClose();
+        set_bidvalue('');
+      }, 2000);
+    } catch (error) {
+      set_process("Fault! Try again.");
+      setTimeout(() => {
+        set_process("Processing...");
+        handleClose();
+      });
+      console.log(error);
+    }
+
+  }
 
   const placebid = () => {
     handleOpen_bid();
@@ -173,6 +200,19 @@ const Detail_Page = ({ ctheme }) => {
     // return `${year}${sep1}${month < 10 ? `0${month}` : `${month}`}${sep1}${date}${hours}${sep2}${minutes}${ampm}`
   }
 
+  const pay_type = (value) => {
+    var str;
+    if (value === '0') {
+      str = "BNB"
+    }
+    if (value === '1') {
+      str = "FAST"
+    }
+    if (value === '2') {
+      str = "DUKE"
+    }
+    return str;
+  }
 
   return (
     <>
@@ -207,7 +247,7 @@ const Detail_Page = ({ ctheme }) => {
                 <Box display="flex" flex="75" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#2BA55D">
                   User's name
                 </Box>
-                <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75">
+                <Box display="flex" flex="95" alignItems="center" justifyContent="center" fontFamily="Poppins" fontSize="12px" fontWeight="400" color="#757B75" >
                   <MdRemoveRedEye fontSize="20px" />
                   {"\u00a0"}2.4 K views
                 </Box>
@@ -276,6 +316,9 @@ const Detail_Page = ({ ctheme }) => {
                   str={<MdRemoveRedEye fontSize="30px" />}
                   borderRadius={"8px"}
                   marginLeft="2%"
+                  onClick={() => {
+                    get_bid();
+                  }}
                 />
               </Box>
             </Box>
@@ -301,7 +344,85 @@ const Detail_Page = ({ ctheme }) => {
             </Box>
           </Box>
           <Underline3 display="flex" flex="5" width="100%" justifyContent="center">
-            <Underline2 display="flex" width="90%" flexDirection="column">
+            <Underline2 display="flex" width="90%" flexDirection="column" onClick={()=>{
+                set_bidlist(!flag_bidlist)
+              }}>
+              <List_ULetter ctheme={ctheme} str={"Offers"} width1={"100%"} height1={"40px"} flag={!flag_bidlist?true:false}
+              ></List_ULetter>
+              {
+                flag_bidlist? bids.length > 0 ? <>
+                  <Box display={"flex"} >
+                    <OffterList>
+                      <Box display={"flex"} marginTop={"1%"}>
+                        <Box display={"flex"} flex={"0.5"} justifyContent={"center"}>
+                          No
+                        </Box>
+                        <Box display={"flex"} flex={"1"} justifyContent={"center"}>
+                          Price
+                        </Box>
+                        <Box display={"flex"} flex={"1"} justifyContent={"center"}>
+                          USD Price
+                        </Box>
+                        <Box display={"flex"} flex={"1"} justifyContent={"center"}>
+                          Expiration
+                        </Box>
+                        <Box display={"flex"} flex={"1"} justifyContent={"center"}>
+                          From
+                        </Box>
+                        <Box display={"flex"} flex={"1.5"} justifyContent={"center"}>
+                          Price
+                        </Box>
+                      </Box>
+
+                      {
+                        bids.map((item, index) => {
+                          return (
+                            <Box display={"flex"} marginTop={"2%"} marginBottom={"2%"}>
+                              <Box display={"flex"} flex={"0.5"} justifyContent={"center"} alignItems={"center"}>
+                                {index + 1}
+                              </Box>
+                              <Box display={"flex"} flex={"1"} justifyContent={"center"} alignItems={"center"}>
+                                {parseInt(item.price._hex) / Math.pow(10, 18)} {pay_type(mainData.paymentType)}
+                              </Box>
+                              <Box display={"flex"} flex={"1"} justifyContent={"center"} alignItems={"center"}>
+                                0.99$
+                              </Box>
+                              <Box display={"flex"} flex={"1"} justifyContent={"center"} alignItems={"center"}>
+                                {duratoin_format(mainData.duration)}
+                              </Box>
+                              <Box display={"flex"} flex={"1"} justifyContent={"center"} alignItems={"center"}>
+                                {item.applicant.slice(0, 4)}...{item.applicant.slice(-3)}
+                              </Box>
+                              <Box display={"flex"} flex={"1.5"} justifyContent={"center"} alignItems={"center"}>
+                                <BtnCustomize
+                                  color={"#2BA55D"}
+                                  back={"white"}
+                                  width={"70%"}
+                                  height={"30px"}
+                                  border={"1px solid #2BA55D"}
+                                  str={"Accept"}
+                                  borderRadius={"8px"}
+                                  marginLeft="2%"
+                                  onClick={() => {
+                                    accept(item.applicant)
+                                  }}
+                                />
+                              </Box>
+                            </Box>
+                          )
+                        })
+                      }
+
+                    </OffterList>
+                  </Box>
+                </>
+                  :
+                  <Box display={"flex"} >
+                    <OffterList alignItems={"center"} justifyContent={"center"} height={"60px"}>
+                      No bid list.
+                    </OffterList>
+                  </Box>:""
+              }
               <List_ULetter ctheme={ctheme} str={"Price history"} width1={"100%"} height1={"40px"}></List_ULetter>
               <Box display="flex">
                 <img src={detail_chart1} width="100%" height="100%"></img>
@@ -322,22 +443,16 @@ const Detail_Page = ({ ctheme }) => {
         </Box>
       </Box>
       <Part_Drop>
-        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
+        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" marginBottom="5%">
           <Box display="flex" flexDirection="column" marginTop="2%">
-            <Collection_Image display="flex" flex="1" marginBottom="2%" flexWrap="wrap" justifyContent="space-between">
-              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
-                <Last_Drop index={1} img={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+            <GridShow display="grid" gridTemplateColumns="auto auto auto auto" gridGap="20px">
+              <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
+                <Last_Drop index={1} img2={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+                <Last_Drop index={1} img2={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+                <Last_Drop index={1} img2={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+                <Last_Drop index={1} img2={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
-              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
-                <Last_Drop index={1} img={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
-                <Last_Drop index={1} img={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" maxWidth="240px" marginBottom="2%">
-                <Last_Drop index={1} img={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-            </Collection_Image>
+            </GridShow>
           </Box>
         </Box>
       </Part_Drop>
@@ -349,11 +464,11 @@ const Detail_Page = ({ ctheme }) => {
         <Box style={style1}>
           <MHeader>{mainData.title}</MHeader>
           <MContent alignItems="center" marginTop="3%">
-            Bid:{"\u00a0"}
+            {str_bidaccept}:{"\u00a0"}
             {process}
           </MContent>
           <MContent alignItems="flex-start" marginTop="1%">
-            Just a moment until bid auction.
+            Just a moment until {str_bidaccept} auction.
           </MContent>
         </Box>
       </Modal>
@@ -381,12 +496,6 @@ const Detail_Page = ({ ctheme }) => {
                   border: "1px solid #CECECE",
                 }}
                 onChange={(e) => {
-                  // const price = mainData.startingPrice / Math.pow(10, 18);
-                  // if (e.target.value < price) {
-                  //   alert("You must input value more than" + price);
-                  //   set_bidvalue('');
-                  //   return;
-                  // }
                   set_bidvalue(e.target.value);
                 }}
                 value={bidvalue}
@@ -413,7 +522,7 @@ const Detail_Page = ({ ctheme }) => {
                   alert("You must input bid price.");
                   return;
                 }
-                placebid_accept();
+                startbid();
               }}
             />
           </MContent>
@@ -422,6 +531,18 @@ const Detail_Page = ({ ctheme }) => {
     </>
   );
 };
+
+const GridShow = styled(Box)`
+  @media (max-width: 1800px) {
+    grid-template-columns: auto auto auto!important;
+  }
+  @media (max-width: 1385px) {
+    grid-template-columns: auto auto !important;
+  }
+  @media (max-width: 1022px) {
+    grid-template-columns: auto!important;
+  }
+`;
 
 const Collection_Image = styled(Box)`
   flex-direction: row;
@@ -475,6 +596,21 @@ const Drop_chart1 = styled(Box)`
   justify-content: center;
   width: 100%;
   height: 160px;
+  background: linear-gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14%, rgba(198, 231, 255, 0.31) 97.12%);
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: black;
+  // color: ${({ ctheme, ltheme, dtheme }) => (ctheme ? "black" : "white")};
+`;
+
+const OffterList = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
   background: linear-gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14%, rgba(198, 231, 255, 0.31) 97.12%);
   font-family: Poppins;
   font-style: normal;

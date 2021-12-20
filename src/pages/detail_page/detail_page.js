@@ -44,6 +44,7 @@ const Detail_Page = ({ ctheme }) => {
 
   const [process, set_process] = useState("Processing...");
   useEffect(() => {
+    window.scrollTo(0, 0);
     // console.log("------------------------");
     // console.log(nfts);
   });
@@ -365,7 +366,7 @@ flex-direction: row;
 
 const Underline2 = styled(Box)`
 @media(max-width: 800px) {
-  width: 95 % !important;
+  width: 95% !important;
 }
 `;
 
@@ -389,7 +390,7 @@ const Img_Title1 = styled(Box)`
 
 const Part_Drop = styled(Box)`
 display: flex;
-width: 100 %;
+width: 100%;
 margin-top: 20px;
 flex-direction: column;
 `;
@@ -398,9 +399,9 @@ const Drop_chart1 = styled(Box)`
 display: flex;
 align-items: center;
 justify-content: center;
-width: 100 %;
+width: 100%;
 height: 160px;
-background: linear-gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14 %, rgba(198, 231, 255, 0.31) 97.12 %);
+background: linear-gradient(273.64deg, rgba(187, 230, 204, 0.33) 3.14%, rgba(198, 231, 255, 0.31) 97.12%);
 font-family: Poppins;
 font-style: normal;
 font-weight: 600;
@@ -413,18 +414,18 @@ color: black;
 const MHeader = styled(Box)`
 display: flex;
 flex: 1;
-width: 100 %;
+width: 100%;
 justify-content: center;
 font-size: 38px;
 color: white;
-margin-top: 3 %;
+margin-top: 3%;
 align-items: center;
 `;
 
 const MContent = styled(Box)`
 display: flex;
 flex: 2;
-width: 100 %;
+width: 100%;
 justify-content: center;
 font-size: 25px;
 color: white;

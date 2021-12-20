@@ -2,13 +2,13 @@ import React from "react";
 import { Box } from '@material-ui/core'
 import styled from 'styled-components';
 import { lightTheme, darkTheme } from "../../theme/theme"
-import { MdArrowDropUp } from "react-icons/md";
+import { MdArrowDropUp, MdArrowDropDown } from "react-icons/md";
 
-const List_ULetter = ({ ctheme, str, width1, height1 }) => {
+const List_ULetter = ({ ctheme, str, width1, height1, flag }) => {
     return (
         <ILtter ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} width={width1} height={height1}>
             <Box display="flex" flex="5" alignItems="center" justifyContent="flex-start">{str}</Box>
-            <Box display="flex" flex="1" alignItems="center" justifyContent="flex-end"><MdArrowDropUp /></Box>
+            <Box display="flex" flex="1" alignItems="center" justifyContent="flex-end">{flag?<MdArrowDropUp />:<MdArrowDropDown />}</Box>
         </ILtter>
     );
 };
