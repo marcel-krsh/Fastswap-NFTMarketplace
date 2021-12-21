@@ -148,6 +148,7 @@ const Create_NFT = ({ ctheme }) => {
               history.push({ pathname: "/" });
               window.location.reload();
               handleClose();
+              window.scrollTo(0, 0);
             }, 2000);
           } catch (err) {
             set_process("Fault! Try again.");
@@ -201,12 +202,14 @@ const Create_NFT = ({ ctheme }) => {
                 history.push({ pathname: "/" });
                 window.location.reload();
                 handleClose();
+                window.scrollTo(0, 0);
               }, 2000);
             }
           } catch (err) {
             set_process("Fault! Try again.");
             setTimeout(() => {
               handleClose();
+              
             }, 2000);
             console.log(err);
           }

@@ -31,6 +31,7 @@ const Items = ({ ctheme }) => {
     const [cnt, set_cnt] = useState(1);
 
     const get_items = async () => {
+
         const balance_owner = await nftContract.balanceOf(account);
         let total = parseInt(balance_owner._hex);
         if (total > 12) {
@@ -58,6 +59,7 @@ const Items = ({ ctheme }) => {
             if (i === 11) {
                 set_loading(true);
             }
+
         }
         set_tokens_uri(tokens);
     }
@@ -122,7 +124,7 @@ const Items = ({ ctheme }) => {
 
     return (
         <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} position="relative">
-            {cnt !== 1 ?
+            <>{cnt !== 1 ?
                 <>
                     {!loading ?
                         <Box position="fixed" top="50%" left="50%" zIndex="100">
@@ -180,150 +182,146 @@ const Items = ({ ctheme }) => {
                                 </Box>
                             </Box>
                         </PartDrop>
+
                     }
-
                 </>
-
-            }
-
-
-
+            }</>
         </StyledContainer>
     );
 };
 
 const GridShow = styled(Box)`
-    @media (max-width: 1800px) {
-        grid-template-columns:auto auto auto auto !important;
+            @media (max-width: 1800px) {
+                grid - template - columns:auto auto auto auto !important;
     }
-    @media (max-width: 1410px) {
-        grid-template-columns: auto auto auto !important;
+            @media (max-width: 1410px) {
+                grid - template - columns: auto auto auto !important;
     }
-    @media (max-width: 1200px) {
-        grid-template-columns: auto auto !important;
+            @media (max-width: 1200px) {
+                grid - template - columns: auto auto !important;
     }
-    @media (max-width: 850px) {
-        grid-template-columns: auto !important;
+            @media (max-width: 850px) {
+                grid - template - columns: auto !important;
     }
-`
+            `
 
 const Header1space = styled(Box)`
-@media (max-width: 1000px) {
-    margin-left: 8% !important;
-    margin-right: 8% !important;
+            @media (max-width: 1000px) {
+                margin - left: 8% !important;
+            margin-right: 8% !important;
 }
-    @media (max-width: 800px) {
-        margin-left: 5% !important;
-        margin-right: 5% !important;
+            @media (max-width: 800px) {
+                margin - left: 5% !important;
+            margin-right: 5% !important;
     }
-`
+            `
 
 const HLetter = styled(Box)`
-    display: flex;
-    height:34px;
-    justify-content: center;
-    align-items: center;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #2BA55D;
-    border-top: 4px solid rgba(0,0,0,0);
-    &:hover{
-        border-top: 4px solid  #2BA55D;
-        cursor: pointer;
+            display: flex;
+            height:34px;
+            justify-content: center;
+            align-items: center;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            color: #2BA55D;
+            border-top: 4px solid rgba(0,0,0,0);
+            &:hover{
+                border - top: 4px solid  #2BA55D;
+            cursor: pointer;
     }
-    @media (max-width: 1000px) {
-        font-size: 12px;
+            @media (max-width: 1000px) {
+                font - size: 12px;
     }
-    @media (max-width: 800px) {
-        font-size: 12px;
+            @media (max-width: 800px) {
+                font - size: 12px;
     }
-    @media (max-width: 600px) {
-        font-size: 8px;
+            @media (max-width: 600px) {
+                font - size: 8px;
     }
 
-`
+            `
 
 const Header1 = styled(Box)`
-    display: flex;
-    width:100%;
+            display: flex;
+            width:100%;
 
-`
+            `
 
 const StyledContainer = styled(Box)`
-    position: relative;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    background: ${({ ctheme, ltheme, dtheme }) => ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main};
-`
+            position: relative;
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            background: ${({ ctheme, ltheme, dtheme }) => ctheme ? ltheme.bgcolor_main : dtheme.bgcolor_main};
+            `
 
 const Leftimgletter = styled(Box)`
-@media (max-width: 1200px) {
-    font-size: 60px !important;
+            @media (max-width: 1200px) {
+                font - size: 60px !important;
 }
-@media (max-width: 1000px) {
-    font-size: 72px !important;
+            @media (max-width: 1000px) {
+                font - size: 72px !important;
 }
-@media (max-width: 600px) {
-    font-size: 50px !important;
+            @media (max-width: 600px) {
+                font - size: 50px !important;
 }
-`
+            `
 
 const Leftimgletter1 = styled(Box)`
-@media (max-width: 1200px) {
-    font-size: 14px !important;
+            @media (max-width: 1200px) {
+                font - size: 14px !important;
 }
-@media (max-width: 1000px) {
-    font-size: 20px !important;
+            @media (max-width: 1000px) {
+                font - size: 20px !important;
 }
-@media (max-width: 600px) {
-    font-size: 14px !important;
+            @media (max-width: 600px) {
+                font - size: 14px !important;
 }
-`
+            `
 
 const Imgdownletter = styled(Box)`
 
-    @media (max-width: 1200px) {
-        font-size: 7px !important;
+            @media (max-width: 1200px) {
+                font - size: 7px !important;
     }
-    @media (max-width: 800px) {
-        font-size: 12px !important;
+            @media (max-width: 800px) {
+                font - size: 12px !important;
     }
-    @media (max-width: 600px) {
-        font-size: 9px !important;
+            @media (max-width: 600px) {
+                font - size: 9px !important;
     }
-`
+            `
 
 const Imgdownletter1 = styled(Box)`
 
-    @media (max-width: 1200px) {
-        font-size: 10px !important;
+            @media (max-width: 1200px) {
+                font - size: 10px !important;
     }
-    @media (max-width: 800px) {
-        font-size: 18px !important;
+            @media (max-width: 800px) {
+                font - size: 18px !important;
     }
-    @media (max-width: 600px) {
-        font-size: 12px !important;
+            @media (max-width: 600px) {
+                font - size: 12px !important;
     }
-`
+            `
 const PartHeader = styled(Box)`
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    @media (max-width: 1000px) {
-        flex-direction: column;
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            @media (max-width: 1000px) {
+                flex - direction: column;
     }
-`
+            `
 const PartDrop = styled(Box)`
-    display: flex;
-    width: 100%;
-    margin-top:5%;
-    flex-direction: column;
+            display: flex;
+            width: 100%;
+            margin-top:5%;
+            flex-direction: column;
 
-`
+            `
 
 export default Items;

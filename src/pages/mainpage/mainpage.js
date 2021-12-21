@@ -142,11 +142,11 @@ const BoxGadient = styled(Box)`
   width: 100%;
   height: 196px;
   font-family: Poppins;
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 20px;
-color: #000000;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #000000;
   background: linear-gradient(88.83deg, rgba(157, 209, 178, 0.57) 0.54%, rgba(157, 209, 178, 0.19) 99.61%), linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
 `
 const Part2 = styled(Box)`
@@ -155,20 +155,20 @@ const Part2 = styled(Box)`
   margin-bottom: 5%;
 `
 const ImgDownLetter = styled(Box)`
-font-family: Poppins;
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 12px;
-color: #2BA55D;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  color: #2BA55D;
 `
 const ImgUpLetter = styled(Box)`
-font-family: Poppins;
-font-style: normal;
-font-weight: 600;
-font-size: 24px;
-line-height: 24px;
-color: #131413;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  color: #131413;
 `
 
 const GridShow = styled(Box)`

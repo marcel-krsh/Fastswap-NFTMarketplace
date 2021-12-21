@@ -68,7 +68,7 @@ function App() {
             <div className="sidebar1" style={{ display: "none", minHeight: "100vh" }}>
               <Sidebar flag_sidebar={1} ctheme={ctheme} setTheme={setTheme}></Sidebar>
             </div>
-            <div className="sidebar2" style={{ minHeight: "100vh" }}>
+            <div className="sidebar2" style={ctheme?{ minHeight: "100vh", backgroundColor:"white", borderRight:"2px solid #F0F0F0"}:{ minHeight: "100vh", backgroundColor:"rgb(39, 38, 44)", borderRight:"2px solid #2ba55d"}} >
               <Sidebar flag_sidebar={flag_sidebar} ctheme={ctheme} setTheme={setTheme}></Sidebar>
             </div>
             <StyledContainer ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme}>
@@ -77,7 +77,7 @@ function App() {
                 <Route exact path="/">
                   <Mainpage ctheme={ctheme} />
                 </Route>
-                <Route exact path="/Collection_page">
+                <Route exact path="/Collection_page1">
                   <Collection_page ctheme={ctheme} />
                 </Route>
                 <Route exact path="/Detail_page">

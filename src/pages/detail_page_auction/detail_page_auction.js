@@ -21,7 +21,7 @@ import Last_Drop from "../../components/carts/cart_drop";
 import List_ULetter from "../../components/letters/list_uletter";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
-import { NFT_MARKETPLACE_ABI, NFT_ABI, FAST_TOKEN_ABI, NFT_AUCTION_ABI } from "../../utils/abi";
+import { NFT_MARKETPLACE_ABI, NFT_ABI, FAST_TOKEN_ABI, NFT_AUCTION_ABI, NFT_ } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
 import { ethers } from "ethers";
 
@@ -30,7 +30,7 @@ const Detail_Page = ({ ctheme }) => {
   const auctionIndex = parseInt(history.location.search.slice(1));
   const { auctions } = useSelector((store) => store.product1);
   const mainData = auctions[auctionIndex];
-  const { account, library } = useWeb3React();
+  const { account, balance, library } = useWeb3React();
   const nftContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null), [library]);
   const marketplaceContract = useMemo(() => (library ? new ethers.Contract(CONTRACTS.MARKETPLACE, NFT_MARKETPLACE_ABI, library.getSigner()) : null), [library]);
   const auctionContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.AUCTION_HALL, NFT_AUCTION_ABI, library.getSigner()) : null, [library])
@@ -46,11 +46,12 @@ const Detail_Page = ({ ctheme }) => {
   const handleClose_bid = () => {
     setOpen_bid(false);
   };
-  const [bidvalue, set_bidvalue] = useState();
+  const [bidvalue, set_bidvalue] = useState(0);
   const [bids, set_bids] = useState([]);
   const [str_bidaccept, set_bidaccept] = useState('');
   const [flag_bidlist, set_bidlist] = useState(false);
   const [process, set_process] = useState("Processing...");
+  const [bal, set_balance] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -63,7 +64,7 @@ const Detail_Page = ({ ctheme }) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "40%",
-    height: 250,
+    height: 350,
     boxShadow: 24,
     p: 4,
     borderRadius: "10px",
@@ -93,6 +94,8 @@ const Detail_Page = ({ ctheme }) => {
       const price = "0x" + bid_price.toString(16);
       let bid = await auctionContract.bid(mainData.ids_auc, price);
       await bid.wait();
+      const approve = await fastContract.approve(CONTRACTS.AUCTION_HALL, price);
+      await approve.wait();
       // let accept = await auctionContract.accept(mainData.ids_auc, applicant);
       // await accept.wait();
       set_process("Bid successfully.");
@@ -122,11 +125,15 @@ const Detail_Page = ({ ctheme }) => {
     set_bidaccept("Accept");
     try {
       let accept1 = await auctionContract.accept(mainData.ids_auc, '0xb68ed8463f1896b18e000103af9e73c3d1edca1d');
+      set_process("Accept successfully.");
       await accept1.wait();
       setTimeout(() => {
-        set_process("Accept successfully.");
+
         handleClose();
         set_bidvalue('');
+        history.push({ pathname: "/" });
+        window.location.reload();
+        window.scrollTo(0, 0);
       }, 2000);
     } catch (error) {
       set_process("Fault! Try again.");
@@ -139,7 +146,24 @@ const Detail_Page = ({ ctheme }) => {
 
   }
 
-  const placebid = () => {
+  const placebid = async () => {
+    console.log(balance)
+    if (mainData.paymentType === '0') {
+      var temp;
+
+      set_balance(
+        0
+      );
+
+    }
+    if (mainData.paymentType === '1') {
+      var temp = await fastContract.balanceOf(account);
+      set_balance(parseInt(temp._hex) / Math.pow(10, 18));
+    }
+
+    if (mainData.paymentType === '2') {
+      set_balance(0);
+    }
     handleOpen_bid();
   };
 
@@ -468,13 +492,13 @@ const Detail_Page = ({ ctheme }) => {
       >
         <Box style={style1}>
           <MHeader>{mainData.title}</MHeader>
-          <MContent alignItems="center" marginTop="3%">
+          <MContent3 alignItems="center" justifyContent={"center"}>
             {str_bidaccept}:{"\u00a0"}
             {process}
-          </MContent>
-          <MContent alignItems="flex-start" marginTop="1%">
+          </MContent3>
+          <MContent3 alignItems="center" justifyContent={"center"}>
             Just a moment until {str_bidaccept} auction.
-          </MContent>
+          </MContent3>
         </Box>
       </Modal>
 
@@ -486,28 +510,39 @@ const Detail_Page = ({ ctheme }) => {
       >
         <Box style={style1}>
           <MHeader>{mainData.title}</MHeader>
-          <MContent alignItems="center" marginTop="3%">
-            <Box display="flex" width="50%" marginTop="1%">
+          <MContent alignItems={"center"}>
+            <Box display={"flex"} flex={"1"} justifyContent={"flex-start"} alignItems={"flex-end"} width={"80%"} fontSize={"22px"}>Price</Box>
+            <Box display="flex" marginTop="1%" flex={"1"} width={"80%"} bgcolor={"white"} borderRadius={"8px"}>
+              <Box display={"flex"} flex={"1"} justifyContent={"center"}>
+                <Box display="flex" alignItems={"center"} justifyContent={"center"} color={"rgb(43, 165, 93)"}>
+                  <img src={mainData.paymentType === "2" ? small_duke : mainData.paymentType === "1" ? icon_logo : mainData.paymentType === "0" ? bnb1 : ""} width="80%" height="50%" alt="" />
+                  {'\u00a0'}{mainData.paymentType === "2" ? "DUKE" : mainData.paymentType === "1" ? "FAST" : mainData.paymentType === "0" ? "BNB" : ""}
+                </Box>
+              </Box>
               <Box
                 display="flex"
-                flex="4"
+                flex={"1.8"}
                 component="input"
                 type='number'
                 placeholder="Input bid price correctly."
-                borderRadius="8px"
-                height="50px"
-                paddingLeft="3%"
+                fontSize={"18px"}
+                color={"rgb(43, 165, 93)"}
                 style={{
-                  border: "1px solid #CECECE",
+                  borderLeft: "1px solid #CECECE",
+                  borderRight: "1px solid #CECECE",
+                  borderTop: "1px solid white",
+                  borderBottom: "1px solid white"
                 }}
                 onChange={(e) => {
                   set_bidvalue(e.target.value);
                 }}
                 value={bidvalue}
               ></Box>
+              <Box display={"flex"} flex={"0.8"} color={"rgb(43, 165, 93)"} justifyContent={"flex-end"} alignItems={"center"}>{bidvalue / 1000}$</Box>
             </Box>
+            <Box display={"flex"} flex={"0.8"} justifyContent={"flex-end"} width={"80%"} fontSize={"18px"}>Balance: {bal}</Box>
           </MContent>
-          <MContent alignItems="flex-start" marginTop="1%" marginBottom="5%">
+          <MContent1 alignItems="center" marginBottom="3%">
             <BtnCustomize
               color={"#2BA55D"}
               back={"white"}
@@ -530,9 +565,9 @@ const Detail_Page = ({ ctheme }) => {
                 startbid();
               }}
             />
-          </MContent>
+          </MContent1>
         </Box>
-      </Modal>
+      </Modal >
     </>
   );
 };
@@ -643,11 +678,27 @@ const MHeader = styled(Box)`
 
 const MContent = styled(Box)`
   display: flex;
+  flex-direction: column;
   flex: 2;
+  width: 100%;
+  font-size: 25px;
+  color: white;
+`;
+
+const MContent1 = styled(Box)`
+  display: flex;
+  flex: 1;
   width: 100%;
   justify-content: center;
   font-size: 25px;
   color: white;
 `;
-
+const MContent3 = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  font-size: 25px;
+  color: white;
+`;
 export default Detail_Page;

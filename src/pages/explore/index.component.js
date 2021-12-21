@@ -25,7 +25,11 @@ export const PageTitileContent = styled(Box).attrs({
 export const HeaderCardBase = styled(Box).attrs({
   width: "316px",
   height: "236px",
-})``;
+})`
+  &:empty {
+    height: 0px !important;
+  }
+`;
 
 export const HeaderCard = styled(HeaderCardBase).attrs({
   borderRadius: 8,

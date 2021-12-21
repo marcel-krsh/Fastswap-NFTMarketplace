@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 
-const LastDrop = ({ index, img, simg, simg1, title, name, ctheme, payment }) => {
+const LastDrop = ({ index, img, simg, title, name, ctheme, payment }) => {
   const history = useHistory();
   const price_format = (value) => {
     var temp = value;
@@ -32,12 +32,12 @@ const LastDrop = ({ index, img, simg, simg1, title, name, ctheme, payment }) => 
 
   }
   const str_format = (str) =>{
-    let str_simple;
-    if(str.length>15)
+    var str_simple = str;
+    if(str_simple.length>15)
     {
       str_simple = str.slice(0,15)+"..."
     }
-    return str_simple
+    return str_simple;
   }
 
   return (

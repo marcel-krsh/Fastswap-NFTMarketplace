@@ -1,30 +1,125 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-pascal-case */
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState, useMemo } from 'react';
 import { FaCamera, FaPencilAlt } from "react-icons/fa";
 import { FiMove } from "react-icons/fi";
 import { Box, Slider } from "@material-ui/core";
 import styled from "styled-components";
 import cover_big1 from "../../images/cover/collection_header.png";
-import small_ellipse from "../../images/small_ellipse2.png";
 import tiger_circle1 from "../../images/tiger_circle1.png";
-import small_duke from "../../images/small_duke1.png";
-import cover4 from "../../images/cover/cover-4.png";
-import cover5 from "../../images/cover/cover-5.png";
-import cover6 from "../../images/cover/cover-6.png";
-import cover7 from "../../images/cover/cover-7.png";
-import cover8 from "../../images/cover/cover-8.png";
-import cover9 from "../../images/cover/cover-9.png";
-import cover10 from "../../images/cover/cover-10.png";
-import cover11 from "../../images/cover/cover-11.png";
+import small_ellipse from "../../images/small_ellipse2.png";
+import small_duke from "../../images/Duke.png";
+import icon_logo from "../../images/icon_logo.png";
+import bnb1 from "../../images/bnb1.png";
 import BtnCustomize from "../../components/buttons/btn_container";
 import BtnCustomizeSave from "../../components/buttons/btn_customize_save";
 import Last_Drop from "../../components/carts/cart_drop";
 import { lightTheme, darkTheme } from "../../theme/theme";
+import LastDrop from "../../components/carts/cart_item_drop"
+import ImgLetter from "../../components/letters/img_letter";
+import { ethers } from 'ethers';
+import { NFT_ABI } from '../../utils/abi';
+import { CONTRACTS } from '../../utils/constants';
+import { useWeb3React } from '@web3-react/core';
+import Loader from 'react-loader-spinner';
 
 const Profile_page_empty = ({ ctheme }) => {
+  const { account, library } = useWeb3React()
   const [flag_move, set_move] = useState(false);
+  const nftContract = useMemo(() => library ? new ethers.Contract(CONTRACTS.NFT, NFT_ABI, library.getSigner()) : null, [library])
+  const [loading, set_loading] = useState(false);
+  const [total_item, set_total_item] = useState(0);
+  const [tokens_uri, set_tokens_uri] = useState([]);
+  const [cnt, set_cnt] = useState(1);
+
+  const get_items = async () => {
+    const balance_owner = await nftContract.balanceOf(account);
+    let total = parseInt(balance_owner._hex);
+    if (total > 12) {
+      total = total - 12;
+      set_total_item(total);
+    }
+    let tokens = [];
+    for (let i = 0; i < 12; i++) {
+      let owner_index = await nftContract.tokenOfOwnerByIndex(account, i);
+      let token_uri = await nftContract.tokenURI(owner_index);
+      await fetch(token_uri).then(async (res) => {
+        let json_ipfs = await res.json();
+        tokens.push({
+          image: json_ipfs.image,
+          name: json_ipfs.name,
+          description: json_ipfs.description
+        });
+      }).catch((error) => {
+        // console.log(error);
+      });
+      // if (i === parseInt(balance_owner._hex)-1) {
+      //     set_loading(true);
+      // }
+      if (i === 11) {
+        set_loading(true);
+      }
+    }
+    set_tokens_uri(tokens);
+  }
+
+  const get_more_items = async () => {
+    let t_cnt = cnt;
+    t_cnt++;
+    set_cnt(t_cnt);
+    if (total_item > 12) {
+      set_loading(false);
+      let tokens = tokens_uri;
+      let temp = total_item;
+      temp = temp - 12;
+      set_total_item(temp);
+      for (let i = 12 * cnt; i < 12 * (cnt + 1); i++) {
+        let owner_index = await nftContract.tokenOfOwnerByIndex(account, i);
+        let token_uri = await nftContract.tokenURI(owner_index);
+        await fetch(token_uri).then(async (res) => {
+          let json_ipfs = await res.json();
+          tokens.push({
+            image: json_ipfs.image,
+            name: json_ipfs.name,
+            description: json_ipfs.description
+          });
+        }).catch((error) => {
+          // console.log(error);
+        });
+        if (i === 12 * (cnt + 1) - 1) {
+          set_loading(true);
+        }
+      }
+      set_tokens_uri(tokens);
+    }
+    else {
+      set_loading(false);
+      let tokens = tokens_uri;
+      for (let i = 12 * cnt; i < 12 * cnt + total_item; i++) {
+        let owner_index = await nftContract.tokenOfOwnerByIndex(account, i);
+        let token_uri = await nftContract.tokenURI(owner_index);
+        await fetch(token_uri).then(async (res) => {
+          let json_ipfs = await res.json();
+          tokens.push({
+            image: json_ipfs.image,
+            name: json_ipfs.name,
+            description: json_ipfs.description
+          });
+        }).catch((error) => {
+          // console.log(error);
+        });
+        if (i === 12 * cnt + total_item - 1) {
+          set_loading(true);
+        }
+      }
+      set_tokens_uri(tokens);
+    }
+
+
+  }
+  useEffect(() => {
+    get_items();
+  }, [])
 
   return (
     <>
@@ -204,223 +299,261 @@ const Profile_page_empty = ({ ctheme }) => {
           </Tab_letter1>
           <Tab_letter1 display="flex" flex="5"></Tab_letter1>
           <Box display="flex" flex="3" alignItems="center" justifyContent="flex-end">
-            <BtnCustomize color={"#757B75"} back={"white"} width={"100%"} height={"32px"} border={"1px solid #757B75"} str={"Price - lowest"} borderRadius={"8px"} />
+            <BtnCustomize color={"#757B75"} back={"white"} width={"100%"} height={"32px"} border={"1px solid #757B75"} str={"Price-lowest"} borderRadius={"8px"} />
           </Box>
         </Box>
       </Box>
-      <Part_Drop>
-        <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
-          {/* <Img_Letter letter={'Latest drops 🚀'} ctheme={ctheme} /> */}
-          <Box display="flex" flexDirection="column" marginTop="2%">
-            <Collection_Image display="flex" flex="1" marginBottom="2%">
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+      <>{cnt !== 1 ?
+        <>
+          {!loading ?
+            <Box position="fixed" top="50%" left="50%" zIndex="100">
+              <Loader type="Oval" color="#2BA55D" height={100} width={100} />
+            </Box> : ''
+          }
+
+          <PartDrop>
+            <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
+              <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center">
+                <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
+                  {
+                    tokens_uri.length > 0 && tokens_uri.map((item, index) => {
+                      console.log(item)
+                      return (
+                        <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
+                          <LastDrop index={index} img={item.image} simg={small_ellipse} title={item.name} name={item.description} ctheme={ctheme}></LastDrop>
+                        </Box>
+                      )
+                    })
+                  }
+                </GridShow>
               </Box>
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+              <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
+                <Box display="flex" width="40%" onClick={() => { get_more_items() }}>
+                  <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"100%"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
+                </Box>
               </Box>
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1">
-                <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-            </Collection_Image>
-            <Collection_Image display="flex" flex="1" marginBottom="2%">
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover8} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover9} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover10} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1">
-                <Last_Drop img={cover11} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-            </Collection_Image>
-          </Box>
-          <Box my="30px" display="flex" justifyContent="center">
-            <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"230px"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
-          </Box>
-        </Box>
-      </Part_Drop>
+            </Box>
+          </PartDrop>
+        </> :
+        <>
+          {
+            !loading ?
+              <Box position="fixed" top="50%" left="50%" zIndex="100">
+                <Loader type="Oval" color="#2BA55D" height={100} width={100} />
+              </Box> : <PartDrop>
+                <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" overflow={"hidden"}>
+                  <Box display="flex" marginTop="2%" marginBottom="2%" justifyContent="center">
+                    <GridShow display="grid" gridTemplateColumns="auto auto auto auto auto" gridGap="20px">
+                      {
+                        tokens_uri.length > 0 && tokens_uri.map((item, index) => {
+                          return (
+                            <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
+                              <LastDrop index={index} img={item.image} simg={small_ellipse} title={item.name} name={item.description} ctheme={ctheme}></LastDrop>
+                            </Box>
+                          )
+                        })
+                      }
+                    </GridShow>
+                  </Box>
+                  <Box marginTop="5%" display="flex" justifyContent="center" marginBottom="5%">
+                    <Box display="flex" width="40%" onClick={() => { get_more_items() }}>
+                      <BtnCustomize display="flex" color={"white"} back={"#2BA55D"} width={"100%"} height={"56px"} border={"1px solid #2BA55D"} str={"Explore more"} borderRadius={"8px"} />
+                    </Box>
+                  </Box>
+                </Box>
+              </PartDrop>
+          }
+        </>
+      }</>
     </>
   );
 };
 
+const GridShow = styled(Box)`
+      @media (max-width: 1800px) {
+        grid - template - columns:auto auto auto auto !important;
+    }
+      @media (max-width: 1410px) {
+        grid - template - columns: auto auto auto !important;
+    }
+      @media (max-width: 1200px) {
+        grid - template - columns: auto auto !important;
+    }
+      @media (max-width: 850px) {
+        grid - template - columns: auto !important;
+    }
+
+      `
 const Drag_reposition = styled(Box)`
-  opacity: 0.8;
-`;
+      opacity: 0.8;
+      `;
 
 const Box_create_nft = styled(Box)`
-  @media (max-width: 600px) {
-    display: none !important;
-  }
-`;
+      @media(max-width: 600px) {
+        display: none!important;
+}
+      `;
 
 const Camera_move1 = styled(Box)`
-  &:hover {
-    div {
-      display: flex !important;
-    }
+      &:hover {
+        div {
+        display: flex!important;
   }
-`;
+}
+      `;
 
 const Tiger_img1 = styled(Box)`
-  &:hover {
-    div {
-      display: flex !important;
-    }
+      &:hover {
+        div {
+        display: flex!important;
   }
-`;
+}
+      `;
 
 const Tiger_camera = styled(Box)``;
 
 const Underline_link = styled(Box)`
-  flex-direction: row;
-`;
+      flex-direction: row;
+      `;
 
 const Collection_Image = styled(Box)`
-  flex-direction: row;
-  @media (max-width: 600px) {
-    flex-direction: column;
-  }
-`;
+      flex-direction: row;
+      @media(max-width: 600px) {
+        flex - direction: column;
+}
+      `;
 
 const Box_Price1 = styled(Box)`
-  @media (max-width: 600px) {
-    display: none !important;
-  }
-`;
+      @media(max-width: 600px) {
+        display: none!important;
+}
+      `;
 
 const Tab_letter1 = styled(Box)`
-  @media (max-width: 960px) {
-    display: none !important;
-  }
-`;
+      @media(max-width: 960px) {
+        display: none!important;
+}
+      `;
 
 const Detail_Letter0 = styled(Box)`
-  @media (max-width: 1000px) {
-    font-size: 20px !important;
+      @media(max-width: 1000px) {
+        font - size: 20px!important;
+}
+      @media(max-width: 600px) {
+        font - size: 15px!important;
+}
+      &:hover {
+        cursor: pointer;
+      div {
+        display: flex!important;
   }
-  @media (max-width: 600px) {
-    font-size: 15px !important;
-  }
-  &:hover {
-    cursor: pointer;
-    div {
-      display: flex !important;
-    }
-  }
-`;
+}
+      `;
 
 const Box_Letter1 = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  @media (max-width: 600px) {
-    flex-direction: column;
-    height: 120px !important;
-  }
-`;
+      display: flex;
+      flex-direction: row;
+      @media(max-width: 600px) {
+        flex - direction: column;
+      height: 120px!important;
+}
+      `;
 const Box_Letter2 = styled(Box)`
-  @media (max-width: 600px) {
-    border-right: none !important;
-    border-bottom: 1px solid #cecece !important;
-  }
-`;
+      @media(max-width: 600px) {
+        border - right: none!important;
+      border-bottom: 1px solid #cecece!important;
+}
+      `;
 
 const Detail_letter1 = styled(Box)`
-  @media (max-width: 1200px) {
-    font-size: 15px !important;
-  }
-  @media (max-width: 1000px) {
-    font-size: 12px !important;
-  }
-  @media (max-width: 1000px) {
-    font-size: 10px !important;
-  }
-  @media (max-width: 600px) {
-    font-size: 8px !important;
-    &:hover {
-      cursor: pointer;
+      @media(max-width: 1200px) {
+        font - size: 15px!important;
+}
+      @media(max-width: 1000px) {
+        font - size: 12px!important;
+}
+      @media(max-width: 1000px) {
+        font - size: 10px!important;
+}
+      @media(max-width: 600px) {
+        font - size: 8px!important;
+      &:hover {
+        cursor: pointer;
       div {
-        display: flex !important;
-      }
+        display: flex!important;
     }
   }
-`;
+}
+      `;
 
 const Detail_letter2 = styled(Box)`
-  @media (max-width: 1200px) {
-    font-size: 15px !important;
-  }
-  @media (max-width: 1000px) {
-    font-size: 12px !important;
-  }
-  @media (max-width: 800px) {
-    font-size: 9px !important;
-  }
-`;
+      @media(max-width: 1200px) {
+        font - size: 15px!important;
+}
+      @media(max-width: 1000px) {
+        font - size: 12px!important;
+}
+      @media(max-width: 800px) {
+        font - size: 9px!important;
+}
+      `;
 
 const Detail_letter3 = styled(Box)`
-  @media (max-width: 1200px) {
-    font-size: 10px !important;
-  }
+      @media(max-width: 1200px) {
+        font - size: 10px!important;
+}
 
-  @media (max-width: 1000px) {
-    font-size: 8px !important;
-  }
-`;
+      @media(max-width: 1000px) {
+        font - size: 8px!important;
+}
+      `;
 
-const Part_Drop = styled(Box)`
-  display: flex;
-  width: 100%;
-  margin-top: 5%;
-  flex-direction: column;
-`;
+const PartDrop = styled(Box)`
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      `;
 
 const LItem_group = styled(Box)`
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 500;
-  line-height: 22px;
-  color: #757b75;
-  border-bottom: 4px solid rgba(0, 0, 0, 0);
-  &:hover {
-    color: #2ba55d;
-    border-bottom: 4px solid #2ba55d;
-  }
-`;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 500;
+      line-height: 22px;
+      color: #757b75;
+      border-bottom: 4px solid rgba(0, 0, 0, 0);
+      &:hover {
+        color: #2ba55d;
+      border-bottom: 4px solid #2ba55d;
+}
+      `;
 const LItem_upletter = styled(Box)`
-  font-size: 18px;
-  @media (max-width: 1000px) {
-    font-szie: 12px !important;
-  }
-`;
+      font-size: 18px;
+      @media(max-width: 1000px) {
+        font - size: 12px!important;
+}
+      `;
 
 const LItem_upletter1 = styled(Box)`
-  font-size: 12px;
-  @media (max-width: 1000px) {
-    font-szie: 9px !important;
-  }
-`;
+      font-size: 12px;
+      @media(max-width: 1000px) {
+        font - size: 9px!important;
+}
+      `;
 
 const Show_Items = styled(Box)`
-  width: 100%;
-  display: flex;
-  margin-top: 5%;
-  @media (max-width: 900px) {
-    display: none !important;
-  }
-`;
+      width: 100%;
+      display: flex;
+      margin-top: 5%;
+      @media(max-width: 900px) {
+        display: none!important;
+}
+      `;
 
 const Show_Detail = styled(Box)`
-  width: 100%;
-  display: flex;
-  height: 520px;
-  flex-direction: column;
-`;
+      width: 100%;
+      display: flex;
+      height: 520px;
+      flex-direction: column;
+      `;
 
 export default Profile_page_empty;

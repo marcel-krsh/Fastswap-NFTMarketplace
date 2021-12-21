@@ -125,32 +125,30 @@ const Collection_page = ({ ctheme }) => {
         <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%">
           <Img_Letter letter={"Latest drops 🚀"} ctheme={ctheme} />
           <Box display="flex" flexDirection="column" marginTop="2%" width="100%">
-            <Collection_Image display="flex" flex="1" marginBottom="2%">
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+            <Collection_Image display="flex" flex="1" marginBottom="2%" flexWrap={"wrap"}>
+              <Box display="flex" flex="1">
+                <Last_Drop img2={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} title={"This is demo"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
               <Box display="flex" flex="1">
-                <Last_Drop img={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-            </Collection_Image>
-            <Collection_Image display="flex" flex="1" marginBottom="2%">
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover8} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover9} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
-              </Box>
-              <Box display="flex" flex="1" marginRight="2%">
-                <Last_Drop img={cover10} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+                <Last_Drop img2={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} title={"This is demo"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
               <Box display="flex" flex="1">
-                <Last_Drop img={cover11} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+                <Last_Drop img2={cover6} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} title={"This is demo"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+              </Box>
+              <Box display="flex" flex="1">
+                <Last_Drop img2={cover7} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} title={"This is demo"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+              </Box>
+              <Box display="flex" flex="1">
+                <Last_Drop img2={cover8} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} title={"This is demo"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+              </Box>
+              <Box display="flex" flex="1">
+                <Last_Drop img2={cover9} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} title={"This is demo"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+              </Box>
+              <Box display="flex" flex="1">
+                <Last_Drop img2={cover10} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} title={"This is demo"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
+              </Box>
+              <Box display="flex" flex="1">
+                <Last_Drop img2={cover11} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} title={"This is demo"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
               </Box>
             </Collection_Image>
           </Box>
