@@ -24,8 +24,10 @@ import { useSelector } from "react-redux";
 import { NFT_MARKETPLACE_ABI, NFT_ABI, FAST_TOKEN_ABI, NFT_AUCTION_ABI, NFT_ } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
 import { ethers } from "ethers";
+import Web3 from "web3";
 
 const Detail_Page = ({ ctheme }) => {
+  let web3;
   const history = useHistory();
   const auctionIndex = parseInt(history.location.search.slice(1));
   const { auctions } = useSelector((store) => store.product1);
@@ -149,11 +151,12 @@ const Detail_Page = ({ ctheme }) => {
   const placebid = async () => {
     console.log(balance)
     if (mainData.paymentType === '0') {
-      var temp;
+      web3 = new Web3(window.ethereum);
+      web3.eth.getBalance(account, function(err, result) {
+        set_balance(web3.utils.fromWei(result, "ether"));
+      });
 
-      set_balance(
-        0
-      );
+
 
     }
     if (mainData.paymentType === '1') {
