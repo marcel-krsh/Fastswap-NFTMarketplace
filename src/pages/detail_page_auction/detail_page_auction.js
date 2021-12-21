@@ -474,7 +474,7 @@ const Detail_Page = ({ ctheme }) => {
       <Part_Drop>
         <Box display="flex" flexDirection="column" marginLeft="5%" marginRight="5%" marginBottom="5%">
           <Box display="flex" flexDirection="column" marginTop="2%">
-            <GridShow display="grid" gridTemplateColumns="auto auto auto auto" gridGap="20px">
+            <GridShow display="grid" gridTemplateColumns="auto auto auto auto" gridGap="20px" justifyContent={"center"}>
               <Box mt={[1, 2, 3, 3]} display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gridGap={24}>
                 <Last_Drop index={1} img2={cover4} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
                 <Last_Drop index={1} img2={cover5} simg={small_ellipse} simg1={small_duke} name={"Creator Name"} price={"310.9 DUKE"} ctheme={ctheme}></Last_Drop>
