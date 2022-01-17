@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Modal } from "@material-ui/core";
 import styled from "styled-components";
-import { MdMenuOpen } from "react-icons/md";
+import { MdMenuOpen, MdLogout } from "react-icons/md";
 import { injected, walletConnect, trustWallet, binance_wallet } from "../../utils/connectors";
 // import _ from "lodash";
 import { useWeb3React } from "@web3-react/core";
@@ -14,28 +15,30 @@ import img_logo from "../../images/logo_mark1.png";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { useHistory } from "react-router";
 import { DropDown, DropDownItem } from "../../components/elements/dropdown.jsx";
-import { MdLogout } from "react-icons/md";
+import { setAccountRS } from "../../actions/auth";
+
+const style1 = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "60%",
+  height: 468,
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "10px",
+  backgroundColor: "#2BA55D",
+  display: "flex",
+  flexDirection: "column",
+};
 
 const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const style1 = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "60%",
-    height: 468,
-    boxShadow: 24,
-    p: 4,
-    borderRadius: "10px",
-    backgroundColor: "#2BA55D",
-    display: "flex",
-    flexDirection: "column",
-  };
-
+  
   const DESKTOP_CONNECTORS = {
     MetaMask: injected,
     WalletConnect: walletConnect,
@@ -57,9 +60,10 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     window.localStorage.removeItem("CurrentAccount");
   };
 
-  const handleConnect = (currentConnector) => {
+  const handleConnect = async (currentConnector) => {
     setOpen(false);
-    activate(walletConnectors[currentConnector]);
+    await activate(walletConnectors[currentConnector]);
+    
     window.localStorage.setItem("CurrentWalletConnect", currentConnector);
   };
 
@@ -74,6 +78,10 @@ const Header = ({ flag_sidebar, set_sidebar, ctheme }) => {
     const currentWalletState = window.localStorage.getItem("CurrentWalletConnect");
     currentWalletState && activate(walletConnectors[currentWalletState]);
   }, []);
+
+  useEffect(async () => {
+    dispatch(await setAccountRS(account)); 
+  }, [account]);
 
   return (
     <StyledContainer px="20px" boxSizing="border-box" ctheme={ctheme ? 1 : 0} ltheme={lightTheme} dtheme={darkTheme} zIndex={2}>

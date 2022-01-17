@@ -22,6 +22,7 @@ import { NFT_ABI } from '../../utils/abi';
 import { CONTRACTS } from '../../utils/constants';
 import { useWeb3React } from '@web3-react/core';
 import Loader from 'react-loader-spinner';
+import useWallet from '../../hooks/useWallet';
 
 const Profile_page_empty = ({ ctheme }) => {
   const { account, library } = useWeb3React()
@@ -31,6 +32,13 @@ const Profile_page_empty = ({ ctheme }) => {
   const [total_item, set_total_item] = useState(0);
   const [tokens_uri, set_tokens_uri] = useState([]);
   const [cnt, set_cnt] = useState(1);
+
+  const { signMessage } = useWallet();
+
+  const handleCreate = () => {
+    console.log('handleCreate');
+    signMessage();
+  }
 
   const get_items = async () => {
     const balance_owner = await nftContract.balanceOf(account);
@@ -228,7 +236,7 @@ const Profile_page_empty = ({ ctheme }) => {
             </Box_Letter1>
             <Box width="80%" display="flex" flex="1"></Box>
             <Box_create_nft display="flex" flex="1" width="80%" justifyContent="flex-end">
-              <BtnCustomize color={"white"} back={"#2BA55D"} width={"60%"} height={"56px"} border={"1px solid #2BA55D"} str={"+ Create NFT"} borderRadius={"8px"} />
+              <BtnCustomize color={"white"} back={"#2BA55D"} width={"60%"} height={"56px"} border={"1px solid #2BA55D"} str={"+ Create NFT"} borderRadius={"8px"} onClick={handleCreate}/>
             </Box_create_nft>
           </Box_Price1>
         </Box>
