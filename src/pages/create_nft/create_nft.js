@@ -13,6 +13,8 @@ import BtnCustomize from "../../components/buttons/btn_container";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { NFT_ABI, NFT_MARKETPLACE_ABI, NFT_AUCTION_ABI } from "../../utils/abi";
 import { CONTRACTS } from "../../utils/constants";
+import S3 from "react-aws-s3"
+import Config from "../../config";
 
 const Create_NFT = ({ ctheme }) => {
   const { account, library } = useWeb3React();
@@ -83,62 +85,119 @@ const Create_NFT = ({ ctheme }) => {
   // }
 
   const upload_ipfs = async () => {
-    if (account === undefined) {
-      alert("Please connect wallet");
-      return;
-    } else {
-      setOpen(true);
-      const dict = {
-        name: name,
-        description: description,
-        image: image_url,
-      };
+     if (account === undefined) {
+       alert("Please connect wallet");
+       return;
+     } else {
+    setOpen(true);
+    const dict = {
+      name: name,
+      description: description,
+      image: image_url,
+    };
 
-      let price1;
-      let pay_method;
-      if (toggle1 === true) {
-        const temp_hash = await client.add(JSON.stringify(dict));
-        if (type_trans === false) {
-          console.log("i");
-          // let start_price = 0, end_price = 100000, duration = 600;
-          try {
-            const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, "0x1");
-            await createNFT.wait();
-            // console.log("ii")
-            const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path);
-            var token_id = parseInt(nftIDs[0]._hex, 16);
-            console.log(token_id);
-            // var start = '0x' + start_price.toString(16);
-            // var end = '0x' + end_price.toString(16);
-            var dur = "0x" + (duration * 24 * 60 * 60).toString(16);
-            if (price_type.duke === true) {
-              pay_method = 2;
-              price1 = (price.duke * Math.pow(10, 18)).toString(16);
-            }
-            if (price_type.fast === true) {
-              pay_method = 1;
-              price1 = (price.fast * Math.pow(10, 18)).toString(16);
-            }
-            if (price_type.bnb === true) {
-              pay_method = 0;
-              price1 = (price.bnb * Math.pow(10, 18)).toString(16);
-            }
-            // let price_wei = "0x" + price1;
-            let price_wei = "0x" + price1;
-            const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
+    let price1;
+    let pay_method;
+    // console.log(toggle1);
+    if (toggle1 === true) {
+      const temp_hash = await client.add(JSON.stringify(dict));
+      // console.log(temp_hash);
+      if (type_trans === false) {
+        console.log("i");
+        // let start_price = 0, end_price = 100000, duration = 600;
+        try {
+          const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, "0x1");
+          // console.log(createNFT);
+          await createNFT.wait();
+          // console.log("ii")
+          const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path);
+          var token_id = parseInt(nftIDs[0]._hex, 16);
+          console.log(token_id);
+          // var start = '0x' + start_price.toString(16);
+          // var end = '0x' + end_price.toString(16);
+          var dur = "0x" + (duration * 24 * 60 * 60).toString(16);
+          if (price_type.duke === true) {
+            pay_method = 2;
+            price1 = (price.duke * Math.pow(10, 18)).toString(16);
+          }
+          if (price_type.fast === true) {
+            pay_method = 1;
+            price1 = (price.fast * Math.pow(10, 18)).toString(16);
+          }
+          if (price_type.bnb === true) {
+            pay_method = 0;
+            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+          }
+          // let price_wei = "0x" + price1;
+          let price_wei = "0x" + price1;
+          const approve = await nftContract.approve(CONTRACTS.AUCTION_HALL, token_id);
+          await approve.wait();
+          let auction = await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account); // 0: BNB, 1: FAST, 2: DUKE
+          await auction.wait();
+          // .then((res) => {
+          //   set_process("Created successfully.");
+          //   setTimeout(() => {
+          //     history.push({ pathname: "/" });
+          //     window.location.reload();
+          //     handleClose();
+          //   }, 2000);
+
+          // }).catch((error) => {
+          //   set_process("Fault! Try again.")
+          //   setTimeout(() => {
+          //     handleClose();
+          //   }, 2000);
+          // });
+          set_process("Created successfully.");
+          setTimeout(() => {
+            history.push({ pathname: "/" });
+            window.location.reload();
+            handleClose();
+            window.scrollTo(0, 0);
+          }, 2000);
+        } catch (err) {
+          set_process("Fault! Try again.");
+          setTimeout(() => {
+            handleClose();
+          }, 2000);
+          console.log(err);
+        }
+      } else {
+        try {
+          const amount = "0x" + supply.toString(16);
+          console.log(temp_hash.path);
+          const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount);
+          await createNFT.wait();
+          const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path);
+          if (price_type.duke === true) {
+            pay_method = "DUKE";
+            price1 = (price.duke * Math.pow(10, 9)).toString(16);
+          }
+          if (price_type.fast === true) {
+            pay_method = "FAST";
+            price1 = (price.fast * Math.pow(10, 18)).toString(16);
+          }
+          if (price_type.bnb === true) {
+            pay_method = "BNB";
+            price1 = (price.bnb * Math.pow(10, 18)).toString(16);
+          }
+          let price_wei = "0x" + price1;
+
+          for (var i = 0; i < nftIDs.length; i++) {
+            var token_id1 = parseInt(nftIDs[i]._hex, 16);
+            const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id1);
             await approve.wait();
-            let auction = await auctionContract.createAuction(token_id, price_wei, price_wei, pay_method, dur, account); // 0: BNB, 1: FAST, 2: DUKE
-            await auction.wait();
+            let sale = await marketplaceContract.registerForSale(token_id1, price_wei, temp_hash.path, pay_method);
+            await sale.wait();
             // .then((res) => {
-            //   set_process("Created successfully.");
-            //   setTimeout(() => {
-            //     history.push({ pathname: "/" });
-            //     window.location.reload();
-            //     handleClose();
-            //   }, 2000);
-
+            // set_process("Created successfully.");
+            // setTimeout(() => {
+            //   history.push({ pathname: "/" });
+            //   window.location.reload();
+            //   handleClose();
+            // }, 2000);
             // }).catch((error) => {
-            //   set_process("Fault! Try again.")
+            //   set_process("Fault! Try again.");
             //   setTimeout(() => {
             //     handleClose();
             //   }, 2000);
@@ -150,78 +209,74 @@ const Create_NFT = ({ ctheme }) => {
               handleClose();
               window.scrollTo(0, 0);
             }, 2000);
-          } catch (err) {
-            set_process("Fault! Try again.");
-            setTimeout(() => {
-              handleClose();
-            }, 2000);
-            console.log(err);
           }
-        } else {
-          try {
-            const amount = "0x" + supply.toString(16);
-            console.log(temp_hash.path);
-            const createNFT = await marketplaceContract.createNewProduction(temp_hash.path, amount);
-            await createNFT.wait();
-            const nftIDs = await marketplaceContract.getNFTIDsByHash(temp_hash.path);
-            if (price_type.duke === true) {
-              pay_method = "DUKE";
-              price1 = (price.duke * Math.pow(10, 9)).toString(16);
-            }
-            if (price_type.fast === true) {
-              pay_method = "FAST";
-              price1 = (price.fast * Math.pow(10, 18)).toString(16);
-            }
-            if (price_type.bnb === true) {
-              pay_method = "BNB";
-              price1 = (price.bnb * Math.pow(10, 18)).toString(16);
-            }
-            let price_wei = "0x" + price1;
+        } catch (err) {
+          set_process("Fault! Try again.");
+          setTimeout(() => {
+            handleClose();
 
-            for (var i = 0; i < nftIDs.length; i++) {
-              var token_id1 = parseInt(nftIDs[i]._hex, 16);
-              const approve = await nftContract.approve(CONTRACTS.MARKETPLACE, token_id1);
-              await approve.wait();
-              let sale = await marketplaceContract.registerForSale(token_id1, price_wei, temp_hash.path, pay_method);
-              await sale.wait();
-              // .then((res) => {
-              // set_process("Created successfully.");
-              // setTimeout(() => {
-              //   history.push({ pathname: "/" });
-              //   window.location.reload();
-              //   handleClose();
-              // }, 2000);
-              // }).catch((error) => {
-              //   set_process("Fault! Try again.");
-              //   setTimeout(() => {
-              //     handleClose();
-              //   }, 2000);
-              // });
-              set_process("Created successfully.");
-              setTimeout(() => {
-                history.push({ pathname: "/" });
-                window.location.reload();
-                handleClose();
-                window.scrollTo(0, 0);
-              }, 2000);
-            }
-          } catch (err) {
-            set_process("Fault! Try again.");
-            setTimeout(() => {
-              handleClose();
-              
-            }, 2000);
-            console.log(err);
-          }
+          }, 2000);
+          console.log(err);
         }
       }
     }
+    // }
   };
+
+
+  const imageUpload = async (e) => {
+    imageUploadOnS3Bucket(e)
+    // set_image1(URL.createObjectURL(e.target.files[0]));
+
+    // set_image(e.target.files[0]);
+    await client.add(e.target.files[0]).then((res) => {
+      console.log(res);
+      let url = `https://ipfs.io/ipfs/${res.path}`;
+      set_url(url);
+      console.log(url);
+      // set_hash(res.path);
+    });
+    // console.log(cid)
+
+    // upload_image();
+
+  }
+
+  const imageUploadOnS3Bucket = (e) => {
+    // console.log(e.target.files);
+
+    const config = {
+      bucketName: Config.bucketName,
+      dirName:Config.dirName,
+      region:Config.region,
+      accessKeyId:Config.accessKeyId,
+      secretAccessKey:Config.secretAccessKey,
+    };
+
+    const file =e.target.files[0]
+    const fileName =e.target.files[0].name
+
+    const ReactS3Client = new S3(config);
+    ReactS3Client.uploadFile(file, fileName)
+    .then(data=>{
+      // console.log(data);
+      if(data.status === 204){
+        console.log("success");
+        set_image1(data.location)
+      }else{
+        console.log("fail");
+      }
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+
+  }
 
   return (
     <>
       <Box display="flex" marginTop="5%" width="100%" flexDirection="column" alignItems="center">
-        <Box display="flex" width="60%" fontFamily="Poppins, sans-serif" fontWeight="bold" fontSize="34px" lineHeight="34px" letterSpacing="0.5" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}>
+        <Box display="flex" width="60%" fontFamily="Poppins, sans-serif" fontWeight="bold" fontSize="34px" lineHeight="34px" letterSpacing="0.5" color={ctheme ? lightTheme.font_color1 : darkTheme.font_color1}> 
           Create NFT
         </Box>
         <Box display="flex" width="60%" flexDirection="column" marginTop="8%">
@@ -235,20 +290,7 @@ const Create_NFT = ({ ctheme }) => {
             {/* <MdImage fontSize="140px" color="#CECECE"></MdImage> */}
             <input
               type="file"
-              onChange={async (e) => {
-                set_image1(URL.createObjectURL(e.target.files[0]));
-                // set_image(e.target.files[0]);
-                await client.add(e.target.files[0]).then((res) => {
-                  console.log(res);
-                  let url = `https://ipfs.io/ipfs/${res.path}`;
-                  set_url(url);
-                  console.log(url);
-                  // set_hash(res.path);
-                });
-                // console.log(cid)
-
-                // upload_image();
-              }}
+              onChange={imageUpload}
             />
             {/* <img src={image_file}></img> */}
           </Loadimg>
