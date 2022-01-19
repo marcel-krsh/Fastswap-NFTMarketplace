@@ -220,7 +220,7 @@ const Create_NFT = ({ ctheme }) => {
         }
       }
     }
-    // }
+    }
   };
 
 
